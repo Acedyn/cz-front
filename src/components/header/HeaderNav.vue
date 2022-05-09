@@ -29,9 +29,9 @@ const navigations = ref([
     soon: true
   },
   {
-    route: "",
+    route: "/roadmap",
     title: "bill of lading",
-    soon: true
+    soon: false
   },
   {
     route: "/team",
