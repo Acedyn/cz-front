@@ -28,9 +28,11 @@ import HeaderNav from "./components/header/HeaderNav.vue"
 
 #app {
   margin: 0;
-  padding: 0 20px;
-  height: 100vh;
-  width: 100vw;
+  padding: 0;
+  min-height: 100vh;
+  min-width: 100vw;
+  height: 100%;
+  width: 100%;
 
   font-weight: normal;
 
@@ -41,6 +43,10 @@ import HeaderNav from "./components/header/HeaderNav.vue"
   ),
   url(@/assets/background/main_background.png);
   background-size: contain;
+}
+
+header {
+  padding: 0 20px;
 }
 
 </style>

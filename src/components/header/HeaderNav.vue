@@ -34,9 +34,9 @@ const navigations = ref([
     soon: true
   },
   {
-    route: "",
+    route: "/team",
     title: "team",
-    soon: true
+    soon: false
   },
   {
     route: "",
@@ -91,8 +91,7 @@ const navigations = ref([
 }
 
 .cardboard-logo {
-  height: 120px;
-  margin-left: 10px;
+  height: 10em;
   transition: 0.2s;
 }
 
