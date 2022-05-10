@@ -9,17 +9,20 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      meta: { transition: "slide" }
     },
     {
       path: '/team',
       name: 'team',
-      component: () => TeamView
+      component: () => TeamView,
+      meta: { transition: "fade" }
     },
     {
       path: '/roadmap',
       name: 'roadmap',
-      component: () => RoadmapView
+      component: () => RoadmapView,
+      meta: { transition: "flip" }
     },
   ]
 })

@@ -33,7 +33,7 @@ const socialNetworks = ref([
   },
   {
     image: discord,
-    link: "discord.gg/6M4C2dGzWc",
+    link: "https://discord.com/invite/6M4C2dGzWc",
   },
 ])
 const navigations = ref([

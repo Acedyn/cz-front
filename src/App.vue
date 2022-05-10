@@ -8,24 +8,18 @@ import HeaderNav from "./components/header/HeaderNav.vue"
     <HeaderNav />
   </header>
 
-  <RouterView />
+  <RouterView v-slot="{ Component }">
+    <transition name="fadeFast">
+      <component :is="Component" />
+    </transition>
+  </RouterView>
   
 </template>
 
 <style>
 @import '@/assets/base.css';
-@font-face {
-  font-family: BlockHeadSide;
-  src: local("BlockHead"), url(@/assets/fonts/blockhead-darkside-regular.otf);
-}
-@font-face {
-  font-family: BlockHeadFace;
-  src: local("BlockHead"), url(@/assets/fonts/blockhead-blackface-regular.ttf);
-}
-@font-face {
-  font-family: BlockHeadUnplugged;
-  src: local("BlockHead"), url(@/assets/fonts/blockhead-unplugged-regular.otf);
-}
+@import '@/assets/animations.css';
+@import '@/assets/fonts.css';
 
 #app {
   margin: 0;

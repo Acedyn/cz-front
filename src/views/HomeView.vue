@@ -1,6 +1,18 @@
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
+
+const show = ref(false)
+
+onMounted(() => {
+  show.value = true
+})
+</script>
+
 <template>
   <div class="title">
-    <img src="../assets/images/banner_site_v02.png" class="main-image" />
+    <transition name="slide">
+      <img v-if="show" src="../assets/images/banner_site_v02.png" class="main-image" />
+    </transition>
     <div class="footer">© 2022, Cardboard Citizens </div>
   </div>
 </template>

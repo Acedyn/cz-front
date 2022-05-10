@@ -1,0 +1,75 @@
+.fadeFast-enter-active,
+.fadeFast-leave-active {
+  transition: opacity 0.1s;
+}
+.fadeFast-enter-from,
+.fadeFast-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+@keyframes slide {
+  from {
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+    animation-timing-function: ease-in;
+  }
+}
+
+.slide-enter-active {
+  animation: slide 0.3s;
+}
+.slide-leave-active {
+  transition: opacity 0.5s;
+}
+.slide-leave-to {
+  opacity: 0;
+}
+
+
+@keyframes flip {
+  from {
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    animation-timing-function: ease-in;
+  }
+
+  60% {
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    opacity: 1;
+  }
+
+  80% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+  }
+
+  to {
+    transform: perspective(400px);
+  }
+}
+
+.flip-enter-active {
+  animation: flip 0.3s;
+}
+.flip-leave-active {
+  transition: opacity 0.5s;
+}
+.flip-leave-to {
+  opacity: 0;
+}
