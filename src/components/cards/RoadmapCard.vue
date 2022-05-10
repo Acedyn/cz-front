@@ -13,9 +13,11 @@ export default defineComponent({
   <div id="paragraph">
     <div id="text-container">
       <p id="title">{{ title }}</p>
+      <br/>
       <div v-for="paragraph in paragraphs" :key="paragraph.title">
         <p class="head">{{ paragraph.head }}</p>
         <p class="text">{{ paragraph.text }}</p>
+        <br/>
       </div>
     </div>
   </div>
@@ -38,8 +40,9 @@ export default defineComponent({
   position: absolute;
   left: 38%;
   width: 49%;
-  top: 0%;
-  height: 100%;
+  top: 5%;
+  height: 90%;
+  text-overflow: scroll;
 }
 
 #title {

@@ -1,11 +1,30 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { RouterLink } from "vue-router";
 import NavigationButton from "./NavigationButton.vue";
 import SocialButton from "./SocialButton.vue";
+import MobileMenu from "./MobileMenu.vue";
 
 import discord from "../../assets/logos/discord.svg";
 import twitter from "../../assets/logos/twitter.svg";
+
+
+const desktopMode = ref(true)
+const refresh = () => {
+  window.location.reload();
+}
+const checkWindowSize = () => {
+  desktopMode.value = window.innerWidth > 1000;
+}
+
+onMounted(() => {
+  checkWindowSize()
+  window.addEventListener("resize", checkWindowSize);
+})
+
+onUnmounted(() => {
+  window.removeEventListener("resize", checkWindowSize);
+})
 
 const socialNetworks = ref([
   {
@@ -24,7 +43,7 @@ const navigations = ref([
     soon: false
   },
   {
-    route: "/about",
+    route: "",
     title: "warehouse",
     soon: true
   },
@@ -53,11 +72,11 @@ const navigations = ref([
 
 <template>
   <div class="wrapper">
-    <button class="logo-button">
+    <button class="logo-button" @click="refresh">
       <img class="cardboard-logo" src="../../assets/logos/brand_logo.png" />
     </button>
 
-    <nav class="desktop-nav">
+    <nav class="desktop-nav" v-if="desktopMode">
       <RouterLink
         class="link"
         v-for="navigation in navigations"
@@ -72,6 +91,7 @@ const navigations = ref([
         :link="socialNetwork.link"
       />
     </nav>
+    <MobileMenu v-else/>
   </div>
 </template>
 
