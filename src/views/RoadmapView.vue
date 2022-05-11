@@ -61,16 +61,16 @@ const setState = (newState: number) => {
     <div id="template" v-if="show">
       <div id="template-overlay">
 
-        <div id="office" class="overlay" @click="setState(0)">
+        <div id="office" class="overlay highlight" @click="setState(0)">
           <img class="horizontal-title" src="../assets/images/carboard_template_office.png" />
         </div>
-        <div id="warehouse" class="overlay" @click="setState(1)">
+        <div id="warehouse" class="overlay highlight" @click="setState(1)">
           <img class="horizontal-title" src="../assets/images/carboard_template_warehouse.png" />
         </div>
-        <div id="brand" class="overlay" @click="setState(2)">
+        <div id="brand" class="overlay highlight" @click="setState(2)">
           <img class="vertical-title" src="../assets/images/carboard_template_brand.png" />
         </div>
-        <div id="menu" class="overlay" @click="setState(2)">
+        <div id="menu" class="overlay highlight" @click="setState(-1)">
           <img class="vertical-title" src="../assets/images/carboard_template_menu.png" />
         </div>
 
@@ -78,6 +78,7 @@ const setState = (newState: number) => {
           <RoadmapCard
             v-if="state >= 0"
             class="overlay"
+            id="paragraph"
             :title="text[state].title"
             :paragraphs="text[state].paragraphs"
           />
@@ -134,8 +135,8 @@ const setState = (newState: number) => {
   transition: 0.2s;
 }
 
-.overlay:hover {
-  backdrop-filter: contrast(115%);
+.overlay:hover .highlight{
+  backdrop-filter: contrast(120%);
 }
 
 .overlay:hover .horizontal-title {
@@ -162,6 +163,11 @@ const setState = (newState: number) => {
   grid-row: 3 / 8;
   grid-column: 2 / 3;
   padding-bottom: 50%;
+}
+#paragraph {
+  grid-row: 1 / 10;
+  grid-column: 4 / 7;
+  transform: scale(1.01);
 }
 
 

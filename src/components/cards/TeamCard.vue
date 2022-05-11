@@ -42,12 +42,11 @@ export default {
   flex-direction: row;
   max-width: 36em;
 
-  background-image: radial-gradient(circle, #a37e60, #997458);
-  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 40%);
 
   border: 5px solid transparent;
   border-radius: 2px;
   border-image: url(@/assets/dots/dots_2-1.png) 20 round;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 40%);
   background-image: radial-gradient(circle, #a37e60, #916d51);
   padding: 10px;
 }
