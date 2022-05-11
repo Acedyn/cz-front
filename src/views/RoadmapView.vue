@@ -1,95 +1,90 @@
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
 import RoadmapCard from "../components/cards/RoadmapCard.vue";
 
-export default defineComponent({
-  data() {
-    return {
-      state: -1,
-      text: [
-        {
-          title: "The Post Office",
-          paragraphs: [
-            {
-              head: "The Break Room",
-              text: "Some Cardboard Citizens find themselves spending entirely too much time in the break room. But the coffee is good, you can smoke a cig, and the vibes are chill, so who can blame them? Beats delivering packages. Until the mail room gets overcrowded with boxes and Mr. Uggated goes on one of his hangover laden tirades. It can be a bit of a problem. Marvin claimed to have stayed back there without delivering a single package for 30 days one time. Uggated never found out, but for some reason, Marvin was different after those 30 days. No one could quite pin it down, just… an air about him.",
-            },
-            {
-              head: "Deliveries",
-              text: "We deliver. Not always on time. Sometimes the boxes are a bit chewed up. Sometimes your mail smells like an ashtray. But get over yourself, you don’t spend all day in a truck with dispatch hounding you, so take your judgment, put it on a post card and mail it to us so we can lose it forever behind the sorting machine. Otherwise, check your mail for what we actually do deliver and thank your lucky stars we don’t open your letters. We’re looking at you, Mrs. Dildonna, you dirty, dirty girl, you. We wouldn’t know anything about Mr. X, would we?",
-            },
-          ],
-        },
-        {
-          title: "The Warehouse",
-          paragraphs: [
-            {
-              head: "The Inventory",
-              text: "There are 6,666 Citizens, all unique, all half-heartedly sorting and delivering, waiting for you to breathe life into them. We need you to tell our story, so pick one of us up, turn on the old noggin, and spit something out that you think we would do.",
-            },
-            {
-              head: "The Corkboard",
-              text: "You Citizen holders are a talented group of degenerates and while most post offices have pictures of wanted criminals and lost children and sometimes wanted criminals who are lost children, we decided to hell with that, let’s put pictures of ourselves up there. Only thing is, you all are the artists, not us, so we put up the best pictures of us on the Corkboard that you fine folk produce. Don’t forget to put your name on it. We aren’t mind readers. Return to Sender is a thing for a reason.",
-            },
-          ],
-        },
-        {
-          title: "The Brand",
-          paragraphs: [
-            {
-              head: "Boutique",
-              text: "Let’s just say we know people and those people like the way we look. So we’re going to have those people put us on some streetwear in exclusive collections designed by our team and a Parisian fashion creator. Cz attitude never looked so good. Only on our website.",
-            },
-            {
-              head: "Collaborations",
-              text: "Bring Cardboard Citizens outfits to the fashion world with limited editions partnering streetwear, sport brands.",
-            },
-          ],
-        },
-      ],
-    };
+const state = ref(-1)
+const text = ref([
+  {
+    title: "The Post Office",
+    paragraphs: [
+      {
+        head: "The Break Room",
+        text: "Some Cardboard Citizens find themselves spending entirely too much time in the break room. But the coffee is good, you can smoke a cig, and the vibes are chill, so who can blame them? Beats delivering packages. Until the mail room gets overcrowded with boxes and Mr. Uggated goes on one of his hangover laden tirades. It can be a bit of a problem. Marvin claimed to have stayed back there without delivering a single package for 30 days one time. Uggated never found out, but for some reason, Marvin was different after those 30 days. No one could quite pin it down, just… an air about him.",
+      },
+      {
+        head: "Deliveries",
+        text: "We deliver. Not always on time. Sometimes the boxes are a bit chewed up. Sometimes your mail smells like an ashtray. But get over yourself, you don’t spend all day in a truck with dispatch hounding you, so take your judgment, put it on a post card and mail it to us so we can lose it forever behind the sorting machine. Otherwise, check your mail for what we actually do deliver and thank your lucky stars we don’t open your letters. We’re looking at you, Mrs. Dildonna, you dirty, dirty girl, you. We wouldn’t know anything about Mr. X, would we?",
+      },
+    ],
   },
-  methods: {
-    setState(newState: number) {
-      this.state = newState;
-    },
+  {
+    title: "The Warehouse",
+    paragraphs: [
+      {
+        head: "The Inventory",
+        text: "There are 6,666 Citizens, all unique, all half-heartedly sorting and delivering, waiting for you to breathe life into them. We need you to tell our story, so pick one of us up, turn on the old noggin, and spit something out that you think we would do.",
+      },
+      {
+        head: "The Corkboard",
+        text: "You Citizen holders are a talented group of degenerates and while most post offices have pictures of wanted criminals and lost children and sometimes wanted criminals who are lost children, we decided to hell with that, let’s put pictures of ourselves up there. Only thing is, you all are the artists, not us, so we put up the best pictures of us on the Corkboard that you fine folk produce. Don’t forget to put your name on it. We aren’t mind readers. Return to Sender is a thing for a reason.",
+      },
+    ],
   },
-  components: {
-    RoadmapCard,
+  {
+    title: "The Brand",
+    paragraphs: [
+      {
+        head: "Boutique",
+        text: "Let’s just say we know people and those people like the way we look. So we’re going to have those people put us on some streetwear in exclusive collections designed by our team and a Parisian fashion creator. Cz attitude never looked so good. Only on our website.",
+      },
+      {
+        head: "Collaborations",
+        text: "Bring Cardboard Citizens outfits to the fashion world with limited editions partnering streetwear, sport brands.",
+      },
+    ],
   },
-});
+])
+
+const show = ref(false)
+
+onMounted(() => {
+  show.value = true
+})
+
+const setState = (newState: number) => {
+  state.value = newState;
+}
 </script>
 
 <template>
-  <div id="template">
-    <div id="template-overlay">
-      <div id="title" class="overlay" @click="setState(-1)">
-        <span class="goal-title" id="main-title">Cardboard Citizens</span>
-        <span class="goal-title">Bill of lading</span>
-      </div>
+  <transition name="fade">
+    <div id="template" v-if="show">
+      <div id="template-overlay">
 
-      <div>
-        <div id="office" class="overlay overlay-button" @click="setState(0)">
-          <span class="goal-title">The Post Office</span>
+        <div id="office" class="overlay" @click="setState(0)">
+          <img class="horizontal-title" src="../assets/images/carboard_template_office.png" />
         </div>
-        <div id="warehouse" class="overlay overlay-button" @click="setState(1)">
-          <span class="goal-title">The Warehouse</span>
+        <div id="warehouse" class="overlay" @click="setState(1)">
+          <img class="horizontal-title" src="../assets/images/carboard_template_warehouse.png" />
         </div>
-        <div id="brand" class="overlay overlay-button" @click="setState(2)">
-          <span class="goal-title">The Brand</span>
+        <div id="brand" class="overlay" @click="setState(2)">
+          <img class="vertical-title" src="../assets/images/carboard_template_brand.png" />
         </div>
-      </div>
+        <div id="menu" class="overlay" @click="setState(2)">
+          <img class="vertical-title" src="../assets/images/carboard_template_menu.png" />
+        </div>
 
-      <transition name="fade">
-        <RoadmapCard
-          v-if="state >= 0"
-          class="overlay"
-          :title="text[state].title"
-          :paragraphs="text[state].paragraphs"
-        />
-      </transition>
+        <transition name="fade">
+          <RoadmapCard
+            v-if="state >= 0"
+            class="overlay"
+            :title="text[state].title"
+            :paragraphs="text[state].paragraphs"
+          />
+        </transition>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <style scoped>
@@ -113,66 +108,70 @@ export default defineComponent({
   aspect-ratio: 1.9 / 1;
   position: absolute;
   cursor: context-menu;
+  display: grid;
+  grid-template-columns: 3% 19% 2% 54% 1% 16.5%;
+  grid-template-rows: 4% 21% 4% 2% 38% 2% 5% 20%;
 }
 
-.goal-title {
-  text-align: center;
-  color: rgb(46 35 26);
-  font-size: 30px;
-  line-height: 30px;
-  font-family: "BlockHeadFace";
-  transition: 0.2s;
+.horizontal-title {
+  height: 60%;
+  width: auto;
+  transition: 0.1s;
+}
+
+.vertical-title {
+  height: auto;
+  width: 60%;
+  transition: 0.1s;
 }
 
 .overlay {
-  position: absolute;
-  transition: 0.2s;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
-  flex-direction: column;
+  transition: 0.2s;
 }
 
-.overlay-button:hover {
-  background-color: rgba(102, 72, 60, 0.5);
+.overlay:hover {
+  backdrop-filter: contrast(115%);
 }
 
-.overlay-button:hover .goal-title {
-  font-size: 32px;
-  line-height: 32px;
+.overlay:hover .horizontal-title {
+  height: 63%;
 }
 
-#main-title {
-  padding: 0px 100px;
-  font-size: 60px;
-  line-height: 60px;
-}
-
-#title {
-  left: 37%;
-  width: 51%;
-  top: 31%;
-  height: 38%;
+.overlay:hover .vertical-title {
+  width: 63%;
 }
 
 #office {
-  left: 37%;
-  width: 51%;
-  top: 3%;
-  height: 27%;
+  grid-column: 4 / 5;
+  grid-row: 2 / 4;
 }
 #warehouse {
-  left: 1.4%;
-  top: 30%;
-  width: 35%;
-  height: 40%;
+  grid-row: 7 / 9;
+  grid-column: 4 / 5;
 }
 #brand {
-  left: 37%;
-  width: 51%;
-  top: 70%;
-  height: 27%;
+  grid-row: 2 / 9;
+  grid-column: 6 / 7;
+}
+#menu {
+  grid-row: 3 / 8;
+  grid-column: 2 / 3;
+  padding-bottom: 50%;
+}
+
+
+@media screen and (max-width: 640px) {
+  #template {
+    transform: rotate(90deg) scale(1.9);
+    max-width: 100vw;
+    max-height: calc(100vh - 150px);
+    height: 100vh;
+  }
 }
 </style>
 

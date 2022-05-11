@@ -10,7 +10,7 @@ onMounted(() => {
 
 <template>
   <div class="title">
-    <transition name="slide">
+    <transition name="fade">
       <img v-if="show" src="../assets/images/banner_site_v02.png" class="main-image" />
     </transition>
     <div class="footer">© 2022, Cardboard Citizens </div>
@@ -19,12 +19,18 @@ onMounted(() => {
 
 <style scoped>
 .title {
-  height: calc(100vh - 130px);
+  height: calc(100vh - 10em);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   position: relative;
+}
+
+@media screen and (max-width: 640px) {
+  .title {
+    height: calc(100vh - 7em);
+  }
 }
 
 .main-image {
@@ -36,7 +42,6 @@ onMounted(() => {
     height: 60%;
   }
 }
-
 
 .footer {
   position: absolute;

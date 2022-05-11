@@ -129,4 +129,10 @@ const navigations = ref([
 .link {
   height: 35px;
 }
+
+@media screen and (max-width: 640px) {
+  .cardboard-logo {
+    height: 7em;
+  }
+}
 </style>
