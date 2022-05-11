@@ -11,28 +11,27 @@ export default defineComponent({
 
 <template>
   <div id="paragraph">
-    <p id="title">{{ title }}</p>
-    <br/>
-    <div v-for="(paragraph, index) in paragraphs" :key="paragraph.title" class="block" :style="index % 2 === 0 ? {flexDirection: 'row'} : {flexDirection: 'row-reverse'}">
-      <img class="cardboard-logo" src="../../assets/logos/brand_logo.png" />
-      <div class="text-block">
-        <p class="head" :style="index % 2 === 0 ? {textAlign: 'left'} : {textAlign: 'right'}">{{ paragraph.head }}</p>
-        <p class="text">{{ paragraph.text }}</p>
-      </div>
+    <div id="card">
+      <p id="title">{{ title }}</p>
       <br/>
+      <div v-for="(paragraph, index) in paragraphs" :key="paragraph.title" class="block" :style="index % 2 === 0 ? {flexDirection: 'row'} : {flexDirection: 'row-reverse'}">
+        <img class="cardboard-logo" src="../../assets/logos/brand_logo.png" />
+        <div class="text-block">
+          <p class="head" :style="index % 2 === 0 ? {textAlign: 'left'} : {textAlign: 'right'}">{{ paragraph.head }}</p>
+          <p class="text">{{ paragraph.text }}</p>
+        </div>
+        <br/>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
 #paragraph {
-  border: 5px solid transparent;
-  border-radius: 2px;
-  border-image: url(@/assets/dots/dots_2-1.png) 20 round;
   box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 40%);
   background-image: radial-gradient(circle, rgb(110 82 59 / 95%),  rgb(112 83 60 / 95%));
-  padding: 10px;
-  overflow: auto;
+  padding: 5px;
+  border-radius: 3px;
 
   font-weight: bolder;
   font-size: 1em;
@@ -43,6 +42,14 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
+
+#card {
+  border: 5px solid transparent;
+  border-radius: 2px;
+  border-image: url(@/assets/dots/dots_2-1.png) 20 round;
+  padding: 10px;
+  height: 100%;
 }
 
 #title {

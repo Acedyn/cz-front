@@ -168,6 +168,7 @@ const setState = (newState: number) => {
   grid-row: 1 / 10;
   grid-column: 4 / 7;
   transform: scale(1.01);
+  overflow: auto;
 }
 
 
