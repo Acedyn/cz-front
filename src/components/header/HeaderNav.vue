@@ -48,7 +48,7 @@ const navigations = ref([
     soon: true
   },
   {
-    route: "/roadmap",
+    route: "/billoflading",
     title: "bill of lading",
     soon: false
   },

@@ -28,7 +28,7 @@ export default {
       <div>
       <button class="button enabled" @click="click('/')">Home</button>
       <button class="button disabled">Warehouse</button>
-      <button class="button enabled" @click="click('/roadmap')">Bill of Lading</button>
+      <button class="button enabled" @click="click('/billoflading')">Bill of Lading</button>
       <button class="button enabled" @click="click('/team')">Team</button>
       <button class="button disabled">Boutique</button>
       <button class="button disabled">Break Room</button>

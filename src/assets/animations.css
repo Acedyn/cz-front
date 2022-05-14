@@ -66,9 +66,10 @@
 
 .flip-enter-active {
   animation: flip 0.3s;
+  opacity: 1;
 }
-.flip-leave-active {
-  transition: opacity 0.5s;
+.flip-enter-from {
+  opacity: 0;
 }
 .flip-leave-to {
   opacity: 0;

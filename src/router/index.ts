@@ -33,8 +33,8 @@ const router = createRouter({
       },
     },
     {
-      path: '/roadmap',
-      name: 'roadmap',
+      path: '/billoflading',
+      name: 'billoflading',
       component: RoadmapView,
       beforeEnter: () => {
         const app = document.querySelector("#app")

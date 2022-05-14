@@ -66,7 +66,7 @@ onMounted(() => {
                 :name="member.name"
                 :src="member.image"
                 :description="member.description"
-                social="member.social"
+                :social="member.social"
               />
             </transition>
           </div>
@@ -95,6 +95,7 @@ h2 {
 }
 
 .team-card {
-  transition: 0.5s;
+  animation-delay: 0.1s;
+  transition-delay: 0.1s;
 }
 </style>

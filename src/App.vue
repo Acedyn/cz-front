@@ -9,9 +9,7 @@ import HeaderNav from "./components/header/HeaderNav.vue"
   </header>
 
   <RouterView v-slot="{ Component }">
-    <transition name="fadeFast">
-      <component :is="Component" />
-    </transition>
+    <component :is="Component" />
   </RouterView>
   
 </template>
