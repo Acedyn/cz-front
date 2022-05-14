@@ -11,7 +11,7 @@ onMounted(() => {
 <template>
   <div class="title">
     <transition name="fade">
-      <img v-if="show" src="../assets/images/banner_site_v02.png" class="main-image" />
+      <img v-if="show" src="../assets/images/banner_site_v02.png" class="main-image"/>
     </transition>
     <div class="footer">© 2022, Cardboard Citizens </div>
   </div>

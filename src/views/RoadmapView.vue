@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import RoadmapCard from "../components/cards/RoadmapCard.vue";
 
 const state = ref(-1)
@@ -46,14 +46,25 @@ const text = ref([
 ])
 
 const show = ref(false)
-
-onMounted(() => {
-  setTimeout(() => {show.value = true}, 1000)
-})
+const desktopMode = ref(false)
 
 const setState = (newState: number) => {
   state.value = newState;
 }
+
+const checkWindowSize = () => {
+  desktopMode.value = window.innerWidth > 640;
+}
+
+onMounted(() => {
+  show.value = true
+  checkWindowSize()
+  window.addEventListener("resize", checkWindowSize);
+})
+
+onUnmounted(() => {
+  window.removeEventListener("resize", checkWindowSize);
+})
 </script>
 
 <template>
@@ -62,13 +73,16 @@ const setState = (newState: number) => {
       <div class="template-overlay">
 
         <div id="office" class="overlay highlight" @click="setState(0)">
-          <img class="horizontal-title" src="../assets/images/carboard_template_office.png" />
+          <img v-if="desktopMode" class="horizontal-title" src="../assets/images/carboard_template_office.png" />
+          <img v-else class="horizontal-title" src="../assets/images/v_carboard_template_office.png" />
         </div>
         <div id="warehouse" class="overlay highlight" @click="setState(1)">
-          <img class="horizontal-title" src="../assets/images/carboard_template_warehouse.png" />
+          <img v-if="desktopMode" class="horizontal-title" src="../assets/images/carboard_template_warehouse.png" />
+          <img v-else class="horizontal-title" src="../assets/images/v_carboard_template_warehouse.png" />
         </div>
         <div id="brand" class="overlay highlight" @click="setState(2)">
-          <img class="vertical-title" src="../assets/images/carboard_template_brand.png" />
+          <img v-if="desktopMode" class="vertical-title" src="../assets/images/carboard_template_brand.png" />
+          <img v-else class="vertical-title" src="../assets/images/v_carboard_template_brand.png" />
         </div>
         <div id="menu" class="overlay highlight" @click="setState(-1)">
           <img class="vertical-title" src="../assets/images/carboard_template_menu.png" />
@@ -170,6 +184,70 @@ const setState = (newState: number) => {
   grid-row: 1 / 10;
   grid-column: 4 / 7;
   overflow: auto;
+}
+
+@media screen and (max-width: 640px) {
+  .template {
+    width: 100vw;
+    height: calc(100vw * 1.9);
+    max-height: calc(100vw * 1.9);
+    background-image: url(@/assets/images/v_carboard_template.png);
+  }
+
+  .template-overlay {
+    max-height: 100%;
+    width: 100%;
+    aspect-ratio: 1 / 1.9;
+    position: absolute;
+    cursor: context-menu;
+    display: grid;
+    grid-template-columns: 3% 21% 5% 2% 38% 1% 6% 20%;
+    grid-template-rows: 3% 19% 2% 54% 1% 17%;
+  }
+
+  #office {
+    grid-column: 7 / 9;
+    grid-row: 4 / 5;
+  }
+  #warehouse {
+    grid-row: 4 / 5;
+    grid-column: 2 / 4;
+  }
+  #brand {
+    grid-row: 6 / 7;
+    grid-column: 2 / 9;
+  }
+  #menu {
+    grid-column: 5 / 6;
+    grid-row: 2 / 3;
+  }
+
+  .paragraph {
+    grid-row: 4 / 7;
+    grid-column: 2 / 9;
+  }
+
+  .horizontal-title {
+    width: 40%;
+    height: auto;
+  }
+
+  .vertical-title {
+    width: auto;
+    height: 50%;
+  }
+
+  .overlay:hover .horizontal-title {
+    width: 42%;
+    height: auto;
+    filter: brightness(500%) saturate(200%);
+  }
+
+  .overlay:hover .vertical-title {
+    height: 53%;
+    width: auto;
+    filter: brightness(500%) saturate(200%);
+  }
 }
 </style>
 

@@ -15,7 +15,7 @@ export default defineComponent({
       <p class="title">{{ title }}</p>
       <div v-for="(paragraph, index) in paragraphs" :key="paragraph.title" class="block" :style="index % 2 === 0 ? {flexDirection: 'row'} : {flexDirection: 'row-reverse'}">
         <div class="text-block">
-          <p class="head" :style="index % 2 === 0 ? {textAlign: 'left'} : {textAlign: 'right'}">{{ paragraph.head }}</p>
+          <p class="head" :style="index % 2 === 0 ? {textAlign: 'left'} : {textAlign: 'left'}">{{ paragraph.head }}</p>
           <p class="text">{{ paragraph.text }}</p>
         </div>
         <br/>
@@ -27,7 +27,8 @@ export default defineComponent({
 <style scoped>
 .paragraph {
   box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 40%);
-  background-image: radial-gradient(circle, rgb(110 82 59 / 95%),  rgb(112 83 60 / 95%));
+  background-size: contain;
+  background-image: url(@/assets/images/doodles.png);
   padding: 5px;
   border-radius: 3px;
 
@@ -66,6 +67,7 @@ export default defineComponent({
 }
 
 .head {
+  color: #efd7bc;
   text-transform: uppercase;
   font-size: 1.5em;
   line-height: 2em;
@@ -73,6 +75,7 @@ export default defineComponent({
 }
 
 .text {
+  color: #c1b09d;
   font-size: 1.3em;
   line-height: 1.3em;
   text-align: justify;

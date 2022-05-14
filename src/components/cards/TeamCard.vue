@@ -44,7 +44,7 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  max-width: 36em;
+  max-width: 35em;
 
 
   border: 5px solid transparent;

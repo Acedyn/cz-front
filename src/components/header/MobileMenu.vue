@@ -1,4 +1,5 @@
 <script lang="ts">
+import router from '../../router/'
 export default {
   methods: {
     openNav() {
@@ -15,8 +16,7 @@ export default {
     },
     click(element: string) {
       this.closeNav()
-      const height = document.querySelector(`#${element}`)?.scrollHeight;
-      window.scrollTo({top: height, behavior: "smooth"})
+      router.push(element)
     }
   },
 };
@@ -26,10 +26,10 @@ export default {
   <div id="myNav" class="overlay">
     <div class="overlay-content">
       <div>
-      <button class="button enabled" @click="click('header')">Home</button>
+      <button class="button enabled" @click="click('/')">Home</button>
       <button class="button disabled">Warehouse</button>
-      <button class="button disabled">Bill of Lading</button>
-      <button class="button enabled" @click="click('cards')">Team</button>
+      <button class="button enabled" @click="click('/roadmap')">Bill of Lading</button>
+      <button class="button enabled" @click="click('/team')">Team</button>
       <button class="button disabled">Boutique</button>
       <button class="button disabled">Break Room</button>
       </div>
