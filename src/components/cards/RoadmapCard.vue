@@ -4,7 +4,7 @@ import { defineComponent } from "vue";
 export default defineComponent({
   props: {
     title: String,
-    paragraphs: Array,
+    paragraphs: Array as () => {text: string, head: string}[],
   },
 });
 </script>
@@ -13,7 +13,7 @@ export default defineComponent({
   <div class="paragraph">
     <div class="card">
       <p class="title">{{ title }}</p>
-      <div v-for="(paragraph, index) in paragraphs" :key="paragraph.title" class="block" :style="index % 2 === 0 ? {flexDirection: 'row'} : {flexDirection: 'row-reverse'}">
+      <div v-for="(paragraph, index) in paragraphs" :key="paragraph.head" class="block" :style="index % 2 === 0 ? {flexDirection: 'row'} : {flexDirection: 'row-reverse'}">
         <div class="text-block">
           <p class="head" :style="index % 2 === 0 ? {textAlign: 'left'} : {textAlign: 'left'}">{{ paragraph.head }}</p>
           <p class="text">{{ paragraph.text }}</p>

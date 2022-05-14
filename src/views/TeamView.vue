@@ -40,7 +40,7 @@ const members = ref([
 
 onMounted(() => {
   members.value.forEach((member, index) => {
-    setTimeout(() => { member.show = true }, index * 100)
+    setTimeout(() => { member.show = true }, index * 0)
   })
 })
 </script>

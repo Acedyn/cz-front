@@ -22,7 +22,7 @@ const text = ref([
     paragraphs: [
       {
         head: "The Inventory",
-        text: "There are 6,666 Citizens, all unique, all half-heartedly sorting and delivering, waiting for you to breathe life into them. We need you to tell our story, so pick one of us up, turn on the old noggin, and spit something out that you think we would do.",
+        text: "There are 6,767 Citizens, all unique, all half-heartedly sorting and delivering, waiting for you to breathe life into them. We need you to tell our story, so pick one of us up, turn on the old noggin, and spit something out that you think we would do.",
       },
       {
         head: "The Corkboard",
@@ -119,7 +119,7 @@ onUnmounted(() => {
 .template-overlay {
   max-height: 100%;
   width: 100%;
-  aspect-ratio: 1.9 / 1;
+  aspect-ratio: 1.94817 / 1;
   position: absolute;
   cursor: context-menu;
   display: grid;
@@ -197,7 +197,7 @@ onUnmounted(() => {
   .template-overlay {
     max-height: 100%;
     width: 100%;
-    aspect-ratio: 1 / 1.9;
+    aspect-ratio: 1 / 1.94817;
     position: absolute;
     cursor: context-menu;
     display: grid;
