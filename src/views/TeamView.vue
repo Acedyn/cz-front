@@ -7,6 +7,8 @@ import steven from "../assets/profiles/steven.jpg";
 import kodaz from "../assets/profiles/kodaz.jpg";
 import willie from "../assets/profiles/willie.jpg";
 
+const show = ref(false)
+
 const members = ref([
   {
     name: "Willie, Co-Founder",
@@ -39,33 +41,38 @@ const members = ref([
 ]);
 
 onMounted(() => {
+  show.value = true
   members.value.forEach((member, index) => {
-    setTimeout(() => { member.show = true }, index * 0)
+    setTimeout(() => { member.show = true }, index * 100)
   })
 })
 </script>
 
 <template>
   <div>
-    <h2>Team</h2>
+    <transition name="fade">
+      <div v-if="show">
+        <h2>Team</h2>
 
-    <div class="team-presentation">
-      <div 
-        v-for="member in members"
-        :key="member.name"
-      >
-        <transition name="flip">
-          <TeamCard
-            class="team-card"
-            v-if="member.show"
-            :name="member.name"
-            :src="member.image"
-            :description="member.description"
-            social="member.social"
-          />
-        </transition>
+        <div class="team-presentation">
+          <div 
+            v-for="member in members"
+            :key="member.name"
+          >
+            <transition name="flip">
+              <TeamCard
+                class="team-card"
+                v-if="member.show"
+                :name="member.name"
+                :src="member.image"
+                :description="member.description"
+                social="member.social"
+              />
+            </transition>
+          </div>
+        </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 

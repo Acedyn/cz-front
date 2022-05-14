@@ -53,7 +53,6 @@ export default {
 }
 
 .picture {
-  max-height: 200px;
   margin: 10px 0px;
   display: flex;
   align-items: center;
@@ -84,7 +83,7 @@ h3 {
 }
 
 .profile {
-  max-width: 100%;
+  max-height: 140px;
   filter: brightness(90%);
   border-radius: 3%;
   box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 40%);

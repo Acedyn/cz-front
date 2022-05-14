@@ -68,37 +68,39 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <transition name="fade">
-    <div v-if="show" class="template">
-      <div class="template-overlay">
+  <div>
+    <transition name="fade">
+      <div v-if="show" class="template">
+        <div class="template-overlay">
 
-        <div id="office" class="overlay highlight" @click="setState(0)">
-          <img v-if="desktopMode" class="horizontal-title" src="../assets/images/carboard_template_office.png" />
-          <img v-else class="horizontal-title" src="../assets/images/v_carboard_template_office.png" />
-        </div>
-        <div id="warehouse" class="overlay highlight" @click="setState(1)">
-          <img v-if="desktopMode" class="horizontal-title" src="../assets/images/carboard_template_warehouse.png" />
-          <img v-else class="horizontal-title" src="../assets/images/v_carboard_template_warehouse.png" />
-        </div>
-        <div id="brand" class="overlay highlight" @click="setState(2)">
-          <img v-if="desktopMode" class="vertical-title" src="../assets/images/carboard_template_brand.png" />
-          <img v-else class="vertical-title" src="../assets/images/v_carboard_template_brand.png" />
-        </div>
-        <div id="menu" class="overlay highlight" @click="setState(-1)">
-          <img class="vertical-title" src="../assets/images/carboard_template_menu.png" />
-        </div>
+          <div id="office" class="overlay highlight" @click="setState(0)">
+            <img v-if="desktopMode" class="horizontal-title" src="../assets/images/carboard_template_office.png" />
+            <img v-else class="horizontal-title" src="../assets/images/v_carboard_template_office.png" />
+          </div>
+          <div id="warehouse" class="overlay highlight" @click="setState(1)">
+            <img v-if="desktopMode" class="horizontal-title" src="../assets/images/carboard_template_warehouse.png" />
+            <img v-else class="horizontal-title" src="../assets/images/v_carboard_template_warehouse.png" />
+          </div>
+          <div id="brand" class="overlay highlight" @click="setState(2)">
+            <img v-if="desktopMode" class="vertical-title" src="../assets/images/carboard_template_brand.png" />
+            <img v-else class="vertical-title" src="../assets/images/v_carboard_template_brand.png" />
+          </div>
+          <div id="menu" class="overlay highlight" @click="setState(-1)">
+            <img class="vertical-title" src="../assets/images/carboard_template_menu.png" />
+          </div>
 
-        <transition name="fade">
-          <RoadmapCard
-            v-if="state >= 0"
-            class="overlay paragraph"
-            :title="text[state].title"
-            :paragraphs="text[state].paragraphs"
-          />
-        </transition>
+          <transition name="fade">
+            <RoadmapCard
+              v-if="state >= 0"
+              class="overlay paragraph"
+              :title="text[state].title"
+              :paragraphs="text[state].paragraphs"
+            />
+          </transition>
+        </div>
       </div>
-    </div>
-  </transition>
+    </transition>
+  </div>
 </template>
 
 <style scoped>
@@ -146,6 +148,7 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   transition: 0.3s;
+  z-index: 1;
 }
 
 .overlay:hover {
