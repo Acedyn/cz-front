@@ -72,7 +72,7 @@ const navigations = ref([
 
 <template>
   <div class="wrapper">
-    <button class="logo-button" @click="refresh">
+    <button id="main-logo" @click="refresh">
       <img class="cardboard-logo" src="../../assets/logos/brand_logo.png" />
     </button>
 
@@ -103,7 +103,7 @@ const navigations = ref([
   justify-content: space-between;
 }
 
-.logo-button {
+#main-logo {
   margin: 0px;
   padding: 0px;
   border: 0px;

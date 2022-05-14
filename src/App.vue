@@ -30,7 +30,19 @@ import HeaderNav from "./components/header/HeaderNav.vue"
   width: 100%;
 
   font-weight: normal;
+}
 
+.roadmap-background {
+  background-image: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(62, 48, 31, 0.2)
+  ),
+  url(@/assets/background/roadmap_background.png);
+  background-size: contain;
+}
+
+body {
   background-image: radial-gradient(
     circle,
     rgba(0, 0, 0, 0) 50%,

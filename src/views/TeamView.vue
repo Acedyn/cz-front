@@ -46,23 +46,25 @@ onMounted(() => {
 </script>
 
 <template>
-  <h2>Team</h2>
+  <div>
+    <h2>Team</h2>
 
-  <div class="team-presentation">
-    <div 
-      v-for="member in members"
-      :key="member.name"
-    >
-      <transition name="flip">
-        <TeamCard
-          class="team-card"
-          v-if="member.show"
-          :name="member.name"
-          :src="member.image"
-          :description="member.description"
-          social="member.social"
-        />
-      </transition>
+    <div class="team-presentation">
+      <div 
+        v-for="member in members"
+        :key="member.name"
+      >
+        <transition name="flip">
+          <TeamCard
+            class="team-card"
+            v-if="member.show"
+            :name="member.name"
+            :src="member.image"
+            :description="member.description"
+            social="member.social"
+          />
+        </transition>
+      </div>
     </div>
   </div>
 </template>

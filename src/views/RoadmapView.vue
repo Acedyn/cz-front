@@ -48,7 +48,7 @@ const text = ref([
 const show = ref(false)
 
 onMounted(() => {
-  show.value = true
+  setTimeout(() => {show.value = true}, 1000)
 })
 
 const setState = (newState: number) => {
@@ -58,8 +58,8 @@ const setState = (newState: number) => {
 
 <template>
   <transition name="fade">
-    <div id="template" v-if="show">
-      <div id="template-overlay">
+    <div v-if="show" class="template">
+      <div class="template-overlay">
 
         <div id="office" class="overlay highlight" @click="setState(0)">
           <img class="horizontal-title" src="../assets/images/carboard_template_office.png" />
@@ -77,8 +77,7 @@ const setState = (newState: number) => {
         <transition name="fade">
           <RoadmapCard
             v-if="state >= 0"
-            class="overlay"
-            id="paragraph"
+            class="overlay paragraph"
             :title="text[state].title"
             :paragraphs="text[state].paragraphs"
           />
@@ -89,7 +88,7 @@ const setState = (newState: number) => {
 </template>
 
 <style scoped>
-#template {
+.template {
   max-width: 100vw;
   max-height: calc(100vh - 150px);
   height: 100vh;
@@ -103,7 +102,7 @@ const setState = (newState: number) => {
   align-items: center;
 }
 
-#template-overlay {
+.template-overlay {
   max-height: 100%;
   width: 100%;
   aspect-ratio: 1.9 / 1;
@@ -123,7 +122,7 @@ const setState = (newState: number) => {
 .vertical-title {
   height: auto;
   width: 60%;
-  transition: 0.1s;
+  transition: 0.3s;
 }
 
 .overlay {
@@ -132,19 +131,21 @@ const setState = (newState: number) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: 0.2s;
+  transition: 0.3s;
 }
 
-.overlay:hover .highlight{
+.overlay:hover {
   backdrop-filter: contrast(120%);
 }
 
 .overlay:hover .horizontal-title {
   height: 63%;
+  filter: brightness(500%) saturate(200%);
 }
 
 .overlay:hover .vertical-title {
   width: 63%;
+  filter: brightness(500%) saturate(200%);
 }
 
 #office {
@@ -164,21 +165,11 @@ const setState = (newState: number) => {
   grid-column: 2 / 3;
   padding-bottom: 50%;
 }
-#paragraph {
+
+.paragraph {
   grid-row: 1 / 10;
   grid-column: 4 / 7;
-  transform: scale(1.01);
   overflow: auto;
-}
-
-
-@media screen and (max-width: 640px) {
-  #template {
-    transform: rotate(90deg) scale(1.9);
-    max-width: 100vw;
-    max-height: calc(100vh - 150px);
-    height: 100vh;
-  }
 }
 </style>
 

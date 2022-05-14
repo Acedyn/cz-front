@@ -10,12 +10,10 @@ export default defineComponent({
 </script>
 
 <template>
-  <div id="paragraph">
-    <div id="card">
-      <p id="title">{{ title }}</p>
-      <br/>
+  <div class="paragraph">
+    <div class="card">
+      <p class="title">{{ title }}</p>
       <div v-for="(paragraph, index) in paragraphs" :key="paragraph.title" class="block" :style="index % 2 === 0 ? {flexDirection: 'row'} : {flexDirection: 'row-reverse'}">
-        <img class="cardboard-logo" src="../../assets/logos/brand_logo.png" />
         <div class="text-block">
           <p class="head" :style="index % 2 === 0 ? {textAlign: 'left'} : {textAlign: 'right'}">{{ paragraph.head }}</p>
           <p class="text">{{ paragraph.text }}</p>
@@ -27,7 +25,7 @@ export default defineComponent({
 </template>
 
 <style scoped>
-#paragraph {
+.paragraph {
   box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 40%);
   background-image: radial-gradient(circle, rgb(110 82 59 / 95%),  rgb(112 83 60 / 95%));
   padding: 5px;
@@ -44,32 +42,41 @@ export default defineComponent({
   justify-content: space-around;
 }
 
-#card {
+.card {
   border: 5px solid transparent;
   border-radius: 2px;
   border-image: url(@/assets/dots/dots_2-1.png) 20 round;
   padding: 10px;
   height: 100%;
+  overflow: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
-#title {
+.title {
+  color: #efd7bc;
   font-weight: normal;
   text-align: center;
   font-family: "BlockHeadFace";
-  font-size: 30px;
-  line-height: 30px;
+  font-size: 2.5em;
+  line-height: 2em;
+  text-transform: uppercase;
 }
 
 .head {
-  font-size: 1.2em;
-  line-height: 1.2em;
+  text-transform: uppercase;
+  font-size: 1.5em;
+  line-height: 2em;
   text-decoration: underline;
 }
 
 .text {
-  font-size: 1em;
-  line-height: 1em;
+  font-size: 1.3em;
+  line-height: 1.3em;
   text-align: justify;
+  letter-spacing: -0.05em;
 }
 
 .block {

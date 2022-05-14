@@ -10,19 +10,40 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
-      meta: { transition: "slide" }
+      beforeEnter: () => {
+        const app = document.querySelector("#app")
+        const logo = document.querySelector("#main-logo")
+        if(app && logo) {
+          app.classList.remove("roadmap-background")
+          logo.removeAttribute("style")
+        }
+      },
     },
     {
       path: '/team',
       name: 'team',
-      component: () => TeamView,
-      meta: { transition: "fade" }
+      component: TeamView,
+      beforeEnter: () => {
+        const app = document.querySelector("#app")
+        const logo = document.querySelector("#main-logo")
+        if(app && logo) {
+          app.classList.remove("roadmap-background")
+          logo.removeAttribute("style")
+        }
+      },
     },
     {
       path: '/roadmap',
       name: 'roadmap',
-      component: () => RoadmapView,
-      meta: { transition: "flip" }
+      component: RoadmapView,
+      beforeEnter: () => {
+        const app = document.querySelector("#app")
+        const logo = document.querySelector("#main-logo")
+        if(app && logo) {
+          app.classList.add("roadmap-background")
+          logo.setAttribute("style", "filter: brightness(250%)")
+        }
+      },
     },
   ]
 })

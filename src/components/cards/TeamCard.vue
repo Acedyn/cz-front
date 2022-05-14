@@ -60,10 +60,12 @@ export default {
 }
 
 .description {
+  color: #211f1d;
   padding: 10px;
   font-weight: bolder;
-  font-size: 1em;
-  line-height: 1em;
+  font-size: 1.2em;
+  line-height: 1.2em;
+  letter-spacing: -0.05em;
   font-family: "BlockHeadUnplugged", monospace;
 }
 

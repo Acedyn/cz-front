@@ -70,3 +70,23 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #453527;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #efd7bc;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #352b22;
+}
