@@ -39,7 +39,7 @@ const text = ref([
       },
       {
         head: "Collaborations",
-        text: "Bring Cardboard Citizens outfits to the fashion world with limited editions partnering streetwear, sport brands.",
+        text: "Somehow Marvin stumbled upon some Paris based street and sport wear companies while on an international leg with Solana Beach Parcel Service before the, um, “incident” and he had to move to the Post Office. He hit it off with them and they owe him a bunch in poker debt. All those days spent in the back paid off. So Marvin’s got us an in with these guys and we’re going to team up with them to bring Cz attitude to a wider audience.",
       },
     ],
   },
@@ -95,6 +95,7 @@ onUnmounted(() => {
               class="overlay paragraph"
               :title="text[state].title"
               :paragraphs="text[state].paragraphs"
+              @exit="setState(-1)"
             />
           </transition>
         </div>

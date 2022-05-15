@@ -36,7 +36,7 @@ import HeaderNav from "./components/header/HeaderNav.vue"
     rgba(0, 0, 0, 0) 50%,
     rgba(62, 48, 31, 0.2)
   ),
-  url(@/assets/background/roadmap_background.png);
+  url(@/assets/background/roadmap_background.jpg);
   background-size: contain;
 }
 
@@ -46,7 +46,7 @@ body {
     rgba(0, 0, 0, 0) 50%,
     rgba(62, 48, 31, 0.2)
   ),
-  url(@/assets/background/main_background.png);
+  url(@/assets/background/main_background.jpg);
   background-size: contain;
 }
 

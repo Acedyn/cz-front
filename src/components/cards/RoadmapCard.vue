@@ -2,10 +2,30 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
+  data() {
+    return {
+      toto: 0
+    };
+  },
   props: {
     title: String,
     paragraphs: Array as () => {text: string, head: string}[],
   },
+  methods: {
+    clearState(event: Event) {
+      if(this.toto > 0 && !this.$el.contains(event.target)) {
+        this.$emit("exit");
+      }
+      this.toto++
+    },
+  },
+  mounted() {
+    window.addEventListener("click", this.clearState);
+  },
+  unmounted() {
+    window.removeEventListener("click", this.clearState);
+  }
+  
 });
 </script>
 
