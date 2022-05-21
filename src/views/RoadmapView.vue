@@ -52,6 +52,22 @@ const setState = (newState: number) => {
   state.value = newState;
 }
 
+const resizeTemplate = async () => {
+  const el = document.querySelector("#roadmap-ui") as HTMLElement
+
+  const parentHeight = el?.parentElement?.clientHeight
+  const parentWidth = el?.parentElement?.clientWidth
+  if(!el || !parentHeight || !parentWidth) { return }
+
+ if(parentWidth / parentHeight > 1.94817 || !desktopMode.value) {
+    el.style.height = "100%"
+    el.style.width = `${parentHeight * 1.94817}px`
+  } else {
+    el.style.width = "100%"
+    el.style.height = `${parentWidth * 0.51330}px`
+  }
+}
+
 const checkWindowSize = () => {
   desktopMode.value = window.innerWidth > 640;
 }
@@ -59,19 +75,22 @@ const checkWindowSize = () => {
 onMounted(() => {
   show.value = true
   checkWindowSize()
+  resizeTemplate()
   window.addEventListener("resize", checkWindowSize);
+  window.addEventListener("resize", resizeTemplate);
 })
 
 onUnmounted(() => {
   window.removeEventListener("resize", checkWindowSize);
+  window.removeEventListener("resize", resizeTemplate);
 })
 </script>
 
 <template>
   <div>
-    <transition name="fade">
-      <div v-if="show" class="template">
-        <div class="template-overlay">
+    <transition name="fade" @enter="resizeTemplate">
+      <div v-show="show" class="template">
+        <div class="template-overlay" id="roadmap-ui">
 
           <div id="office" class="overlay highlight" @click="setState(0)">
             <img v-if="desktopMode" class="horizontal-title" src="../assets/images/carboard_template_office.png" />
@@ -121,8 +140,8 @@ onUnmounted(() => {
 
 .template-overlay {
   max-height: 100%;
-  width: 100%;
-  aspect-ratio: 1.94817 / 1;
+  max-width: 100%;
+  /* aspect-ratio: 1.94817 / 1; */
   position: absolute;
   cursor: context-menu;
   display: grid;
@@ -199,12 +218,6 @@ onUnmounted(() => {
   }
 
   .template-overlay {
-    max-height: 100%;
-    width: 100%;
-    aspect-ratio: 1 / 1.94817;
-    position: absolute;
-    cursor: context-menu;
-    display: grid;
     grid-template-columns: 3% 21% 5% 2% 38% 1% 6% 20%;
     grid-template-rows: 3% 19% 2% 54% 1% 17%;
   }

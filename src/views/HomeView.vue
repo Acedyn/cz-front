@@ -11,7 +11,7 @@ onMounted(() => {
 <template>
   <div class="title">
     <transition name="fade">
-      <img v-if="show" src="../assets/images/banner_site_v02.png" class="main-image"/>
+      <img v-show="show" src="../assets/images/banner_site_v02.png" class="main-image"/>
     </transition>
     <div class="footer">© 2022, Cardboard Citizens </div>
   </div>
@@ -48,7 +48,7 @@ onMounted(() => {
   bottom: 10px;
   left: 10px;
 
-  font-size: 1em;
+  font-size: var(--text-medium);
   font-weight: bolder;
   font-family: "BlockHeadUnplugged", monospace;
 }

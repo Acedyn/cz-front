@@ -32,7 +32,7 @@ export default {
 <style scoped>
 .container {
   display: flex;
-  flex-direction: horizontal;
+  flex-direction: column;
   margin: 10px;
   box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 40%);
   background-image: radial-gradient(circle, #a37e60, #916d51);
@@ -62,9 +62,9 @@ export default {
   color: #211f1d;
   padding: 10px;
   font-weight: bolder;
-  font-size: 1.2em;
+  font-size: var(--text-medium);
   line-height: 1.2em;
-  letter-spacing: -0.05em;
+  letter-spacing: calc(var(--text-medium) * -0.04);
   font-family: "BlockHeadUnplugged", monospace;
 }
 
@@ -72,7 +72,7 @@ h3 {
   margin: 10px 0px;
   font-family: BlockHeadFace;
   line-height: 30px;
-  font-size: 30px;
+  font-size: var(--text-large);
   color: rgba(0, 0, 0, 70%);
   text-align: start;
 }
@@ -87,5 +87,30 @@ h3 {
   filter: brightness(90%);
   border-radius: 3%;
   box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 40%);
+}
+
+@media screen and (max-width: 640px) {
+  .card {
+    flex-direction: column;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .profile {
+    max-height: 200px;
+  }
+}
+
+@media screen and (min-width: 2500px) {
+  .profile {
+    max-height: 280px;
+  }
+}
+
+
+@media screen and (min-width: 3800px) {
+  .profile {
+    max-height: 360px;
+  }
 }
 </style>

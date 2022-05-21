@@ -25,17 +25,18 @@ export default {
 <template>
   <div id="myNav" class="overlay">
     <div class="overlay-content">
+      <img class="cardboard-logo" src="../../assets/logos/brand_logo.png" />
       <div>
-      <button class="button enabled" @click="click('/')">Home</button>
-      <button class="button disabled">Warehouse</button>
-      <button class="button enabled" @click="click('/billoflading')">Bill of Lading</button>
-      <button class="button enabled" @click="click('/team')">Team</button>
-      <button class="button disabled">Boutique</button>
-      <button class="button disabled">Break Room</button>
+        <button class="button enabled" @click="click('/')">Home</button>
+        <button class="button disabled">Warehouse</button>
+        <button class="button enabled" @click="click('/billoflading')">Bill of Lading</button>
+        <button class="button enabled" @click="click('/team')">Team</button>
+        <button class="button disabled">Boutique</button>
+        <button class="button disabled">Break Room</button>
       </div>
       <div class="social">
-        <a href="https://twitter.com/CardboardCtzNFT"><img src="../../assets/logos/twitter.svg"></a>
-        <a><img src="../../assets/logos/discord.svg"></a>
+        <a href="https://twitter.com/CardboardCtzNFT"><img class="social-link" src="../../assets/logos/twitter.svg"></a>
+        <a href="https://discord.com/invite/6M4C2dGzWc"><img class="social-link" src="../../assets/logos/discord.svg"></a>
       </div>
     </div>
   </div>
@@ -64,11 +65,12 @@ export default {
 .overlay-content {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   position: relative;
   width: 100%; /* 100% width */
   height: 100%; /* 100% width */
   text-align: center; /* Centered text/links */
+  padding: 20px;
 }
 
 .overlay .button {
@@ -76,7 +78,7 @@ export default {
   font-family: BlockHeadFace;
   text-decoration: none;
   line-height: 40px;
-  font-size: 45px;
+  font-size: 35px;
   display: block; /* Display block instead of inline */
   transition: 0.3s; /* Transition effects on hover (color) */
 }
@@ -103,6 +105,7 @@ button{
   margin-right: auto;
   display: flex;
   flex-direction: column;
+  text-transform: uppercase;
 }
 
 @media screen and (max-height: 500px) {
@@ -144,7 +147,16 @@ button{
   justify-content: space-around;
 }
 
-img {
+.social-link {
   height: 5vh;
+  width: auto;
+}
+
+.cardboard-logo {
+  width: 40vw;
+  object-fit: contain;
+  margin-left: auto;
+  margin-right: auto;
+  filter: brightness(300%) saturate(20%);
 }
 </style>

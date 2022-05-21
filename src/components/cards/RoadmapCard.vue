@@ -53,7 +53,7 @@ export default defineComponent({
   border-radius: 3px;
 
   font-weight: bolder;
-  font-size: 1em;
+  font-size: var(--text-medium);
   line-height: 1em;
   font-family: "BlockHeadUnplugged", monospace;
   color: #211f1d;
@@ -81,7 +81,7 @@ export default defineComponent({
   font-weight: normal;
   text-align: center;
   font-family: "BlockHeadFace";
-  font-size: 2.5em;
+  font-size: var(--text-extra-large);
   line-height: 2em;
   text-transform: uppercase;
 }
@@ -89,7 +89,7 @@ export default defineComponent({
 .head {
   color: #efd7bc;
   text-transform: uppercase;
-  font-size: 1.5em;
+  font-size: var(--text-large);
   line-height: 2em;
   text-decoration: underline;
 }

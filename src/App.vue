@@ -18,6 +18,7 @@ import HeaderNav from "./components/header/HeaderNav.vue"
 @import '@/assets/base.css';
 @import '@/assets/animations.css';
 @import '@/assets/fonts.css';
+@import '@/assets/variables.css';
 
 #app {
   margin: 0;

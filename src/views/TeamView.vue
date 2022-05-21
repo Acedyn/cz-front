@@ -51,7 +51,7 @@ onMounted(() => {
 <template>
   <div>
     <transition name="fade">
-      <div v-if="show">
+      <div v-show="show">
         <h2>Team</h2>
 
         <div class="team-presentation">
@@ -62,7 +62,7 @@ onMounted(() => {
             <transition name="flip">
               <TeamCard
                 class="team-card"
-                v-if="member.show"
+                v-show="member.show"
                 :name="member.name"
                 :src="member.image"
                 :description="member.description"
