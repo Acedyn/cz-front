@@ -71,36 +71,36 @@ const navigations = ref([
 </script>
 
 <template>
-  <div class="wrapper">
-    <button id="main-logo" @click="refresh">
-      <img class="cardboard-logo" src="../../assets/logos/brand_logo.png" />
-    </button>
+  <header class="header-container">
+    <div class="header-content">
+      <button id="main-logo" @click="refresh">
+        <img class="cardboard-logo" src="../../assets/logos/brand_logo.png" />
+      </button>
 
-    <nav class="desktop-nav" v-if="desktopMode">
-      <RouterLink
-        class="link"
-        v-for="navigation in navigations"
-        :key="navigation.route"
-        :to="navigation.route"
-        ><NavigationButton :title="navigation.title" :soon="navigation.soon"
-      /></RouterLink>
-      <SocialButton
-        class="link"
-        v-for="socialNetwork in socialNetworks"
-        :src="socialNetwork.image"
-        :link="socialNetwork.link"
-      />
-    </nav>
-    <MobileMenu v-else/>
-  </div>
+      <nav class="desktop-nav" v-if="desktopMode">
+        <RouterLink class="link" v-for="navigation in navigations" :key="navigation.route" :to="navigation.route">
+          <NavigationButton :title="navigation.title" :soon="navigation.soon" />
+        </RouterLink>
+        <SocialButton class="link" v-for="socialNetwork in socialNetworks" :src="socialNetwork.image"
+          :link="socialNetwork.link" />
+      </nav>
+      <MobileMenu v-else />
+    </div>
+  </header>
 </template>
 
 <style scoped>
-.wrapper {
+.header-container {
+  position: relative;
+  z-index: 2;
+}
+
+.header-content {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  padding: 0 20px;
 }
 
 #main-logo {

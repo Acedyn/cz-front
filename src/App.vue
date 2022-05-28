@@ -4,14 +4,11 @@ import HeaderNav from "./components/header/HeaderNav.vue"
 </script>
 
 <template>
-  <header>
-    <HeaderNav />
-  </header>
+  <!-- <HeaderNav /> -->
 
   <RouterView v-slot="{ Component }">
     <component :is="Component" />
   </RouterView>
-  
 </template>
 
 <style>
@@ -32,27 +29,10 @@ import HeaderNav from "./components/header/HeaderNav.vue"
 }
 
 .roadmap-background {
-  background-image: radial-gradient(
-    circle,
-    rgba(0, 0, 0, 0) 50%,
-    rgba(62, 48, 31, 0.2)
-  ),
-  url(@/assets/background/roadmap_background.jpg);
+  background-image: radial-gradient(circle,
+      rgba(0, 0, 0, 0) 50%,
+      rgba(62, 48, 31, 0.2)),
+    url(@/assets/background/roadmap_background.jpg);
   background-size: contain;
 }
-
-body {
-  background-image: radial-gradient(
-    circle,
-    rgba(0, 0, 0, 0) 50%,
-    rgba(62, 48, 31, 0.2)
-  ),
-  url(@/assets/background/main_background.jpg);
-  background-size: contain;
-}
-
-header {
-  padding: 0 20px;
-}
-
 </style>
