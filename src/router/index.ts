@@ -34,8 +34,8 @@ const router = createRouter({
       },
     },
     {
-      path: "/billoflading",
-      name: "billoflading",
+      path: "/bill-of-lading",
+      name: "bill-of-lading",
       component: RoadmapView,
       beforeEnter: () => {
         const app = document.querySelector("#app");

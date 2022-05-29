@@ -4,7 +4,7 @@ import HeaderNav from "./components/header/HeaderNav.vue"
 </script>
 
 <template>
-  <!-- <HeaderNav /> -->
+  <HeaderNav />
 
   <RouterView v-slot="{ Component }">
     <component :is="Component" />

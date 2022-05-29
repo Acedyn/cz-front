@@ -13,6 +13,9 @@ const desktopMode = ref(true)
 const refresh = () => {
   window.location.reload();
 }
+
+const isMobile = window.mobileAndTabletCheck();
+
 const checkWindowSize = () => {
   desktopMode.value = window.innerWidth > 1000;
 }
@@ -48,7 +51,7 @@ const navigations = ref([
     soon: true
   },
   {
-    route: "/billoflading",
+    route: "/bill-of-lading",
     title: "bill of lading",
     soon: false
   },
@@ -77,14 +80,15 @@ const navigations = ref([
         <img class="cardboard-logo" src="../../assets/logos/brand_logo.png" />
       </button>
 
-      <nav class="desktop-nav" v-if="desktopMode">
+      <nav class="desktop-nav" v-if="desktopMode && !($route.path === '/')">
         <RouterLink class="link" v-for="navigation in navigations" :key="navigation.route" :to="navigation.route">
           <NavigationButton :title="navigation.title" :soon="navigation.soon" />
         </RouterLink>
         <SocialButton class="link" v-for="socialNetwork in socialNetworks" :src="socialNetwork.image"
           :link="socialNetwork.link" />
       </nav>
-      <MobileMenu v-else />
+
+      <MobileMenu v-else-if="!desktopMode" />
     </div>
   </header>
 </template>
@@ -111,7 +115,7 @@ const navigations = ref([
 }
 
 .cardboard-logo {
-  height: 10em;
+  height: 8em;
   transition: 0.2s;
 }
 

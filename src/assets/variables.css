@@ -2,10 +2,6 @@
   --text-medium: 16px;
   --text-large: 20px;
   --text-extra-large: 32px;
-
-  /* Resolution in pixels of background image */
-  --bg-width: 6000;
-  --bg-height: 3374;
 }
 
 @media screen and (min-width: 1800px) {
