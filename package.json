@@ -5,9 +5,13 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview --port 5050",
-    "typecheck": "vue-tsc --noEmit"
+    "typecheck": "vue-tsc --noEmit",
+    "postinstall": "npm run build",
+    "start": "node server.js"
   },
   "dependencies": {
+    "express": "^4.18.1",
+    "serve-static": "^1.15.0",
     "vue": "^3.2.33",
     "vue-mobile-detection": "^2.0.1",
     "vue-router": "^4.0.14"
