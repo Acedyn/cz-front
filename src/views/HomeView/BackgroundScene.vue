@@ -4,6 +4,10 @@ import "@/components/circular-progress/circle-progress.css";
 import CircleProgress from "@/components/circular-progress/CircularProgress.vue";
 import ImageRegion from "./ImageRegion.vue";
 
+const discordLink = import.meta.env.VITE_CZ_DISCORD;
+const twitterLink = import.meta.env.VITE_CZ_TWITTER;
+const warehouseLink = import.meta.env.VITE_CZ_WAREHOUSE;
+
 const onMobile = window.mobileAndTabletCheck();
 const totalImages = onMobile ? 1 : 14;
 const imagesLoaded = ref<number>(0);
@@ -32,8 +36,8 @@ onBeforeUnmount(() => document.body.style.overflow = "auto");
       <img src="@/assets/background/scene_no_houses.jpg" class="full-width background origin-corner fade-in"
         @load="loadImage" />
 
-      <ImageRegion name="post_office" :onImageLoaded="loadImage" :close="true" />
-      <ImageRegion name="warehouse" :onImageLoaded="loadImage" :close="true" />
+      <ImageRegion name="post_office" :onImageLoaded="loadImage" :close="true" to="/" />
+      <ImageRegion name="warehouse" :onImageLoaded="loadImage" :close="true" :url="warehouseLink" />
 
       <ImageRegion name="breakroom" :onImageLoaded="loadImage" :close="true" :soon="true" />
       <ImageRegion name="boutique" :onImageLoaded="loadImage" :soon="true" />
@@ -42,8 +46,8 @@ onBeforeUnmount(() => document.body.style.overflow = "auto");
 
       <ImageRegion name="team" :onImageLoaded="loadImage" to="/team" :close="true" />
 
-      <ImageRegion name="discord" :onImageLoaded="loadImage" />
-      <ImageRegion name="twitter" :onImageLoaded="loadImage" />
+      <ImageRegion name="discord" :onImageLoaded="loadImage" :url="discordLink" />
+      <ImageRegion name="twitter" :onImageLoaded="loadImage" :url="twitterLink" />
     </div>
   </div>
 

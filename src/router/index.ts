@@ -46,6 +46,15 @@ const router = createRouter({
         }
       },
     },
+    {
+      path: "/warehouse",
+      name: "warehouse",
+      component: () => {},
+      beforeEnter: () => {
+        const w = window.open(import.meta.env.VITE_CZ_WAREHOUSE, '_blank');
+        if (w) w.focus();
+      },
+    },
   ],
 });
 

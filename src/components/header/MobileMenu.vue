@@ -20,6 +20,9 @@ export default {
     }
   },
 };
+
+const twitterLink = import.meta.env.VITE_CZ_TWITTER;
+const discordLink = import.meta.env.VITE_CZ_TWITTER;
 </script>
 
 <template>
@@ -28,16 +31,16 @@ export default {
       <img class="cardboard-logo" src="../../assets/logos/brand_logo.png" />
       <div>
         <button class="button enabled" @click="click('/')">Home</button>
-        <button class="button disabled">Warehouse</button>
+        <button class="button enabled beta-container" @click="click('/warehouse')">Warehouse<span
+            class="beta-sign">BETA</span></button>
         <button class="button enabled" @click="click('/bill-of-lading')">Bill of Lading</button>
         <button class="button enabled" @click="click('/team')">Team</button>
         <button class="button disabled">Boutique</button>
         <button class="button disabled">Break Room</button>
       </div>
       <div class="social">
-        <a href="https://twitter.com/CardboardCtzNFT"><img class="social-link" src="../../assets/logos/twitter.svg"></a>
-        <a href="https://discord.com/invite/6M4C2dGzWc"><img class="social-link"
-            src="../../assets/logos/discord.svg"></a>
+        <a :href="twitterLink"><img class="social-link" src="../../assets/logos/twitter.svg"></a>
+        <a :href="discordLink"><img class="social-link" src="../../assets/logos/discord.svg"></a>
       </div>
     </div>
   </div>
@@ -169,10 +172,28 @@ button {
 }
 
 .cardboard-logo {
+  cursor: pointer;
   width: 40vw;
   object-fit: contain;
   margin-left: auto;
   margin-right: auto;
   filter: brightness(300%) saturate(20%);
+}
+
+.beta-container {
+  position: relative;
+}
+
+.beta-sign {
+  position: absolute;
+  right: -3em;
+  top: -0.5em;
+  background-color: #E33D3D;
+  border-radius: 0.5em;
+  color: white;
+  font-size: 0.5em;
+  padding: 0em 0.6em;
+  line-height: 27px;
+  font-family: "BlockHeadUnplugged";
 }
 </style>

@@ -32,11 +32,11 @@ onUnmounted(() => {
 const socialNetworks = ref([
   {
     image: twitter,
-    link: "https://twitter.com/CardboardCtzNFT",
+    link: import.meta.env.VITE_CZ_TWITTER,
   },
   {
     image: discord,
-    link: "https://discord.com/invite/6M4C2dGzWc",
+    link: import.meta.env.VITE_CZ_DISCORD,
   },
 ])
 const navigations = ref([
@@ -46,9 +46,9 @@ const navigations = ref([
     soon: false
   },
   {
-    route: "",
+    route: "/warehouse",
     title: "warehouse",
-    soon: true
+    soon: false
   },
   {
     route: "/bill-of-lading",
@@ -76,9 +76,9 @@ const navigations = ref([
 <template>
   <header class="header-container">
     <div class="header-content">
-      <button id="main-logo" @click="refresh">
+      <router-link to="/" id="main-logo">
         <img class="cardboard-logo" src="../../assets/logos/brand_logo.png" />
-      </button>
+      </router-link>
 
       <nav class="desktop-nav" v-if="desktopMode && !($route.path === '/')">
         <RouterLink class="link" v-for="navigation in navigations" :key="navigation.route" :to="navigation.route">
@@ -96,10 +96,13 @@ const navigations = ref([
 <style scoped>
 .header-container {
   position: relative;
-  z-index: 2;
+  z-index: 1;
+  width: v-bind("(desktopMode && $route.path === '/') ? '' : '100%'");
+  display: inline-block;
 }
 
 .header-content {
+
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -115,6 +118,7 @@ const navigations = ref([
 }
 
 .cardboard-logo {
+  cursor: pointer;
   height: 8em;
   transition: 0.2s;
 }

@@ -7,6 +7,7 @@ const props = defineProps<{
   onImageLoaded: () => void
   soon?: boolean
   to?: string
+  url?: string
   close?: boolean
 }>()
 
@@ -14,7 +15,12 @@ const imagesRootURL = new URL('/src/assets/background', import.meta.url).href;
 const mouseOver = ref<boolean>();
 
 const redirect = () => {
-  if (props.to) {
+  if (props.url) {
+    const w = window.open(props.url, '_blank');
+    if (w) w.focus();
+  } else if (props.to == '/') {
+    window.location.pathname = "/";
+  } else if (props.to) {
     router.push(props.to);
   }
 }
