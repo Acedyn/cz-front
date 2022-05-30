@@ -20,6 +20,9 @@ export default {
     }
   },
 };
+
+const twitterLink = import.meta.env.VITE_CZ_TWITTER;
+const discordLink = import.meta.env.VITE_CZ_TWITTER;
 </script>
 
 <template>
@@ -28,15 +31,16 @@ export default {
       <img class="cardboard-logo" src="../../assets/logos/brand_logo.png" />
       <div>
         <button class="button enabled" @click="click('/')">Home</button>
-        <button class="button disabled">Warehouse</button>
-        <button class="button enabled" @click="click('/billoflading')">Bill of Lading</button>
+        <button class="button enabled beta-container" @click="click('/warehouse')">Warehouse<span
+            class="beta-sign">BETA</span></button>
+        <button class="button enabled" @click="click('/bill-of-lading')">Bill of Lading</button>
         <button class="button enabled" @click="click('/team')">Team</button>
         <button class="button disabled">Boutique</button>
         <button class="button disabled">Break Room</button>
       </div>
       <div class="social">
-        <a href="https://twitter.com/CardboardCtzNFT"><img class="social-link" src="../../assets/logos/twitter.svg"></a>
-        <a href="https://discord.com/invite/6M4C2dGzWc"><img class="social-link" src="../../assets/logos/discord.svg"></a>
+        <a :href="twitterLink"><img class="social-link" src="../../assets/logos/twitter.svg"></a>
+        <a :href="discordLink"><img class="social-link" src="../../assets/logos/discord.svg"></a>
       </div>
     </div>
   </div>
@@ -52,14 +56,20 @@ export default {
 .overlay {
   height: 100%;
   width: 0;
-  position: fixed; /* Stay in place */
-  z-index: 2; /* Sit on top */
+  position: fixed;
+  /* Stay in place */
+  z-index: 2;
+  /* Sit on top */
   left: 0;
   top: 0;
-  background-color: rgb(0, 0, 0); /* Black fallback color */
-  background-color: rgba(0, 0, 0, 0.9); /* Black w/opacity */
-  overflow-x: hidden; /* Disable horizontal scroll */
-  transition: 0.3s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+  background-color: rgb(0, 0, 0);
+  /* Black fallback color */
+  background-color: rgba(0, 0, 0, 0.9);
+  /* Black w/opacity */
+  overflow-x: hidden;
+  /* Disable horizontal scroll */
+  transition: 0.3s;
+  /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
 }
 
 .overlay-content {
@@ -67,9 +77,12 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  width: 100%; /* 100% width */
-  height: 100%; /* 100% width */
-  text-align: center; /* Centered text/links */
+  width: 100%;
+  /* 100% width */
+  height: 100%;
+  /* 100% width */
+  text-align: center;
+  /* Centered text/links */
   padding: 20px;
 }
 
@@ -79,8 +92,10 @@ export default {
   text-decoration: none;
   line-height: 40px;
   font-size: 35px;
-  display: block; /* Display block instead of inline */
-  transition: 0.3s; /* Transition effects on hover (color) */
+  display: block;
+  /* Display block instead of inline */
+  transition: 0.3s;
+  /* Transition effects on hover (color) */
 }
 
 .disabled {
@@ -96,7 +111,7 @@ export default {
   color: #f1f1f1;
 }
 
-button{
+button {
   margin: 20px 0px;
   padding: 0px;
   border: 0px;
@@ -126,6 +141,10 @@ button{
   transition: 0.2s;
 }
 
+.hamburger div {
+  background-color: #281414 !important;
+}
+
 .hamburger:hover {
   filter: sepia(8%) saturate(100%) brightness(150%);
 }
@@ -153,10 +172,28 @@ button{
 }
 
 .cardboard-logo {
+  cursor: pointer;
   width: 40vw;
   object-fit: contain;
   margin-left: auto;
   margin-right: auto;
   filter: brightness(300%) saturate(20%);
+}
+
+.beta-container {
+  position: relative;
+}
+
+.beta-sign {
+  position: absolute;
+  right: -3em;
+  top: -0.5em;
+  background-color: #E33D3D;
+  border-radius: 0.5em;
+  color: white;
+  font-size: 0.5em;
+  padding: 0em 0.6em;
+  line-height: 27px;
+  font-family: "BlockHeadUnplugged";
 }
 </style>

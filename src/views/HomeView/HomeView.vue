@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import BackgroundScene from "./BackgroundScene.vue";
 
 const show = ref(false)
 
@@ -9,12 +10,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="title">
-    <transition name="fade">
-      <img v-show="show" src="../assets/images/banner_site_v02.png" class="main-image"/>
-    </transition>
-    <div class="footer">© 2022, Cardboard Citizens </div>
-  </div>
+  <BackgroundScene />
 </template>
 
 <style scoped>

@@ -13,6 +13,9 @@ const desktopMode = ref(true)
 const refresh = () => {
   window.location.reload();
 }
+
+const isMobile = window.mobileAndTabletCheck();
+
 const checkWindowSize = () => {
   desktopMode.value = window.innerWidth > 1000;
 }
@@ -29,11 +32,11 @@ onUnmounted(() => {
 const socialNetworks = ref([
   {
     image: twitter,
-    link: "https://twitter.com/CardboardCtzNFT",
+    link: import.meta.env.VITE_CZ_TWITTER,
   },
   {
     image: discord,
-    link: "https://discord.com/invite/6M4C2dGzWc",
+    link: import.meta.env.VITE_CZ_DISCORD,
   },
 ])
 const navigations = ref([
@@ -43,12 +46,12 @@ const navigations = ref([
     soon: false
   },
   {
-    route: "",
+    route: "/warehouse",
     title: "warehouse",
-    soon: true
+    soon: false
   },
   {
-    route: "/billoflading",
+    route: "/bill-of-lading",
     title: "bill of lading",
     soon: false
   },
@@ -71,36 +74,40 @@ const navigations = ref([
 </script>
 
 <template>
-  <div class="wrapper">
-    <button id="main-logo" @click="refresh">
-      <img class="cardboard-logo" src="../../assets/logos/brand_logo.png" />
-    </button>
+  <header class="header-container">
+    <div class="header-content">
+      <router-link to="/" id="main-logo">
+        <img class="cardboard-logo" src="../../assets/logos/brand_logo.png" />
+      </router-link>
 
-    <nav class="desktop-nav" v-if="desktopMode">
-      <RouterLink
-        class="link"
-        v-for="navigation in navigations"
-        :key="navigation.route"
-        :to="navigation.route"
-        ><NavigationButton :title="navigation.title" :soon="navigation.soon"
-      /></RouterLink>
-      <SocialButton
-        class="link"
-        v-for="socialNetwork in socialNetworks"
-        :src="socialNetwork.image"
-        :link="socialNetwork.link"
-      />
-    </nav>
-    <MobileMenu v-else/>
-  </div>
+      <nav class="desktop-nav" v-if="desktopMode && !($route.path === '/')">
+        <RouterLink class="link" v-for="navigation in navigations" :key="navigation.route" :to="navigation.route">
+          <NavigationButton :title="navigation.title" :soon="navigation.soon" />
+        </RouterLink>
+        <SocialButton class="link" v-for="socialNetwork in socialNetworks" :src="socialNetwork.image"
+          :link="socialNetwork.link" />
+      </nav>
+
+      <MobileMenu v-else-if="!desktopMode" />
+    </div>
+  </header>
 </template>
 
 <style scoped>
-.wrapper {
+.header-container {
+  position: relative;
+  z-index: 1;
+  width: v-bind("(desktopMode && $route.path === '/') ? '' : '100%'");
+  display: inline-block;
+}
+
+.header-content {
+
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  padding: 0 20px;
 }
 
 #main-logo {
@@ -111,7 +118,8 @@ const navigations = ref([
 }
 
 .cardboard-logo {
-  height: 10em;
+  cursor: pointer;
+  height: 8em;
   transition: 0.2s;
 }
 
