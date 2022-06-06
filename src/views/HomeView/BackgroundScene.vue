@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeMount, onBeforeUnmount, ref } from "vue";
+import { onBeforeMount, onBeforeUnmount, ref, computed } from "vue";
 import "@/components/circular-progress/circle-progress.css";
 import CircleProgress from "@/components/circular-progress/CircularProgress.vue";
 import ImageRegion from "./ImageRegion.vue";
@@ -8,6 +8,7 @@ const discordLink = import.meta.env.VITE_CZ_DISCORD;
 const twitterLink = import.meta.env.VITE_CZ_TWITTER;
 const warehouseLink = import.meta.env.VITE_CZ_WAREHOUSE;
 
+const dark = ref<boolean>(false)
 const onMobile = window.mobileAndTabletCheck();
 const totalImages = onMobile ? 1 : 14;
 const imagesLoaded = ref<number>(0);
@@ -19,6 +20,14 @@ const loadImage = () => {
   }
 }
 
+const toggleTheme = () => {
+  dark.value = !(dark.value)
+}
+
+const imagesRootURL = new URL('/src/assets/background', import.meta.url).href;
+const desktopBackground = computed(() => dark.value ? `${imagesRootURL}/scene_no_houses_dark.jpg` : `${imagesRootURL}/scene_no_houses.jpg`)
+const smartphoneBackground = computed(() => dark.value ? `${imagesRootURL}/smartphone_brackground_dark.jpg` : `${imagesRootURL}/smartphone_brackground.jpg`)
+
 onBeforeMount(() => {
   document.body.style.overflow = 'hidden';
 });
@@ -28,26 +37,27 @@ onBeforeUnmount(() => document.body.style.overflow = "auto");
 
 <template>
   <div v-if="onMobile">
-    <img src="@/assets/background/smartphone_brackground.jpg" class="smartphone-background fade-in" @load="loadImage" />
+    <img :src="smartphoneBackground" class="smartphone-background fade-in" @load="loadImage" />
   </div>
 
   <div v-else>
     <div class="background-container">
-      <img src="@/assets/background/scene_no_houses.jpg" class="full-width background origin-corner fade-in"
+      <img :src="desktopBackground" class="full-width background origin-corner fade-in"
         @load="loadImage" />
 
-      <ImageRegion name="post_office" :onImageLoaded="loadImage" :close="true" to="/" />
-      <ImageRegion name="warehouse" :onImageLoaded="loadImage" :close="true" :url="warehouseLink" />
+      <ImageRegion name="post_office" :onImageLoaded="loadImage" :close="true" to="/" :dark="dark"/>
+      <ImageRegion name="warehouse" :onImageLoaded="loadImage" :close="true" :url="warehouseLink" :dark="dark" />
 
-      <ImageRegion name="breakroom" :onImageLoaded="loadImage" :close="true" :soon="true" />
-      <ImageRegion name="boutique" :onImageLoaded="loadImage" :soon="true" />
+      <ImageRegion name="breakroom" :onImageLoaded="loadImage" :close="true" :soon="true" :dark="dark" />
+      <ImageRegion name="boutique" :onImageLoaded="loadImage" :soon="true" :dark="dark" />
 
-      <ImageRegion name="bill_of_lading" :onImageLoaded="loadImage" :close="true" to="/bill-of-lading" />
+      <ImageRegion name="bill_of_lading" :onImageLoaded="loadImage" :close="true" to="/bill-of-lading" :dark="dark" />
 
-      <ImageRegion name="team" :onImageLoaded="loadImage" to="/team" :close="true" />
+      <ImageRegion name="team" :onImageLoaded="loadImage" to="/team" :close="true" :dark="dark" />
 
-      <ImageRegion name="discord" :onImageLoaded="loadImage" :url="discordLink" />
-      <ImageRegion name="twitter" :onImageLoaded="loadImage" :url="twitterLink" />
+      <ImageRegion name="discord" :onImageLoaded="loadImage" :url="discordLink" :dark="dark" />
+      <ImageRegion name="twitter" :onImageLoaded="loadImage" :url="twitterLink" :dark="dark" />
+      <ImageRegion name="lightmode" :onImageLoaded="loadImage" @click="toggleTheme" :dark="dark" />
     </div>
   </div>
 
@@ -114,10 +124,9 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 
-  width: 100vw;
   aspect-ratio: 16 / 9;
-  min-width: calc(var(--background-scale) * 1920px);
-  min-height: calc(var(--background-scale) * 1080px);
+  min-width: 100vw;
+  min-height: 100vh;
 
   overflow: hidden;
 }
@@ -200,6 +209,13 @@ body {
 
 .discord {
   --rect-top-left-x: 1995;
+  --rect-top-left-y: 253;
+  --rect-w: 171;
+  --rect-h: 151;
+}
+
+.lightmode {
+  --rect-top-left-x: 1829;
   --rect-top-left-y: 253;
   --rect-w: 171;
   --rect-h: 151;

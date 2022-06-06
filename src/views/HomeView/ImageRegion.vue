@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import router from "@/router";
-import { defineProps, onBeforeMount, ref } from "vue";
+import { onBeforeMount, ref, computed } from "vue";
 
 const props = defineProps<{
   name: string
@@ -9,12 +9,18 @@ const props = defineProps<{
   to?: string
   url?: string
   close?: boolean
+  dark?: boolean
+}>()
+
+const emit = defineEmits<{
+  (e: 'click'): void
 }>()
 
 const imagesRootURL = new URL('/src/assets/background', import.meta.url).href;
 const mouseOver = ref<boolean>();
 
 const redirect = () => {
+  emit("click")
   if (props.url) {
     const w = window.open(props.url, '_blank');
     if (w) w.focus();
@@ -25,8 +31,8 @@ const redirect = () => {
   }
 }
 
-const closeURL = `${imagesRootURL}/${props.name}_close.png`
-const openURL = `${imagesRootURL}/${props.name}_open.png`
+const closeURL = computed(() => props.dark ? `${imagesRootURL}/${props.name}_dark_close.png` : `${imagesRootURL}/${props.name}_close.png`)
+const openURL = computed(() => props.dark ? `${imagesRootURL}/${props.name}_dark_open.png` : `${imagesRootURL}/${props.name}_open.png`)
 
 function preloadImage(url: string) {
   const img = new Image();
@@ -40,8 +46,7 @@ onBeforeMount(() => {
 
   // Preload images and decode them
   imagesToLoad.forEach((url) => {
-    const img = preloadImage(url);
-
+    const img = preloadImage(url.value);
     img.onload = () => {
       img.decode().then(props.onImageLoaded);
     }
