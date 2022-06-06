@@ -10,7 +10,7 @@ const warehouseLink = import.meta.env.VITE_CZ_WAREHOUSE;
 
 const dark = ref<boolean>(false)
 const onMobile = window.mobileAndTabletCheck();
-const totalImages = onMobile ? 1 : 14;
+const totalImages = onMobile ? 1 : 18;
 const imagesLoaded = ref<number>(0);
 const getLoadingProgress = () => Math.floor((imagesLoaded.value / totalImages) * 100)
 

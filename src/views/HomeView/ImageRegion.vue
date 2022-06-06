@@ -31,8 +31,14 @@ const redirect = () => {
   }
 }
 
-const closeURL = computed(() => props.dark ? `${imagesRootURL}/${props.name}_dark_close.png` : `${imagesRootURL}/${props.name}_close.png`)
-const openURL = computed(() => props.dark ? `${imagesRootURL}/${props.name}_dark_open.png` : `${imagesRootURL}/${props.name}_open.png`)
+
+const closeLightURL = `${imagesRootURL}/${props.name}_close.png`
+const openLightURL = `${imagesRootURL}/${props.name}_open.png`
+const closeDarkURL = `${imagesRootURL}/${props.name}_dark_close.png`
+const openDarkURL = `${imagesRootURL}/${props.name}_dark_open.png`
+
+const closeURL = computed(() => props.dark ? closeDarkURL : closeLightURL)
+const openURL = computed(() => props.dark ? openDarkURL : openLightURL)
 
 function preloadImage(url: string) {
   const img = new Image();
@@ -41,12 +47,12 @@ function preloadImage(url: string) {
 }
 
 onBeforeMount(() => {
-  const imagesToLoad = [closeURL];
-  if (props.close) imagesToLoad.push(openURL);
+  const imagesToLoad = [closeLightURL, closeDarkURL];
+  if (props.close) imagesToLoad.concat([openLightURL, openDarkURL]);
 
   // Preload images and decode them
   imagesToLoad.forEach((url) => {
-    const img = preloadImage(url.value);
+    const img = preloadImage(url);
     img.onload = () => {
       img.decode().then(props.onImageLoaded);
     }
