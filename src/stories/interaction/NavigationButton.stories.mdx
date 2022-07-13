@@ -1,0 +1,21 @@
+import NavigationButton from '../../components/interaction/NavigationButton.vue'
+
+<Meta title="Interaction/NavigationButton" component="{NavigationButton}" />
+
+export const Template = (args) => ({
+  components: { NavigationButton },
+  setup() {
+    return { args };
+  },
+  template: '<NavigationButton v-bind="args" />',
+});
+
+<Story
+  name="Primary"
+  args={{
+    colorLine: "#fffff",
+    colorBG: "#fffff",
+    label: 'Button',
+  }}>
+  {Template.bind({})}
+</Story>

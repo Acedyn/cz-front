@@ -26,3 +26,8 @@ coverage
 *.njsproj
 *.sln
 *.sw?
+
+# Storybook build outputs
+.out
+.storybook-out
+storybook-static
