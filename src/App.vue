@@ -11,5 +11,10 @@
 </template>
 
 <style>
-@import '@/assets/base.css';
+@import "@/assets/base.css";
+
+#app {
+  width: 100vw;
+  height: 100vh;
+}
 </style>
