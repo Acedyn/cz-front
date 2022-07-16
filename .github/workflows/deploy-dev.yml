@@ -7,7 +7,7 @@ on:
       - "v*"
 
 env:
-  AWS_REGION: us-west-1
+  AWS_REGION: us-east-1
   ECR_REPOSITORY: cz-front
   CONTAINER_NAME: cz-front-dev
 
