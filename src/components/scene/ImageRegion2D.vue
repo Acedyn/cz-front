@@ -27,8 +27,8 @@ if (preferences.theme.includes("dark")) {
 }
 
 const imageUrl = {
-  idle: new URL(`${imageBase}.png`, import.meta.url).href,
-  hover: new URL(`${imageBase}_hover.png`, import.meta.url).href,
+  idle: new URL(`/${imageBase}.png`, import.meta.url).href,
+  hover: new URL(`/${imageBase}_hover.png`, import.meta.url).href,
 };
 
 onBeforeMount(() => {

@@ -9,10 +9,10 @@ const props = withDefaults(
     root?: string;
     background?: string;
     aspectRatio?: number;
-    scrolling: boolean;
+    scrolling?: boolean;
   }>(),
   {
-    root: "/src/assets/scenes",
+    root: "src/assets/scenes",
     background: "background",
     aspectRatio: 16 / 9,
   }
@@ -28,7 +28,7 @@ if (preferences.theme.includes("dark")) {
   backgroundImageBase += "_dark";
 }
 
-const backgroundImage = new URL(`${backgroundImageBase}.jpg`, import.meta.url)
+const backgroundImage = new URL(`/${backgroundImageBase}.jpg`, import.meta.url)
   .href;
 
 const scrollToCenter = () => {
