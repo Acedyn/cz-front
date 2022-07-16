@@ -9,9 +9,10 @@ const props = withDefaults(
     root?: string;
     background?: string;
     aspectRatio?: number;
+    scrolling: boolean;
   }>(),
   {
-    root: "src/assets/scenes",
+    root: "/src/assets/scenes",
     background: "background",
     aspectRatio: 16 / 9,
   }
@@ -21,7 +22,8 @@ const containerRef = ref<HTMLDivElement>();
 const backgroundRef = ref<HTMLImageElement>();
 const preferences = usePreferencesStore();
 
-let backgroundImageBase = `/${props.root}/${props.name}/${props.background}`;
+const sceneRoot = `${props.root}/${props.name}`;
+let backgroundImageBase = `${sceneRoot}/${props.background}`;
 if (preferences.theme.includes("dark")) {
   backgroundImageBase += "_dark";
 }
@@ -40,40 +42,56 @@ const scrollToCenter = () => {
   }
 };
 
+const sceneConfig = {
+  root: sceneRoot,
+};
+
 onBeforeMount(() => {
   preloadImages([backgroundImage]);
+
+  if (!props.scrolling) {
+    window.addEventListener("resize", scrollToCenter);
+  }
 });
 </script>
 
 <template>
-  <div class="scene-container">
-    <div class="background-container" ref="containerRef">
-      <img
-        :src="backgroundImage"
-        alt="background"
-        class="background-image"
-        ref="backgroundRef"
-        @load="scrollToCenter"
-      />
+  <div class="scene-container" ref="containerRef">
+    <img
+      :src="backgroundImage"
+      alt="background"
+      class="background-image"
+      ref="backgroundRef"
+      @load="scrollToCenter"
+    />
+    <div class="scene-elements">
+      <slot name="elements" :sceneConfig="sceneConfig" />
     </div>
   </div>
 </template>
 
 <style scoped>
 .scene-container,
-.background-container,
-.background-image {
+.background-image,
+.scene-elements {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  overflow-x: auto;
+  overflow-x: v-bind("props.scrolling ? 'auto' : 'hidden'");
   overflow-y: hidden;
 }
 
 .background-image {
   width: auto;
+  min-width: 100%;
+  min-height: v-bind("`calc(100vw / ${16 / 9})`");
+  transform: translateY(calc((100vh - 100%) / 2));
+}
+
+.scene-elements {
+  width: v-bind("`calc(100vh * ${16 / 9})`");
   min-width: 100%;
   min-height: v-bind("`calc(100vw / ${16 / 9})`");
   transform: translateY(calc((100vh - 100%) / 2));

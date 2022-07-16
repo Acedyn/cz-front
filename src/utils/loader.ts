@@ -4,9 +4,13 @@ export const preloadImages = (urls: string[], callback?: OnLoadCallback) => {
     const img = new Image();
     img.src = url;
 
-    if (callback) {
-      img.onload = callback;
-    }
+    img.onload = () => {
+      img.decode().then(() => {
+        if (callback) {
+          callback();
+        }
+      });
+    };
 
     return img;
   });
