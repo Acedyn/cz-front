@@ -59,7 +59,7 @@ jobs:
           docker push $ECR_REGISTRY/${{ matrix.repo }} --all-tags
 
   deploy:
-    name: Deploy kubernetes cluster to k8s
+    name: Deploy kubernetes cluster to EKS
     needs: build
 
     runs-on: ubuntu-latest
@@ -75,5 +75,7 @@ jobs:
 
       - name: Deploy to EKS cluster
         uses: kodermax/kubectl-aws-eks@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
           args: rollout restart deployments.apps/cz-alpha-deployment -n $KUBECTL_NAMESPACE
