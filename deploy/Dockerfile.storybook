@@ -1,7 +1,8 @@
 FROM node:lts-alpine AS build-deps
 WORKDIR /usr/src/app
 COPY package.json ./
-RUN npm install
+COPY package-lock.json ./
+RUN npm install --also=dev
 COPY . ./
 RUN npm run build-storybook
 
