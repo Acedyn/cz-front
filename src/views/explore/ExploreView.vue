@@ -25,6 +25,15 @@ import Scene2D from "@/components/scene/Scene2D.vue";
         :height="25"
         disabled
       />
+
+      <ImageRegion2D
+        name="bill_of_lading"
+        :config="sceneConfig"
+        :top="70"
+        :left="40"
+        :width="20"
+        :height="25"
+      />
     </template>
   </Scene2D>
 </template>
