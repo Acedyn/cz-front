@@ -1,5 +1,5 @@
 ---
-name: Build and push to Amazon ECR
+name: Build and deploy to Amazon ECR
 
 on:
   workflow_dispatch:
@@ -9,9 +9,12 @@ on:
 
 env:
   AWS_REGION: us-east-1
+  KUBECTL_NAMESPACE: cz-alpha-stack
 
 jobs:
   build:
+    name: Build and push docker images
+
     strategy:
       matrix:
         include:
@@ -20,7 +23,6 @@ jobs:
           - repo: cz-storybook
             docker: ./deploy/Dockerfile.storybook
 
-    name: Build
     runs-on: ubuntu-latest
     environment: production
 
@@ -55,3 +57,23 @@ jobs:
         run: |
           docker build -t $ECR_REGISTRY/${{ matrix.repo }}:$IMAGE_TAG -t $ECR_REGISTRY/${{ matrix.repo }}:latest -f ${{ matrix.docker }} .
           docker push $ECR_REGISTRY/${{ matrix.repo }} --all-tags
+
+  deploy:
+    name: Deploy kubernetes cluster to k8s
+    needs: build
+
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@13d241b293754004c80624b5567555c4a39ffbe3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Deploy to EKS cluster
+        uses: kodermax/kubectl-aws-eks@master
+        with:
+          args: rollout restart deployments.apps/cz-alpha-deployment -n $KUBECTL_NAMESPACE
