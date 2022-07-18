@@ -6,6 +6,7 @@ import { onBeforeMount, ref } from "vue";
 const props = withDefaults(
   defineProps<{
     name: string;
+    highlight?: string;
     root?: string;
     background?: string;
     aspectRatio?: number;
@@ -33,7 +34,6 @@ const backgroundImage = new URL(`/${backgroundImageBase}.jpg`, import.meta.url)
 
 const scrollToCenter = () => {
   if (containerRef.value && backgroundRef.value) {
-    console.log(backgroundRef.value.clientWidth);
     containerRef.value.scrollTo({
       left:
         (backgroundRef.value.clientWidth - containerRef.value.clientWidth) / 2,
@@ -44,6 +44,7 @@ const scrollToCenter = () => {
 
 const sceneConfig = {
   root: sceneRoot,
+  highlight: props.highlight,
 };
 
 onBeforeMount(() => {
