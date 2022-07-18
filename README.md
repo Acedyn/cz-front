@@ -42,3 +42,22 @@ builds correctly
 ```bash
 npm run build
 ```
+
+To deploy the alpha branch we use github tags. The tags must follow
+the syntax v[major].[minor].[patch] where major is non backward
+compatible changes, minor a backward compatible new feature, and
+a patch an update that do not add any new feature (generally a fix)
+
+```bash
+git tag v1.23.12
+git push origin v1.23.12
+```
+
+When the tag is pushed, it will trigger the github action that will
+deploy the application on AWS EKS
+
+## Conventions
+
+- The components are written using vuejs's [script setup](https://vuejs.org/api/sfc-script-setup.html)
+- The commit messages are written using [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/#summary)
+- Each simple reusable component must have a [storybook story](https://storybook.js.org/docs/vue/get-started/whats-a-story)

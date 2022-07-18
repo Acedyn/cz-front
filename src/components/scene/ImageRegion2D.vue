@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { preloadImages } from "@/utils/loader";
 import { usePreferencesStore } from "@/stores/preferences";
-import { onBeforeMount, ref } from "vue";
+import { onBeforeMount, ref, computed } from "vue";
 
 const props = defineProps<{
   top: number;
@@ -12,14 +12,23 @@ const props = defineProps<{
   name: string;
   config: {
     root: string;
+    highlight?: string;
   };
 
   disabled?: boolean;
   highlight?: string;
 }>();
 
+const emit = defineEmits<{
+  (e: "click"): void;
+}>();
+
 const isHover = ref(false);
 const preferences = usePreferencesStore();
+
+const highlightColor = computed(() => {
+  return props.highlight || props.config.highlight;
+});
 
 let imageBase = `${props.config.root}/${props.name}`;
 if (preferences.theme.includes("dark")) {
@@ -43,7 +52,7 @@ onBeforeMount(() => {
     @mouseleave="isHover = false"
   >
     <template v-if="isHover">
-      <div class="hover-content">
+      <div class="hover-content" @click="() => emit('click')">
         <slot name="hover">
           <p class="hover-text">{{ props.name }}</p>
         </slot>
@@ -76,7 +85,7 @@ onBeforeMount(() => {
 
 .region-image {
   filter: v-bind(
-    "props.highlight ? `drop-shadow(0px 0px 5px ${props.highlight})` : ''"
+    "highlightColor ? `drop-shadow(0px 0px 4px ${highlightColor})` : ''"
   );
   object-fit: contain;
   width: 100%;
@@ -117,6 +126,9 @@ onBeforeMount(() => {
 
 .hover-content:hover + .region-image {
   transform: scale(1.02);
+  filter: v-bind(
+    "highlightColor ? `drop-shadow(0px 0px 6px ${highlightColor})` : ''"
+  );
 }
 
 .hover-text {

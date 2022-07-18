@@ -60,4 +60,4 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: rollout restart deployments.apps/${{ matrix.docker }}-deployment -n ${{ matrix.kubectl_namespace }}
+          args: rollout restart deployments.apps/${{ matrix.repo }}-deployment -n ${{ matrix.kubectl_namespace }}

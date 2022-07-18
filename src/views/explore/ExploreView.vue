@@ -4,7 +4,7 @@ import Scene2D from "@/components/scene/Scene2D.vue";
 </script>
 
 <template>
-  <Scene2D name="post_office">
+  <Scene2D name="post_office" highlight="white">
     <template #elements="{ sceneConfig }">
       <ImageRegion2D
         name="post_office"
@@ -28,6 +28,15 @@ import Scene2D from "@/components/scene/Scene2D.vue";
 
       <ImageRegion2D
         name="bill_of_lading"
+        :config="sceneConfig"
+        :top="70"
+        :left="40"
+        :width="20"
+        :height="25"
+      />
+
+      <ImageRegion2D
+        name="warehouse"
         :config="sceneConfig"
         :top="70"
         :left="40"
