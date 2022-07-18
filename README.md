@@ -55,3 +55,9 @@ git push origin v1.23.12
 
 When the tag is pushed, it will trigger the github action that will
 deploy the application on AWS EKS
+
+## Conventions
+
+- The components are written using vuejs's [script setup](https://vuejs.org/api/sfc-script-setup.html)
+- The commit messages are written using [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/#summary)
+- Each simple reusable component must have a [storybook story](https://storybook.js.org/docs/vue/get-started/whats-a-story)

@@ -1,0 +1,44 @@
+---
+name: Unit test
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - alpha
+      - beta
+      - prod
+  pull_request:
+    branches:
+      - alpha
+      - beta
+      - prod
+
+jobs:
+  unittest:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+          - os: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install --also=dev
+
+      - name: Check typing
+        run: npm run type-check
+
+      - name: Run build
+        run: npm run build
