@@ -7,6 +7,16 @@ import { usePreferencesStore } from "@/stores/preferences";
 import router from "@/router";
 
 const preferences = usePreferencesStore();
+const hightlightConfig = {
+  dark: {
+    visited: "white",
+    new: "blue",
+  },
+  light: {
+    visited: "black",
+    new: "blue",
+  },
+};
 
 const openLink = (url: string) => {
   window.open(url, "_blank");
@@ -14,7 +24,7 @@ const openLink = (url: string) => {
 </script>
 
 <template>
-  <Scene2D name="post_office" highlight="white">
+  <Scene2D name="post_office" :highlight="hightlightConfig">
     <template #elements="{ sceneConfig }">
       <ImageRegion2D
         name="post_office"

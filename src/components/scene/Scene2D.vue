@@ -7,7 +7,7 @@ import { storeToRefs } from "pinia";
 const props = withDefaults(
   defineProps<{
     name: string;
-    highlight?: string;
+    highlight?: Record<string, { new: string; visited: string }>;
     root?: string;
     background?: string;
     aspectRatio?: number;

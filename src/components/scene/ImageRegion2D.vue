@@ -3,6 +3,7 @@ import DetailsRegion from "./DetailsRegion.vue";
 
 import { preloadImages } from "@/utils/loader";
 import { usePreferencesStore } from "@/stores/preferences";
+import { useHistoryStore } from "@/stores/history";
 import { onBeforeMount, ref, computed } from "vue";
 import { storeToRefs } from "pinia";
 
@@ -15,13 +16,13 @@ const props = defineProps<{
   name: string;
   config: {
     root: string;
-    highlight?: Record<string, Record<string, string>>;
+    highlight?: Record<string, { new: string; visited: string }>;
   };
 
   disabled?: boolean;
   noHoverImage?: boolean;
   noHoverBackground?: boolean;
-  highlight?: Record<string, Record<string, string>>;
+  highlight?: Record<string, { new: string; visited: string }>;
 }>();
 
 const emit = defineEmits<{
@@ -31,12 +32,8 @@ const emit = defineEmits<{
 const isHover = ref(false);
 const preferences = usePreferencesStore();
 const { theme } = storeToRefs(preferences);
-
-const highlightColor = computed(() => {
-  const highlightConfig = props.highlight || props.config.highlight;
-  const hightlightTheme = highlightConfig[theme.value];
-  return hightlightTheme;
-});
+const history = useHistoryStore();
+const { sceneVisits } = storeToRefs(history);
 
 const imageBase = `${props.config.root}/${props.name}`;
 
@@ -67,6 +64,22 @@ const imageUrl = computed(() => {
   return imageUrls.light;
 });
 
+const highlightColor = computed(() => {
+  const highlightConfig = props.highlight || props.config.highlight;
+  if (!highlightConfig) {
+    return "transparent";
+  }
+  const hightlightTheme = highlightConfig[theme.value];
+  return sceneVisits.value[imageBase]
+    ? hightlightTheme.visited
+    : hightlightTheme.new;
+});
+
+const onClick = () => {
+  history.storeSceneVisit(imageBase);
+  emit("click");
+};
+
 onBeforeMount(() => {
   preloadImages(Object.values(imageUrl.value));
 });
@@ -82,7 +95,7 @@ onBeforeMount(() => {
     <template v-if="isHover">
       <div
         :class="`hover-content ${noHoverBackground ? '' : 'hover-background'}`"
-        @click="() => emit('click')"
+        @click="onClick"
       >
         <slot name="hover">
           <DetailsRegion
