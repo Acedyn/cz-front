@@ -1,9 +1,12 @@
 import { defineStore } from "pinia";
 
+const preferencesLocal = JSON.parse(
+  localStorage.getItem("preferences") || "{}"
+);
 export const usePreferencesStore = defineStore({
   id: "preferences",
   state: () => ({
-    theme: "light",
+    theme: preferencesLocal.theme || "light",
   }),
   getters: {
     getTheme: (state) => state.theme,
@@ -11,6 +14,9 @@ export const usePreferencesStore = defineStore({
   actions: {
     toggleTheme() {
       this.theme = this.theme === "light" ? "dark" : "light";
+
+      preferencesLocal.theme = this.theme;
+      localStorage.setItem("preferences", JSON.stringify(preferencesLocal));
     },
   },
 });

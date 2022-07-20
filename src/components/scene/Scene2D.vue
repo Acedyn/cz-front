@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { usePreferencesStore } from "@/stores/preferences";
 import { preloadImages } from "@/utils/loader";
-import { onBeforeMount, ref } from "vue";
+import { onBeforeMount, ref, computed } from "vue";
+import { storeToRefs } from "pinia";
 
 const props = withDefaults(
   defineProps<{
@@ -22,15 +23,23 @@ const props = withDefaults(
 const containerRef = ref<HTMLDivElement>();
 const backgroundRef = ref<HTMLImageElement>();
 const preferences = usePreferencesStore();
+const { theme } = storeToRefs(preferences);
 
 const sceneRoot = `${props.root}/${props.name}`;
-let backgroundImageBase = `${sceneRoot}/${props.background}`;
-if (preferences.theme.includes("dark")) {
-  backgroundImageBase += "_dark";
-}
+const backgroundImageBase = `${sceneRoot}/${props.background}`;
 
-const backgroundImage = new URL(`/${backgroundImageBase}.jpg`, import.meta.url)
-  .href;
+const backgroundImages = {
+  light: new URL(`/${backgroundImageBase}.jpg`, import.meta.url).href,
+  dark: new URL(`/${backgroundImageBase}_dark.jpg`, import.meta.url).href,
+};
+
+const backgroundImage = computed(() => {
+  if (theme.value.includes("dark")) {
+    return backgroundImages.dark;
+  }
+
+  return backgroundImages.light;
+});
 
 const scrollToCenter = () => {
   if (containerRef.value && backgroundRef.value) {
@@ -48,7 +57,7 @@ const sceneConfig = {
 };
 
 onBeforeMount(() => {
-  preloadImages([backgroundImage]);
+  preloadImages([backgroundImage.value]);
 
   if (!props.scrolling) {
     window.addEventListener("resize", scrollToCenter);

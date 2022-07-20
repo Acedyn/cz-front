@@ -42,6 +42,7 @@ const props = defineProps<{
 
 .title {
   font-size: 20px;
+  font-weight: bolder;
   color: white;
   text-transform: uppercase;
 }

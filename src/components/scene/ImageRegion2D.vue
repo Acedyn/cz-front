@@ -4,6 +4,7 @@ import DetailsRegion from "./DetailsRegion.vue";
 import { preloadImages } from "@/utils/loader";
 import { usePreferencesStore } from "@/stores/preferences";
 import { onBeforeMount, ref, computed } from "vue";
+import { storeToRefs } from "pinia";
 
 const props = defineProps<{
   top: number;
@@ -14,13 +15,13 @@ const props = defineProps<{
   name: string;
   config: {
     root: string;
-    highlight?: string;
+    highlight?: Record<string, Record<string, string>>;
   };
 
   disabled?: boolean;
   noHoverImage?: boolean;
   noHoverBackground?: boolean;
-  highlight?: string;
+  highlight?: Record<string, Record<string, string>>;
 }>();
 
 const emit = defineEmits<{
@@ -29,27 +30,45 @@ const emit = defineEmits<{
 
 const isHover = ref(false);
 const preferences = usePreferencesStore();
+const { theme } = storeToRefs(preferences);
 
 const highlightColor = computed(() => {
-  return props.highlight || props.config.highlight;
+  const highlightConfig = props.highlight || props.config.highlight;
+  const hightlightTheme = highlightConfig[theme.value];
+  return hightlightTheme;
 });
 
-let imageBase = `${props.config.root}/${props.name}`;
-if (preferences.theme.includes("dark")) {
-  imageBase += "_dark";
-}
+const imageBase = `${props.config.root}/${props.name}`;
 
-const imageUrl = {
-  idle: new URL(`/${imageBase}.png`, import.meta.url).href,
-  hover: new URL(`/${imageBase}_hover.png`, import.meta.url).href,
+const imageUrls = {
+  dark: {
+    idle: new URL(`/${imageBase}_dark.png`, import.meta.url).href,
+    hover: new URL(`/${imageBase}_dark_hover.png`, import.meta.url).href,
+  },
+  light: {
+    idle: new URL(`/${imageBase}.png`, import.meta.url).href,
+    hover: new URL(`/${imageBase}_hover.png`, import.meta.url).href,
+  },
 };
 
 if (props.disabled || props.noHoverImage) {
-  imageUrl.hover = imageUrl.idle;
+  Object.values(imageUrls).forEach((imageUrl) => {
+    if (props.disabled || props.noHoverImage) {
+      imageUrl.hover = imageUrl.idle;
+    }
+  });
 }
 
+const imageUrl = computed(() => {
+  if (theme.value.includes("dark")) {
+    return imageUrls.dark;
+  }
+
+  return imageUrls.light;
+});
+
 onBeforeMount(() => {
-  preloadImages(Object.values(imageUrl));
+  preloadImages(Object.values(imageUrl.value));
 });
 </script>
 

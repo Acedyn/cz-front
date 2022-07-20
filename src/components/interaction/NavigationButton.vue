@@ -2,6 +2,7 @@
 const props = defineProps<{
   colorLine: string;
   colorBG: string;
+  noArrow?: boolean;
 }>();
 </script>
 
@@ -9,6 +10,7 @@ const props = defineProps<{
   <button class="button-container">
     <span class="background" />
     <div class="content">
+      <span class="arrow" />
       <slot>Click Me</slot>
     </div>
   </button>
@@ -36,6 +38,7 @@ const props = defineProps<{
 
   background: black;
   opacity: 0;
+  transition: opacity 0.2s;
 }
 
 .button-container:hover .background {
@@ -45,5 +48,51 @@ const props = defineProps<{
 .content {
   color: v-bind("props.colorLine");
   font-weight: bolder;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.arrow {
+  position: relative;
+  width: 30px;
+  height: 0;
+  border-bottom: v-bind("`4px solid ${props.colorLine}`");
+  margin-right: 10px;
+
+  transition: width 0.2s ease-in-out;
+}
+
+.arrow::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 15px;
+  bottom: 0;
+
+  border-bottom: v-bind("`4px solid ${props.colorLine}`");
+
+  transform: translateY(1px) rotate(45deg);
+  transform-origin: right;
+}
+
+.arrow::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 15px;
+  bottom: 0;
+
+  border-bottom: v-bind("`4px solid ${props.colorLine}`");
+
+  transform: translateY(-1px) rotate(-45deg);
+  transform-origin: right;
+}
+
+.button-container:hover .arrow {
+  width: 40px;
 }
 </style>

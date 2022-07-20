@@ -2,7 +2,15 @@
 import ImageRegion2D from "@/components/scene/ImageRegion2D.vue";
 import DetailsRegion from "@/components/scene/DetailsRegion.vue";
 import Scene2D from "@/components/scene/Scene2D.vue";
+
+import { usePreferencesStore } from "@/stores/preferences";
 import router from "@/router";
+
+const preferences = usePreferencesStore();
+
+const openLink = (url: string) => {
+  window.open(url, "_blank");
+};
 </script>
 
 <template>
@@ -117,6 +125,7 @@ import router from "@/router";
         :height="6.99"
         noHoverImage
         noHoverBackground
+        @click="preferences.toggleTheme"
         ><template #hover><span /></template
       ></ImageRegion2D>
 
@@ -129,6 +138,7 @@ import router from "@/router";
         :height="6.99"
         noHoverImage
         noHoverBackground
+        @click="() => openLink('http://discord.gg/cardboardcz')"
         ><template #hover><span /></template
       ></ImageRegion2D>
 
@@ -141,6 +151,7 @@ import router from "@/router";
         :height="6.9"
         noHoverImage
         noHoverBackground
+        @click="() => openLink('https://twitter.com/CardboardCtzNFT')"
         ><template #hover><span /></template
       ></ImageRegion2D>
     </template>
