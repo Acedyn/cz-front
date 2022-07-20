@@ -11,7 +11,7 @@ const props = withDefaults(
     root?: string;
     background?: string;
     aspectRatio?: number;
-    scrolling?: boolean;
+    noScrolling?: boolean;
   }>(),
   {
     root: "src/assets/scenes",
@@ -59,7 +59,7 @@ const sceneConfig = {
 onBeforeMount(() => {
   preloadImages([backgroundImage.value]);
 
-  if (!props.scrolling) {
+  if (props.noScrolling) {
     window.addEventListener("resize", scrollToCenter);
   }
 });
@@ -89,7 +89,7 @@ onBeforeMount(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  overflow-x: v-bind("props.scrolling ? 'auto' : 'hidden'");
+  overflow-x: v-bind("!props.noScrolling ? 'auto' : 'hidden'");
   overflow-y: hidden;
 }
 

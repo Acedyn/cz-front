@@ -1,21 +1,26 @@
+import ImmersionView from "@/views/immersion/ImmersionView.vue";
 import PostOfficeView from "@/views/immersion/PostOfficeView.vue";
 import BillOfLadingView from "@/views/immersion/BillOfLadingView.vue";
 
-const immersionRoutes = [
-  {
-    path: "/post-office",
-    name: "post-office",
-    component: PostOfficeView,
-  },
-  {
-    path: "/bill-of-lading",
-    name: "bill-of-lading",
-    component: BillOfLadingView,
-  },
-];
-
-immersionRoutes.forEach((route) => {
-  route.path = `/immersion${route.path}`;
-});
-
-export default immersionRoutes;
+export default {
+  path: "/immersion",
+  name: "immersion",
+  component: ImmersionView,
+  children: [
+    {
+      path: "",
+      name: "post-office",
+      component: PostOfficeView,
+    },
+    {
+      path: "post-office",
+      name: "post-office",
+      component: PostOfficeView,
+    },
+    {
+      path: "bill-of-lading",
+      name: "bill-of-lading",
+      component: BillOfLadingView,
+    },
+  ],
+};

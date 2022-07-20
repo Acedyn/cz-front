@@ -9,12 +9,12 @@ import router from "@/router";
 const preferences = usePreferencesStore();
 const hightlightConfig = {
   dark: {
-    visited: "white",
-    new: "blue",
+    visited: "#ffffff54",
+    new: "#fffa00",
   },
   light: {
     visited: "black",
-    new: "blue",
+    new: "#fffa00",
   },
 };
 
@@ -33,6 +33,7 @@ const openLink = (url: string) => {
         :left="38.93"
         :width="24.11"
         :height="47.05"
+        @click="() => router.push('/immersion/post-office')"
         ><template #hover>
           <DetailsRegion
             title="post office"

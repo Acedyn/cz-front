@@ -66,7 +66,7 @@ const imageUrl = computed(() => {
 
 const highlightColor = computed(() => {
   const highlightConfig = props.highlight || props.config.highlight;
-  if (!highlightConfig) {
+  if (props.disabled || !highlightConfig) {
     return "transparent";
   }
   const hightlightTheme = highlightConfig[theme.value];
