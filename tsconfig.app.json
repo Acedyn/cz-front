@@ -5,8 +5,8 @@
   "compilerOptions": {
     "composite": true,
     "baseUrl": ".",
-    "target": "es2017",
-    "lib": ["es2017"],
+    "target": "es2021",
+    "lib": ["es2021"],
     "paths": {
       "@/*": ["./src/*"]
     }

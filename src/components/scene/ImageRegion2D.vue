@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import DetailsRegion from "./DetailsRegion.vue";
+
 import { preloadImages } from "@/utils/loader";
 import { usePreferencesStore } from "@/stores/preferences";
 import { onBeforeMount, ref, computed } from "vue";
@@ -16,6 +18,8 @@ const props = defineProps<{
   };
 
   disabled?: boolean;
+  noHoverImage?: boolean;
+  noHoverBackground?: boolean;
   highlight?: string;
 }>();
 
@@ -40,6 +44,10 @@ const imageUrl = {
   hover: new URL(`/${imageBase}_hover.png`, import.meta.url).href,
 };
 
+if (props.disabled || props.noHoverImage) {
+  imageUrl.hover = imageUrl.idle;
+}
+
 onBeforeMount(() => {
   preloadImages(Object.values(imageUrl));
 });
@@ -50,26 +58,25 @@ onBeforeMount(() => {
     class="region-container"
     @mouseover="isHover = true"
     @mouseleave="isHover = false"
+    :class="`${props.disabled ? 'disabled' : ''}`"
   >
     <template v-if="isHover">
-      <div class="hover-content" @click="() => emit('click')">
+      <div
+        :class="`hover-content ${noHoverBackground ? '' : 'hover-background'}`"
+        @click="() => emit('click')"
+      >
         <slot name="hover">
-          <p class="hover-text">{{ props.name }}</p>
+          <DetailsRegion
+            :title="props.name.replaceAll('_', ' ')"
+            description="lorem ipsum id dolor els istum dale rictus dolores"
+          />
         </slot>
       </div>
-      <img
-        :src="imageUrl.hover"
-        :alt="props.name"
-        :class="`region-image hover ${props.disabled ? 'disabled' : ''}`"
-      />
+      <img :src="imageUrl.hover" :alt="props.name" class="region-image hover" />
     </template>
 
     <template v-else>
-      <img
-        :src="imageUrl.idle"
-        :alt="props.name"
-        :class="`region-image ${props.disabled ? 'disabled' : ''}`"
-      />
+      <img :src="imageUrl.idle" :alt="props.name" class="region-image" />
     </template>
   </div>
 </template>
@@ -101,27 +108,11 @@ onBeforeMount(() => {
   position: absolute;
   top: 0;
   left: 0;
-  background: radial-gradient(
-    closest-side,
-    rgba(0, 0, 0, 0.6) 30%,
-    rgba(0, 0, 0, 0)
-  );
   width: 100%;
   height: 100%;
   border-radius: 50%;
   cursor: pointer;
-
-  transition: opacity 0.3s ease-out, background-size 0.1s ease-out;
-  opacity: 0;
-  background-size: 20% 20%;
-  background-repeat: no-repeat;
-  background-position: center;
   z-index: 1;
-}
-
-.hover-content:hover {
-  opacity: 1;
-  background-size: 100% 100%;
 }
 
 .hover-content:hover + .region-image {
@@ -131,11 +122,22 @@ onBeforeMount(() => {
   );
 }
 
-.hover-text {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.hover-background {
+  background: radial-gradient(
+    closest-side,
+    rgba(0, 0, 0, 0.5) 30%,
+    rgba(0, 0, 0, 0)
+  );
+
+  transition: opacity 0.3s ease-out, background-size 0.1s ease-out;
+  opacity: 0;
+  background-size: 20% 20%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.hover-background:hover {
+  opacity: 1;
+  background-size: 100% 100%;
 }
 </style>
