@@ -39,12 +39,22 @@ const imageBase = `${props.config.root}/${props.name}`;
 
 const imageUrls = {
   dark: {
-    idle: new URL(`/${imageBase}_dark.png`, import.meta.url).href,
-    hover: new URL(`/${imageBase}_dark_hover.png`, import.meta.url).href,
+    idle: new URL(
+      `/${props.config.root}/${props.name}_dark.png`,
+      import.meta.url
+    ).href,
+    hover: new URL(
+      `/${props.config.root}/${props.name}_dark_hover.png`,
+      import.meta.url
+    ).href,
   },
   light: {
-    idle: new URL(`/${imageBase}.png`, import.meta.url).href,
-    hover: new URL(`/${imageBase}_hover.png`, import.meta.url).href,
+    idle: new URL(`/${props.config.root}/${props.name}.png`, import.meta.url)
+      .href,
+    hover: new URL(
+      `/${props.config.root}/${props.name}_hover.png`,
+      import.meta.url
+    ).href,
   },
 };
 

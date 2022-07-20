@@ -26,11 +26,11 @@ const preferences = usePreferencesStore();
 const { theme } = storeToRefs(preferences);
 
 const sceneRoot = `${props.root}/${props.name}`;
-const backgroundImageBase = `${sceneRoot}/${props.background}`;
 
 const backgroundImages = {
-  light: new URL(`/${backgroundImageBase}.jpg`, import.meta.url).href,
-  dark: new URL(`/${backgroundImageBase}_dark.jpg`, import.meta.url).href,
+  light: new URL(`/${sceneRoot}/${props.background}.jpg`, import.meta.url).href,
+  dark: new URL(`/${sceneRoot}/${props.background}_dark.jpg`, import.meta.url)
+    .href,
 };
 
 const backgroundImage = computed(() => {
