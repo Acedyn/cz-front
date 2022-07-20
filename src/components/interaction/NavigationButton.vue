@@ -10,7 +10,7 @@ const props = defineProps<{
   <button class="button-container">
     <span class="background" />
     <div class="content">
-      <span class="arrow" />
+      <span class="arrow" v-if="!noArrow" />
       <slot>Click Me</slot>
     </div>
   </button>

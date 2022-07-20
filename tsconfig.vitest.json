@@ -3,7 +3,8 @@
   "exclude": [],
   "compilerOptions": {
     "composite": true,
-    "lib": [],
+    "target": "es2021",
+    "lib": ["es2021"],
     "types": ["node", "jsdom"]
   }
 }
