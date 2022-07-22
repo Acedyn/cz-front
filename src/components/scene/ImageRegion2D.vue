@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import DetailsRegion from "./DetailsRegion.vue";
+
 import { preloadImages } from "@/utils/loader";
 import { usePreferencesStore } from "@/stores/preferences";
+import { useHistoryStore } from "@/stores/history";
 import { onBeforeMount, ref, computed } from "vue";
+import { storeToRefs } from "pinia";
 
 const props = defineProps<{
   top: number;
@@ -12,11 +16,15 @@ const props = defineProps<{
   name: string;
   config: {
     root: string;
-    highlight?: string;
+    highlight?: Record<string, { new: string; visited: string }>;
+    noDark?: boolean;
   };
 
   disabled?: boolean;
-  highlight?: string;
+  noHoverImage?: boolean;
+  noHoverBackground?: boolean;
+  noDark?: boolean;
+  highlight?: Record<string, { new: string; visited: string }>;
 }>();
 
 const emit = defineEmits<{
@@ -25,23 +33,71 @@ const emit = defineEmits<{
 
 const isHover = ref(false);
 const preferences = usePreferencesStore();
+const { theme } = storeToRefs(preferences);
+const history = useHistoryStore();
+const { sceneVisits } = storeToRefs(history);
 
-const highlightColor = computed(() => {
-  return props.highlight || props.config.highlight;
-});
+const imageBase = `${props.config.root}/${props.name}`;
 
-let imageBase = `${props.config.root}/${props.name}`;
-if (preferences.theme.includes("dark")) {
-  imageBase += "_dark";
+const imageUrls = {
+  dark: {
+    idle: new URL(
+      `/${props.config.root}/${props.name}_dark.png`,
+      import.meta.url
+    ).href,
+    hover: new URL(
+      `/${props.config.root}/${props.name}_dark_hover.png`,
+      import.meta.url
+    ).href,
+  },
+  light: {
+    idle: new URL(`/${props.config.root}/${props.name}.png`, import.meta.url)
+      .href,
+    hover: new URL(
+      `/${props.config.root}/${props.name}_hover.png`,
+      import.meta.url
+    ).href,
+  },
+};
+
+if (props.disabled || props.noHoverImage) {
+  Object.values(imageUrls).forEach((imageUrl) => {
+    if (props.disabled || props.noHoverImage) {
+      imageUrl.hover = imageUrl.idle;
+    }
+  });
 }
 
-const imageUrl = {
-  idle: new URL(`/${imageBase}.png`, import.meta.url).href,
-  hover: new URL(`/${imageBase}_hover.png`, import.meta.url).href,
+if (props.noDark || props.config.noDark) {
+  imageUrls.dark = imageUrls.light;
+}
+
+const imageUrl = computed(() => {
+  if (theme.value.includes("dark")) {
+    return imageUrls.dark;
+  }
+
+  return imageUrls.light;
+});
+
+const highlightColor = computed(() => {
+  const highlightConfig = props.highlight || props.config.highlight;
+  if (props.disabled || !highlightConfig) {
+    return "transparent";
+  }
+  const hightlightTheme = highlightConfig[theme.value];
+  return sceneVisits.value[imageBase]
+    ? hightlightTheme.visited
+    : hightlightTheme.new;
+});
+
+const onClick = () => {
+  history.storeSceneVisit(imageBase);
+  emit("click");
 };
 
 onBeforeMount(() => {
-  preloadImages(Object.values(imageUrl));
+  preloadImages(Object.values(imageUrl.value));
 });
 </script>
 
@@ -50,26 +106,25 @@ onBeforeMount(() => {
     class="region-container"
     @mouseover="isHover = true"
     @mouseleave="isHover = false"
+    :class="`${props.disabled ? 'disabled' : ''}`"
   >
     <template v-if="isHover">
-      <div class="hover-content" @click="() => emit('click')">
+      <div
+        :class="`hover-content ${noHoverBackground ? '' : 'hover-background'}`"
+        @click="onClick"
+      >
         <slot name="hover">
-          <p class="hover-text">{{ props.name }}</p>
+          <DetailsRegion
+            :title="props.name.replaceAll('_', ' ')"
+            description="lorem ipsum id dolor els istum dale rictus dolores"
+          />
         </slot>
       </div>
-      <img
-        :src="imageUrl.hover"
-        :alt="props.name"
-        :class="`region-image hover ${props.disabled ? 'disabled' : ''}`"
-      />
+      <img :src="imageUrl.hover" :alt="props.name" class="region-image hover" />
     </template>
 
     <template v-else>
-      <img
-        :src="imageUrl.idle"
-        :alt="props.name"
-        :class="`region-image ${props.disabled ? 'disabled' : ''}`"
-      />
+      <img :src="imageUrl.idle" :alt="props.name" class="region-image" />
     </template>
   </div>
 </template>
@@ -101,27 +156,11 @@ onBeforeMount(() => {
   position: absolute;
   top: 0;
   left: 0;
-  background: radial-gradient(
-    closest-side,
-    rgba(0, 0, 0, 0.6) 30%,
-    rgba(0, 0, 0, 0)
-  );
   width: 100%;
   height: 100%;
   border-radius: 50%;
   cursor: pointer;
-
-  transition: opacity 0.3s ease-out, background-size 0.1s ease-out;
-  opacity: 0;
-  background-size: 20% 20%;
-  background-repeat: no-repeat;
-  background-position: center;
   z-index: 1;
-}
-
-.hover-content:hover {
-  opacity: 1;
-  background-size: 100% 100%;
 }
 
 .hover-content:hover + .region-image {
@@ -131,11 +170,22 @@ onBeforeMount(() => {
   );
 }
 
-.hover-text {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.hover-background {
+  background: radial-gradient(
+    closest-side,
+    rgba(0, 0, 0, 0.5) 30%,
+    rgba(0, 0, 0, 0)
+  );
+
+  transition: opacity 0.3s ease-out, background-size 0.1s ease-out;
+  opacity: 0;
+  background-size: 20% 20%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.hover-background:hover {
+  opacity: 1;
+  background-size: 100% 100%;
 }
 </style>

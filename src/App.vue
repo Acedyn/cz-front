@@ -2,7 +2,7 @@
   <header>
     <nav>
       <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/explore">Explore</RouterLink>
+      <RouterLink to="/immersion">Immersion</RouterLink>
       <RouterLink to="/tools">Tools</RouterLink>
     </nav>
   </header>
@@ -11,6 +11,7 @@
 </template>
 
 <style>
+@import "@/assets/fonts.css";
 @import "@/assets/base.css";
 
 #app {

@@ -1,36 +1,53 @@
 <script setup lang="ts">
 import { usePreferencesStore } from "@/stores/preferences";
 import { preloadImages } from "@/utils/loader";
-import { onBeforeMount, ref } from "vue";
+import { onBeforeMount, onBeforeUnmount, ref, computed } from "vue";
+import { storeToRefs } from "pinia";
 
 const props = withDefaults(
   defineProps<{
     name: string;
-    highlight?: string;
+    highlight?: Record<string, { new: string; visited: string }>;
     root?: string;
     background?: string;
     aspectRatio?: number;
-    scrolling?: boolean;
+    noScrolling?: boolean;
+    noAutoScrolling?: boolean;
+    noDark?: boolean;
   }>(),
   {
     root: "src/assets/scenes",
     background: "background",
     aspectRatio: 16 / 9,
+    noScrolling: false,
+    noDark: false,
   }
 );
 
 const containerRef = ref<HTMLDivElement>();
 const backgroundRef = ref<HTMLImageElement>();
 const preferences = usePreferencesStore();
+const { theme } = storeToRefs(preferences);
 
 const sceneRoot = `${props.root}/${props.name}`;
-let backgroundImageBase = `${sceneRoot}/${props.background}`;
-if (preferences.theme.includes("dark")) {
-  backgroundImageBase += "_dark";
+
+const backgroundImages = {
+  light: new URL(`/${sceneRoot}/${props.background}.jpg`, import.meta.url).href,
+  dark: new URL(`/${sceneRoot}/${props.background}_dark.jpg`, import.meta.url)
+    .href,
+};
+
+if (props.noDark) {
+  backgroundImages.dark = backgroundImages.light;
 }
 
-const backgroundImage = new URL(`/${backgroundImageBase}.jpg`, import.meta.url)
-  .href;
+const backgroundImage = computed(() => {
+  if (theme.value.includes("dark")) {
+    return backgroundImages.dark;
+  }
+
+  return backgroundImages.light;
+});
 
 const scrollToCenter = () => {
   if (containerRef.value && backgroundRef.value) {
@@ -42,17 +59,45 @@ const scrollToCenter = () => {
   }
 };
 
+let lastTimestamp = 0;
+const mousePosition = { x: 0, y: 0 };
+const getMousePosition = (e: MouseEvent) => {
+  mousePosition.x = e.clientX;
+  mousePosition.y = e.clientY;
+};
+const slideMouse = (e: number) => {
+  const deltaTime = e - lastTimestamp;
+  lastTimestamp = e;
+  window.requestAnimationFrame(slideMouse);
+
+  if (!containerRef.value || props.noAutoScrolling) {
+    return;
+  }
+  if (mousePosition.y / window.innerHeight < 0.2) {
+    return;
+  }
+  const offset = (mousePosition.x - window.innerWidth / 2) * deltaTime * 0.001;
+  containerRef.value.scrollTo(containerRef.value.scrollLeft + offset, 10);
+};
+
 const sceneConfig = {
   root: sceneRoot,
   highlight: props.highlight,
+  noDark: props.noDark,
 };
 
 onBeforeMount(() => {
-  preloadImages([backgroundImage]);
+  window.requestAnimationFrame(slideMouse);
+  window.addEventListener("mousemove", getMousePosition);
+  preloadImages([backgroundImage.value]);
 
-  if (!props.scrolling) {
+  if (props.noScrolling) {
     window.addEventListener("resize", scrollToCenter);
   }
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("mousemove", getMousePosition);
 });
 </script>
 
@@ -68,6 +113,7 @@ onBeforeMount(() => {
     <div class="scene-elements">
       <slot name="elements" :sceneConfig="sceneConfig" />
     </div>
+    <slot name="overlay" />
   </div>
 </template>
 
@@ -80,21 +126,21 @@ onBeforeMount(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  overflow-x: v-bind("props.scrolling ? 'auto' : 'hidden'");
+  overflow-x: v-bind("!props.noScrolling ? 'auto' : 'hidden'");
   overflow-y: hidden;
 }
 
 .background-image {
   width: auto;
   min-width: 100%;
-  min-height: v-bind("`calc(100vw / ${16 / 9})`");
+  min-height: v-bind("`calc(100vw / ${props.aspectRatio})`");
   transform: translateY(calc((100vh - 100%) / 2));
 }
 
 .scene-elements {
-  width: v-bind("`calc(100vh * ${16 / 9})`");
+  width: v-bind("`calc(100vh * ${props.aspectRatio})`");
   min-width: 100%;
-  min-height: v-bind("`calc(100vw / ${16 / 9})`");
+  min-height: v-bind("`calc(100vw / ${props.aspectRatio})`");
   transform: translateY(calc((100vh - 100%) / 2));
 }
 </style>

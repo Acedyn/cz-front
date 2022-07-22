@@ -7,15 +7,33 @@ export const Template = (args) => ({
   setup() {
     return { args };
   },
-  template: '<NavigationButton v-bind="args" />',
+  template: '<NavigationButton v-bind="args">{{args.label}}</NavigationButton>',
 });
+
 
 <Story
   name="Primary"
   args={{
-    colorLine: "#fffff",
-    colorBG: "#fffff",
-    label: 'Button',
+    colorLine: "#eed7bc",
+    colorBG: "#664f3c",
+    label: "Click Me",
+    noArrow: false
   }}>
   {Template.bind({})}
 </Story>
+
+<Story
+  name="Scene Navigation"
+  args={{
+    colorLine: "#ffffff",
+    colorBG: "#bd7947",
+    label: "Enter the post office",
+    noArrow: false
+  }}>
+  {Template.bind({})}
+</Story>
+
+
+# Navigation button
+
+Simple button used to navigate accros pages.
