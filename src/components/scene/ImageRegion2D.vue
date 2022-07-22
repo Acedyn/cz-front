@@ -17,11 +17,13 @@ const props = defineProps<{
   config: {
     root: string;
     highlight?: Record<string, { new: string; visited: string }>;
+    noDark?: boolean;
   };
 
   disabled?: boolean;
   noHoverImage?: boolean;
   noHoverBackground?: boolean;
+  noDark?: boolean;
   highlight?: Record<string, { new: string; visited: string }>;
 }>();
 
@@ -64,6 +66,10 @@ if (props.disabled || props.noHoverImage) {
       imageUrl.hover = imageUrl.idle;
     }
   });
+}
+
+if (props.noDark || props.config.noDark) {
+  imageUrls.dark = imageUrls.light;
 }
 
 const imageUrl = computed(() => {

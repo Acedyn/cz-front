@@ -12,11 +12,14 @@ const props = withDefaults(
     background?: string;
     aspectRatio?: number;
     noScrolling?: boolean;
+    noDark?: boolean;
   }>(),
   {
     root: "src/assets/scenes",
     background: "background",
     aspectRatio: 16 / 9,
+    noScrolling: false,
+    noDark: false,
   }
 );
 
@@ -32,6 +35,10 @@ const backgroundImages = {
   dark: new URL(`/${sceneRoot}/${props.background}_dark.jpg`, import.meta.url)
     .href,
 };
+
+if (props.noDark) {
+  backgroundImages.dark = backgroundImages.light;
+}
 
 const backgroundImage = computed(() => {
   if (theme.value.includes("dark")) {
@@ -54,6 +61,7 @@ const scrollToCenter = () => {
 const sceneConfig = {
   root: sceneRoot,
   highlight: props.highlight,
+  noDark: props.noDark,
 };
 
 onBeforeMount(() => {
@@ -96,14 +104,14 @@ onBeforeMount(() => {
 .background-image {
   width: auto;
   min-width: 100%;
-  min-height: v-bind("`calc(100vw / ${16 / 9})`");
+  min-height: v-bind("`calc(100vw / ${props.aspectRatio})`");
   transform: translateY(calc((100vh - 100%) / 2));
 }
 
 .scene-elements {
-  width: v-bind("`calc(100vh * ${16 / 9})`");
+  width: v-bind("`calc(100vh * ${props.aspectRatio})`");
   min-width: 100%;
-  min-height: v-bind("`calc(100vw / ${16 / 9})`");
+  min-height: v-bind("`calc(100vw / ${props.aspectRatio})`");
   transform: translateY(calc((100vh - 100%) / 2));
 }
 </style>
