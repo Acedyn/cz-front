@@ -1,11 +1,17 @@
 <script setup lang="ts">
-import NavigationButton from "@/components/interaction/NavigationButton.vue";
+import NavigationButton from "../interaction/NavigationButton.vue";
 
-const props = defineProps<{
-  title: string;
-  description?: string;
-  noButton?: boolean;
-}>();
+const props = withDefaults(
+  defineProps<{
+    title: string;
+    textColor?: string;
+    description?: string;
+    noButton?: boolean;
+  }>(),
+  {
+    textColor: "white",
+  }
+);
 </script>
 
 <template>
@@ -23,7 +29,8 @@ const props = defineProps<{
 
 <style scoped>
 .details-container {
-  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   height: 100%;
 
   display: flex;
@@ -37,13 +44,12 @@ const props = defineProps<{
 }
 
 .text {
-  color: white;
+  color: v-bind("props.textColor");
 }
 
 .title {
   font-size: 20px;
   font-weight: bolder;
-  color: white;
   text-transform: uppercase;
 }
 

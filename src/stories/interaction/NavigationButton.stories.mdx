@@ -1,6 +1,9 @@
 import NavigationButton from '../../components/interaction/NavigationButton.vue'
 
-<Meta title="Interaction/NavigationButton" component="{NavigationButton}" />
+<Meta title="Interaction/NavigationButton" component="{NavigationButton}" argTypes={{
+      colorLine: { control: "color" },
+      colorBG: { control: "color" },
+  }} />
 
 export const Template = (args) => ({
   components: { NavigationButton },

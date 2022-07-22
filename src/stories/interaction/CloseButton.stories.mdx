@@ -1,6 +1,10 @@
 import CloseButton from '../../components/interaction/CloseButton.vue'
 
-<Meta title="Interaction/CloseButton" component="{CloseButton}" />
+<Meta title="Interaction/CloseButton" component="{CloseButton}" argTypes={{
+      colorLine: { control: "color" },
+      colorBG: { control: "color" },
+  }} />
+
 
 export const Template = (args) => ({
   components: { CloseButton },
