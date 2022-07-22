@@ -16,6 +16,8 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@storybook/addons": "^6.5.9",
+    "@storybook/theming": "^6.5.9",
     "pinia": "^2.0.14",
     "vue": "^3.2.37",
     "vue-router": "^4.0.16",

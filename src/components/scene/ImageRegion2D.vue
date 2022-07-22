@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import DetailsRegion from "./DetailsRegion.vue";
 
-import { preloadImages } from "@/utils/loader";
-import { usePreferencesStore } from "@/stores/preferences";
-import { useHistoryStore } from "@/stores/history";
+import { preloadImages } from "../../utils/loader";
+import { usePreferencesStore } from "../../stores/preferences";
+import { useHistoryStore } from "../../stores/history";
 import { onBeforeMount, ref, computed } from "vue";
 import { storeToRefs } from "pinia";
 
@@ -161,6 +161,7 @@ onBeforeMount(() => {
   border-radius: 50%;
   cursor: pointer;
   z-index: 1;
+  display: flex;
 }
 
 .hover-content:hover + .region-image {

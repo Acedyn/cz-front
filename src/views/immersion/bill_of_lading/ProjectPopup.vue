@@ -2,75 +2,103 @@
 import { ref } from "vue";
 
 const props = defineProps<{
-  source: string
-}>()
+  source: string;
+}>();
 
 const emit = defineEmits<{
-  (e: "click"): void
-}>()
+  (e: "click"): void;
+}>();
 
-const imagesRootURL = 'src/assets/scenes/bill_of_lading/displays'
-const images = ref<Record<string, { url: string, colorA: string, colorB: string }>>({
-  "proof_water": { url: new URL(`/${imagesRootURL}/proof_of_water.png`, import.meta.url).href, colorA: "8ecae0", colorB: "07417b" },
-  "proof_knowledge": { url: new URL(`/${imagesRootURL}/proof_of_knowledge.png`, import.meta.url).href, colorA: "343b3e", colorB: "151f24" },
-  "proof_scrap": { url: new URL(`/${imagesRootURL}/proof_of_scrap.png`, import.meta.url).href, colorA: "847169", colorB: "452d26" },
-  "proof_forest": { url: new URL(`/${imagesRootURL}/proof_of_forest.png`, import.meta.url).href, colorA: "5c6923", colorB: "5c6923" },
-})
+const imagesRootURL = "src/assets/scenes/bill_of_lading/displays";
+const images = ref<
+  Record<string, { url: string; colorA: string; colorB: string }>
+>({
+  proof_water: {
+    url: new URL(`/${imagesRootURL}/proof_of_water.png`, import.meta.url).href,
+    colorA: "8ecae0",
+    colorB: "07417b",
+  },
+  proof_knowledge: {
+    url: new URL(`/${imagesRootURL}/proof_of_knowledge.png`, import.meta.url)
+      .href,
+    colorA: "343b3e",
+    colorB: "151f24",
+  },
+  proof_scrap: {
+    url: new URL(`/${imagesRootURL}/proof_of_scrap.png`, import.meta.url).href,
+    colorA: "847169",
+    colorB: "452d26",
+  },
+  proof_forest: {
+    url: new URL(`/${imagesRootURL}/proof_of_forest.png`, import.meta.url).href,
+    colorA: "5c6923",
+    colorB: "5c6923",
+  },
+});
 
 const onMobile = ref<boolean>(false);
 const getContainerStyle = () => {
   if (!onMobile.value) {
-    return { backgroundImage: 'url(' + images.value[props.source].url + ')' }
+    return { backgroundImage: "url(" + images.value[props.source].url + ")" };
   }
-  return {}
-}
+  return {};
+};
 </script>
 
 <template>
   <div
-    :class="`project-container ${props.source}-container ${onMobile ? 'mobile-container' : ''}`"
+    :class="`project-container ${props.source}-container ${
+      onMobile ? 'mobile-container' : ''
+    }`"
     @click="() => emit('click')"
     :style="getContainerStyle()"
   >
-    <div :class="`paragraph ${props.source} ${onMobile ? 'mobile-paragraph' : ''}`">
+    <div
+      :class="`paragraph ${props.source} ${onMobile ? 'mobile-paragraph' : ''}`"
+    >
       <template v-if="props.source === 'proof_water'">
-        <img src="@/assets/scenes/bill_of_lading/displays/water_title.png" v-if="onMobile" class="mobile-title">
+        <img
+          src="@/assets/scenes/bill_of_lading/displays/water_title.png"
+          v-if="onMobile"
+          class="mobile-title"
+        />
         <h4>Description</h4>
         <p>
-          “Fear causes hesitation, and hesitation will cause your worst fears to come true.” Bohdi, Point
-          Break.
+          “Fear causes hesitation, and hesitation will cause your worst fears to
+          come true.” Bohdi, Point Break.
         </p>
         <p>
-          Water is the reason why human beings are now living on Earth, Oceans represent 71% of our planet's
-          surface. Therefore, Cardboard Citizens will make it one of
-          <b
-            class="important"
-          >
-            its main purposes to clean the seas, lakes and rivers. No more plastic in the
-            oceans!
+          Water is the reason why human beings are now living on Earth, Oceans
+          represent 71% of our planet's surface. Therefore, Cardboard Citizens
+          will make it one of
+          <b class="important">
+            its main purposes to clean the seas, lakes and rivers. No more
+            plastic in the oceans!
           </b>
         </p>
         <p>
-          Proof of Water is a protocol powered by the Solana Blockchain which aims at providing accountability
-          for the cleaning of the oceans, lakes and rivers.. (We won’t be cleaning your swimming pool Marvin
-          !)
+          Proof of Water is a protocol powered by the Solana Blockchain which
+          aims at providing accountability for the cleaning of the oceans, lakes
+          and rivers.. (We won’t be cleaning your swimming pool Marvin !)
         </p>
         <p>
-          This solution will follow a validation process quite similar to the other protocols. Holders (holding
-          the right citizens with water and blue traits) will be validators of our system. Organisations
-          specialised in cleaning oceans will work with us to clean the water and send proof to our system in
-          order to trace it through the blockchain. Validators will be compensated thanks to public and
+          This solution will follow a validation process quite similar to the
+          other protocols. Holders (holding the right citizens with water and
+          blue traits) will be validators of our system. Organisations
+          specialised in cleaning oceans will work with us to clean the water
+          and send proof to our system in order to trace it through the
+          blockchain. Validators will be compensated thanks to public and
           private institutions' donations.
         </p>
         <p>
           <b class="important">
-            As a Non-profit / Profit Organisations 90% of the funding will be redistributed
-            to Cardboard Citizens Holders.
+            As a Non-profit / Profit Organisations 90% of the funding will be
+            redistributed to Cardboard Citizens Holders.
           </b>
         </p>
         <p>
-          Notes: Not every Cardboard Citizens will be a key actor in the Proof of Water process. Water / Blue
-          traits will be required…
+          Notes: Not every Cardboard Citizens will be a key actor in the Proof
+          of Water process. Water / Blue traits will be required…
         </p>
 
         <h4>Timeline</h4>
@@ -80,14 +108,21 @@ const getContainerStyle = () => {
         <ul>
           <li>Proof of Water process release</li>
           <li>Proof of Water design development</li>
-          <li>Proof of Water Beta testing only for Cardboard Citizens Holders</li>
+          <li>
+            Proof of Water Beta testing only for Cardboard Citizens Holders
+          </li>
         </ul>
         <p>
           <b class="important">Q2 2023</b>
         </p>
         <ul>
-          <li>Cardboard Citizens receive first donation to use Proof of Water (Organization TBA)</li>
-          <li>Proof of Water first deployment only for the first Organization</li>
+          <li>
+            Cardboard Citizens receive first donation to use Proof of Water
+            (Organization TBA)
+          </li>
+          <li>
+            Proof of Water first deployment only for the first Organization
+          </li>
         </ul>
         <p>
           <b class="important">Q3 2023</b>
@@ -98,26 +133,35 @@ const getContainerStyle = () => {
       </template>
 
       <template v-else-if="props.source === 'proof_knowledge'">
-        <img src="@/assets/scenes/bill_of_lading/displays/knowledge_title.png" v-if="onMobile" class="mobile-title">
+        <img
+          src="@/assets/scenes/bill_of_lading/displays/knowledge_title.png"
+          v-if="onMobile"
+          class="mobile-title"
+        />
         <h4>Description</h4>
         <p>
-          (Solana is getting Hammered by Cardboard Citizens !) Cardboard Citizen was born in the Crypto space,
-          that is why we want to embrace the Web3 environment by being key actors in its growth.
+          (Solana is getting Hammered by Cardboard Citizens !) Cardboard Citizen
+          was born in the Crypto space, that is why we want to embrace the Web3
+          environment by being key actors in its growth.
         </p>
         <p>
           <b class="important">
-            Proof of Knowledge is not only one of our protocols BUT a Web3 toolbox designed
-            by the Cardboard Citizens development team.
-          </b> It aims at simplifying the daily life of Web3
-          Users for Crypto and NFTs business related.
+            Proof of Knowledge is not only one of our protocols BUT a Web3
+            toolbox designed by the Cardboard Citizens development team.
+          </b>
+          It aims at simplifying the daily life of Web3 Users for Crypto and
+          NFTs business related.
         </p>
         <p>
           <b class="important">
-            As a Non-profit / Profit Organisations 90% of the Tool’s profit will be
-            redistributed to Cardboard Citizens Holders ⇒ Good2Earn
+            As a Non-profit / Profit Organisations 90% of the Tool’s profit will
+            be redistributed to Cardboard Citizens Holders ⇒ Good2Earn
           </b>
         </p>
-        <p>Notes: All Cardboard Citizens tools will be free to use for our holders.</p>
+        <p>
+          Notes: All Cardboard Citizens tools will be free to use for our
+          holders.
+        </p>
 
         <h4>What is inside the Cz_ToolBox ?</h4>
         <p>
@@ -125,7 +169,10 @@ const getContainerStyle = () => {
         </p>
         <ul>
           <li>Cz_Portfolio (NFT User's Portfolio)</li>
-          <li>Cz_Lifeguard (NFT Individual User Floor Monitoring and Alert floor Dashboard)</li>
+          <li>
+            Cz_Lifeguard (NFT Individual User Floor Monitoring and Alert floor
+            Dashboard)
+          </li>
           <li>Multi Wallet Management</li>
           <li>Cz_Radar (Sweep and Sniping NFT tools)</li>
         </ul>
@@ -144,53 +191,67 @@ const getContainerStyle = () => {
         </p>
         <ul>
           <li>Cz_ToolBox Design development to be released</li>
-          <li>Cz_Lifguard deployed (only for Cardboard Citizens NFT holders)</li>
-          <li>Cz_Banner and Wallpaper creation (only for Cardboard Citizens NFT holders)</li>
-          <li>Cz_Portfolio and Cz_Radar deployed (only for Cardboard Citizens NFT holders)</li>
+          <li>
+            Cz_Lifguard deployed (only for Cardboard Citizens NFT holders)
+          </li>
+          <li>
+            Cz_Banner and Wallpaper creation (only for Cardboard Citizens NFT
+            holders)
+          </li>
+          <li>
+            Cz_Portfolio and Cz_Radar deployed (only for Cardboard Citizens NFT
+            holders)
+          </li>
           <li>Cz_ToolBox available for everyone</li>
         </ul>
       </template>
 
       <template v-else-if="props.source === 'proof_scrap'">
-        <img src="@/assets/scenes/bill_of_lading/displays/scrap_title.png" v-if="onMobile" class="mobile-title">
+        <img
+          src="@/assets/scenes/bill_of_lading/displays/scrap_title.png"
+          v-if="onMobile"
+          class="mobile-title"
+        />
         <h4>Description</h4>
         <p>
-          Buying, consuming, throwing away, buying, consuming, throwing away… This is the current Consumer
-          Cycle. Cardboard Citizens are foremost World Citizens who want to make the Earth the core of its
-          Cz_Config_System. We want to connect and solve real life issues with Web3 solutions.
+          Buying, consuming, throwing away, buying, consuming, throwing away…
+          This is the current Consumer Cycle. Cardboard Citizens are foremost
+          World Citizens who want to make the Earth the core of its
+          Cz_Config_System. We want to connect and solve real life issues with
+          Web3 solutions.
         </p>
         <p>
           Proof of scrap is the
           <b class="important">
-            first protocol providing real accountability in recycling products powered by
-            the blockchain.
-          </b>This recycling solution aims to educate people's consciousness by offering
-          our service to public and private organizations (governments, corporations, cities, etc…)
+            first protocol providing real accountability in recycling products
+            powered by the blockchain. </b
+          >This recycling solution aims to educate people's consciousness by
+          offering our service to public and private organizations (governments,
+          corporations, cities, etc…)
         </p>
         <p>
-          This protocol will follow a simple validation process through our community and using the Solana
-          Blockchain.
-          <b
-            class="important"
-          >Our holders will be validators of our system.</b>Once a product has been
-          recycled and proof has been sent by the user, Cardboard Citizens NFT holders will validate through
-          the blockchain in order to close the process (User recycle process TBA)
+          This protocol will follow a simple validation process through our
+          community and using the Solana Blockchain.
+          <b class="important">Our holders will be validators of our system.</b
+          >Once a product has been recycled and proof has been sent by the user,
+          Cardboard Citizens NFT holders will validate through the blockchain in
+          order to close the process (User recycle process TBA)
         </p>
         <p>
           <b class="important">
-            Users and Validators will be compensated thanks to public and private
-            institutions' donations.
+            Users and Validators will be compensated thanks to public and
+            private institutions' donations.
           </b>
         </p>
         <p>
           <b class="important">
-            As a Non-profit / Profit Organisations 90% of the funding will be redistributed
-            to Cardboard Citizens Holders and Users ⇒ Good2Earn
+            As a Non-profit / Profit Organisations 90% of the funding will be
+            redistributed to Cardboard Citizens Holders and Users ⇒ Good2Earn
           </b>
         </p>
         <p>
-          Notes: Every Cardboard Citizens NFT holder can be a validator for Proof of Scrap (no specific traits
-          needed)
+          Notes: Every Cardboard Citizens NFT holder can be a validator for
+          Proof of Scrap (no specific traits needed)
         </p>
 
         <h4>Timeline</h4>
@@ -200,14 +261,21 @@ const getContainerStyle = () => {
         <ul>
           <li>Proof of Scrap process release</li>
           <li>Proof of Scrap design development</li>
-          <li>Proof of Scrap Beta testing only for Cardboard Citizens Holders</li>
+          <li>
+            Proof of Scrap Beta testing only for Cardboard Citizens Holders
+          </li>
         </ul>
         <p>
           <b class="important">Q4 2022</b>
         </p>
         <ul>
-          <li>Cardboard Citizens receive first donation to use Proof of Scrap (Organisation TBA)</li>
-          <li>Proof of Scrap first deployment only for the first Organisation</li>
+          <li>
+            Cardboard Citizens receive first donation to use Proof of Scrap
+            (Organisation TBA)
+          </li>
+          <li>
+            Proof of Scrap first deployment only for the first Organisation
+          </li>
         </ul>
         <p>
           <b class="important">Q1 2023</b>
@@ -218,47 +286,56 @@ const getContainerStyle = () => {
       </template>
 
       <template v-else-if="props.source === 'proof_forest'">
-        <img src="@/assets/scenes/bill_of_lading/displays/forest_title.png" v-if="onMobile" class="mobile-title">
+        <img
+          src="@/assets/scenes/bill_of_lading/displays/forest_title.png"
+          v-if="onMobile"
+          class="mobile-title"
+        />
         <h4>Description</h4>
         <p>
-          As Earth is the core of Cz_Config_System we must take care of it.. Trees and biodiversity is the
-          essence of life. Trees are the lungs, mushrooms are the brains and as a World Citizen we have to
-          respect and maintain this 4.5 billion years old beautiful ecosystem.
-          <b
-            class="important"
-          >
-            Elevating people’s consciousness through our protocols and values will always
-            be Cardboard Citizens ultimate goal.
+          As Earth is the core of Cz_Config_System we must take care of it..
+          Trees and biodiversity is the essence of life. Trees are the lungs,
+          mushrooms are the brains and as a World Citizen we have to respect and
+          maintain this 4.5 billion years old beautiful ecosystem.
+          <b class="important">
+            Elevating people’s consciousness through our protocols and values
+            will always be Cardboard Citizens ultimate goal.
           </b>
         </p>
         <p>
-          Proof of Forest is the first protocol powered by the Solana blockchain providing accountability for
-          reforestation and Biodiversity conservation.
+          Proof of Forest is the first protocol powered by the Solana blockchain
+          providing accountability for reforestation and Biodiversity
+          conservation.
         </p>
         <p>
-          This reforestation solution will follow a validation process quite similar to the other protocols.
-          Holders (holding the right citizens with green traits) will serve as validators of our system. We
-          will work hand in hand with organisations that specialise in the planting of trees and preserve
-          ecosystems. Once a tree has been planted and proof has been sent by the organisation, Cardboard
-          Citizens NFT holders will validate through the blockchain in order to close the process (Proof of
-          Forest process TBA).
+          This reforestation solution will follow a validation process quite
+          similar to the other protocols. Holders (holding the right citizens
+          with green traits) will serve as validators of our system. We will
+          work hand in hand with organisations that specialise in the planting
+          of trees and preserve ecosystems. Once a tree has been planted and
+          proof has been sent by the organisation, Cardboard Citizens NFT
+          holders will validate through the blockchain in order to close the
+          process (Proof of Forest process TBA).
         </p>
         <p>
           <b class="important">
-            Validators will be compensated thanks to public and private institutions'
-            donations.
+            Validators will be compensated thanks to public and private
+            institutions' donations.
           </b>
         </p>
-        <p>Warning: The replanting of trees will not be the unique focus of Proof of Forest (more to come…)</p>
+        <p>
+          Warning: The replanting of trees will not be the unique focus of Proof
+          of Forest (more to come…)
+        </p>
         <p>
           <b class="important">
-            As a Non-profit / Profit Organizations 90% of the funding will be redistributed
-            to Cardboard Citizens Holders Good2Earn
+            As a Non-profit / Profit Organizations 90% of the funding will be
+            redistributed to Cardboard Citizens Holders Good2Earn
           </b>
         </p>
         <p>
-          Notes: Not every Cardboard Citizens will be a key actor in the Proof of Forest process. Green traits
-          will be required…
+          Notes: Not every Cardboard Citizens will be a key actor in the Proof
+          of Forest process. Green traits will be required…
         </p>
 
         <h4>Timeline</h4>
@@ -268,14 +345,21 @@ const getContainerStyle = () => {
         <ul>
           <li>Proof of Forest process release</li>
           <li>Proof of Forest design development</li>
-          <li>Proof of Forest Beta testing only for Cardboard Citizens Holders</li>
+          <li>
+            Proof of Forest Beta testing only for Cardboard Citizens Holders
+          </li>
         </ul>
         <p>
           <b class="important">Q1 2023</b>
         </p>
         <ul>
-          <li>Cardboard Citizens receive first donation to use Proof of Forest (Organization TBA)</li>
-          <li>Proof of Forest first deployment only for the first Organization</li>
+          <li>
+            Cardboard Citizens receive first donation to use Proof of Forest
+            (Organization TBA)
+          </li>
+          <li>
+            Proof of Forest first deployment only for the first Organization
+          </li>
         </ul>
         <p>
           <b class="important">Q2 2023</b>
@@ -335,7 +419,7 @@ p {
 
 .important {
   font-weight: bolder;
-    fon-height: bolder;
+  fon-height: bolder;
 }
 
 .proof_forest {
