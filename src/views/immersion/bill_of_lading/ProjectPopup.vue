@@ -34,7 +34,7 @@ const getContainerStyle = () => {
   >
     <div :class="`paragraph ${props.source} ${onMobile ? 'mobile-paragraph' : ''}`">
       <template v-if="props.source === 'proof_water'">
-        <img src="@/assets/bill_of_lading/display/water_title.png" v-if="onMobile" class="mobile-title">
+        <img src="@/assets/scenes/bill_of_lading/displays/water_title.png" v-if="onMobile" class="mobile-title">
         <h4>Description</h4>
         <p>
           “Fear causes hesitation, and hesitation will cause your worst fears to come true.” Bohdi, Point
@@ -98,7 +98,7 @@ const getContainerStyle = () => {
       </template>
 
       <template v-else-if="props.source === 'proof_knowledge'">
-        <img src="@/assets/bill_of_lading/display/knowledge_title.png" v-if="onMobile" class="mobile-title">
+        <img src="@/assets/scenes/bill_of_lading/displays/knowledge_title.png" v-if="onMobile" class="mobile-title">
         <h4>Description</h4>
         <p>
           (Solana is getting Hammered by Cardboard Citizens !) Cardboard Citizen was born in the Crypto space,
@@ -152,7 +152,7 @@ const getContainerStyle = () => {
       </template>
 
       <template v-else-if="props.source === 'proof_scrap'">
-        <img src="@/assets/bill_of_lading/display/scrap_title.png" v-if="onMobile" class="mobile-title">
+        <img src="@/assets/scenes/bill_of_lading/displays/scrap_title.png" v-if="onMobile" class="mobile-title">
         <h4>Description</h4>
         <p>
           Buying, consuming, throwing away, buying, consuming, throwing away… This is the current Consumer
@@ -218,7 +218,7 @@ const getContainerStyle = () => {
       </template>
 
       <template v-else-if="props.source === 'proof_forest'">
-        <img src="@/assets/bill_of_lading/display/forest_title.png" v-if="onMobile" class="mobile-title">
+        <img src="@/assets/scenes/bill_of_lading/displays/forest_title.png" v-if="onMobile" class="mobile-title">
         <h4>Description</h4>
         <p>
           As Earth is the core of Cz_Config_System we must take care of it.. Trees and biodiversity is the
