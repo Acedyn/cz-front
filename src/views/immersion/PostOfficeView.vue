@@ -2,8 +2,11 @@
 import ImageRegion2D from "@/components/scene/ImageRegion2D.vue";
 import DetailsRegion from "@/components/scene/DetailsRegion.vue";
 import Scene2D from "@/components/scene/Scene2D.vue";
+import OverlayPopup from "@/components/popup/OverlayPopup.vue";
+import { YoutubeVue3 } from "youtube-vue3";
 
 import { usePreferencesStore } from "@/stores/preferences";
+import { ref, onMounted, onUnmounted } from "vue";
 import router from "@/router";
 
 const preferences = usePreferencesStore();
@@ -21,6 +24,16 @@ const hightlightConfig = {
 const openLink = (url: string) => {
   window.open(url, "_blank");
 };
+
+const isTvVisibile = ref(false)
+const tvVideoSize = ref<number[]>([
+  window.innerWidth * 0.8,
+  window.innerHeight * 0.6,
+]);
+const youtubeVideoID = "aPLlCBuKmFE";
+const toggleTV = () => {
+    isTvVisibile.value = !isTvVisibile.value
+}
 </script>
 
 <template>
@@ -124,6 +137,7 @@ const openLink = (url: string) => {
         :width="7.03"
         :height="13.98"
         noHoverBackground
+        @click="toggleTV"
         ><template #hover><span /></template
       ></ImageRegion2D>
 
@@ -167,4 +181,25 @@ const openLink = (url: string) => {
       ></ImageRegion2D>
     </template>
   </Scene2D>
+  <OverlayPopup :show="isTvVisibile" margin="10%" @exit="toggleTV">
+    <YoutubeVue3
+      :videoid="youtubeVideoID"
+      :width="tvVideoSize[0]"
+      :height="tvVideoSize[1]"
+      :controls="1"
+      :autoplay="0"
+      class="tv-container"
+    />
+  </OverlayPopup>
 </template>
+
+<style>
+.tv-container {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+</style>
