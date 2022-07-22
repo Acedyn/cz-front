@@ -81,13 +81,15 @@ const selectProject = (name: string | undefined) => {
         ><template #hover> <DetailsRegion title="proof of forest" /> </template
       ></ImageRegion2D>
     </template>
-  </Scene2D>
 
-  <OverlayPopup
-    :show="selectedProject != undefined"
-    margin="10%"
-    @exit="() => selectProject(undefined)"
-  >
-    <ProjectPopup :source="selectedProject as string" @click="selectProject" />
-  </OverlayPopup>
+    <template #overlay>
+      <OverlayPopup
+        :show="selectedProject != undefined"
+        margin="10%"
+        @exit="() => selectProject(undefined)"
+      >
+        <ProjectPopup :source="selectedProject as string" @click="selectProject" />
+      </OverlayPopup>
+    </template>
+  </Scene2D>
 </template>

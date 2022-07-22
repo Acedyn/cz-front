@@ -6,7 +6,7 @@ import OverlayPopup from "@/components/popup/OverlayPopup.vue";
 import { YoutubeVue3 } from "youtube-vue3";
 
 import { usePreferencesStore } from "@/stores/preferences";
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref } from "vue";
 import router from "@/router";
 
 const preferences = usePreferencesStore();
@@ -25,19 +25,23 @@ const openLink = (url: string) => {
   window.open(url, "_blank");
 };
 
-const isTvVisibile = ref(false)
+const isTvVisibile = ref(false);
 const tvVideoSize = ref<number[]>([
   window.innerWidth * 0.8,
   window.innerHeight * 0.6,
 ]);
 const youtubeVideoID = "aPLlCBuKmFE";
 const toggleTV = () => {
-    isTvVisibile.value = !isTvVisibile.value
-}
+  isTvVisibile.value = !isTvVisibile.value;
+};
 </script>
 
 <template>
-  <Scene2D name="post_office" :highlight="hightlightConfig">
+  <Scene2D
+    name="post_office"
+    :highlight="hightlightConfig"
+    :noAutoScrolling="isTvVisibile"
+  >
     <template #elements="{ sceneConfig }">
       <ImageRegion2D
         name="post_office"
@@ -180,26 +184,29 @@ const toggleTV = () => {
         ><template #hover><span /></template
       ></ImageRegion2D>
     </template>
+
+    <template #overlay>
+      <OverlayPopup :show="isTvVisibile" margin="10%" @exit="toggleTV">
+        <YoutubeVue3
+          :videoid="youtubeVideoID"
+          :width="tvVideoSize[0]"
+          :height="tvVideoSize[1]"
+          :controls="1"
+          :autoplay="0"
+          class="tv-container"
+        />
+      </OverlayPopup>
+    </template>
   </Scene2D>
-  <OverlayPopup :show="isTvVisibile" margin="10%" @exit="toggleTV">
-    <YoutubeVue3
-      :videoid="youtubeVideoID"
-      :width="tvVideoSize[0]"
-      :height="tvVideoSize[1]"
-      :controls="1"
-      :autoplay="0"
-      class="tv-container"
-    />
-  </OverlayPopup>
 </template>
 
 <style>
 .tv-container {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

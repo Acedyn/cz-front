@@ -113,6 +113,7 @@ onBeforeUnmount(() => {
     <div class="scene-elements">
       <slot name="elements" :sceneConfig="sceneConfig" />
     </div>
+    <slot name="overlay" />
   </div>
 </template>
 
