@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { usePreferencesStore } from "@/stores/preferences";
 import { preloadImages } from "@/utils/loader";
-import { onBeforeMount, ref, computed } from "vue";
+import { onBeforeMount, onBeforeUnmount, ref, computed } from "vue";
 import { storeToRefs } from "pinia";
 
 const props = withDefaults(
@@ -12,6 +12,7 @@ const props = withDefaults(
     background?: string;
     aspectRatio?: number;
     noScrolling?: boolean;
+    noAutoScrolling?: boolean;
     noDark?: boolean;
   }>(),
   {
@@ -58,6 +59,27 @@ const scrollToCenter = () => {
   }
 };
 
+let lastTimestamp = 0;
+const mousePosition = { x: 0, y: 0 };
+const getMousePosition = (e: MouseEvent) => {
+  mousePosition.x = e.clientX;
+  mousePosition.y = e.clientY;
+};
+const slideMouse = (e: number) => {
+  const deltaTime = e - lastTimestamp;
+  lastTimestamp = e;
+  window.requestAnimationFrame(slideMouse);
+
+  if (!containerRef.value || props.noAutoScrolling) {
+    return;
+  }
+  if (mousePosition.y / window.innerHeight < 0.2) {
+    return;
+  }
+  const offset = (mousePosition.x - window.innerWidth / 2) * deltaTime * 0.001;
+  containerRef.value.scrollTo(containerRef.value.scrollLeft + offset, 10);
+};
+
 const sceneConfig = {
   root: sceneRoot,
   highlight: props.highlight,
@@ -65,11 +87,17 @@ const sceneConfig = {
 };
 
 onBeforeMount(() => {
+  window.requestAnimationFrame(slideMouse);
+  window.addEventListener("mousemove", getMousePosition);
   preloadImages([backgroundImage.value]);
 
   if (props.noScrolling) {
     window.addEventListener("resize", scrollToCenter);
   }
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("mousemove", getMousePosition);
 });
 </script>
 

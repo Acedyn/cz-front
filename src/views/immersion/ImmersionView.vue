@@ -18,7 +18,9 @@ onBeforeMount(() => {
 <template>
   <router-view v-slot="{ Component }">
     <transition :name="transition">
-      <component :is="Component" />
+      <div class="scene-wrapper">
+        <component :is="Component" />
+      </div>
     </transition>
   </router-view>
 </template>
@@ -44,5 +46,13 @@ onBeforeMount(() => {
 .fade-dark-leave-to {
   filter: brightness(0);
   opacity: 0.7;
+}
+
+.scene-wrapper {
+    position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 </style>
