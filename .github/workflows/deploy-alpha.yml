@@ -6,6 +6,9 @@ on:
   push:
     tags:
       - "v*"
+  create:
+    tags:
+      - "v*"
 
 env:
   AWS_REGION: us-east-1
