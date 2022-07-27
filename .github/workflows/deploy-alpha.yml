@@ -3,9 +3,6 @@ name: Build and deploy to Amazon ECR
 
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - "v*"
   create:
     tags:
       - "v*"
@@ -25,7 +22,7 @@ jobs:
             kubectl_namespace: cz-alpha-stack
           - repo: cz-storybook
             docker: ./deploy/Dockerfile.storybook
-            kubectl_namespace: cz-dev-stack
+            kubectl_namespace: cz-alpha-stack
 
     runs-on: ubuntu-latest
     environment: production
