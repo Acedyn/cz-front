@@ -7,10 +7,11 @@ COPY . ./
 RUN npm run build-storybook
 
 FROM nginx:alpine
+ARG NGINX_ADMIN_AUTH=password
 COPY ./deploy/nginx.dev.conf /etc/nginx/nginx.conf
 COPY --from=build-deps /usr/src/app/storybook-static /usr/share/nginx/html
 RUN apk add apache2-utils
 RUN mkdir etc/apache2 && touch etc/apache2/.htpasswd
-RUN htpasswd -b /etc/apache2/.htpasswd admin ${NGINX_ADMIN_AUTH:-password}
+RUN htpasswd -b /etc/apache2/.htpasswd admin $NGINX_ADMIN_AUTH
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
