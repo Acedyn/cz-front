@@ -7,8 +7,14 @@ import router from "./router";
 
 const app = createApp(App);
 
+const preferencesLocal = JSON.parse(
+  localStorage.getItem("preferences") || "{}"
+);
+
 app.use(createPinia());
-app.use(createI18n({ locale: "en", legacy: false }));
+app.use(
+  createI18n({ locale: preferencesLocal.language || "en", legacy: false })
+);
 app.use(router);
 
 app.mount("#app");

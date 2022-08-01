@@ -1,0 +1,30 @@
+import LanguagePicker from '../../components/interaction/LanguagePicker.vue'
+
+<Meta title="Interaction/LanguagePicker" component="{LanguagePicker}" />
+
+export const Template = (args) => ({
+  components: { LanguagePicker },
+  setup() {
+    return { args };
+  },
+  template: '<LanguagePicker v-bind="args" />',
+});
+
+
+<Story
+  name="Primary"
+  args={{
+    colorLine: "black",
+    colorBG: "#664f3c",
+    round: true,
+    size: "30px",
+  }}>
+  {Template.bind({})}
+</Story>
+
+
+# Language Picker
+
+Dropdown picker component to select the website's language.
+The language switch will only work on text that uses i18n, make sure to [read the documentation](https://vue-i18n.intlify.dev/guide/advanced/composition.html#basic-usage)
+if you want to put some text.

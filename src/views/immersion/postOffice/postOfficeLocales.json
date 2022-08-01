@@ -1,0 +1,23 @@
+{
+  "en": {
+    "sections": {
+      "post_office": {
+        "description": "Exit the immersion view"
+      }
+    }
+  },
+  "fr": {
+    "sections": {
+      "post_office": {
+        "description": "Quitter la page d'immersion"
+      }
+    }
+  },
+  "es": {
+    "sections": {
+      "post_office": {
+        "description": "Salir de la vista de inmersión"
+      }
+    }
+  }
+}

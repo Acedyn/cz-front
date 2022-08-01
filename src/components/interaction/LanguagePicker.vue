@@ -15,5 +15,9 @@ const selectLanguage = (language: string) => {
 </script>
 
 <template>
-  <DropDownPicker :options="['en', 'es', 'fr']" @select="selectLanguage" />
+  <DropDownPicker
+    :options="['en', 'es', 'fr']"
+    @select="selectLanguage"
+    :defaultOption="preferences.language"
+  />
 </template>

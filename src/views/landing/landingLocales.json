@@ -1,11 +1,11 @@
 {
   "en": {
-    "msg": "Hello world!"
+    "hello": "Hello world!"
   },
   "fr": {
-    "msg": "Bonjour monde!"
+    "hello": "Bonjour monde!"
   },
   "es": {
-    "msg": "Hola mundo!"
+    "hello": "Hola mundo!"
   }
 }

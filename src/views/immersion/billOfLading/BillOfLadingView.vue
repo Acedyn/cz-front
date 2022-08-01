@@ -3,7 +3,7 @@ import ImageRegion2D from "@/components/scene/ImageRegion2D.vue";
 import DetailsRegion from "@/components/scene/DetailsRegion.vue";
 import Scene2D from "@/components/scene/Scene2D.vue";
 import OverlayPopup from "@/components/popup/OverlayPopup.vue";
-import ProjectPopup from "./bill_of_lading/ProjectPopup.vue";
+import ProjectPopup from "./ProjectPopup.vue";
 import { ref } from "vue";
 
 const hightlightConfig = {
@@ -88,7 +88,10 @@ const selectProject = (name: string | undefined) => {
         margin="10%"
         @exit="() => selectProject(undefined)"
       >
-        <ProjectPopup :source="selectedProject as string" @click="selectProject" />
+        <ProjectPopup
+          :source="selectedProject as string"
+          @click="selectProject"
+        />
       </OverlayPopup>
     </template>
   </Scene2D>

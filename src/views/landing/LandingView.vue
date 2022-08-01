@@ -6,4 +6,4 @@ const { t } = useI18n({
   messages: locales,
 });
 </script>
-<template>{{ t("msg") }}</template>
+<template>{{ t("hello") }}</template>
