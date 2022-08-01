@@ -1,6 +1,6 @@
 import ImmersionView from "@/views/immersion/ImmersionView.vue";
-import PostOfficeView from "@/views/immersion/PostOfficeView.vue";
-import BillOfLadingView from "@/views/immersion/BillOfLadingView.vue";
+import PostOfficeView from "@/views/immersion/postOffice/PostOfficeView.vue";
+import BillOfLadingView from "@/views/immersion/billOfLading/BillOfLadingView.vue";
 
 export default {
   path: "/immersion",

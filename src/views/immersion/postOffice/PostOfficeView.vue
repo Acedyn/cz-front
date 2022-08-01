@@ -4,10 +4,12 @@ import DetailsRegion from "@/components/scene/DetailsRegion.vue";
 import Scene2D from "@/components/scene/Scene2D.vue";
 import OverlayPopup from "@/components/popup/OverlayPopup.vue";
 import { YoutubeVue3 } from "youtube-vue3";
+import { useI18n } from "vue-i18n";
 
 import { usePreferencesStore } from "@/stores/preferences";
 import { ref } from "vue";
 import router from "@/router";
+import locales from "./postOfficeLocales.json";
 
 const preferences = usePreferencesStore();
 const hightlightConfig = {
@@ -34,6 +36,10 @@ const youtubeVideoID = "aPLlCBuKmFE";
 const toggleTV = () => {
   isTvVisibile.value = !isTvVisibile.value;
 };
+
+const { t } = useI18n({
+  messages: locales,
+});
 </script>
 
 <template>
@@ -50,11 +56,11 @@ const toggleTV = () => {
         :left="38.93"
         :width="24.11"
         :height="47.05"
-        @click="() => router.push('/immersion/post-office')"
+        @click="() => router.push('/')"
         ><template #hover>
           <DetailsRegion
             title="post office"
-            description="lorem ipsum id dolor els istum dale rictus dolores ed astam maelicutis rotore"
+            :description="t('sections.post_office.description')"
           /> </template
       ></ImageRegion2D>
 
