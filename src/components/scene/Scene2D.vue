@@ -126,8 +126,7 @@ onBeforeUnmount(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  overflow-x: v-bind("!props.noScrolling ? 'auto' : 'hidden'");
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 .background-image {

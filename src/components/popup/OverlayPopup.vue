@@ -43,7 +43,7 @@ const onClick = (e: MouseEvent, force?: boolean) => {
 .overlay-backdrop {
   background: #0000009e;
   z-index: 10;
-  position: absolute;
+  position: fixed;
   top: 0px;
   bottom: 0px;
   left: 0px;
@@ -57,6 +57,7 @@ const onClick = (e: MouseEvent, force?: boolean) => {
 }
 
 .close-button {
+  z-index: 20;
   margin: 1%;
   position: absolute;
   top: 0;
