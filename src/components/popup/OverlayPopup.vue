@@ -5,6 +5,7 @@ import CloseButton from "@/components/interaction/CloseButton.vue";
 const props = defineProps<{
   show: boolean;
   margin: string;
+  disableCloseButton?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -28,6 +29,7 @@ const onClick = (e: MouseEvent, force?: boolean) => {
     ref="backdrop"
   >
     <CloseButton
+      v-if="!props.disableCloseButton"
       colorLine="black"
       colorBG="#664f3c"
       size="40px"

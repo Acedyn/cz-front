@@ -7,6 +7,10 @@ import { useHistoryStore } from "../../stores/history";
 import { onBeforeMount, ref, computed } from "vue";
 import { storeToRefs } from "pinia";
 
+interface lifeCycleCallback {
+  (element: { id: string }): void;
+}
+
 const props = defineProps<{
   top: number;
   left: number;
@@ -16,6 +20,8 @@ const props = defineProps<{
   name: string;
   config: {
     root: string;
+    onLoad: lifeCycleCallback;
+    onReady: lifeCycleCallback;
     highlight?: Record<string, { new: string; visited: string }>;
     noDark?: boolean;
   };
@@ -97,7 +103,10 @@ const onClick = () => {
 };
 
 onBeforeMount(() => {
-  preloadImages(Object.values(imageUrl.value));
+  props.config.onLoad(props.name);
+  preloadImages(Object.values(imageUrl.value), () => {
+    props.config.onReady(props.name);
+  });
 });
 </script>
 
