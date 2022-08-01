@@ -1,0 +1,42 @@
+import Button from '../../components/interaction/Button.vue'
+
+<Meta title="Interaction/Button" component="{Button}" argTypes={{
+      colorLine: { control: "color" },
+      colorBG: { control: "color" },
+  }} />
+
+export const Template = (args) => ({
+  components: { Button },
+  setup() {
+    return { args };
+  },
+  template: '<Button v-bind="args">{{args.label}}</Button>',
+});
+
+
+<Story
+  name="Primary"
+  args={{
+    colorLine: "#eed7bc",
+    colorBG: "#664f3c",
+    label: "Click Me",
+    noArrow: false
+  }}>
+  {Template.bind({})}
+</Story>
+
+<Story
+  name="Scene Navigation"
+  args={{
+    colorLine: "#ffffff",
+    colorBG: "#bd7947",
+    label: "Enter the post office",
+    noArrow: false
+  }}>
+  {Template.bind({})}
+</Story>
+
+
+# Navigation Button
+
+Simple Button used to navigate accros pages.

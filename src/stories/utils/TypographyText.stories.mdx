@@ -1,0 +1,31 @@
+import TypographyText from '../../components/utils/TypographyText.vue'
+
+<Meta title="Interaction/TypographyText" component="{TypographyText}" argTypes={{
+  size: { control: {type:"select", options: ["small", "regular", "big"] } } ,
+  weight: { control: {type:"select", options: ["light", "regular", "bold"] } } ,
+}} />
+
+export const Template = (args) => ({
+  components: { TypographyText },
+  setup() {
+    return { args };
+  },
+  template: '<TypographyText v-bind="args"><p>{{args.content}}</p></TypographyText>',
+});
+
+
+<Story
+  name="Primary"
+  args={{
+    content: "Exemple",
+    size: "regular",
+    color: "#000000",
+    weight: "regular",
+  }}>
+  {Template.bind({})}
+</Story>
+
+
+# TypographyText system
+
+TypographyText system uses accros the website.
