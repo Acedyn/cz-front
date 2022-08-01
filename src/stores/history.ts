@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 
 const historyLocal = JSON.parse(localStorage.getItem("history") || "{}");
-console.log(historyLocal);
 export const useHistoryStore = defineStore({
   id: "history",
   state: () => ({

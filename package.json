@@ -20,6 +20,7 @@
     "@storybook/theming": "^6.5.9",
     "pinia": "^2.0.14",
     "vue": "^3.2.37",
+    "vue-i18n": "^9.1.10",
     "vue-router": "^4.0.16",
     "youtube-vue3": "^0.1.15"
   },

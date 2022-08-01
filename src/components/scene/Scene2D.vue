@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { usePreferencesStore } from "@/stores/preferences";
-import { preloadImages } from "@/utils/loader";
+import { usePreferencesStore } from "../../stores/preferences";
+import { preloadImages } from "../../utils/loader";
 import { onBeforeMount, onBeforeUnmount, ref, computed } from "vue";
 import { storeToRefs } from "pinia";
 
