@@ -184,7 +184,7 @@ onMounted(async () => {
 }
 
 .citizen-story {
-  background: url(@/assets/warehouse/story_display.png);
+  background: url(@/assets/immersion/warehouse/story_display.png);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
