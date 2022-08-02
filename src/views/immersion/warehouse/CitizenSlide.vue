@@ -118,36 +118,31 @@ onMounted(async () => {
         class="disabled button"
         v-if="currentStorySelection === undefined && !isStoryVisible"
       >
-        <img src="../../assets/icons/trash.png" />
+        <img src="@/assets/immersion/warehouse/icons/trash.png" />
       </div>
       <div
         tooltip="back"
         class="disabled button"
-        @click="
-          () => {
-            currentStorySelection = undefined;
-            isStoryVisible = false;
-          }
-        "
+        @click="toggleStoryPreview"
         v-else
       >
-        <img src="../../assets/icons/back.png" />
+        <img src="@/assets/immersion/warehouse/icons/back.png" />
       </div>
       <div tooltip="suffle" class="disabled button">
-        <img src="../../assets/icons/shuffle.png" />
+        <img src="@/assets/immersion/warehouse/icons/shuffle.png" />
       </div>
       <div
         :class="`button ${isStoryVisible ? 'button-highlight' : ''}`"
         tooltip="read"
         @click="toggleStoryPreview"
       >
-        <img src="../../assets/icons/read.png" />
+        <img src="@/assets/immersion/warehouse/icons/read.png" />
       </div>
       <div
         tooltip="commit"
         :class="`disabled button ${isCompleted ? 'button-highlight' : ''}`"
       >
-        <img src="../../assets/icons/commit.png" />
+        <img src="@/assets/immersion/warehouse/icons/commit.png" />
       </div>
     </div>
   </NFTCard>
@@ -178,7 +173,7 @@ onMounted(async () => {
 }
 
 .card-control {
-  position: absolute;
+  position: fixed;
   display: flex;
   bottom: -10px;
   left: 0px;

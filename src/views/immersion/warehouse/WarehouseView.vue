@@ -63,7 +63,10 @@ onBeforeMount(async () => {
       </template>
       <template v-else-if="isLoading">
         <h4 class="fallback-text">Fetching your citizens</h4>
-        <img class="anim-loading" src="@/assets/animation/loading_anim.gif" />
+        <img
+          class="anim-loading"
+          src="@/assets/immersion/warehouse/animation/loading_anim.gif"
+        />
       </template>
       <h4 v-else>No cardboard citizens fount</h4>
     </div>
@@ -82,6 +85,12 @@ onBeforeMount(async () => {
   width: 100%;
   height: 100%;
   overflow: hidden;
+
+  background-size: auto 100%;
+  background-repeat-x: repeat;
+  background-repeat-y: no-repeat;
+  background-position-y: center;
+  background-image: url(@/assets/immersion/warehouse/background.jpg);
 }
 
 .band {
@@ -136,12 +145,12 @@ onBeforeMount(async () => {
   color: #efd7bc;
   font-family: BlockHeadFace;
   text-transform: uppercase;
-  font-size: var(--text-medium);
+  font-size: 3vh;
   font-weight: light;
 }
 
 .carousel-fallback > h4 {
-  font-size: var(--text-large);
+  font-size: 3vh;
   font-weight: lighter;
 }
 

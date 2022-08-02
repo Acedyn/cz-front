@@ -127,8 +127,8 @@ const pictureRotation = computed(() => Math.random() * 5 + 1);
   position: absolute;
   top: 83%;
   bottom: 2%;
-  left: 10%;
-  right: 10%;
+  left: -10%;
+  right: -10%;
   padding: 0 2%;
 
   text-transform: uppercase;
