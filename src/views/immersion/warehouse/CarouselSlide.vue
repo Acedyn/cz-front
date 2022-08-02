@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from "vue";
+import type { CSSProperties } from "vue";
 
 const props = withDefaults(
   defineProps<{
@@ -27,7 +28,7 @@ const isVisible = computed(
 );
 
 const computedStyle = computed(() => {
-  const style: Partial<CSSStyleDeclaration> = {
+  const style: CSSProperties = {
     left: `${
       windowWidth.value / 2 +
       props.distance * fullWidth.value -
@@ -44,10 +45,10 @@ const computedStyle = computed(() => {
 
   if (isSelected.value) {
     style.transform += " scale(1.30) translateY(-2%)";
-    style.zIndex = "2";
+    style.zIndex = 2;
   }
 
-  return style as Record<string, string | null>;
+  return [style];
 });
 
 const setWindowSize = () => {
