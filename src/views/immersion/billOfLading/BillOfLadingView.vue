@@ -88,10 +88,7 @@ const selectProject = (name: string | undefined) => {
         margin="10%"
         @exit="() => selectProject(undefined)"
       >
-        <ProjectPopup
-          :source="selectedProject as string"
-          @click="selectProject"
-        />
+        <ProjectPopup :source="selectedProject as string" />
       </OverlayPopup>
     </template>
   </Scene2D>

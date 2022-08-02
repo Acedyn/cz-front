@@ -1,3 +1,9 @@
+<script lang="ts">
+interface lifeCycleCallback {
+  (id: string): void;
+}
+</script>
+
 <script setup lang="ts">
 import DetailsRegion from "./DetailsRegion.vue";
 
@@ -16,6 +22,8 @@ const props = defineProps<{
   name: string;
   config: {
     root: string;
+    onLoad: lifeCycleCallback;
+    onReady: lifeCycleCallback;
     highlight?: Record<string, { new: string; visited: string }>;
     noDark?: boolean;
   };
@@ -97,7 +105,10 @@ const onClick = () => {
 };
 
 onBeforeMount(() => {
-  preloadImages(Object.values(imageUrl.value));
+  props.config.onLoad(props.name);
+  preloadImages(Object.values(imageUrl.value), () => {
+    props.config.onReady(props.name);
+  });
 });
 </script>
 
