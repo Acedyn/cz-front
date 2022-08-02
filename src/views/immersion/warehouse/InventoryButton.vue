@@ -52,7 +52,7 @@ const activate = () => {
 }
 
 .open {
-  background-image: url(@/assets/warehouse/inventory_open.png);
+  background-image: url(@/assets/immersion/warehouse/inventory_open.png);
 }
 
 @media screen and (max-width: 640px) {
