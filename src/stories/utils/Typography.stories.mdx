@@ -1,0 +1,24 @@
+import Typography from '../../components/interaction/Typography.vue'
+
+<Meta title="Interaction/Typography" component="{Typography}"/>
+
+export const Template = (args) => ({
+  components: { Typography },
+  setup() {
+    return { args };
+  },
+  template: '<Typography></Typography>',
+});
+
+
+<Story
+  name="Primary"
+  args={{
+  }}>
+  {Template.bind({})}
+</Story>
+
+
+# Navigation button
+
+Simple button used to navigate accros pages.

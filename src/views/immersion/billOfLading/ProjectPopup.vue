@@ -9,7 +9,7 @@ const emit = defineEmits<{
   (e: "click"): void;
 }>();
 
-const imagesRootURL = "src/assets/scenes/bill_of_lading/displays";
+const imagesRootURL = "src/assets/immersion/scenes/bill_of_lading/displays";
 const images = ref<
   Record<string, { url: string; colorA: string; colorB: string }>
 >({
@@ -58,7 +58,7 @@ const getContainerStyle = () => {
     >
       <template v-if="props.source === 'proof_water'">
         <img
-          src="@/assets/scenes/bill_of_lading/displays/water_title.png"
+          src="@/assets/immersion/scenes/bill_of_lading/displays/water_title.png"
           v-if="onMobile"
           class="mobile-title"
         />
@@ -134,7 +134,7 @@ const getContainerStyle = () => {
 
       <template v-else-if="props.source === 'proof_knowledge'">
         <img
-          src="@/assets/scenes/bill_of_lading/displays/knowledge_title.png"
+          src="@/assets/immersion/scenes/bill_of_lading/displays/knowledge_title.png"
           v-if="onMobile"
           class="mobile-title"
         />
@@ -208,7 +208,7 @@ const getContainerStyle = () => {
 
       <template v-else-if="props.source === 'proof_scrap'">
         <img
-          src="@/assets/scenes/bill_of_lading/displays/scrap_title.png"
+          src="@/assets/immersion/scenes/bill_of_lading/displays/scrap_title.png"
           v-if="onMobile"
           class="mobile-title"
         />
@@ -287,7 +287,7 @@ const getContainerStyle = () => {
 
       <template v-else-if="props.source === 'proof_forest'">
         <img
-          src="@/assets/scenes/bill_of_lading/displays/forest_title.png"
+          src="@/assets/immersion/scenes/bill_of_lading/displays/forest_title.png"
           v-if="onMobile"
           class="mobile-title"
         />

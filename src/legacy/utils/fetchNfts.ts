@@ -38,6 +38,7 @@ export async function getOwnedCitizens(): Promise<Citizen[]> {
   const [ownedCitizensRaw] = await czGet("/wind/registered", {
     address: wallet.value.publicKey.toString(),
   });
+  console.log(ownedCitizensRaw);
   const ownedCitizensFormated = ownedCitizensRaw
     .sort((a, b) => a.name.localeCompare(b.name))
     .map(async (rawCitizen) => {

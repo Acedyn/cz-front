@@ -1,3 +1,9 @@
+<script lang="ts">
+interface lifeCycleCallback {
+  (id: string): void;
+}
+</script>
+
 <script setup lang="ts">
 import DetailsRegion from "./DetailsRegion.vue";
 
@@ -6,10 +12,6 @@ import { usePreferencesStore } from "../../stores/preferences";
 import { useHistoryStore } from "../../stores/history";
 import { onBeforeMount, ref, computed } from "vue";
 import { storeToRefs } from "pinia";
-
-interface lifeCycleCallback {
-  (element: { id: string }): void;
-}
 
 const props = defineProps<{
   top: number;

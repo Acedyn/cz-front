@@ -17,7 +17,7 @@ const props = withDefaults(
     noDark?: boolean;
   }>(),
   {
-    root: "src/assets/scenes",
+    root: "src/assets/immersion/scenes",
     background: "background",
     aspectRatio: 16 / 9,
     noScrolling: false,
