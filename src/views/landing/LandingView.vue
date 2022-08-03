@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
 import locales from "./landingLocales.json";
-import TypographyText from '@/components/utils/TypographyText.vue';
+import TypographyText from "@/components/utils/TypographyText.vue";
 
 const { t } = useI18n({
   messages: locales,
@@ -9,7 +9,7 @@ const { t } = useI18n({
 </script>
 
 <template>
-
-    <TypographyText size="big"><p>{{ t("hello") }}</p></TypographyText>
-
+  <TypographyText>
+    <p>{{ t("hello") }}</p>
+  </TypographyText>
 </template>
