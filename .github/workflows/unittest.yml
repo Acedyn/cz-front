@@ -3,12 +3,6 @@ name: Unit test
 
 on:
   workflow_dispatch:
-
-  push:
-    branches:
-      - alpha
-      - beta
-      - prod
   pull_request:
     branches:
       - alpha

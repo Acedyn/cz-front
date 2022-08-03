@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { usePreferencesStore } from "@/stores/preferences";
-import { preloadImages } from "@/utils/loader";
+import { usePreferencesStore } from "../../stores/preferences";
+import { preloadImages } from "../../utils/loader";
 import { onBeforeMount, onBeforeUnmount, ref, computed } from "vue";
 import { storeToRefs } from "pinia";
+import OverlayPopup from "../../components/popup/OverlayPopup.vue";
 
 const props = withDefaults(
   defineProps<{
@@ -16,7 +17,7 @@ const props = withDefaults(
     noDark?: boolean;
   }>(),
   {
-    root: "src/assets/scenes",
+    root: "src/assets/immersion/scenes",
     background: "background",
     aspectRatio: 16 / 9,
     noScrolling: false,
@@ -80,20 +81,41 @@ const slideMouse = (e: number) => {
   containerRef.value.scrollTo(containerRef.value.scrollLeft + offset, 10);
 };
 
+const isReady = ref(false);
+const childElements: { [id: string]: { ready: boolean } } = {};
+
 const sceneConfig = {
   root: sceneRoot,
   highlight: props.highlight,
   noDark: props.noDark,
+  onLoad: (id: string) => {
+    childElements[id] = { ready: false };
+    isReady.value = Object.values(childElements).every((e) => e.ready);
+  },
+  onReady: (id: string) => {
+    const childElement = childElements[id];
+    if (!childElement) {
+      return;
+    }
+
+    childElement.ready = true;
+    isReady.value = Object.values(childElements).every((e) => e.ready);
+  },
 };
 
 onBeforeMount(() => {
+  sceneConfig.onLoad("background");
   window.requestAnimationFrame(slideMouse);
   window.addEventListener("mousemove", getMousePosition);
-  preloadImages([backgroundImage.value]);
+  preloadImages([backgroundImage.value], () => {
+    sceneConfig.onReady("background");
+  });
 
   if (props.noScrolling) {
     window.addEventListener("resize", scrollToCenter);
   }
+
+  isReady.value = false;
 });
 
 onBeforeUnmount(() => {
@@ -114,6 +136,10 @@ onBeforeUnmount(() => {
       <slot name="elements" :sceneConfig="sceneConfig" />
     </div>
     <slot name="overlay" />
+    <slot v-if="!isReady" name="loading">
+      <OverlayPopup :show="true" margin="20%" disableCloseButton>
+      </OverlayPopup>
+    </slot>
   </div>
 </template>
 
@@ -126,8 +152,7 @@ onBeforeUnmount(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  overflow-x: v-bind("!props.noScrolling ? 'auto' : 'hidden'");
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 .background-image {

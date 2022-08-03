@@ -1,6 +1,7 @@
 import ImmersionView from "@/views/immersion/ImmersionView.vue";
-import PostOfficeView from "@/views/immersion/PostOfficeView.vue";
-import BillOfLadingView from "@/views/immersion/BillOfLadingView.vue";
+import PostOfficeView from "@/views/immersion/postOffice/PostOfficeView.vue";
+import BillOfLadingView from "@/views/immersion/billOfLading/BillOfLadingView.vue";
+import WarehouseView from "@/views/immersion/warehouse/WarehouseView.vue";
 
 export default {
   path: "/immersion",
@@ -21,6 +22,11 @@ export default {
       path: "bill-of-lading",
       name: "bill-of-lading",
       component: BillOfLadingView,
+    },
+    {
+      path: "warehouse",
+      name: "warehouse",
+      component: WarehouseView,
     },
   ],
 };

@@ -11,7 +11,9 @@ const transition = computed(() =>
 );
 
 onBeforeMount(() => {
-  router.push("/immersion/post-office");
+  if (router.currentRoute.value.fullPath === "/immersion") {
+    router.push("/immersion/post-office");
+  }
 });
 </script>
 

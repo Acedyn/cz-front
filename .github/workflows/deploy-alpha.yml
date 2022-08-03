@@ -3,9 +3,6 @@ name: Build and deploy to Amazon ECR
 
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - "v*"
   create:
     tags:
       - "v*"
@@ -21,11 +18,11 @@ jobs:
       matrix:
         include:
           - repo: cz-front
-            docker: ./deploy/Dockerfile.dev
+            docker: ./deploy/Dockerfile.alpha
             kubectl_namespace: cz-alpha-stack
           - repo: cz-storybook
             docker: ./deploy/Dockerfile.storybook
-            kubectl_namespace: cz-dev-stack
+            kubectl_namespace: cz-alpha-stack
 
     runs-on: ubuntu-latest
     environment: production
@@ -53,9 +50,10 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.ref_name }}
-          NGINX_ADMIN_AUTH: ${{ secrets.NGINX_ADMIN_AUTH }}
         run: |
-          docker build -t $ECR_REGISTRY/${{ matrix.repo }}:$IMAGE_TAG -t $ECR_REGISTRY/${{ matrix.repo }}:latest -f ${{ matrix.docker }} .
+          docker build -t $ECR_REGISTRY/${{ matrix.repo }}:$IMAGE_TAG \
+            -t $ECR_REGISTRY/${{ matrix.repo }}:latest -f ${{ matrix.docker }} \
+            --build-arg NGINX_ADMIN_AUTH=${{ secrets.NGINX_ADMIN_AUTH }} .
           docker push $ECR_REGISTRY/${{ matrix.repo }} --all-tags
 
       - name: Deploy to EKS cluster
