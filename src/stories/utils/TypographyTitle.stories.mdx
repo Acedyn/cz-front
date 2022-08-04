@@ -1,16 +1,16 @@
-import TypographyText from '../../components/utils/TypographyText.vue'
+import TypographyTitle from '../../components/utils/TypographyTitle.vue'
 
-<Meta title="Utils/TypographyText" component="{TypographyText}" argTypes={{
+<Meta title="Utils/TypographyTitle" component="{TypographyTitle}" argTypes={{
   size: { control: {type:"select", options: ["small", "regular", "big"] } } ,
   weight: { control: {type:"select", options: ["light", "regular", "bold"] } } ,
 }} />
 
 export const Template = (args) => ({
-  components: { TypographyText },
+  components: { TypographyTitle },
   setup() {
     return { args };
   },
-  template: '<TypographyText v-bind="args"><p>{{args.content}}</p></TypographyText>',
+  template: '<TypographyTitle v-bind="args"><p>{{args.content}}</p></TypographyTitle>',
 });
 
 
@@ -26,6 +26,6 @@ export const Template = (args) => ({
 </Story>
 
 
-# TypographyText system
+# TypographyTitle system
 
-TypographyText system uses accros the website.
+TypographyTitle system uses accros the website.
