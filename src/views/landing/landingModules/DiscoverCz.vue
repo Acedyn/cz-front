@@ -36,7 +36,9 @@ const { t } = useI18n({
           <CtaButton icon="handyman" invert>Tools</CtaButton>
         </div>
         <div class="trust">
-          <TypographyText>Supported by</TypographyText>
+          <TypographyText color="var(--global-color-primary)" font="Inter"
+            >Supported by</TypographyText
+          >
         </div>
       </div>
       <div class="image-container">
@@ -47,7 +49,9 @@ const { t } = useI18n({
       </div>
     </div>
     <div class="see-more">
-      <TypographyText><p>See more</p></TypographyText>
+      <TypographyText color="var(--global-color-primary)" font="Inter"
+        >See more</TypographyText
+      >
       <span class="material-icons button-icon">arrow_downward</span>
     </div>
   </div>
@@ -55,7 +59,7 @@ const { t } = useI18n({
 
 <style scoped>
 .discover-container {
-  max-height: 20vh;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -95,6 +99,7 @@ const { t } = useI18n({
   grid-template-rows: 1fr 1fr;
   align-items: center;
   justify-content: center;
+  color: var(--global-color-primary);
 }
 
 .button-icon {

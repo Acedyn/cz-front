@@ -6,12 +6,14 @@ const props = withDefaults(
     color?: string;
     weight?: "bold" | "regular" | "light";
     level?: number;
+    font?: string;
   }>(),
   {
     size: "regular",
     color: "var(--global-color-primary)",
-    weight: "regular",
+    weight: "bold",
     level: 1,
+    font: "Inter",
   }
 );
 
@@ -76,6 +78,6 @@ const fontClass = computed(() => {
 
 .typography {
   color: v-bind("props.color");
-  font-family: "Poppins";
+  font-family: v-bind("props.font");
 }
 </style>

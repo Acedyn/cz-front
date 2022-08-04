@@ -4,11 +4,13 @@ const props = withDefaults(
     size?: "small" | "regular" | "big";
     color?: string;
     weight?: "bold" | "regular" | "light";
+    font?: string;
   }>(),
   {
     size: "regular",
     color: "var(--global-color-paragraph)",
     weight: "regular",
+    font: "Courier Prime",
   }
 );
 
@@ -50,5 +52,6 @@ function getClass() {
 
 .typographyColor {
   color: v-bind("props.color");
+  font-family: v-bind("props.font");
 }
 </style>

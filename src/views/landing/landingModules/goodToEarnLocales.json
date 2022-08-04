@@ -1,0 +1,38 @@
+{
+  "en": {
+    "title": {
+      "main": "Good to Earn",
+      "details": "To get a closer look to waht make Cardboard Citizens so great !"
+    },
+    "arguments": {
+      "one": {
+        "title": "This is argument one",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi morbi sit consectetur elit."
+      }
+    }
+  },
+  "fr": {
+    "title": {
+      "main": "Good to Earn",
+      "details": "Pour voir de plus près ce qui rend les Cardboard Citizens si formidables !"
+    },
+    "arguments": {
+      "one": {
+        "title": "This is argument one",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi morbi sit consectetur elit."
+      }
+    }
+  },
+  "es": {
+    "title": {
+      "main": "Good to Earn",
+      "details": "¡Para ver más de cerca lo que hace que Cardboard Citizens sea tan genial!"
+    },
+    "arguments": {
+      "one": {
+        "title": "This is argument one",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi morbi sit consectetur elit."
+      }
+    }
+  }
+}

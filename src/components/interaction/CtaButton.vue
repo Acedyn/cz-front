@@ -38,6 +38,7 @@ const emit = defineEmits<{
       size="regular"
       :color="props.invert ? props.color : 'white'"
       weight="bold"
+      font="Poppins"
       v-if="!props.noText"
     >
       <slot />
