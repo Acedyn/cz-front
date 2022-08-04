@@ -12,7 +12,7 @@ import GoodToEarn from "./landingModules/GoodToEarn.vue";
 
 <style scoped>
 .landing-view {
-  padding: 0 5.313rem;
+  padding: 3.125rem 5.313rem;
   background-color: #3e200f;
 
   display: flex;
@@ -38,6 +38,6 @@ import GoodToEarn from "./landingModules/GoodToEarn.vue";
 }
 
 .discover-cz {
-  height: 95vh;
+  height: calc(95vh - 3.125rem);
 }
 </style>

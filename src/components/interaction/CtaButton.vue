@@ -35,7 +35,7 @@ const emit = defineEmits<{
   >
     <span class="material-icons button-icon">{{ props.icon }}</span>
     <TypographyTitle
-      size="regular"
+      size="small"
       :color="props.invert ? props.color : 'white'"
       weight="bold"
       font="Poppins"

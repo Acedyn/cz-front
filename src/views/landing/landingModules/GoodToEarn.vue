@@ -49,10 +49,11 @@ const goodToEarnArguments = [
       v-for="(argument, index) in goodToEarnArguments"
       :key="index"
     >
-      <div class="image-container">
-        <img :src="argument.image" class="hero-image" />
-      </div>
-      <div class="argument-text">
+      <img
+        :src="argument.image"
+        :class="`hero-image ${index % 2 === 0 ? '' : 'right-argument'}`"
+      />
+      <div :class="`argument-text ${index % 2 === 0 ? 'right-argument' : ''}`">
         <TypographyTitle size="regular" :level="3">
           {{ argument.title }}
         </TypographyTitle>
@@ -64,4 +65,52 @@ const goodToEarnArguments = [
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.container {
+  padding: 6.25rem 8.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5.625rem;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.063rem;
+  max-width: 34rem;
+  text-align: center;
+}
+
+.argument {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  max-height: 50vh;
+  gap: 5.625rem;
+}
+
+.hero-image {
+  height: 50vh;
+
+  object-fit: contain;
+  border-radius: 1.25rem;
+}
+
+.argument-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.875rem;
+  max-width: 90%;
+  text-align: center;
+}
+
+.right-argument {
+  order: 1;
+  justify-self: end;
+}
+</style>

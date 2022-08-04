@@ -50,13 +50,13 @@ const fontClass = computed(() => {
 
 <style scoped>
 .typographySize__small {
-  font-size: 0.813rem;
-  line-height: 0.813rem;
+  font-size: 1.375rem;
+  line-height: 1.375rem;
 }
 
 .typographySize__regular {
-  font-size: 1.375rem;
-  line-height: 1.375rem;
+  font-size: 2.75rem;
+  line-height: 2.75rem;
 }
 
 .typographySize__big {
