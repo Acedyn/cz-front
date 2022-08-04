@@ -7,7 +7,7 @@ const props = withDefaults(
   }>(),
   {
     size: "regular",
-    color: "#000000",
+    color: "var(--global-color-paragraph)",
     weight: "regular",
   }
 );

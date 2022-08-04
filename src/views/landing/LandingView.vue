@@ -1,15 +1,19 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
-import locales from "./landingLocales.json";
-import TypographyText from "@/components/utils/TypographyText.vue";
-
-const { t } = useI18n({
-  messages: locales,
-});
+import DiscoverCz from "./landingModules/DiscoverCz.vue";
 </script>
 
 <template>
-  <TypographyText>
-    <p>{{ t("hello") }}</p>
-  </TypographyText>
+  <div class="landing-view">
+    <DiscoverCz class="discover-cz" />
+  </div>
 </template>
+
+<style scoped>
+.landing-view {
+  padding: 0 5.313rem;
+}
+
+.discover-cz {
+  height: 90vh;
+}
+</style>

@@ -3,11 +3,11 @@ import TypographyTitle from "../utils/TypographyTitle.vue";
 
 const props = withDefaults(
   defineProps<{
-    color: string;
-    colorHover: string;
-    colorHoverInvert: string;
     icon: string;
-    noText?: boolean;
+    color?: string;
+    colorHover?: string;
+    colorHoverInvert?: string;
+    noTex?: boolean;
     invert?: boolean;
     thickness?: string;
   }>(),
@@ -15,8 +15,15 @@ const props = withDefaults(
     noText: true,
     invert: false,
     thickness: "0.188rem",
+    color: "var(--global-color-primary)",
+    colorHover: "var(--global-color-hover)",
+    colorHoverInvert: "var(--global-color-secondary)",
   }
 );
+
+const emit = defineEmits<{
+  (e: "click"): void;
+}>();
 </script>
 
 <template>
@@ -24,6 +31,7 @@ const props = withDefaults(
     :class="`clear-button-style cta-button ${props.noText ? 'no-text' : ''} ${
       props.invert ? 'inverted' : ''
     }`"
+    @click="() => emit('click')"
   >
     <span class="material-icons button-icon">{{ props.icon }}</span>
     <TypographyTitle
