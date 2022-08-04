@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import DiscoverCz from "./landingModules/DiscoverCz.vue";
 import GoodToEarn from "./landingModules/GoodToEarn.vue";
+import TrustUs from "./landingModules/TrustUs.vue";
 </script>
 
 <template>
   <div class="landing-view">
     <DiscoverCz class="discover-cz module" />
     <GoodToEarn class="good-to-earn module" />
+    <TrustUs class="trust-us module" />
   </div>
 </template>
 

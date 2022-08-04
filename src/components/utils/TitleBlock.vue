@@ -7,6 +7,8 @@ const props = withDefaults(
     title: string;
     titleSize?: "small" | "regular" | "big";
     titleLevel?: number;
+    titleColor?: string;
+    textSize?: "small" | "regular" | "big";
     maxWidth?: string;
   }>(),
   {
@@ -18,10 +20,14 @@ const props = withDefaults(
 
 <template>
   <div class="title-block">
-    <TypographyTitle :size="props.titleSize" :level="props.titleLevel">
+    <TypographyTitle
+      :size="props.titleSize"
+      :level="props.titleLevel"
+      :color="props.titleColor"
+    >
       {{ props.title }}
     </TypographyTitle>
-    <TypographyText>
+    <TypographyText :size="props.textSize">
       <slot />
     </TypographyText>
   </div>

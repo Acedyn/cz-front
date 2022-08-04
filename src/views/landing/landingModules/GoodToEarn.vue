@@ -34,11 +34,9 @@ const goodToEarnArguments = [
 
 <template>
   <div class="container">
-    <div class="title">
-      <TitleBlock :title="t('title.main')" maxWidth="34rem">
-        <p>{{ t("title.details") }}</p>
-      </TitleBlock>
-    </div>
+    <TitleBlock :title="t('title.main')" maxWidth="34rem">
+      <p>{{ t("title.details") }}</p>
+    </TitleBlock>
 
     <div
       class="argument"
