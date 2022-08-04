@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import TypographyTitle from "../../../components/utils/TypographyTitle.vue";
-import TypographyText from "../../../components/utils/TypographyText.vue";
+import TitleBlock from "../../../components/utils/TitleBlock.vue";
 
 import { useI18n } from "vue-i18n";
 import locales from "./goodToEarnLocales.json";
@@ -36,12 +35,9 @@ const goodToEarnArguments = [
 <template>
   <div class="container">
     <div class="title">
-      <TypographyTitle size="big" :level="2">
-        {{ t("title.main") }}
-      </TypographyTitle>
-      <TypographyText>
+      <TitleBlock :title="t('title.main')" maxWidth="34rem">
         <p>{{ t("title.details") }}</p>
-      </TypographyText>
+      </TitleBlock>
     </div>
 
     <div
@@ -54,12 +50,9 @@ const goodToEarnArguments = [
         :class="`hero-image ${index % 2 === 0 ? '' : 'right-argument'}`"
       />
       <div :class="`argument-text ${index % 2 === 0 ? 'right-argument' : ''}`">
-        <TypographyTitle size="regular" :level="3">
-          {{ argument.title }}
-        </TypographyTitle>
-        <TypographyText>
+        <TitleBlock :title="argument.title" titleSize="regular" :titleLevel="3">
           <p>{{ argument.details }}</p>
-        </TypographyText>
+        </TitleBlock>
       </div>
     </div>
   </div>
@@ -72,15 +65,6 @@ const goodToEarnArguments = [
   flex-direction: column;
   align-items: center;
   gap: 5.625rem;
-}
-
-.title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.063rem;
-  max-width: 34rem;
-  text-align: center;
 }
 
 .argument {

@@ -13,9 +13,9 @@ const { t } = useI18n({
 </script>
 
 <template>
-  <div class="discover-container">
-    <div class="discover-content">
-      <div class="discover-details">
+  <div class="container">
+    <div class="content">
+      <div class="details">
         <div class="main-text">
           <TypographyTitle size="big" :level="1">{{
             t("mainText.discover")
@@ -58,20 +58,20 @@ const { t } = useI18n({
 </template>
 
 <style scoped>
-.discover-container {
+.container {
   max-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-.discover-content {
+.content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   flex-grow: 1;
 }
 
-.discover-details {
+.details {
   max-width: 90%;
   display: flex;
   flex-direction: column;
