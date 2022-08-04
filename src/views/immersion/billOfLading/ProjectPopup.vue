@@ -375,12 +375,16 @@ const getContainerStyle = () => {
 <style scoped>
 .project-container {
   position: absolute;
-  top: 0vh;
-  bottom: 0vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   width: 100vw;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+  margin-left: auto;
+  margin-right: auto;
 
   display: flex;
   justify-content: center;

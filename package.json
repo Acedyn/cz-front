@@ -21,6 +21,7 @@
     "@solana/web3.js": "^1.50.1",
     "@storybook/addons": "^6.5.9",
     "@storybook/theming": "^6.5.9",
+    "buffer": "^6.0.3",
     "pinia": "^2.0.14",
     "solana-wallets-vue": "^0.3.2",
     "vue": "^3.2.37",

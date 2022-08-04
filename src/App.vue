@@ -22,5 +22,11 @@ import LanguagePicker from "./components/interaction/LanguagePicker.vue";
 #app {
   width: 100vw;
   height: 100vh;
+  position: absolute;
+  top: 0;
+}
+
+header {
+  display: none;
 }
 </style>

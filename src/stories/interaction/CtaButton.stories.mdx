@@ -1,0 +1,49 @@
+import CtaButton from '../../components/interaction/CtaButton.vue'
+
+<Meta title="interaction/CtaButton" component="{CtaButton}" argType={{
+      color: { control: "color" },
+      colorHover: { control: "color" },
+      colorHoverInvert: { control: "color" },
+}}/>
+
+export const Template = (args) => ({
+  components: { CtaButton },
+  setup() {
+    return { args };
+  },
+  template: '<CtaButton v-bind="args">{{args.content}}</CtaButton>',
+});
+
+
+<Story
+  name="World"
+  args={{
+    content: "World",
+    color: "#D79C67",
+    colorHover: "#794C16",
+    colorHoverInvert: "#fea03338",
+    icon: "public",
+    noText: false,
+    invert: false,
+  }}>
+  {Template.bind({})}
+</Story>
+
+<Story
+  name="Tools"
+  args={{
+    content: "Tools",
+    color: "#D79C67",
+    colorHover: "#794C16",
+    colorHoverInvert: "#fea03338",
+    icon: "handyman",
+    noText: false,
+    invert: false,
+  }}>
+  {Template.bind({})}
+</Story>
+
+
+# Call to action button
+
+Important button that is supposed to call attention
