@@ -7,13 +7,12 @@ const props = withDefaults(
     color?: string;
     colorHover?: string;
     colorHoverInvert?: string;
-    noTex?: boolean;
+    noText?: boolean;
     noIcon?: boolean;
     invert?: boolean;
     thickness?: string;
   }>(),
   {
-    noText: true,
     invert: false,
     thickness: "0.188rem",
     color: "var(--global-color-primary)",

@@ -1,0 +1,65 @@
+import SocialButton from '../../components/interaction/SocialButton.vue'
+
+<Meta title="interaction/SocialButton" component="{SocialButton}" argType={{
+      color: { control: "color" },
+      colorHover: { control: "color" },
+      size: { control: {type:"select", options: ["small", "regular", "big"] } } ,
+      textSize: { control: {type:"select", options: ["discord", "twitter", "instagram", "youtube"] } } ,
+}}/>
+
+export const Template = (args) => ({
+  components: { SocialButton },
+  setup() {
+    return { args };
+  },
+  template: '<SocialButton v-bind="args" />',
+});
+
+<Story
+  name="Discord"
+  args={{
+    social: "discord",
+    color: "#D79C67",
+    colorHover: "#794C16",
+    size: 1,
+  }}>
+  {Template.bind({})}
+</Story>
+
+<Story
+  name="Twitter"
+  args={{
+    social: "twitter",
+    color: "#D79C67",
+    colorHover: "#794C16",
+    size: 1,
+  }}>
+  {Template.bind({})}
+</Story>
+
+<Story
+  name="Instagram"
+  args={{
+    social: "instagram",
+    color: "#D79C67",
+    colorHover: "#794C16",
+    size: 1,
+  }}>
+  {Template.bind({})}
+</Story>
+
+<Story
+  name="Youtube"
+  args={{
+    social: "youtube",
+    color: "#D79C67",
+    colorHover: "#794C16",
+    size: 1,
+  }}>
+  {Template.bind({})}
+</Story>
+
+
+# Social button
+
+Links to social media
