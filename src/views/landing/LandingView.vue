@@ -2,6 +2,7 @@
 import DiscoverCz from "./landingModules/DiscoverCz.vue";
 import GoodToEarn from "./landingModules/GoodToEarn.vue";
 import TrustUs from "./landingModules/TrustUs.vue";
+import OurTeam from "./landingModules/OurTeam.vue";
 </script>
 
 <template>
@@ -9,6 +10,7 @@ import TrustUs from "./landingModules/TrustUs.vue";
     <DiscoverCz class="discover-cz module" />
     <GoodToEarn class="good-to-earn module" />
     <TrustUs class="trust-us module" />
+    <OurTeam class="our-team module" />
   </div>
 </template>
 

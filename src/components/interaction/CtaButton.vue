@@ -3,11 +3,12 @@ import TypographyTitle from "../utils/TypographyTitle.vue";
 
 const props = withDefaults(
   defineProps<{
-    icon: string;
+    icon?: string;
     color?: string;
     colorHover?: string;
     colorHoverInvert?: string;
     noTex?: boolean;
+    noIcon?: boolean;
     invert?: boolean;
     thickness?: string;
   }>(),
@@ -33,10 +34,13 @@ const emit = defineEmits<{
     }`"
     @click="() => emit('click')"
   >
-    <span class="material-icons button-icon">{{ props.icon }}</span>
+    <span v-if="!props.noIcon" class="material-icons button-icon">{{
+      props.icon
+    }}</span>
     <TypographyTitle
       size="small"
       :color="props.invert ? props.color : 'white'"
+      :level="4"
       weight="bold"
       font="Poppins"
       v-if="!props.noText"
