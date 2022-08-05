@@ -4,21 +4,24 @@ import GoodToEarn from "./landingModules/GoodToEarn.vue";
 import TrustUs from "./landingModules/TrustUs.vue";
 import OurTeam from "./landingModules/OurTeam.vue";
 import TrustNumbers from "./landingModules/TrustNumbers.vue";
+import FooterSection from "./FooterSection.vue";
 </script>
 
 <template>
   <div class="landing-view">
-    <DiscoverCz class="discover-cz module" />
-    <GoodToEarn class="good-to-earn module" />
-    <TrustUs class="trust-us module" />
-    <OurTeam class="our-team module" />
-    <TrustNumbers class="trust-numbers module" />
+    <div class="landing-modules">
+      <DiscoverCz class="discover-cz module" />
+      <GoodToEarn class="good-to-earn module" />
+      <TrustUs class="trust-us module" />
+      <OurTeam class="our-team module" />
+      <TrustNumbers class="trust-numbers module" />
+    </div>
+    <FooterSection />
   </div>
 </template>
 
 <style scoped>
 .landing-view {
-  padding: 3.125rem 5.313rem;
   background-color: #512208;
 
   display: flex;
@@ -36,7 +39,14 @@ import TrustNumbers from "./landingModules/TrustNumbers.vue";
   position: absolute;
 
   background: url("@/assets/landing/background.jpg");
-  background-size: 30vw;
+  background-size: 30rem;
+}
+
+.landing-modules {
+  padding: 3.125rem 5.313rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.125rem;
 }
 
 .module {

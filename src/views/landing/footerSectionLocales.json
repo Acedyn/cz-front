@@ -1,0 +1,29 @@
+{
+  "en": {
+    "join": {
+      "title": "Stay up to date",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor egestas proin integer sollicitudin tincidunt tellus. "
+    },
+    "infos": {
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor egestas proin integer sollicitudin tincidunt tellus. "
+    }
+  },
+  "fr": {
+    "join": {
+      "title": "Restez a jour",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor egestas proin integer sollicitudin tincidunt tellus. "
+    },
+    "infos": {
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor egestas proin integer sollicitudin tincidunt tellus. "
+    }
+  },
+  "es": {
+    "join": {
+      "title": "Estar al día",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor egestas proin integer sollicitudin tincidunt tellus. "
+    },
+    "infos": {
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor egestas proin integer sollicitudin tincidunt tellus. "
+    }
+  }
+}

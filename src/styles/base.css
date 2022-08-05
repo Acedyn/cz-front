@@ -24,8 +24,9 @@ body {
 }
 
 :root {
-  --global-color-primary: #d79c67;
+  --global-color-primary: #e29d75;
   --global-color-hover: #b56217;
   --global-color-secondary: #fea03338;
   --global-color-paragraph: #f4e9de;
+  --global-color-unavailable: #ffd8aa;
 }
