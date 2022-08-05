@@ -1,0 +1,38 @@
+{
+  "en": {
+    "title": {
+      "main": "Why trust us ?",
+      "details": "To get a closer look to waht make Cardboard Citizens so great !"
+    },
+    "arguments": {
+      "one": {
+        "title": "Member one",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi morbi sit consectetur elit."
+      }
+    }
+  },
+  "fr": {
+    "title": {
+      "main": "Pourquoi nous croire ?",
+      "details": "To get a closer look to waht make Cardboard Citizens so great !"
+    },
+    "arguments": {
+      "one": {
+        "title": "Member one",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi morbi sit consectetur elit."
+      }
+    }
+  },
+  "es": {
+    "title": {
+      "main": "¿Por qué creernos?",
+      "details": "To get a closer look to waht make Cardboard Citizens so great !"
+    },
+    "arguments": {
+      "one": {
+        "title": "Member one",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi morbi sit consectetur elit."
+      }
+    }
+  }
+}

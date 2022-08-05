@@ -1,0 +1,33 @@
+import SimpleButton from '../../components/interaction/SimpleButton.vue'
+
+<Meta title="interaction/SimpleButton" component="{SimpleButton}" argType={{
+      color: { control: "color" },
+      colorHover: { control: "color" },
+      textSize: { control: {type:"select", options: ["small", "regular", "big"] } } ,
+}}/>
+
+export const Template = (args) => ({
+  components: { SimpleButton },
+  setup() {
+    return { args };
+  },
+  template: '<SimpleButton v-bind="args">{{args.content}}</SimpleButton>',
+});
+
+
+<Story
+  name="Follow"
+  args={{
+    content: "Follow",
+    color: "#D79C67",
+    colorHover: "#794C16",
+    textSize: "regular",
+  }}>
+  {Template.bind({})}
+</Story>
+
+
+# Call to action button
+
+Important button that is supposed to call attention
+
