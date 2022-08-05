@@ -5,8 +5,10 @@ const props = withDefaults(
     color?: string;
     weight?: "bold" | "regular" | "light";
     font?: string;
+    spacing?: number;
   }>(),
   {
+    spacing: 1.5,
     size: "regular",
     color: "var(--global-color-paragraph)",
     weight: "regular",
@@ -28,14 +30,17 @@ function getClass() {
 <style scoped>
 .typographySize__small {
   font-size: 0.813rem;
+  line-height: v-bind("`calc(0.813rem * ${props.spacing})`");
 }
 
 .typographySize__regular {
   font-size: 1rem;
+  line-height: v-bind("`calc(1rem * ${props.spacing})`");
 }
 
 .typographySize__big {
-  font-size: 4rem;
+  font-size: 1.3rem;
+  line-height: v-bind("`calc(1.3rem * ${props.spacing})`");
 }
 
 .typographyWeight__light {

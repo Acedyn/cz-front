@@ -2,12 +2,20 @@
   "en": {
     "title": {
       "main": "Good to Earn",
-      "details": "To get a closer look to waht make Cardboard Citizens so great !"
+      "details": "Good2Earn is a whole new concept designed by Cardboard Citizens...\nYou have to do good to earn and all of our protocols aim at benefits the real world."
     },
     "arguments": {
       "one": {
-        "title": "This is argument one",
-        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi morbi sit consectetur elit."
+        "title": "Provide accountability to profit / nonprofit Organizations",
+        "details": "Accountability is one of the biggest challenge when we bring Social responsibility in a discussion. We develop protocols and system in the Web3 for the Web2 to provide accountability to profit and non-profit organizations in their social actions. "
+      },
+      "two": {
+        "title": "Supporting social actions through the blockchain",
+        "details": "Our tools are first to be deployed for recycling, reforestation and cleaning oceans. Those actions aims to elevate people consciousness in the real challenge that we are facing as world citizens. "
+      },
+      "three": {
+        "title": "Putting the community at the heart of the protocol",
+        "details": "Our holders are the center of our Good2Earn process. This accountability system is centered on the validation of our holders and it is by participating in this process that our holders will be rewarded. Please come and see our detailed Roadmap."
       }
     }
   },

@@ -39,11 +39,11 @@ import FooterSection from "./FooterSection.vue";
   position: absolute;
 
   background: url("@/assets/landing/background.jpg");
-  background-size: 30rem;
+  background-size: 44rem;
 }
 
 .landing-modules {
-  padding: 3.125rem 5.313rem;
+  padding: 3.125rem 10.625rem;
   display: flex;
   flex-direction: column;
   gap: 3.125rem;

@@ -10,6 +10,7 @@ const props = withDefaults(
     titleColor?: string;
     textSize?: "small" | "regular" | "big";
     maxWidth?: string;
+    quotes?: boolean;
   }>(),
   {
     titleSize: "big",
@@ -24,6 +25,7 @@ const props = withDefaults(
       :size="props.titleSize"
       :level="props.titleLevel"
       :color="props.titleColor"
+      :quotes="props.quotes"
     >
       {{ props.title }}
     </TypographyTitle>

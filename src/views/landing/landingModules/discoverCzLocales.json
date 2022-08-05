@@ -1,17 +1,23 @@
 {
   "en": {
     "mainText": {
-      "discover": "Discover\nCardboard Citizens"
+      "discover": "Discover\nCardboard Citizens",
+      "detailsOne": "Cardboard Citizen is an Art Blockchain project. This collection contains 6767 cute cardboards that have been inspired by Danbo (a fictional cardboard box robot character from manga series Yotsuba&! Created in 2003)",
+      "detailsTwo": "We represent holders in our platform of outcome that enables profit and non-profit to achieve accountability on their social actions. This is done with our protocols in the Good 2 Earn system."
     }
   },
   "fr": {
     "mainText": {
-      "discover": "Découvrez\nCardboad Citizens"
+      "discover": "Découvrez\nCardboad Citizens",
+      "detailsOne": "Cardboard Citizen is an Art Blockchain project. This collection contains 6767 cute cardboards that have been inspired by Danbo (a fictional cardboard box robot character from manga series Yotsuba&! Created in 2003)",
+      "detailsTwo": "We represent holders in our platform of outcome that enables profit and non-profit to achieve accountability on their social actions. This is done with our protocols in the Good 2 Earn system."
     }
   },
   "es": {
     "mainText": {
-      "discover": "Descubrir\nCardboard Citizens"
+      "discover": "Descubrir\nCardboard Citizens",
+      "detailsOne": "Cardboard Citizen is an Art Blockchain project. This collection contains 6767 cute cardboards that have been inspired by Danbo (a fictional cardboard box robot character from manga series Yotsuba&! Created in 2003)",
+      "detailsTwo": "We represent holders in our platform of outcome that enables profit and non-profit to achieve accountability on their social actions. This is done with our protocols in the Good 2 Earn system."
     }
   }
 }

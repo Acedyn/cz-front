@@ -2,6 +2,7 @@
 import TypographyTitle from "../../../components/utils/TypographyTitle.vue";
 import TypographyText from "../../../components/utils/TypographyText.vue";
 import CtaButton from "../../../components/interaction/CtaButton.vue";
+import SocialButton from "../../../components/interaction/SocialButton.vue";
 import router from "@/router";
 
 import { useI18n } from "vue-i18n";
@@ -10,6 +11,13 @@ import locales from "./discoverCzLocales.json";
 const { t } = useI18n({
   messages: locales,
 });
+
+const scrollDown = () => {
+  window.scroll({
+    top: window.innerHeight,
+    behavior: "smooth",
+  });
+};
 </script>
 
 <template>
@@ -17,17 +25,15 @@ const { t } = useI18n({
     <div class="content">
       <div class="details">
         <div class="main-text">
-          <TypographyTitle size="big" :level="1">{{
-            t("mainText.discover")
-          }}</TypographyTitle>
-          <TypographyText
-            ><p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor
-              egestas proin integer sollicitudin tincidunt tellus. Leo quis
-              cursus euismod b Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit.
-            </p></TypographyText
-          >
+          <TypographyTitle size="big" :level="1" :spacing="1.2">
+            {{ t("mainText.discover") }}
+          </TypographyTitle>
+          <TypographyText :spacing="1.2">
+            <p>{{ t("mainText.detailsOne") }}</p>
+          </TypographyText>
+          <TypographyText :spacing="1.2">
+            <p>{{ t("mainText.detailsTwo") }}</p>
+          </TypographyText>
         </div>
         <div class="cta-buttons">
           <CtaButton icon="public" @click="() => router.push('/immersion')"
@@ -36,9 +42,27 @@ const { t } = useI18n({
           <CtaButton icon="handyman" invert>Tools</CtaButton>
         </div>
         <div class="trust">
-          <TypographyText color="var(--global-color-primary)" font="Inter"
-            >Supported by</TypographyText
+          <TypographyText
+            color="var(--global-color-primary)"
+            size="big"
+            weight="bold"
           >
+            Supported by
+          </TypographyText>
+          <div class="social-buttons">
+            <SocialButton
+              social="magiceden"
+              :size="0.6"
+              color="var(--global-color-dark)"
+              colorHover="var(--global-color-unavailable)"
+            />
+            <SocialButton
+              social="opensea"
+              :size="0.6"
+              color="var(--global-color-dark)"
+              colorHover="var(--global-color-unavailable)"
+            />
+          </div>
         </div>
       </div>
       <div class="image-container">
@@ -48,10 +72,14 @@ const { t } = useI18n({
         />
       </div>
     </div>
-    <div class="see-more">
-      <TypographyText color="var(--global-color-primary)" font="Inter"
-        >See more</TypographyText
+    <div class="see-more" @click="scrollDown">
+      <TypographyText
+        color="var(--global-color-primary)"
+        font="Inter"
+        size="big"
       >
+        <p>See more</p>
+      </TypographyText>
       <span class="material-icons button-icon">arrow_downward</span>
     </div>
   </div>
@@ -75,9 +103,14 @@ const { t } = useI18n({
   max-width: 90%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 2.5rem;
+}
 
-  height: 70%;
+.main-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.313rem;
+  max-width: 40.25rem;
 }
 
 .cta-buttons {
@@ -92,17 +125,40 @@ const { t } = useI18n({
 
   object-fit: contain;
   border-radius: 1.25rem;
+  opacity: 0.1;
 }
 
 .see-more {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   color: var(--global-color-primary);
+  gap: 0.5rem;
+  cursor: pointer;
 }
 
 .button-icon {
+  transition: 0.2s;
   text-align: center;
+  font-size: 1.5rem;
+}
+
+.see-more:hover .button-icon {
+  font-size: 2rem;
+}
+
+.trust {
+  display: flex;
+  flex-direction: row;
+  gap: 2.875rem;
+  align-items: center;
+}
+
+.social-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
 }
 </style>

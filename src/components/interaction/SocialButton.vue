@@ -3,10 +3,18 @@ import DiscordLogo from "../../assets/social/discord.svg";
 import TwitterLogo from "../../assets/social/twitter.svg";
 import InstagramLogo from "../../assets/social/instagram.svg";
 import YoutubeLogo from "../../assets/social/youtube.svg";
+import MagicEdenLogo from "../../assets/social/magiceden.svg";
+import OpenseaLogo from "../../assets/social/opensea.svg";
 
 const props = withDefaults(
   defineProps<{
-    social: "discord" | "twitter" | "instagram" | "youtube";
+    social:
+      | "discord"
+      | "twitter"
+      | "instagram"
+      | "youtube"
+      | "magiceden"
+      | "opensea";
     color?: string;
     size?: number;
     colorHover?: string;
@@ -21,14 +29,31 @@ const props = withDefaults(
 const emit = defineEmits<{
   (e: "click"): void;
 }>();
+
+const links = {
+  discord: "http://discord.gg/cardboardcz",
+  twitter: "https://twitter.com/CardboardCtzNFT",
+  instagram: "https://www.instagram.com/cardboardctz/",
+  youtube: "https://www.youtube.com/channel/UChi9hIKIzGNTEzWQufm5r6g",
+  magiceden: "https://magiceden.io/marketplace/cardboard_citizens",
+  opensea: "https://opensea.io/collection/cardboard-citizens-solana",
+};
+
+const onClick = () => {
+  emit("click");
+  const w = window.open(links[props.social], "_blank");
+  if (w) w.focus();
+};
 </script>
 
 <template>
-  <button class="clear-button-style social-button" @click="() => emit('click')">
+  <button class="clear-button-style social-button" @click="onClick">
     <DiscordLogo class="logo" v-if="props.social === 'discord'" />
     <TwitterLogo class="logo" v-if="props.social === 'twitter'" />
     <InstagramLogo class="logo" v-if="props.social === 'instagram'" />
     <YoutubeLogo class="logo" v-if="props.social === 'youtube'" />
+    <MagicEdenLogo class="logo" v-if="props.social === 'magiceden'" />
+    <OpenseaLogo class="logo" v-if="props.social === 'opensea'" />
   </button>
 </template>
 

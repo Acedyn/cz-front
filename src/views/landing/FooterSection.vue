@@ -44,7 +44,9 @@ const { t } = useI18n({
       </div>
       <div class="join">
         <TypographyText weight="light">{{ t("join.title") }}</TypographyText>
-        <TypographyText size="small">{{ t("join.text") }}</TypographyText>
+        <TypographyText size="small" weight="light">{{
+          t("join.text")
+        }}</TypographyText>
       </div>
     </div>
     <div class="copyright">

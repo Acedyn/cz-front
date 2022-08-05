@@ -15,18 +15,13 @@ const goodToEarnArguments = [
     image: "https://dummyimage.com/650x540/ffecd6/aaa",
   },
   {
-    title: t("arguments.one.title"),
-    details: t("arguments.one.details"),
+    title: t("arguments.two.title"),
+    details: t("arguments.two.details"),
     image: "https://dummyimage.com/650x540/ffecd6/aaa",
   },
   {
-    title: t("arguments.one.title"),
-    details: t("arguments.one.details"),
-    image: "https://dummyimage.com/650x540/ffecd6/aaa",
-  },
-  {
-    title: t("arguments.one.title"),
-    details: t("arguments.one.details"),
+    title: t("arguments.three.title"),
+    details: t("arguments.three.details"),
     image: "https://dummyimage.com/650x540/ffecd6/aaa",
   },
 ];
@@ -48,7 +43,12 @@ const goodToEarnArguments = [
         :class="`hero-image ${index % 2 === 0 ? '' : 'right-argument'}`"
       />
       <div :class="`argument-text ${index % 2 === 0 ? 'right-argument' : ''}`">
-        <TitleBlock :title="argument.title" titleSize="regular" :titleLevel="3">
+        <TitleBlock
+          quotes
+          :title="argument.title"
+          titleSize="regular"
+          :titleLevel="3"
+        >
           <p>{{ argument.details }}</p>
         </TitleBlock>
       </div>
@@ -94,5 +94,13 @@ const goodToEarnArguments = [
 .right-argument {
   order: 1;
   justify-self: end;
+}
+
+.argument-details::before {
+  content: open-quote;
+}
+
+.argument-details::after {
+  content: open-quote;
 }
 </style>

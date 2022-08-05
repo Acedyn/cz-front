@@ -41,22 +41,24 @@ const cardAspectRatio = 1.2;
     <TitleBlock :title="t('title.main')" maxWidth="34rem">
       <p>{{ t("title.details") }}</p>
     </TitleBlock>
-    <div class="argument-cards">
-      <div
-        v-for="(trustArgument, index) in trustArguments"
-        :key="index"
-        class="argument-card"
-      >
-        <div class="argument-icon"></div>
-        <div class="argument-details">
-          <TitleBlock
-            :title="trustArgument.title"
-            titleSize="small"
-            titleColor="rgba(0, 0, 0, 0.2)"
-            textSize="small"
-          >
-            {{ trustArgument.details }}
-          </TitleBlock>
+    <div class="arguments-scroll">
+      <div class="argument-cards">
+        <div
+          v-for="(trustArgument, index) in trustArguments"
+          :key="index"
+          class="argument-card"
+        >
+          <div class="argument-icon"></div>
+          <div class="argument-details">
+            <TitleBlock
+              :title="trustArgument.title"
+              titleSize="small"
+              titleColor="rgba(0, 0, 0, 0.2)"
+              textSize="small"
+            >
+              {{ trustArgument.details }}
+            </TitleBlock>
+          </div>
         </div>
       </div>
     </div>
@@ -70,22 +72,28 @@ const cardAspectRatio = 1.2;
 
 <style scoped>
 .container {
-  padding: 6.25rem 5rem;
+  padding: 6.25rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4.063rem;
 }
 
+.arguments-scroll {
+  overflow-x: scroll;
+  width: 100vw;
+}
+
 .argument-cards {
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 1.5rem;
+  padding: 0 2rem;
 }
 
 .argument-card {
   --argument-card-width: 18.75rem;
+  min-width: v-bind("cardWidth");
   width: v-bind("cardWidth");
   height: v-bind("`calc(${cardWidth} * ${cardAspectRatio})`");
   background: var(--global-color-primary);
