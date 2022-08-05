@@ -86,8 +86,8 @@ const cardAspectRatio = 1.2;
 
 .argument-card {
   --argument-card-width: 18.75rem;
-  min-width: v-bind("cardWidth");
-  min-height: v-bind("`calc(${cardWidth} * ${cardAspectRatio})`");
+  width: v-bind("cardWidth");
+  height: v-bind("`calc(${cardWidth} * ${cardAspectRatio})`");
   background: var(--global-color-primary);
 
   display: grid;

@@ -19,7 +19,7 @@ import TrustNumbers from "./landingModules/TrustNumbers.vue";
 <style scoped>
 .landing-view {
   padding: 3.125rem 5.313rem;
-  background-color: #3e200f;
+  background-color: #512208;
 
   display: flex;
   flex-direction: column;
@@ -28,7 +28,7 @@ import TrustNumbers from "./landingModules/TrustNumbers.vue";
 
 .landing-view:before {
   content: "";
-  opacity: 0.2;
+  opacity: 0.8;
   top: 0;
   left: 0;
   bottom: 0;
@@ -36,7 +36,7 @@ import TrustNumbers from "./landingModules/TrustNumbers.vue";
   position: absolute;
 
   background: url("@/assets/landing/background.jpg");
-  background-size: 50vw;
+  background-size: 30vw;
 }
 
 .module {
