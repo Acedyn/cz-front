@@ -1,18 +1,10 @@
 <script setup lang="ts">
-import LanguagePicker from "./components/interaction/LanguagePicker.vue";
+import TopHeader from "./components/header/TopHeader.vue";
 </script>
 
 <template>
-  <header>
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/immersion">Immersion</RouterLink>
-      <RouterLink to="/tools">Tools</RouterLink>
-      <LanguagePicker />
-    </nav>
-  </header>
-
-  <RouterView />
+  <TopHeader class="app-header" />
+  <RouterView class="app-view" />
 </template>
 
 <style>
@@ -26,7 +18,13 @@ import LanguagePicker from "./components/interaction/LanguagePicker.vue";
   top: 0;
 }
 
-header {
-  display: none;
+.app-header {
+  position: absolute;
+  z-index: 10;
+  padding: 0 10.625rem;
+}
+
+.app-view {
+  padding-top: 8.225rem;
 }
 </style>

@@ -10,9 +10,12 @@ const props = withDefaults(
     titleColor?: string;
     textSize?: "small" | "regular" | "big";
     maxWidth?: string;
+    gap?: string;
     quotes?: boolean;
   }>(),
   {
+    gap: "1.063rem",
+    textSize: "big",
     titleSize: "big",
     titleLevel: 2,
   }
@@ -40,7 +43,7 @@ const props = withDefaults(
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.063rem;
+  gap: v-bind("props.gap");
   max-width: v-bind("props.maxWidth");
   text-align: center;
 }

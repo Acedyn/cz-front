@@ -1,0 +1,35 @@
+{
+  "en": {
+    "buttons": {
+      "home": "Home",
+      "tools": "Tools",
+      "market": "Marketplace",
+      "world": "World"
+    },
+    "preferences": {
+      "login": "Sign In"
+    }
+  },
+  "fr": {
+    "buttons": {
+      "home": "Home",
+      "tools": "Tools",
+      "market": "Marketplace",
+      "world": "World"
+    },
+    "preferences": {
+      "login": "Sign In"
+    }
+  },
+  "es": {
+    "buttons": {
+      "home": "Home",
+      "tools": "Tools",
+      "market": "Marketplace",
+      "world": "World"
+    },
+    "preferences": {
+      "login": "Sign In"
+    }
+  }
+}

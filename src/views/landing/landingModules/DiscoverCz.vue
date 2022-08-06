@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted } from "vue";
+import { getBreakpoint, Breakpoint } from "../../../utils/breakpoints";
 import TypographyTitle from "../../../components/utils/TypographyTitle.vue";
 import TypographyText from "../../../components/utils/TypographyText.vue";
 import CtaButton from "../../../components/interaction/CtaButton.vue";
@@ -12,91 +14,66 @@ const { t } = useI18n({
   messages: locales,
 });
 
-const scrollDown = () => {
-  window.scroll({
-    top: window.innerHeight,
-    behavior: "smooth",
-  });
-};
+const breakpoint = getBreakpoint(onMounted, onUnmounted);
 </script>
 
 <template>
   <div class="container">
-    <div class="content">
-      <div class="details">
-        <div class="main-text">
-          <TypographyTitle size="big" :level="1" :spacing="1.2">
-            {{ t("mainText.discover") }}
-          </TypographyTitle>
-          <TypographyText :spacing="1.2">
-            <p>{{ t("mainText.detailsOne") }}</p>
-          </TypographyText>
-          <TypographyText :spacing="1.2">
-            <p>{{ t("mainText.detailsTwo") }}</p>
-          </TypographyText>
-        </div>
-        <div class="cta-buttons">
-          <CtaButton icon="public" @click="() => router.push('/immersion')"
-            >World</CtaButton
-          >
-          <CtaButton icon="handyman" invert>Tools</CtaButton>
-        </div>
-        <div class="trust">
-          <TypographyText
-            color="var(--global-color-primary)"
-            size="big"
-            weight="bold"
-          >
-            Supported by
-          </TypographyText>
-          <div class="social-buttons">
-            <SocialButton
-              social="magiceden"
-              :size="0.6"
-              color="var(--global-color-dark)"
-              colorHover="var(--global-color-unavailable)"
-            />
-            <SocialButton
-              social="opensea"
-              :size="0.6"
-              color="var(--global-color-dark)"
-              colorHover="var(--global-color-unavailable)"
-            />
-          </div>
-        </div>
+    <div class="details">
+      <div class="main-text">
+        <TypographyTitle size="big" :level="1" :spacing="1.2">
+          {{ t("mainText.discover") }}
+        </TypographyTitle>
+        <TypographyText :spacing="1.2">
+          <p>{{ t("mainText.detailsOne") }}</p>
+        </TypographyText>
+        <TypographyText :spacing="1.2">
+          <p>{{ t("mainText.detailsTwo") }}</p>
+        </TypographyText>
       </div>
-      <div class="image-container">
-        <img
-          src="https://dummyimage.com/780x680/ffecd6/aaa"
-          class="hero-image"
-        />
+      <div class="cta-buttons">
+        <CtaButton icon="public" @click="() => router.push('/immersion')"
+          >World</CtaButton
+        >
+        <CtaButton icon="handyman" invert>Tools</CtaButton>
+      </div>
+      <div class="trust">
+        <TypographyText
+          color="var(--global-color-primary)"
+          size="big"
+          weight="bold"
+        >
+          Supported by
+        </TypographyText>
+        <div class="social-buttons">
+          <SocialButton
+            social="magiceden"
+            :size="0.6"
+            color="var(--global-color-dark)"
+            colorHover="var(--global-color-unavailable)"
+          />
+          <SocialButton
+            social="opensea"
+            :size="0.6"
+            color="var(--global-color-dark)"
+            colorHover="var(--global-color-unavailable)"
+          />
+        </div>
       </div>
     </div>
-    <div class="see-more" @click="scrollDown">
-      <TypographyText
-        color="var(--global-color-primary)"
-        font="Inter"
-        size="big"
-      >
-        <p>See more</p>
-      </TypographyText>
-      <span class="material-icons button-icon">arrow_downward</span>
+    <div class="image-container" v-if="breakpoint > Breakpoint.SM">
+      <img src="https://dummyimage.com/780x680/ffecd6/aaa" class="hero-image" />
     </div>
   </div>
 </template>
 
 <style scoped>
 .container {
-  max-height: 100vh;
   display: flex;
-  flex-direction: column;
-}
-
-.content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  flex-direction: row;
   align-items: center;
-  flex-grow: 1;
+  justify-content: space-between;
+  gap: 2rem;
 }
 
 .details {
@@ -119,33 +96,18 @@ const scrollDown = () => {
   gap: 1.25rem;
 }
 
+.image-container {
+  height: 100%;
+}
+
 .hero-image {
   width: 100%;
   height: 100%;
+  max-height: 70vh;
 
   object-fit: contain;
   border-radius: 1.25rem;
   opacity: 0.1;
-}
-
-.see-more {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: var(--global-color-primary);
-  gap: 0.5rem;
-  cursor: pointer;
-}
-
-.button-icon {
-  transition: 0.2s;
-  text-align: center;
-  font-size: 1.5rem;
-}
-
-.see-more:hover .button-icon {
-  font-size: 2rem;
 }
 
 .trust {

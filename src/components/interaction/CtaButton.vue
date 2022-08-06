@@ -11,8 +11,10 @@ const props = withDefaults(
     noIcon?: boolean;
     invert?: boolean;
     thickness?: string;
+    size?: number;
   }>(),
   {
+    size: 1,
     invert: false,
     thickness: "0.188rem",
     color: "var(--global-color-primary)",
@@ -65,9 +67,11 @@ const emit = defineEmits<{
   color: white;
   display: flex;
   align-items: center;
-  padding: 0.688rem 1.375rem;
-  border-radius: 0.5rem;
-  gap: 0.688rem;
+  padding: v-bind(
+    "`calc(0.688rem * ${props.size}) calc(1.375rem * ${props.size})`"
+  );
+  border-radius: v-bind("`calc(0.5rem * ${props.size})`");
+  gap: v-bind("`calc(0.688rem * ${props.size})`");
 
   transition: 0.2s;
   font-family: Poppins;
@@ -78,7 +82,7 @@ const emit = defineEmits<{
 }
 
 .no-text {
-  padding: 0.688rem;
+  padding: v-bind("`calc(0.688rem * ${props.size})`");
 }
 
 .inverted {
@@ -95,6 +99,6 @@ const emit = defineEmits<{
 }
 
 .button-icon {
-  font-size: 2rem;
+  font-size: v-bind("`calc(2rem * ${props.size})`");
 }
 </style>

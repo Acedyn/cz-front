@@ -39,7 +39,7 @@ function getClass() {
 }
 
 .typographySize__big {
-  font-size: 1.3rem;
+  font-size: 1.306rem;
   line-height: v-bind("`calc(1.3rem * ${props.spacing})`");
 }
 

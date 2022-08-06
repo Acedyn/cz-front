@@ -7,6 +7,10 @@
   font-weight: normal;
 }
 
+html {
+  font-size: calc(clamp(1600px, 100vw, 1920px) / (1920 / 16));
+}
+
 body {
   min-height: 100vh;
   color: var(--color-text);
