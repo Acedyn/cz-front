@@ -5,6 +5,7 @@ import InstagramLogo from "../../assets/social/instagram.svg";
 import YoutubeLogo from "../../assets/social/youtube.svg";
 import MagicEdenLogo from "../../assets/social/magiceden.svg";
 import OpenseaLogo from "../../assets/social/opensea.svg";
+import SolanaLogo from "../../assets/social/solana.svg";
 
 const props = withDefaults(
   defineProps<{
@@ -14,7 +15,8 @@ const props = withDefaults(
       | "instagram"
       | "youtube"
       | "magiceden"
-      | "opensea";
+      | "opensea"
+      | "solana";
     color?: string;
     size?: number;
     colorHover?: string;
@@ -37,6 +39,7 @@ const links = {
   youtube: "https://www.youtube.com/channel/UChi9hIKIzGNTEzWQufm5r6g",
   magiceden: "https://magiceden.io/marketplace/cardboard_citizens",
   opensea: "https://opensea.io/collection/cardboard-citizens-solana",
+  solana: "https://solana.com/",
 };
 
 const onClick = () => {
@@ -54,6 +57,7 @@ const onClick = () => {
     <YoutubeLogo class="logo" v-if="props.social === 'youtube'" />
     <MagicEdenLogo class="logo" v-if="props.social === 'magiceden'" />
     <OpenseaLogo class="logo" v-if="props.social === 'opensea'" />
+    <SolanaLogo class="logo" v-if="props.social === 'solana'" />
   </button>
 </template>
 

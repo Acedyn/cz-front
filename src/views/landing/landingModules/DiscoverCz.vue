@@ -43,9 +43,15 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
           size="big"
           weight="bold"
         >
-          Supported by
+          Powered by
         </TypographyText>
         <div class="social-buttons">
+          <SocialButton
+            social="solana"
+            :size="0.6"
+            color="var(--global-color-dark)"
+            colorHover="var(--global-color-unavailable)"
+          />
           <SocialButton
             social="magiceden"
             :size="0.6"

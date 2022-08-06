@@ -21,7 +21,7 @@ import TopHeader from "./components/header/TopHeader.vue";
 .app-header {
   position: absolute;
   z-index: 10;
-  padding: 0 10.625rem;
+  padding: 0 8.625rem;
 }
 
 .app-view {

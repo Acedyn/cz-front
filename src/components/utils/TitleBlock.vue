@@ -7,6 +7,7 @@ const props = withDefaults(
   defineProps<{
     title: string;
     titleSize?: "small" | "regular" | "big";
+    titleWordSize?: string;
     titleAnimation?: "words-slide-left" | "words-slide-right";
     titleLevel?: number;
     titleColor?: string;
@@ -84,7 +85,7 @@ onMounted(() => {
 
 .title-words {
   font-weight: inherit;
-  font-size: inherit;
+  font-size: v-bind("props.titleWordSize || 'inherit'");
 }
 
 .idle-words-slide-left {

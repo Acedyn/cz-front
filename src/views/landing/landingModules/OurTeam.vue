@@ -61,7 +61,11 @@ onMounted(() => {
 
 <template>
   <div class="container">
-    <TitleBlock :title="t('title.main')" maxWidth="34rem">
+    <TitleBlock
+      :title="t('title.main')"
+      maxWidth="34rem"
+      titleWordSize="3.75rem"
+    >
       <p>{{ t("title.details") }}</p>
     </TitleBlock>
     <div class="members-scroll">
