@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import TypographyText from "../utils/TypographyText.vue";
 import LanguagePicker from "../interaction/LanguagePicker.vue";
-import CtaButton from "../interaction/CtaButton.vue";
 import { useRoute } from "vue-router";
 
 import { useI18n } from "vue-i18n";
@@ -19,9 +18,10 @@ const buttonClass = (name: string) => {
 <template>
   <header class="header-container">
     <div class="header-left header-sides">
-      <div class="logo">
+      <div class="header-title">
+        <img class="main-logo" src="@/assets/logos/brand_logo.png" />
         <TypographyText size="big" color="white" font="Poppins" weight="bold"
-          >Cardboard Citizens</TypographyText
+          ><p class="menu-button">Cardboard Citizens</p></TypographyText
         >
       </div>
       <nav class="menu">
@@ -49,13 +49,14 @@ const buttonClass = (name: string) => {
     </div>
     <div class="header-right header-sides">
       <LanguagePicker />
-      <CtaButton icon="person" color="transparent">
+      <button class="signin-button">
+        <span class="material-icons signin-icon"> person </span>
         <TypographyText size="big" weight="bold" font="Poppins" color=""
-          ><p class="signin-button">
+          ><p class="signin-text">
             {{ t("preferences.login") }}
           </p></TypographyText
         >
-      </CtaButton>
+      </button>
     </div>
   </header>
 </template>
@@ -70,7 +71,7 @@ const buttonClass = (name: string) => {
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 7.5rem;
+  height: 7.8rem;
   gap: 1rem;
   justify-content: space-between;
 }
@@ -83,8 +84,21 @@ const buttonClass = (name: string) => {
   min-width: 50%;
 }
 
+.header-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.main-logo {
+  filter: brightness(80%);
+  height: 5rem;
+  object-fit: contain;
+}
+
 .menu {
-  min-width: 60%;
+  min-width: 55%;
   display: flex;
   flex-direction: row;
   gap: 1rem;
@@ -92,6 +106,7 @@ const buttonClass = (name: string) => {
 }
 
 .menu-button {
+  font-size: 1.118rem;
   cursor: pointer;
   color: white;
   transition: 0.2s;
@@ -107,7 +122,35 @@ const buttonClass = (name: string) => {
 }
 
 .signin-button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+
+  padding: 0.344rem 0.782rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transition: 0.2s;
+  gap: 0.688rem;
+}
+
+.signin-button:hover {
+  background: var(--global-color-hover);
+}
+
+.signin-text {
   color: white;
   font-weight: inherit;
+  font-size: 1.118rem;
+}
+
+.signin-icon {
+  color: var(--global-color-primary);
+  font-size: 2rem;
 }
 </style>

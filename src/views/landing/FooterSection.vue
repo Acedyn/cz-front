@@ -50,7 +50,7 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
         <RouterLink to="/dashboard" style="text-decoration: none">
           <TypographyText color="white">Dashboard</TypographyText>
         </RouterLink>
-        <LanguagePicker />
+        <LanguagePicker color="var(--global-color-unavailable)" />
       </div>
       <div class="join">
         <TypographyText weight="light">{{ t("join.title") }}</TypographyText>

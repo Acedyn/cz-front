@@ -4,7 +4,6 @@
   box-sizing: border-box;
   margin: 0;
   position: relative;
-  font-weight: normal;
 }
 
 html {
@@ -29,7 +28,7 @@ body {
 
 :root {
   --global-color-primary: #e29d75;
-  --global-color-hover: #b56217;
+  --global-color-hover: #c27c3c;
   --global-color-secondary: #fea03338;
   --global-color-paragraph: #f4e9de;
   --global-color-unavailable: #ffd8aa;
