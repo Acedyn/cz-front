@@ -32,12 +32,10 @@ onMounted(() => {
   }
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      console.log(entry);
       if (entry.isIntersecting) {
         entry.target.classList.add(`animation-${props.titleAnimation}`);
         entry.target.classList.add(`animation-${props.textAnimation}`);
       } else if (entry.boundingClientRect.top > 0) {
-        console.log("eoeo");
         entry.target.classList.remove(`animation-${props.titleAnimation}`);
         entry.target.classList.remove(`animation-${props.textAnimation}`);
       }

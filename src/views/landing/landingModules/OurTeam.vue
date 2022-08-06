@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, onMounted } from "vue";
 import TitleBlock from "../../../components/utils/TitleBlock.vue";
 import TypographyText from "../../../components/utils/TypographyText.vue";
 import SimpleButton from "../../../components/interaction/SimpleButton.vue";
@@ -35,6 +36,27 @@ const teamMembers = [
 
 const cardWidth = "10.625rem";
 const cardAspectRatio = 1.8;
+
+const cards = ref<Element>();
+
+onMounted(() => {
+  if (!cards.value) {
+    return;
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      console.log(entry);
+      if (entry.isIntersecting) {
+        entry.target.classList.add("animation-card-popup");
+      } else if (entry.boundingClientRect.top > 0) {
+        entry.target.classList.remove("animation-card-popup");
+      }
+    });
+  });
+
+  // Tell the observer which elements to track
+  observer.observe(cards.value);
+});
 </script>
 
 <template>
@@ -43,10 +65,11 @@ const cardAspectRatio = 1.8;
       <p>{{ t("title.details") }}</p>
     </TitleBlock>
     <div class="members-scroll">
-      <div class="member-cards">
+      <div class="member-cards" ref="cards">
         <div
           v-for="(teamMember, index) in teamMembers"
           :key="index"
+          :style="`--i:${index}`"
           class="member-card"
         >
           <div class="member-image"></div>
@@ -104,6 +127,7 @@ const cardAspectRatio = 1.8;
   align-items: center;
   padding: 1rem 2rem;
   border-radius: 1.225rem;
+  opacity: 0;
 }
 
 .member-image {
@@ -121,5 +145,22 @@ const cardAspectRatio = 1.8;
   flex-direction: column;
   justify-content: space-around;
   height: 100%;
+}
+
+.animation-card-popup .member-card {
+  animation: words-slide-left 0.4s ease-out;
+  animation-delay: calc(0.1s * var(--i));
+  animation-fill-mode: forwards;
+}
+
+@keyframes words-slide-left {
+  0% {
+    transform: translateX(500%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
 }
 </style>
