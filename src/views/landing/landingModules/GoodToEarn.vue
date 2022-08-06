@@ -29,10 +29,6 @@ const goodToEarnArguments = [
 ];
 
 const breakpoint = getBreakpoint(onMounted, onUnmounted);
-
-const isRightArgument = (index: number) => {
-  return index % 2 === 0 && breakpoint.value < Breakpoint.MD;
-};
 </script>
 
 <template>
@@ -67,6 +63,10 @@ const isRightArgument = (index: number) => {
       >
         <TitleBlock
           :title="argument.title"
+          :titleAnimation="
+            index % 2 === 0 ? 'words-slide-left' : 'words-slide-right'
+          "
+          textAnimation="slide-up"
           titleSize="regular"
           textSize="regular"
           :titleLevel="3"
