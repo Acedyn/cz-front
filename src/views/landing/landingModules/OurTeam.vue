@@ -99,7 +99,7 @@ onMounted(() => {
 }
 
 .members-scroll {
-  overflow-x: scroll;
+  overflow-x: auto;
   width: 100vw;
   display: flex;
 }
@@ -121,6 +121,7 @@ onMounted(() => {
   background: var(--global-color-paragraph);
   outline: solid 0.4rem var(--global-color-primary);
   outline-offset: -0.4rem;
+  box-shadow: rgb(0 0 0 / 20%) 0px 0.313rem 0.938rem;
 
   display: grid;
   grid-template-rows: 1fr 1fr;

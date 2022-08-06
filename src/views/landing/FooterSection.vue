@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted } from "vue";
+import { getBreakpoint, Breakpoint } from "../../utils/breakpoints";
 import TypographyTitle from "../../components/utils/TypographyTitle.vue";
 import TypographyText from "../../components/utils/TypographyText.vue";
 import LanguagePicker from "../../components/interaction/LanguagePicker.vue";
@@ -10,11 +12,19 @@ import locales from "./footerSectionLocales.json";
 const { t } = useI18n({
   messages: locales,
 });
+
+const breakpoint = getBreakpoint(onMounted, onUnmounted);
 </script>
 
 <template>
   <div class="container">
-    <div class="content">
+    <div
+      :class="`content ${
+        breakpoint < Breakpoint.SM
+          ? 'footer-content-small'
+          : 'footer-content-large'
+      }`"
+    >
       <div class="infos">
         <div class="infos-text">
           <TypographyTitle color="white">Cardboard Citizens</TypographyTitle>
@@ -73,6 +83,11 @@ const { t } = useI18n({
   flex-direction: row;
   padding: 3rem 5.313rem;
   gap: 11rem;
+}
+
+.footer-content-small {
+  flex-direction: column;
+  gap: 2.876rem;
 }
 
 .infos {

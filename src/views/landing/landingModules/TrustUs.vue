@@ -14,22 +14,22 @@ const trustArguments = [
   {
     title: t("arguments.one.title"),
     details: t("arguments.one.details"),
-    image: "https://dummyimage.com/650x540/ffecd6/aaa",
+    image: new URL("/src/assets/logos/rocket.png", import.meta.url).href,
   },
   {
     title: t("arguments.one.title"),
     details: t("arguments.one.details"),
-    image: "https://dummyimage.com/650x540/ffecd6/aaa",
+    image: new URL("/src/assets/logos/user.png", import.meta.url).href,
   },
   {
     title: t("arguments.one.title"),
     details: t("arguments.one.details"),
-    image: "https://dummyimage.com/650x540/ffecd6/aaa",
+    image: new URL("/src/assets/logos/planet.png", import.meta.url).href,
   },
   {
     title: t("arguments.one.title"),
     details: t("arguments.one.details"),
-    image: "https://dummyimage.com/650x540/ffecd6/aaa",
+    image: new URL("/src/assets/logos/art.png", import.meta.url).href,
   },
 ];
 
@@ -71,7 +71,9 @@ onMounted(() => {
           :style="`--i:${index}`"
           class="argument-card"
         >
-          <div class="argument-icon"></div>
+          <div class="argument-icon">
+            <img :src="trustArgument.image" class="argument-image" />
+          </div>
           <div class="argument-details">
             <TitleBlock
               :title="trustArgument.title"
@@ -107,7 +109,7 @@ onMounted(() => {
 }
 
 .arguments-scroll {
-  overflow-x: scroll;
+  overflow-x: auto;
   width: 100vw;
   display: flex;
 }
@@ -133,17 +135,22 @@ onMounted(() => {
   grid-template-rows: 1fr 1fr;
   align-items: center;
   padding: 2rem;
-  border-radius: 0.375rem;
+  border-radius: 2rem;
   opacity: 0;
 }
 
 .argument-icon {
   width: 25%;
   height: v-bind("`calc((${cardWidth} - 4rem) * 0.25`");
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 50%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.argument-image {
+  filter: invert(100%);
+  opacity: 0.8;
+  width: 100%;
+  height: 100%;
 }
 
 .important-footer {
@@ -161,13 +168,16 @@ onMounted(() => {
 @keyframes words-slide-left {
   0% {
     transform: scale(0.6);
+    box-shadow: rgb(0 0 0 / 60%) 0px 0.15rem 0.6rem;
     opacity: 0;
   }
   70% {
     transform: scale(1.1);
+    box-shadow: rgb(0 0 0 / 15%) 0px 0.4rem 1.2rem;
   }
   100% {
     transform: scale(1);
+    box-shadow: rgb(0 0 0 / 20%) 0px 0.313rem 0.938rem;
     opacity: 1;
   }
 }

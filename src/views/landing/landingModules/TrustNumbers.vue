@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted } from "vue";
+import { getBreakpoint, Breakpoint } from "../../../utils/breakpoints";
+
 import TypographyTitle from "../../../components/utils/TypographyTitle.vue";
 import TypographyText from "../../../components/utils/TypographyText.vue";
 
@@ -23,10 +26,16 @@ const statistics = [
     details: "Followers",
   },
 ];
+
+const breakpoint = getBreakpoint(onMounted, onUnmounted);
 </script>
 
 <template>
-  <div class="container">
+  <div
+    :class="`container ${
+      breakpoint < Breakpoint.SM ? 'numbers-small' : 'numbers-large'
+    }`"
+  >
     <TypographyTitle :level="3" size="big">{{
       t("title.main")
     }}</TypographyTitle>
@@ -50,8 +59,6 @@ const statistics = [
 <style scoped>
 .container {
   display: grid;
-  grid-template-columns: 4fr 5fr;
-  column-gap: 15%;
   padding: 6.25rem 0;
 }
 
@@ -60,12 +67,23 @@ const statistics = [
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  gap: 2rem;
 }
 
 .statistic {
   display: grid;
   grid-template-rows: 1fr 1fr;
   row-gap: 20%;
+}
+
+.numbers-small {
+  grid-template-rows: 1fr 1fr;
+  row-gap: 20%;
+}
+
+.numbers-large {
+  grid-template-columns: 4fr 5fr;
+  column-gap: 15%;
 }
 
 .stats-details {
