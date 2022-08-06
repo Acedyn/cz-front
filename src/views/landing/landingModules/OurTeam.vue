@@ -4,7 +4,7 @@ import TypographyText from "../../../components/utils/TypographyText.vue";
 import SimpleButton from "../../../components/interaction/SimpleButton.vue";
 
 import { useI18n } from "vue-i18n";
-import locales from "./outTeamLocales.json";
+import locales from "./ourTeamLocales.json";
 
 const { t } = useI18n({
   messages: locales,
@@ -14,18 +14,22 @@ const teamMembers = [
   {
     name: "John doe",
     image: "https://dummyimage.com/650x540/ffecd6/aaa",
+    job: t("johndoe.job"),
   },
   {
     name: "John doe",
     image: "https://dummyimage.com/650x540/ffecd6/aaa",
+    job: t("johndoe.job"),
   },
   {
     name: "John doe",
     image: "https://dummyimage.com/650x540/ffecd6/aaa",
+    job: t("johndoe.job"),
   },
   {
     name: "John doe",
     image: "https://dummyimage.com/650x540/ffecd6/aaa",
+    job: t("johndoe.job"),
   },
 ];
 
@@ -38,18 +42,25 @@ const cardAspectRatio = 1.8;
     <TitleBlock :title="t('title.main')" maxWidth="34rem">
       <p>{{ t("title.details") }}</p>
     </TitleBlock>
-    <div class="member-cards">
-      <div
-        v-for="(teamMember, index) in teamMembers"
-        :key="index"
-        class="member-card"
-      >
-        <div class="member-image"></div>
-        <div class="argument-details">
-          <TypographyText color="var(--global-color-primary)" weight="bold">
-            {{ teamMember.name }}
-          </TypographyText>
-          <SimpleButton textSize="small">Follow</SimpleButton>
+    <div class="members-scroll">
+      <div class="member-cards">
+        <div
+          v-for="(teamMember, index) in teamMembers"
+          :key="index"
+          class="member-card"
+        >
+          <div class="member-image"></div>
+          <div class="argument-details">
+            <TypographyText color="var(--global-color-primary)" weight="bold">
+              {{ teamMember.name }}
+            </TypographyText>
+            <TypographyText color="var(--global-color-disable)">
+              {{ teamMember.job }}
+            </TypographyText>
+            <SimpleButton color="var(--global-color-primary)" textSize="small"
+              >Follow</SimpleButton
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -64,11 +75,20 @@ const cardAspectRatio = 1.8;
   gap: 4.063rem;
 }
 
+.members-scroll {
+  overflow-x: scroll;
+  width: 100vw;
+  display: flex;
+}
+
 .member-cards {
+  padding: 0 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 3rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .member-card {
@@ -83,7 +103,7 @@ const cardAspectRatio = 1.8;
   grid-template-rows: 1fr 1fr;
   align-items: center;
   padding: 1rem 2rem;
-  border-radius: 0.313rem;
+  border-radius: 1.225rem;
 }
 
 .member-image {
@@ -97,7 +117,9 @@ const cardAspectRatio = 1.8;
 
 .argument-details {
   text-align: center;
-  display: grid;
-  grid-template-rows: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
 }
 </style>

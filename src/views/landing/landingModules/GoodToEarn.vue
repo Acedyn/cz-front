@@ -37,7 +37,7 @@ const isRightArgument = (index: number) => {
 
 <template>
   <div
-    :class="`container ${breakpoint < Breakpoint.MD ? 'container-small' : ''}`"
+    :class="`container ${breakpoint < Breakpoint.LD ? 'container-small' : ''}`"
   >
     <TitleBlock :title="t('title.main')" maxWidth="34rem">
       <p>{{ t("title.details") }}</p>
@@ -45,7 +45,7 @@ const isRightArgument = (index: number) => {
 
     <div
       :class="`argument ${
-        breakpoint < Breakpoint.LD ? 'argument-small' : 'argument-large'
+        breakpoint < Breakpoint.SM ? 'argument-small' : 'argument-large'
       }`"
       v-for="(argument, index) in goodToEarnArguments"
       :key="index"
@@ -53,14 +53,14 @@ const isRightArgument = (index: number) => {
       <img
         :src="argument.image"
         :class="`hero-image ${
-          index % 2 === 0 && breakpoint > Breakpoint.MD
+          index % 2 === 0 && breakpoint > Breakpoint.XS
             ? 'left-argument'
             : 'right-argument'
         }`"
       />
       <div
         :class="`argument-text ${
-          index % 2 === 0 && breakpoint > Breakpoint.MD
+          index % 2 === 0 && breakpoint > Breakpoint.XS
             ? 'right-argument'
             : 'left-argument'
         }`"

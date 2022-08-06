@@ -73,7 +73,7 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 5rem;
 }
 
 .details {

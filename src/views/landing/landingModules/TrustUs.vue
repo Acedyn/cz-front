@@ -62,9 +62,13 @@ const cardAspectRatio = 1.2;
         </div>
       </div>
     </div>
-    <TypographyText>
+    <TypographyText size="big">
       <p>
-        Community of +40.000<b class="important-footer">Cardboard Citizens</b>
+        Community of +40.000<a
+          href="https://magiceden.io/marketplace/cardboard_citizens"
+          class="important-footer"
+          >Cardboard Citizens</a
+        >
       </p>
     </TypographyText>
   </div>
@@ -82,6 +86,7 @@ const cardAspectRatio = 1.2;
 .arguments-scroll {
   overflow-x: scroll;
   width: 100vw;
+  display: flex;
 }
 
 .argument-cards {
@@ -89,6 +94,8 @@ const cardAspectRatio = 1.2;
   align-items: center;
   gap: 1.5rem;
   padding: 0 2rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .argument-card {
@@ -117,5 +124,6 @@ const cardAspectRatio = 1.2;
 .important-footer {
   color: var(--global-color-primary);
   padding: 0 0.5rem;
+  text-decoration: none;
 }
 </style>
