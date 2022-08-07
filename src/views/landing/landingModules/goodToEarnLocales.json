@@ -7,14 +7,17 @@
     "arguments": {
       "one": {
         "title": "Provide Accountability ",
+        "details_html": "We will work with profit and non-profit organizations to provide them ease of mind when doing good. This will be done with our protocols that allow a clear and effective accountability for their Social Actions. (Check our detailed roadmap) ",
         "details": "We will work with profit and non-profit organizations to provide them ease of mind when doing good. This will be done with our protocols that allow a clear and effective accountability for their Social Actions. (Check our detailed roadmap) "
       },
       "two": {
         "title": "Incentives for good actions",
+        "details_html": "The Community will have multiple activities that will allow them the opportunity to earn income for the good actions they take to participate in our Good 2 earn initiatives. This income will be in the shape of local claimable coupons, NFT, SOL, SPL tokens, allowing Visitors multiple venues into taking actions.",
         "details": "The Community will have multiple activities that will allow them the opportunity to earn income for the good actions they take to participate in our Good 2 earn initiatives. This income will be in the shape of local claimable coupons, NFT, SOL, SPL tokens, allowing Visitors multiple venues into taking actions."
       },
       "three": {
         "title": "The Community though our Protocols",
+        "details_html": "Citizens are NFT Holders, and Visitors are Potential Citizens.\nCitizens are the parties involved in operations of Cardboard Citizens web3 validation on our Solana smart contracts. Holders will be responsible for most of the web3 and blockchain responsibilities along the way.\nThese will be done by using their NFT token as their voting/validation weight to interact on key aspects along the journey of the project.",
         "details": "Citizens are NFT Holders, and Visitors are Potential Citizens.\nCitizens are the parties involved in operations of Cardboard Citizens web3 validation on our Solana smart contracts. Holders will be responsible for most of the web3 and blockchain responsibilities along the way.\nThese will be done by using their NFT token as their voting/validation weight to interact on key aspects along the journey of the project."
       }
     }

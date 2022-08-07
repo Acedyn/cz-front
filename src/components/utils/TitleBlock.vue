@@ -12,6 +12,7 @@ const props = withDefaults(
     titleLevel?: number;
     titleColor?: string;
     textSize?: "small" | "regular" | "big";
+    textAlign?: "center" | "justify" | "left" | "right";
     textColor?: string;
     textAnimation?: "slide-up";
     maxWidth?: string;
@@ -19,6 +20,7 @@ const props = withDefaults(
     quotes?: boolean;
   }>(),
   {
+    textAlign: "center",
     gap: "1.063rem",
     textSize: "big",
     titleSize: "big",
@@ -82,7 +84,7 @@ onMounted(() => {
   align-items: center;
   gap: v-bind("props.gap");
   max-width: v-bind("props.maxWidth");
-  text-align: center;
+  text-align: v-bind("props.textAlign");
 }
 
 .title-words {

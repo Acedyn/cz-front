@@ -24,18 +24,22 @@ const navButtons = [
   {
     name: t("buttons.home"),
     click: () => router.push("/"),
+    soon: false,
   },
   {
     name: t("buttons.world"),
     click: () => router.push("/immersion"),
+    soon: false,
   },
   {
     name: t("buttons.tools"),
     click: () => router.push("/"),
+    soon: true,
   },
   {
     name: t("buttons.market"),
     click: () => router.push("/marketplace"),
+    soon: false,
   },
 ];
 
@@ -74,7 +78,8 @@ const togglePanel = () => {
       </div>
       <nav class="menu">
         <button
-          class="nav-button"
+          class="nav-button toto"
+          :tooltip="navButton.soon ? 'Comming soon' : undefined"
           v-for="(navButton, index) in navButtons"
           :key="index"
           @click="navButton.click"
@@ -242,5 +247,33 @@ const togglePanel = () => {
 
   color: white;
   font-size: 4rem;
+}
+
+*[tooltip]:before {
+  content: attr(tooltip);
+  transform: scale(0);
+  transition: transform ease-out 100ms;
+  background-color: #000;
+  color: #fff;
+  right: 100%;
+  position: absolute;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+
+  background: var(--global-color-dark);
+  text-transform: uppercase;
+  font-weight: bolder;
+  color: #efd7bc;
+  font-family: BlockHeadUnplugged;
+  font-size: 1rem;
+  width: 10rem;
+  text-align: center;
+  top: 120%;
+  left: -100%;
+  z-index: 50;
+}
+*[tooltip]:hover:before {
+  transform: scale(1);
 }
 </style>

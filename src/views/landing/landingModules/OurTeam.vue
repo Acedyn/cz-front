@@ -2,7 +2,6 @@
 import { ref, onMounted } from "vue";
 import TitleBlock from "../../../components/utils/TitleBlock.vue";
 import TypographyText from "../../../components/utils/TypographyText.vue";
-import SimpleButton from "../../../components/interaction/SimpleButton.vue";
 
 import { useI18n } from "vue-i18n";
 import locales from "./ourTeamLocales.json";
@@ -13,32 +12,36 @@ const { t } = useI18n({
 
 const teamMembers = [
   {
-    name: "John doe",
-    description: t("johndoe.description"),
-    image: "https://dummyimage.com/650x540/ffecd6/aaa",
-    job: t("johndoe.job"),
+    name: "Willie",
+    description: t("willie.description"),
+    image: new URL("/src/assets/landing/members/willie.jpg", import.meta.url)
+      .href,
+    job: t("willie.job"),
+    jobIcon: "build",
+  },
+  {
+    name: "Modsiw",
+    description: t("modsiw.description"),
+    image: new URL("/src/assets/landing/members/modsiw.jpg", import.meta.url)
+      .href,
+    job: t("modsiw.job"),
+    jobIcon: "local_florist",
+  },
+  {
+    name: "Steven",
+    description: t("steven.description"),
+    image: new URL("/src/assets/landing/members/steven.jpg", import.meta.url)
+      .href,
+    job: t("steven.job"),
     jobIcon: "palette",
   },
   {
-    name: "John doe",
-    description: t("johndoe.description"),
-    image: "https://dummyimage.com/650x540/ffecd6/aaa",
-    job: t("johndoe.job"),
-    jobIcon: "palette",
-  },
-  {
-    name: "John doe",
-    description: t("johndoe.description"),
-    image: "https://dummyimage.com/650x540/ffecd6/aaa",
-    job: t("johndoe.job"),
-    jobIcon: "palette",
-  },
-  {
-    name: "John doe",
-    description: t("johndoe.description"),
-    image: "https://dummyimage.com/650x540/ffecd6/aaa",
-    job: t("johndoe.job"),
-    jobIcon: "palette",
+    name: "Serge",
+    description: t("serge.description"),
+    image: new URL("/src/assets/landing/members/serge.jpg", import.meta.url)
+      .href,
+    job: t("serge.job"),
+    jobIcon: "memory",
   },
 ];
 
@@ -83,7 +86,7 @@ onMounted(() => {
           :style="`--i:${index}`"
           class="member-card"
         >
-          <div class="member-image"></div>
+          <span class="member-image" :class="teamMember.name.toLowerCase()" />
           <div class="argument-details">
             <div class="member-name">
               <TypographyText
@@ -106,7 +109,7 @@ onMounted(() => {
               </TypographyText>
             </div>
             <span class="line-separator" />
-            <TypographyText color="var(--global-color-primary)">
+            <TypographyText color="var(--global-color-dark)">
               {{ teamMember.description }}
             </TypographyText>
           </div>
@@ -160,9 +163,10 @@ onMounted(() => {
 }
 
 .member-image {
+  background-size: cover;
+  background-position: center;
   width: 100%;
   height: v-bind("`calc(${cardWidth} * 0.92 - 4rem)`");
-  background: rgba(226, 156, 116, 0.35);
   border-radius: 0.625rem;
   margin-left: auto;
   margin-right: auto;
@@ -203,6 +207,23 @@ onMounted(() => {
   animation: words-slide-left 0.4s ease-out;
   animation-delay: calc(0.1s * var(--i));
   animation-fill-mode: forwards;
+}
+
+.modsiw {
+  background-size: cover;
+  background-image: url(@/assets/landing/members/modsiw.jpg);
+}
+
+.willie {
+  background-image: url(@/assets/landing/members/willie.jpg);
+}
+
+.steven {
+  background-image: url(@/assets/landing/members/steven.jpg);
+}
+
+.serge {
+  background-image: url(@/assets/landing/members/serge.jpg);
 }
 
 @keyframes words-slide-left {

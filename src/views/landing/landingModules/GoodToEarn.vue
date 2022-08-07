@@ -14,17 +14,17 @@ const goodToEarnArguments = [
   {
     title: t("arguments.one.title"),
     details: t("arguments.one.details"),
-    image: "https://dummyimage.com/650x540/ffecd6/aaa",
+    image: new URL(`/src/assets/landing/frames/frame_03.png`, import.meta.url),
   },
   {
     title: t("arguments.two.title"),
     details: t("arguments.two.details"),
-    image: "https://dummyimage.com/650x540/ffecd6/aaa",
+    image: new URL(`/src/assets/landing/frames/frame_02.png`, import.meta.url),
   },
   {
     title: t("arguments.three.title"),
     details: t("arguments.three.details"),
-    image: "https://dummyimage.com/650x540/ffecd6/aaa",
+    image: new URL(`/src/assets/landing/frames/frame_01.png`, import.meta.url),
   },
 ];
 
@@ -68,7 +68,7 @@ onMounted(() => {
     >
       <img
         ref="frames"
-        src="@/assets/landing/frame.png"
+        :src="argument.image.href"
         :class="`hero-image ${
           index % 2 === 0 && breakpoint > Breakpoint.XS
             ? 'left-argument left-frame'
@@ -83,13 +83,14 @@ onMounted(() => {
         }`"
       >
         <TitleBlock
+          textAlign="justify"
           :title="argument.title"
           :titleAnimation="
             index % 2 === 0 ? 'words-slide-left' : 'words-slide-right'
           "
           textAnimation="slide-up"
           titleSize="regular"
-          textSize="regular"
+          textSize="big"
           :titleLevel="3"
           gap="1.875rem"
         >

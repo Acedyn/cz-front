@@ -54,9 +54,11 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
       </div>
       <div class="join">
         <TypographyText weight="light">{{ t("join.title") }}</TypographyText>
-        <TypographyText size="small" weight="light">{{
-          t("join.text")
-        }}</TypographyText>
+        <TypographyText size="small" weight="light"
+          >{{
+          <a>t("join.text")</a>
+          }}</TypographyText
+        >
       </div>
     </div>
     <div class="copyright">

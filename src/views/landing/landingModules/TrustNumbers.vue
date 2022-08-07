@@ -22,10 +22,10 @@ const statistics = [
   },
   {
     value: 0,
-    end: 10,
+    end: 80,
     suffix: "K+",
     data: ref("0K+"),
-    details: "Trading volume",
+    details: "Trading volume (SOL)",
   },
   {
     value: 0,

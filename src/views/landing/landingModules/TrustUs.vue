@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import TitleBlock from "../../../components/utils/TitleBlock.vue";
-import TypographyText from "../../../components/utils/TypographyText.vue";
 
 import { useI18n } from "vue-i18n";
 import locales from "./trustUsLocales.json";
@@ -13,21 +12,25 @@ const { t } = useI18n({
 const trustArguments = [
   {
     title: t("arguments.one.title"),
+    name: "humain",
     details: t("arguments.one.details"),
-    image: new URL("/src/assets/logos/rocket.png", import.meta.url).href,
+    image: new URL("/src/assets/logos/humain.png", import.meta.url).href,
   },
   {
     title: t("arguments.two.title"),
+    name: "environment",
     details: t("arguments.two.details"),
-    image: new URL("/src/assets/logos/user.png", import.meta.url).href,
+    image: new URL("/src/assets/logos/environment.png", import.meta.url).href,
   },
   {
     title: t("arguments.three.title"),
+    name: "innovation",
     details: t("arguments.three.details"),
-    image: new URL("/src/assets/logos/planet.png", import.meta.url).href,
+    image: new URL("/src/assets/logos/innovation.png", import.meta.url).href,
   },
   {
     title: t("arguments.four.title"),
+    name: "art",
     details: t("arguments.four.details"),
     image: new URL("/src/assets/logos/art.png", import.meta.url).href,
   },
@@ -75,13 +78,16 @@ onMounted(() => {
           class="argument-card"
         >
           <div class="argument-icon">
-            <img :src="trustArgument.image" class="argument-image" />
+            <img
+              :src="trustArgument.image"
+              :class="`argument-image ${trustArgument.name}`"
+            />
           </div>
           <TitleBlock
             :title="trustArgument.title"
             titleWordSize="1.235rem"
             titleSize="small"
-            titleColor="rgba(0, 0, 0, 0.2)"
+            titleColor="var(--global-color-primary)"
             textSize="regular"
           >
             {{ trustArgument.details }}
@@ -89,15 +95,6 @@ onMounted(() => {
         </div>
       </div>
     </div>
-    <TypographyText size="big">
-      <p>
-        Community of +40.000<a
-          href="https://magiceden.io/marketplace/cardboard_citizens"
-          class="important-footer"
-          >Cardboard Citizens</a
-        >
-      </p>
-    </TypographyText>
   </div>
 </template>
 
@@ -131,30 +128,40 @@ onMounted(() => {
   min-width: v-bind("cardWidth");
   width: v-bind("cardWidth");
   height: v-bind("`calc(${cardWidth} * ${cardAspectRatio})`");
-  background: var(--global-color-primary);
+  background: rgba(0, 0, 0, 0.1);
+  border: solid 0.3rem var(--global-color-primary);
 
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2.063rem;
   justify-content: center;
-  padding: 3.063rem;
+  padding: 0 1.5rem;
   border-radius: 2rem;
   opacity: 0;
 }
 
 .argument-icon {
   width: 25%;
-  height: v-bind("`calc((${cardWidth} - 5.063rem) * 0.25`");
+  height: v-bind("`calc((${cardWidth} - 3rem) * 0.25`");
   margin-left: auto;
   margin-right: auto;
 }
 
 .argument-image {
-  filter: invert(100%);
   opacity: 0.8;
+  transform: scale(1.5);
   width: 100%;
   height: 100%;
+}
+
+.humain,
+.art {
+  transform: scale(2);
+}
+
+.innovation {
+  transform: scale(2.5);
 }
 
 .important-footer {
