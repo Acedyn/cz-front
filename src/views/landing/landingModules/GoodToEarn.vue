@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { getBreakpoint, Breakpoint } from "../../../utils/breakpoints";
 import TitleBlock from "../../../components/utils/TitleBlock.vue";
 
@@ -29,6 +29,28 @@ const goodToEarnArguments = [
 ];
 
 const breakpoint = getBreakpoint(onMounted, onUnmounted);
+
+const frames = ref<Element[]>();
+
+onMounted(() => {
+  if (!frames.value) {
+    return;
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      console.log(entry);
+      if (entry.isIntersecting) {
+        entry.target.classList.add(`animation-frame`);
+      } else if (entry.boundingClientRect.top > 0) {
+        entry.target.classList.remove(`animation-frame`);
+      }
+    });
+  });
+
+  frames.value.forEach((frame) => {
+    observer.observe(frame);
+  });
+});
 </script>
 
 <template>
@@ -47,11 +69,12 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
       :key="index"
     >
       <img
-        :src="argument.image"
+        ref="frames"
+        src="@/assets/landing/frame.png"
         :class="`hero-image ${
           index % 2 === 0 && breakpoint > Breakpoint.XS
-            ? 'left-argument'
-            : 'right-argument'
+            ? 'left-argument left-frame'
+            : 'right-argument right-frame'
         }`"
       />
       <div
@@ -107,11 +130,29 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
   gap: 2.313rem;
 }
 
+.image-frame {
+  position: absolute;
+}
+
 .hero-image {
   width: 100%;
   object-fit: contain;
   border-radius: 1.5rem;
-  opacity: 0.1;
+  filter: drop-shadow(2px 13px 15px rgba(0, 0, 0, 0.3));
+  transform-origin: top;
+  transition: 0.5s ease-out;
+}
+
+.left-frame {
+  transform: rotate(20deg);
+}
+
+.right-frame {
+  transform: rotate(-20deg);
+}
+
+.animation-frame {
+  transform: rotate(0deg);
 }
 
 .argument-text {

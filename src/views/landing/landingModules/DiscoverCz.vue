@@ -25,14 +25,8 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
         <TypographyTitle size="big" :level="1" :spacing="1.2">
           {{ t("mainText.discover") }}
         </TypographyTitle>
-        <TypographyText :spacing="1.2">
+        <TypographyText :spacing="1.2" size="big">
           <p>{{ t("mainText.detailsOne") }}</p>
-        </TypographyText>
-        <TypographyText :spacing="1.2">
-          <p>{{ t("mainText.detailsTwo") }}</p>
-        </TypographyText>
-        <TypographyText :spacing="1.2">
-          <p>{{ t("mainText.detailsThree") }}</p>
         </TypographyText>
       </div>
       <div class="cta-buttons">

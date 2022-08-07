@@ -36,7 +36,7 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
       breakpoint < Breakpoint.SM ? 'numbers-small' : 'numbers-large'
     }`"
   >
-    <TypographyTitle :level="3" size="big"
+    <TypographyTitle :level="3" size="big" class="trust-title"
       ><p class="trust-title">{{ t("title.main") }}</p></TypographyTitle
     >
     <div class="statistics">
@@ -63,6 +63,8 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
 }
 
 .trust-title {
+  display: flex;
+  align-items: center;
   font-size: 3.75rem;
 }
 
@@ -72,12 +74,15 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .statistic {
   display: grid;
   grid-template-rows: 1fr 1fr;
   row-gap: 20%;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .numbers-small {

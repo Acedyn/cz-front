@@ -65,7 +65,7 @@ const togglePanel = () => {
         <img class="main-logo" src="@/assets/logos/brand_logo.png" />
         <TypographyText size="big" color="white" font="Poppins" weight="bold"
           ><p class="menu-button" @click="navButtons[0].click">
-            Cardboard Citizens
+            Cardboard <br />Citizens
           </p></TypographyText
         >
       </div>
@@ -86,6 +86,7 @@ const togglePanel = () => {
     </div>
     <div class="header-right header-sides" v-if="isCollapsed">
       <LanguagePicker />
+      <!--
       <button class="signin-button">
         <span class="material-icons signin-icon"> person </span>
         <TypographyText size="big" weight="bold" font="Poppins" color=""
@@ -94,13 +95,13 @@ const togglePanel = () => {
           </p></TypographyText
         >
       </button>
+      -->
     </div>
 
     <div class="collaped-header" v-else>
       <button class="collapsed-button" @click="togglePanel">
-        <span class="material-icons" :style="{ fontSize: 'inherit' }"
-          >menu</span
-        >
+        <span class="material-icons" :style="{ fontSize: '5rem' }">menu</span>
+        <img class="colapsed-logo" src="@/assets/logos/brand_logo.png" />
       </button>
     </div>
 
@@ -150,6 +151,13 @@ const togglePanel = () => {
 }
 
 .main-logo {
+  filter: invert(100%) brightness(200%);
+  height: 7rem;
+  object-fit: contain;
+}
+
+.colapsed-logo {
+  padding: 0 1rem;
   filter: invert(100%) brightness(200%);
   height: 5rem;
   object-fit: contain;
