@@ -4,10 +4,21 @@
       "main": "Our Team",
       "details": "To get a closer look to waht make Cardboard Citizens so great !"
     },
-    "johndoe": {
+    "willie": {
+      "job": "Builder",
+      "description": "With an engineer background, Willie is a becoming leader in developing project and community in Web3."
+    },
+    "modsiw": {
+      "job": "Nerd",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus ipsum viverra etiam."
+    },
+    "steven": {
       "job": "Artist",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus ipsum viverra etiam.",
-      "tag": "CrazyGuy"
+      "description": "Experienced graphic designer, Kodaz has a deep interest in characters illustration."
+    },
+    "serge": {
+      "job": "Developer",
+      "description": "A deeply experienced web developper, Serge codes as he breathes."
     }
   },
   "fr": {

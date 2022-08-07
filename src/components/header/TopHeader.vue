@@ -6,6 +6,8 @@ import TopHeaderPanel from "./TopHeaderPanel.vue";
 import { useRoute, onBeforeRouteLeave } from "vue-router";
 import { getBreakpoint, Breakpoint } from "../../utils/breakpoints";
 import { ref, computed, onMounted, onUnmounted } from "vue";
+import { usePreferencesStore } from "../../stores/preferences";
+import { storeToRefs } from "pinia";
 import router from "@/router";
 
 import { useI18n } from "vue-i18n";
@@ -15,24 +17,29 @@ const { t } = useI18n({
   messages: locales,
 });
 
-const collapsed = ref(false);
+const preferences = usePreferencesStore();
+const { headerCollapse } = storeToRefs(preferences);
 
 const navButtons = [
   {
     name: t("buttons.home"),
     click: () => router.push("/"),
+    soon: false,
   },
   {
     name: t("buttons.world"),
     click: () => router.push("/immersion"),
+    soon: false,
   },
   {
     name: t("buttons.tools"),
     click: () => router.push("/"),
+    soon: true,
   },
   {
     name: t("buttons.market"),
     click: () => router.push("/marketplace"),
+    soon: false,
   },
 ];
 
@@ -44,11 +51,11 @@ const buttonClass = (name: string) => {
 };
 
 onBeforeRouteLeave((to) => {
-  collapsed.value = !!to.meta.headerCollased;
+  headerCollapse.value = !!to.meta.headerCollased;
 });
 
 const isCollapsed = computed(() => {
-  return !collapsed.value && breakpoint.value > Breakpoint.SM;
+  return !headerCollapse.value && breakpoint.value > Breakpoint.SM;
 });
 
 const togglePanel = () => {
@@ -65,13 +72,14 @@ const togglePanel = () => {
         <img class="main-logo" src="@/assets/logos/brand_logo.png" />
         <TypographyText size="big" color="white" font="Poppins" weight="bold"
           ><p class="menu-button" @click="navButtons[0].click">
-            Cardboard Citizens
+            Cardboard <br />Citizens
           </p></TypographyText
         >
       </div>
       <nav class="menu">
         <button
-          class="nav-button"
+          class="nav-button toto"
+          :tooltip="navButton.soon ? 'Comming soon' : undefined"
           v-for="(navButton, index) in navButtons"
           :key="index"
           @click="navButton.click"
@@ -86,6 +94,7 @@ const togglePanel = () => {
     </div>
     <div class="header-right header-sides" v-if="isCollapsed">
       <LanguagePicker />
+      <!--
       <button class="signin-button">
         <span class="material-icons signin-icon"> person </span>
         <TypographyText size="big" weight="bold" font="Poppins" color=""
@@ -94,13 +103,13 @@ const togglePanel = () => {
           </p></TypographyText
         >
       </button>
+      -->
     </div>
 
     <div class="collaped-header" v-else>
       <button class="collapsed-button" @click="togglePanel">
-        <span class="material-icons" :style="{ fontSize: 'inherit' }"
-          >menu</span
-        >
+        <span class="material-icons" :style="{ fontSize: '5rem' }">menu</span>
+        <img class="colapsed-logo" src="@/assets/logos/brand_logo.png" />
       </button>
     </div>
 
@@ -150,6 +159,13 @@ const togglePanel = () => {
 }
 
 .main-logo {
+  filter: invert(100%) brightness(200%);
+  height: 7rem;
+  object-fit: contain;
+}
+
+.colapsed-logo {
+  padding: 0 1rem;
   filter: invert(100%) brightness(200%);
   height: 5rem;
   object-fit: contain;
@@ -231,5 +247,33 @@ const togglePanel = () => {
 
   color: white;
   font-size: 4rem;
+}
+
+*[tooltip]:before {
+  content: attr(tooltip);
+  transform: scale(0);
+  transition: transform ease-out 100ms;
+  background-color: #000;
+  color: #fff;
+  right: 100%;
+  position: absolute;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+
+  background: var(--global-color-dark);
+  text-transform: uppercase;
+  font-weight: bolder;
+  color: #efd7bc;
+  font-family: BlockHeadUnplugged;
+  font-size: 1rem;
+  width: 10rem;
+  text-align: center;
+  top: 120%;
+  left: -100%;
+  z-index: 50;
+}
+*[tooltip]:hover:before {
+  transform: scale(1);
 }
 </style>

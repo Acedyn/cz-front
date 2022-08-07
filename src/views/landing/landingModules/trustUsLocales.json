@@ -1,25 +1,25 @@
 {
   "en": {
     "title": {
-      "main": "Why trust us ?",
+      "main": "Our Values",
       "details": "To get a closer look to waht make Cardboard Citizens so great !"
     },
     "arguments": {
       "one": {
         "title": "Human",
-        "details": "We believe in treating others with respect, being understanding, patient and kind when it comes to human relations."
+        "details": "We believe in treating others with respect, love, patience and kindness.."
       },
       "two": {
         "title": "Social & Environment",
-        "details": "We are the next generation; we cannot stand by while our planet is being treated in a manner that is not sustainable on its current trajectory.. Our responsibility is to elevate people consciousness to face the biggest challenge of the century."
+        "details": "Earth is our home and we place it in the core of our initiatives. "
       },
       "three": {
         "title": "Innovation",
-        "details": "Through blockchain we can see the potential to change the daily life and habits of consumers around the world in a positive light. "
+        "details": "We innovate through the blockchain to bring solutions to the world."
       },
       "four": {
         "title": "Art",
-        "details": "Art is the best way to bring people together and convey ideas. For many, The Arts have been used to share beliefs, convey emotions, and create a sense of belonging."
+        "details": "Art is the best way to bring people together and convey ideas. "
       }
     }
   },

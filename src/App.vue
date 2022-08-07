@@ -28,7 +28,7 @@ const isSmall = computed(() => {
 .app-header {
   position: absolute;
   z-index: 10;
-  padding: 0 10.625rem;
+  padding: 0 2.815rem;
 }
 
 .app-header-small {

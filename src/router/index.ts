@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LandingView from "@/views/landing/LandingView.vue";
+import { usePreferencesStore } from "../stores/preferences";
 
 import immersionRoute from "./immersionRoutes";
 
@@ -10,6 +11,10 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: LandingView,
+      beforeEnter() {
+        const preferences = usePreferencesStore();
+        preferences.setHeaderCollapse(false);
+      }
     },
     {
       path: "/marketplace",

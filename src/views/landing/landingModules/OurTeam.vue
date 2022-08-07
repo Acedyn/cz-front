@@ -2,7 +2,11 @@
 import { ref, onMounted } from "vue";
 import TitleBlock from "../../../components/utils/TitleBlock.vue";
 import TypographyText from "../../../components/utils/TypographyText.vue";
-import SimpleButton from "../../../components/interaction/SimpleButton.vue";
+
+import willie from "@/assets/landing/members/willie.jpg";
+import modsiw from "@/assets/landing/members/modsiw.jpg";
+import steven from "@/assets/landing/members/steven.jpg";
+import serge from "@/assets/landing/members/serge.jpg";
 
 import { useI18n } from "vue-i18n";
 import locales from "./ourTeamLocales.json";
@@ -13,36 +17,32 @@ const { t } = useI18n({
 
 const teamMembers = [
   {
-    name: "John doe",
-    tag: t("johndoe.tag"),
-    description: t("johndoe.description"),
-    image: "https://dummyimage.com/650x540/ffecd6/aaa",
-    job: t("johndoe.job"),
+    name: "Willie",
+    description: t("willie.description"),
+    image: willie,
+    job: t("willie.job"),
+    jobIcon: "build",
+  },
+  {
+    name: "Modsiw",
+    description: t("modsiw.description"),
+    image: modsiw,
+    job: t("modsiw.job"),
+    jobIcon: "local_florist",
+  },
+  {
+    name: "Steven",
+    description: t("steven.description"),
+    image: steven,
+    job: t("steven.job"),
     jobIcon: "palette",
   },
   {
-    name: "John doe",
-    tag: t("johndoe.tag"),
-    description: t("johndoe.description"),
-    image: "https://dummyimage.com/650x540/ffecd6/aaa",
-    job: t("johndoe.job"),
-    jobIcon: "palette",
-  },
-  {
-    name: "John doe",
-    tag: t("johndoe.tag"),
-    description: t("johndoe.description"),
-    image: "https://dummyimage.com/650x540/ffecd6/aaa",
-    job: t("johndoe.job"),
-    jobIcon: "palette",
-  },
-  {
-    name: "John doe",
-    tag: t("johndoe.tag"),
-    description: t("johndoe.description"),
-    image: "https://dummyimage.com/650x540/ffecd6/aaa",
-    job: t("johndoe.job"),
-    jobIcon: "palette",
+    name: "Serge",
+    description: t("serge.description"),
+    image: serge,
+    job: t("serge.job"),
+    jobIcon: "memory",
   },
 ];
 
@@ -87,18 +87,7 @@ onMounted(() => {
           :style="`--i:${index}`"
           class="member-card"
         >
-          <div class="member-image">
-            <div class="member-tag">
-              <TypographyText
-                color="white"
-                font="Poppins"
-                weight="bold"
-                size="regular"
-              >
-                {{ teamMember.tag }}
-              </TypographyText>
-            </div>
-          </div>
+          <span class="member-image" :class="teamMember.name.toLowerCase()" />
           <div class="argument-details">
             <div class="member-name">
               <TypographyText
@@ -121,15 +110,9 @@ onMounted(() => {
               </TypographyText>
             </div>
             <span class="line-separator" />
-            <TypographyText color="var(--global-color-disable)">
+            <TypographyText color="var(--global-color-dark)">
               {{ teamMember.description }}
             </TypographyText>
-            <SimpleButton
-              color="var(--global-color-primary)"
-              textSize="big"
-              class="follow-button"
-              >Follow</SimpleButton
-            >
           </div>
         </div>
       </div>
@@ -181,28 +164,19 @@ onMounted(() => {
 }
 
 .member-image {
+  background-size: cover;
+  background-position: center;
   width: 100%;
   height: v-bind("`calc(${cardWidth} * 0.92 - 4rem)`");
-  background: rgba(226, 156, 116, 0.35);
   border-radius: 0.625rem;
   margin-left: auto;
   margin-right: auto;
 }
 
-.member-tag {
-  border-radius: 0.1rem;
-  position: absolute;
-  top: 0.8rem;
-  left: 0.8rem;
-  width: fit-content;
-  padding: 0.2rem 1rem;
-  background: var(--global-color-primary);
-}
-
 .argument-details {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   gap: 1.063rem;
   width: 100%;
   flex-grow: 1;
@@ -234,6 +208,23 @@ onMounted(() => {
   animation: words-slide-left 0.4s ease-out;
   animation-delay: calc(0.1s * var(--i));
   animation-fill-mode: forwards;
+}
+
+.modsiw {
+  background-size: cover;
+  background-image: url(@/assets/landing/members/modsiw.jpg);
+}
+
+.willie {
+  background-image: url(@/assets/landing/members/willie.jpg);
+}
+
+.steven {
+  background-image: url(@/assets/landing/members/steven.jpg);
+}
+
+.serge {
+  background-image: url(@/assets/landing/members/serge.jpg);
 }
 
 @keyframes words-slide-left {

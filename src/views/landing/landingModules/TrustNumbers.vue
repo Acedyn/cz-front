@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { getBreakpoint, Breakpoint } from "../../../utils/breakpoints";
 
 import TypographyTitle from "../../../components/utils/TypographyTitle.vue";
@@ -14,20 +14,72 @@ const { t } = useI18n({
 
 const statistics = [
   {
-    data: "6767",
+    value: 0,
+    end: 6767,
+    suffix: "",
+    data: ref("0"),
     details: "NFTs Minted",
   },
   {
-    data: "10M+",
-    details: "Trading volume",
+    value: 0,
+    end: 80,
+    suffix: "K+",
+    data: ref("0K+"),
+    details: "Trading volume (SOL)",
   },
   {
-    data: "1M+",
+    value: 0,
+    end: 40,
+    suffix: "K",
+    data: ref("0K"),
     details: "Followers",
   },
 ];
 
 const breakpoint = getBreakpoint(onMounted, onUnmounted);
+
+const counter = (stat: any, index: number) => {
+  stat.value = 0;
+  const duration = 800 + 200 * index; // Animate all counters equally for a better UX
+
+  const start = stat.value;
+  const end = stat.end;
+  if (start === end) return; // If equal values, stop here.
+
+  const range = end - start; // Get the range
+  let curr = start; // Set current at start position
+  const startTime = new Date();
+
+  const loop = () => {
+    const currentTime = new Date();
+    let raf = currentTime.getTime() - startTime.getTime();
+    if (raf > duration) raf = duration; // Stop the loop
+    const frac = raf / duration; // Get the time fraction
+    const step = frac * range; // Calculate the value step
+    curr = start + step; // Increment or Decrement current value
+    stat.data.value = Math.floor(curr).toString() + stat.suffix;
+    if (raf < duration) requestAnimationFrame(loop); // Loop
+  };
+
+  requestAnimationFrame(loop); // Start the loop!
+};
+
+const stats = ref<Element>();
+
+onMounted(() => {
+  if (!stats.value) {
+    return;
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        statistics.forEach(counter);
+      }
+    });
+  });
+
+  observer.observe(stats.value);
+});
 </script>
 
 <template>
@@ -36,17 +88,17 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
       breakpoint < Breakpoint.SM ? 'numbers-small' : 'numbers-large'
     }`"
   >
-    <TypographyTitle :level="3" size="big"
+    <TypographyTitle :level="3" size="big" class="trust-title"
       ><p class="trust-title">{{ t("title.main") }}</p></TypographyTitle
     >
-    <div class="statistics">
+    <div class="statistics" ref="stats">
       <div
         class="statistic"
         v-for="(statistic, index) in statistics"
         :key="index"
       >
         <TypographyTitle :level="5" size="big">{{
-          statistic.data
+          `${statistic.data.value}`
         }}</TypographyTitle>
         <TypographyText class="stats-details">{{
           statistic.details
@@ -63,6 +115,8 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
 }
 
 .trust-title {
+  display: flex;
+  align-items: center;
   font-size: 3.75rem;
 }
 
@@ -72,12 +126,15 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .statistic {
   display: grid;
   grid-template-rows: 1fr 1fr;
   row-gap: 20%;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .numbers-small {

@@ -61,7 +61,8 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
 }
 
 .landing-small {
-  padding: 3.125rem 5vw;
+  padding: 0 5vw;
+  align-items: center;
 }
 
 .module {

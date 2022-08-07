@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { getBreakpoint, Breakpoint } from "../../../utils/breakpoints";
 import TypographyTitle from "../../../components/utils/TypographyTitle.vue";
 import TypographyText from "../../../components/utils/TypographyText.vue";
@@ -16,30 +16,98 @@ const { t } = useI18n({
 
 const socialButtons = ["solana", "magiceden", "opensea"];
 const breakpoint = getBreakpoint(onMounted, onUnmounted);
+const slideIndex = ref(0);
+
+const images = ["01", "02", "03", "04", "05", "06", "07", "08", "09"].map(
+  (name) => {
+    return new URL(`/src/assets/landing/profile/${name}.png`, import.meta.url);
+  }
+);
+
+const nextSlide = () => {
+  slideIndex.value = (slideIndex.value + 1) % images.length;
+  setTimeout(nextSlide, 1000 * 3);
+};
+
+onMounted(() => {
+  nextSlide();
+});
 </script>
 
 <template>
   <div class="container">
-    <div class="details">
+    <div
+      :class="`details ${breakpoint <= Breakpoint.SM ? 'details-mobile' : ''}`"
+    >
       <div class="main-text">
         <TypographyTitle size="big" :level="1" :spacing="1.2">
           {{ t("mainText.discover") }}
         </TypographyTitle>
-        <TypographyText :spacing="1.2">
+
+        <div class="image-container" v-if="breakpoint <= Breakpoint.SM">
+          <img src="@/assets/landing/frame.png" class="slider-frame" />
+
+          <div class="paint-container">
+            <transition name="slide">
+              <img
+                :src="images[0].href"
+                class="hero-image"
+                v-if="slideIndex == 0"
+              />
+              <img
+                :src="images[1].href"
+                class="hero-image"
+                v-else-if="slideIndex == 1"
+              />
+              <img
+                :src="images[2].href"
+                class="hero-image"
+                v-else-if="slideIndex == 2"
+              />
+              <img
+                :src="images[3].href"
+                class="hero-image"
+                v-else-if="slideIndex == 3"
+              />
+              <img
+                :src="images[4].href"
+                class="hero-image"
+                v-else-if="slideIndex == 4"
+              />
+              <img
+                :src="images[5].href"
+                class="hero-image"
+                v-else-if="slideIndex == 5"
+              />
+              <img
+                :src="images[6].href"
+                class="hero-image"
+                v-else-if="slideIndex == 6"
+              />
+              <img
+                :src="images[7].href"
+                class="hero-image"
+                v-else-if="slideIndex == 7"
+              />
+              <img
+                :src="images[8].href"
+                class="hero-image"
+                v-else-if="slideIndex == 8"
+              />
+            </transition>
+          </div>
+        </div>
+        <TypographyText :spacing="1.2" size="big">
           <p>{{ t("mainText.detailsOne") }}</p>
-        </TypographyText>
-        <TypographyText :spacing="1.2">
-          <p>{{ t("mainText.detailsTwo") }}</p>
-        </TypographyText>
-        <TypographyText :spacing="1.2">
-          <p>{{ t("mainText.detailsThree") }}</p>
         </TypographyText>
       </div>
       <div class="cta-buttons">
         <CtaButton icon="public" @click="() => router.push('/immersion')"
           >World</CtaButton
         >
-        <CtaButton icon="handyman" invert>Tools</CtaButton>
+        <CtaButton icon="handyman" invert tooltip="Comming soon"
+          >Tools</CtaButton
+        >
       </div>
       <div class="trust">
         <TypographyText
@@ -62,7 +130,57 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
       </div>
     </div>
     <div class="image-container" v-if="breakpoint > Breakpoint.SM">
-      <img src="https://dummyimage.com/780x680/ffecd6/aaa" class="hero-image" />
+      <img src="@/assets/landing/frame.png" class="slider-frame" />
+
+      <div class="paint-container">
+        <transition name="slide">
+          <img
+            :src="images[0].href"
+            class="hero-image"
+            v-if="slideIndex == 0"
+          />
+          <img
+            :src="images[1].href"
+            class="hero-image"
+            v-else-if="slideIndex == 1"
+          />
+          <img
+            :src="images[2].href"
+            class="hero-image"
+            v-else-if="slideIndex == 2"
+          />
+          <img
+            :src="images[3].href"
+            class="hero-image"
+            v-else-if="slideIndex == 3"
+          />
+          <img
+            :src="images[4].href"
+            class="hero-image"
+            v-else-if="slideIndex == 4"
+          />
+          <img
+            :src="images[5].href"
+            class="hero-image"
+            v-else-if="slideIndex == 5"
+          />
+          <img
+            :src="images[6].href"
+            class="hero-image"
+            v-else-if="slideIndex == 6"
+          />
+          <img
+            :src="images[7].href"
+            class="hero-image"
+            v-else-if="slideIndex == 7"
+          />
+          <img
+            :src="images[8].href"
+            class="hero-image"
+            v-else-if="slideIndex == 8"
+          />
+        </transition>
+      </div>
     </div>
   </div>
 </template>
@@ -83,8 +201,14 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
   gap: 2.5rem;
 }
 
+.details-mobile {
+  max-width: 100%;
+  text-align: center;
+}
+
 .main-text {
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 1.313rem;
   max-width: 40.25rem;
@@ -96,18 +220,41 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
   gap: 1.25rem;
 }
 
-.image-container {
+.slider-frame {
+  position: absolute;
+  z-index: 50;
+  width: 100%;
   height: 100%;
+  filter: drop-shadow(2px 13px 15px rgba(0, 0, 0, 0.3));
+}
+
+.image-container {
+  border-radius: 1.25rem;
+  height: 45rem;
+  width: 45rem;
+  max-height: min(70vh, 70vw);
+  max-width: 70vw;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.paint-container {
+  overflow: hidden;
+  width: 85%;
+  height: 90%;
+  position: relative;
 }
 
 .hero-image {
+  position: absolute;
+  left: 0;
+  right: 0;
   width: 100%;
   height: 100%;
-  max-height: 70vh;
 
-  object-fit: contain;
-  border-radius: 1.25rem;
-  opacity: 0.1;
+  object-fit: cover;
 }
 
 .trust {
@@ -122,5 +269,44 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
   flex-direction: row;
   align-items: center;
   gap: 1rem;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: 0.5s ease;
+}
+
+.slide-enter-from {
+  transform: translate(100%);
+}
+.slide-leave-to {
+  transform: translate(-100%);
+}
+
+*[tooltip]:before {
+  content: attr(tooltip);
+  transform: scale(0);
+  transition: transform ease-out 100ms;
+  background-color: #000;
+  color: #fff;
+  right: 100%;
+  position: absolute;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+
+  background: var(--global-color-dark);
+  text-transform: uppercase;
+  font-weight: bolder;
+  color: #efd7bc;
+  font-family: BlockHeadUnplugged;
+  font-size: 1rem;
+  width: 10rem;
+  text-align: center;
+  left: 120%;
+  z-index: 50;
+}
+*[tooltip]:hover:before {
+  transform: scale(1);
 }
 </style>

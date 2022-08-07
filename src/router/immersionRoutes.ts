@@ -1,4 +1,5 @@
 import type { RouteLocationNormalized, NavigationGuardNext } from "vue-router";
+import { usePreferencesStore } from "../stores/preferences";
 
 import ImmersionView from "@/views/immersion/ImmersionView.vue";
 import PostOfficeView from "@/views/immersion/postOffice/PostOfficeView.vue";
@@ -8,11 +9,19 @@ import WarehouseView from "@/views/immersion/warehouse/WarehouseView.vue";
 export default {
   path: "/immersion",
   name: "immersion",
-  // beforeEnter(to: RouteLocationNormalized) {
-  //   if (to.name === "immersion") {
-  //     console.log("fkfk");
-  //   }
-  // },
+  beforeEnter(
+    to: RouteLocationNormalized,
+    from: RouteLocationNormalized,
+    next: NavigationGuardNext
+  ) {
+    const preferences = usePreferencesStore();
+    preferences.setHeaderCollapse(true);
+    if (to.name === "immersion") {
+      next({ name: "post-office" });
+    } else {
+      next();
+    }
+  },
   component: ImmersionView,
   children: [
     {
