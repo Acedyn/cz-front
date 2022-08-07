@@ -7,7 +7,7 @@ import { storeToRefs } from "pinia";
 const preferences = usePreferencesStore();
 const { theme } = storeToRefs(preferences);
 const transition = computed(() =>
-  theme.value.includes("dark") ? "fade-dark" : "fade"
+  theme.value.includes("dark") ? "fade-dark" : "fade-dark"
 );
 
 onBeforeMount(() => {

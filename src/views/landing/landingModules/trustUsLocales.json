@@ -6,8 +6,20 @@
     },
     "arguments": {
       "one": {
-        "title": "Member one",
-        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi morbi sit consectetur elit."
+        "title": "Human",
+        "details": "We believe in treating others with respect, being understanding, patient and kind when it comes to human relations."
+      },
+      "two": {
+        "title": "Social & Environment",
+        "details": "We are the next generation; we cannot stand by while our planet is being treated in a manner that is not sustainable on its current trajectory.. Our responsibility is to elevate people consciousness to face the biggest challenge of the century."
+      },
+      "three": {
+        "title": "Innovation",
+        "details": "Through blockchain we can see the potential to change the daily life and habits of consumers around the world in a positive light. "
+      },
+      "four": {
+        "title": "Art",
+        "details": "Art is the best way to bring people together and convey ideas. For many, The Arts have been used to share beliefs, convey emotions, and create a sense of belonging."
       }
     }
   },

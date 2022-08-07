@@ -17,18 +17,18 @@ const trustArguments = [
     image: new URL("/src/assets/logos/rocket.png", import.meta.url).href,
   },
   {
-    title: t("arguments.one.title"),
-    details: t("arguments.one.details"),
+    title: t("arguments.two.title"),
+    details: t("arguments.two.details"),
     image: new URL("/src/assets/logos/user.png", import.meta.url).href,
   },
   {
-    title: t("arguments.one.title"),
-    details: t("arguments.one.details"),
+    title: t("arguments.three.title"),
+    details: t("arguments.three.details"),
     image: new URL("/src/assets/logos/planet.png", import.meta.url).href,
   },
   {
-    title: t("arguments.one.title"),
-    details: t("arguments.one.details"),
+    title: t("arguments.four.title"),
+    details: t("arguments.four.details"),
     image: new URL("/src/assets/logos/art.png", import.meta.url).href,
   },
 ];
@@ -164,12 +164,12 @@ onMounted(() => {
 }
 
 .animation-card-popup .argument-card {
-  animation: words-slide-left 0.4s ease-out;
+  animation: card-slide-left 0.4s ease-out;
   animation-delay: calc(0.1s * var(--i));
   animation-fill-mode: forwards;
 }
 
-@keyframes words-slide-left {
+@keyframes card-slide-left {
   0% {
     transform: scale(0.6);
     box-shadow: rgb(0 0 0 / 60%) 0px 0.15rem 0.6rem;

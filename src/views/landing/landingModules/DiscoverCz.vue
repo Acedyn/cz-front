@@ -31,6 +31,9 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
         <TypographyText :spacing="1.2">
           <p>{{ t("mainText.detailsTwo") }}</p>
         </TypographyText>
+        <TypographyText :spacing="1.2">
+          <p>{{ t("mainText.detailsThree") }}</p>
+        </TypographyText>
       </div>
       <div class="cta-buttons">
         <CtaButton icon="public" @click="() => router.push('/immersion')"
@@ -49,10 +52,11 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
         <div class="social-buttons">
           <SocialButton
             invert
-            :social="socialButton"
+            :social="socialButton as 'solana'"
             :size="0.6"
             colorHover="var(--global-color-unavailable)"
-            v-for="socialButton in socialButtons"
+            v-for="(socialButton, index) in socialButtons"
+            :key="index"
           />
         </div>
       </div>

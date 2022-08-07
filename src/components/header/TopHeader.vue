@@ -4,7 +4,9 @@ import TypographyText from "../utils/TypographyText.vue";
 import LanguagePicker from "../interaction/LanguagePicker.vue";
 import TopHeaderPanel from "./TopHeaderPanel.vue";
 import { useRoute, onBeforeRouteLeave } from "vue-router";
-import { ref } from "vue";
+import { getBreakpoint, Breakpoint } from "../../utils/breakpoints";
+import { ref, computed, onMounted, onUnmounted } from "vue";
+import router from "@/router";
 
 import { useI18n } from "vue-i18n";
 import locales from "./topHeaderLocales.json";
@@ -18,58 +20,71 @@ const collapsed = ref(false);
 const navButtons = [
   {
     name: t("buttons.home"),
-    link: "https://google.com",
+    click: () => router.push("/"),
   },
   {
     name: t("buttons.world"),
-    link: "https://google.com",
+    click: () => router.push("/immersion"),
   },
   {
     name: t("buttons.tools"),
-    link: "https://google.com",
+    click: () => router.push("/"),
   },
   {
     name: t("buttons.market"),
-    link: "https://google.com",
+    click: () => router.push("/marketplace"),
   },
 ];
 
-const showPanel = ref(true);
+const showPanel = ref(false);
+const breakpoint = getBreakpoint(onMounted, onUnmounted);
 
 const buttonClass = (name: string) => {
   return `menu-button ${useRoute().name === name ? "button-current" : ""}`;
 };
 
 onBeforeRouteLeave((to) => {
-  console.log(to);
   collapsed.value = !!to.meta.headerCollased;
 });
+
+const isCollapsed = computed(() => {
+  return !collapsed.value && breakpoint.value > Breakpoint.SM;
+});
+
+const togglePanel = () => {
+  showPanel.value = !showPanel.value;
+};
 </script>
 
 <template>
-  <header class="header-container">
-    <div class="header-left header-sides" v-if="!collapsed">
+  <header
+    :class="`header-container ${isCollapsed ? '' : 'container-collapsed'}`"
+  >
+    <div class="header-left header-sides" v-if="isCollapsed">
       <div class="header-title">
         <img class="main-logo" src="@/assets/logos/brand_logo.png" />
         <TypographyText size="big" color="white" font="Poppins" weight="bold"
-          ><p class="menu-button">Cardboard Citizens</p></TypographyText
+          ><p class="menu-button" @click="navButtons[0].click">
+            Cardboard Citizens
+          </p></TypographyText
         >
       </div>
       <nav class="menu">
-        <TypographyText
-          size="big"
-          weight="bold"
-          font="Poppins"
-          color=""
+        <button
+          class="nav-button"
           v-for="(navButton, index) in navButtons"
           :key="index"
-          ><p :class="buttonClass(navButton.name.toLowerCase())">
-            {{ navButton.name }}
-          </p></TypographyText
+          @click="navButton.click"
         >
+          <TypographyText size="big" weight="bold" font="Poppins" color=""
+            ><p :class="buttonClass(navButton.name.toLowerCase())">
+              {{ navButton.name }}
+            </p></TypographyText
+          >
+        </button>
       </nav>
     </div>
-    <div class="header-right header-sides" v-if="!collapsed">
+    <div class="header-right header-sides" v-if="isCollapsed">
       <LanguagePicker />
       <button class="signin-button">
         <span class="material-icons signin-icon"> person </span>
@@ -82,12 +97,11 @@ onBeforeRouteLeave((to) => {
     </div>
 
     <div class="collaped-header" v-else>
-      <div class="header-title">
-        <img class="main-logo" src="@/assets/logos/brand_logo.png" />
-        <TypographyText size="big" color="white" font="Poppins" weight="bold"
-          ><p class="menu-button">Cardboard Citizens</p></TypographyText
+      <button class="collapsed-button" @click="togglePanel">
+        <span class="material-icons" :style="{ fontSize: 'inherit' }"
+          >menu</span
         >
-      </div>
+      </button>
     </div>
 
     <OverlayPopup
@@ -104,6 +118,10 @@ onBeforeRouteLeave((to) => {
 <style scoped>
 .header-container {
   width: 100%;
+}
+
+.container-collapsed {
+  width: fit-content;
 }
 
 .header-container,
@@ -143,6 +161,16 @@ onBeforeRouteLeave((to) => {
   flex-direction: row;
   gap: 1rem;
   justify-content: space-between;
+}
+
+.nav-button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
 
 .menu-button {
@@ -192,5 +220,16 @@ onBeforeRouteLeave((to) => {
 .signin-icon {
   color: var(--global-color-primary);
   font-size: 2rem;
+}
+
+.collapsed-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: inherit;
+
+  color: white;
+  font-size: 4rem;
 }
 </style>

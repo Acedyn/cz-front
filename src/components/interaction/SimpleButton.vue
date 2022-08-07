@@ -10,7 +10,6 @@ const props = withDefaults(
     textWeight?: "light" | "regular" | "bold";
   }>(),
   {
-    textWeight: "Poppins",
     textFont: "bold",
     color: "var(--global-color-primary)",
     colorHover: "var(--global-color-hover)",

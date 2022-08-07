@@ -1,12 +1,16 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted, computed } from "vue";
+import { getBreakpoint, Breakpoint } from "./utils/breakpoints";
 import TopHeader from "./components/header/TopHeader.vue";
-import { useRoute } from "vue-router";
 
-const router = useRoute();
+const breakpoint = getBreakpoint(onMounted, onUnmounted);
+const isSmall = computed(() => {
+  return breakpoint.value < Breakpoint.MD;
+});
 </script>
 
 <template>
-  <TopHeader class="app-header" />
+  <TopHeader :class="`app-header ${isSmall ? 'app-header-small' : ''}`" />
   <RouterView class="app-view" />
 </template>
 
@@ -24,7 +28,11 @@ const router = useRoute();
 .app-header {
   position: absolute;
   z-index: 10;
-  padding: 0 8.625rem;
+  padding: 0 10.625rem;
+}
+
+.app-header-small {
+  padding: 0 5vw;
 }
 
 .app-view {

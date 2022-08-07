@@ -15,7 +15,7 @@ const { t } = useI18n({
 const props = defineProps<{
   navButtons: {
     name: string;
-    link: string;
+    click: () => void;
   }[];
 }>();
 

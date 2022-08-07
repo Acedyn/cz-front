@@ -11,6 +11,16 @@ const router = createRouter({
       name: "home",
       component: LandingView,
     },
+    {
+      path: "/marketplace",
+      name: "maketplace",
+      component: () => {
+        return;
+      },
+      beforeEnter() {
+        location.href = "https://magiceden.io/marketplace/cardboard_citizens";
+      },
+    },
 
     immersionRoute,
   ],
