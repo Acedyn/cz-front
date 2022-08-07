@@ -1,0 +1,31 @@
+import TitleBlock from '../../components/utils/TitleBlock.vue'
+
+<Meta title="Utils/TitleBlock" component="{TitleBlock}" argTypes={{
+  size: { control: {type:"select", options: ["small", "regular", "big"] } } ,
+  weight: { control: {type:"select", options: ["light", "regular", "bold"] } } ,
+  titleColor: { control: "color" },
+}} />
+
+export const Template = (args) => ({
+  components: { TitleBlock },
+  setup() {
+    return { args };
+  },
+  template: '<TitleBlock v-bind="args"><p>{{args.content}}</p></TitleBlock>',
+});
+
+
+<Story
+  name="Primary"
+  args={{
+    title: "Main title",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor egestas proin integer sollicitudin tincidunt tellus.",
+    titleColor: "#e29d75"
+  }}>
+  {Template.bind({})}
+</Story>
+
+
+# TitleBlock system
+
+TitleBlock system uses accros the website.

@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LandingView from "@/views/landing/LandingView.vue";
-import ImmersionView from "@/views/immersion/ImmersionView.vue";
-import ToolsView from "@/views/tools/ToolsView.vue";
 
 import immersionRoute from "./immersionRoutes";
 
@@ -14,9 +12,14 @@ const router = createRouter({
       component: LandingView,
     },
     {
-      path: "/tools",
-      name: "tools",
-      component: ToolsView,
+      path: "/marketplace",
+      name: "maketplace",
+      component: () => {
+        return;
+      },
+      beforeEnter() {
+        location.href = "https://magiceden.io/marketplace/cardboard_citizens";
+      },
     },
 
     immersionRoute,

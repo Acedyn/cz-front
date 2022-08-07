@@ -1,15 +1,26 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted } from "vue";
+import { getBreakpoint, Breakpoint } from "../../utils/breakpoints";
+
 import DiscoverCz from "./landingModules/DiscoverCz.vue";
 import GoodToEarn from "./landingModules/GoodToEarn.vue";
 import TrustUs from "./landingModules/TrustUs.vue";
 import OurTeam from "./landingModules/OurTeam.vue";
 import TrustNumbers from "./landingModules/TrustNumbers.vue";
 import FooterSection from "./FooterSection.vue";
+import SeeMore from "./SeeMore.vue";
+
+const breakpoint = getBreakpoint(onMounted, onUnmounted);
 </script>
 
 <template>
   <div class="landing-view">
-    <div class="landing-modules">
+    <SeeMore />
+    <div
+      :class="`landing-modules ${
+        breakpoint < Breakpoint.MD ? 'landing-small' : ''
+      }`"
+    >
       <DiscoverCz class="discover-cz module" />
       <GoodToEarn class="good-to-earn module" />
       <TrustUs class="trust-us module" />
@@ -39,14 +50,18 @@ import FooterSection from "./FooterSection.vue";
   position: absolute;
 
   background: url("@/assets/landing/background.jpg");
-  background-size: 30rem;
+  background-size: 44rem;
 }
 
 .landing-modules {
-  padding: 3.125rem 5.313rem;
+  padding: 3.125rem 10.625rem;
   display: flex;
   flex-direction: column;
   gap: 3.125rem;
+}
+
+.landing-small {
+  padding: 3.125rem 5vw;
 }
 
 .module {
@@ -54,6 +69,6 @@ import FooterSection from "./FooterSection.vue";
 }
 
 .discover-cz {
-  height: calc(95vh - 3.125rem);
+  min-height: calc(100vh - 16rem);
 }
 </style>

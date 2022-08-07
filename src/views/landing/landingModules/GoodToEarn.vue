@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted } from "vue";
+import { getBreakpoint, Breakpoint } from "../../../utils/breakpoints";
 import TitleBlock from "../../../components/utils/TitleBlock.vue";
 
 import { useI18n } from "vue-i18n";
@@ -15,40 +17,61 @@ const goodToEarnArguments = [
     image: "https://dummyimage.com/650x540/ffecd6/aaa",
   },
   {
-    title: t("arguments.one.title"),
-    details: t("arguments.one.details"),
+    title: t("arguments.two.title"),
+    details: t("arguments.two.details"),
     image: "https://dummyimage.com/650x540/ffecd6/aaa",
   },
   {
-    title: t("arguments.one.title"),
-    details: t("arguments.one.details"),
-    image: "https://dummyimage.com/650x540/ffecd6/aaa",
-  },
-  {
-    title: t("arguments.one.title"),
-    details: t("arguments.one.details"),
+    title: t("arguments.three.title"),
+    details: t("arguments.three.details"),
     image: "https://dummyimage.com/650x540/ffecd6/aaa",
   },
 ];
+
+const breakpoint = getBreakpoint(onMounted, onUnmounted);
 </script>
 
 <template>
-  <div class="container">
+  <div
+    :class="`container ${breakpoint < Breakpoint.LD ? 'container-small' : ''}`"
+  >
     <TitleBlock :title="t('title.main')" maxWidth="34rem">
       <p>{{ t("title.details") }}</p>
     </TitleBlock>
 
     <div
-      class="argument"
+      :class="`argument ${
+        breakpoint < Breakpoint.SM ? 'argument-small' : 'argument-large'
+      }`"
       v-for="(argument, index) in goodToEarnArguments"
       :key="index"
     >
       <img
         :src="argument.image"
-        :class="`hero-image ${index % 2 === 0 ? '' : 'right-argument'}`"
+        :class="`hero-image ${
+          index % 2 === 0 && breakpoint > Breakpoint.XS
+            ? 'left-argument'
+            : 'right-argument'
+        }`"
       />
-      <div :class="`argument-text ${index % 2 === 0 ? 'right-argument' : ''}`">
-        <TitleBlock :title="argument.title" titleSize="regular" :titleLevel="3">
+      <div
+        :class="`argument-text ${
+          index % 2 === 0 && breakpoint > Breakpoint.XS
+            ? 'right-argument'
+            : 'left-argument'
+        }`"
+      >
+        <TitleBlock
+          :title="argument.title"
+          :titleAnimation="
+            index % 2 === 0 ? 'words-slide-left' : 'words-slide-right'
+          "
+          textAnimation="slide-up"
+          titleSize="regular"
+          textSize="regular"
+          :titleLevel="3"
+          gap="1.875rem"
+        >
           <p>{{ argument.details }}</p>
         </TitleBlock>
       </div>
@@ -65,20 +88,30 @@ const goodToEarnArguments = [
   gap: 5.625rem;
 }
 
+.container-small {
+  padding: 3.125rem 0vw;
+}
+
 .argument {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   grid-column-start: 1;
   grid-row-start: 1;
-  max-height: 50vh;
-  gap: 5.625rem;
+  gap: 1rem;
+}
+
+.argument-large {
+  grid-template-columns: 1fr 1fr;
+}
+
+.argument-small {
+  gap: 2.313rem;
 }
 
 .hero-image {
-  height: 50vh;
-
+  width: 100%;
   object-fit: contain;
-  border-radius: 1.25rem;
+  border-radius: 1.5rem;
+  opacity: 0.1;
 }
 
 .argument-text {
@@ -89,10 +122,24 @@ const goodToEarnArguments = [
   gap: 1.875rem;
   max-width: 90%;
   text-align: center;
+  justify-self: center;
+}
+
+.right-argument {
+  order: 1;
+  justify-self: start;
 }
 
 .right-argument {
   order: 1;
   justify-self: end;
+}
+
+.argument-details::before {
+  content: open-quote;
+}
+
+.argument-details::after {
+  content: open-quote;
 }
 </style>

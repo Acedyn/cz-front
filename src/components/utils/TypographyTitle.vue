@@ -7,8 +7,11 @@ const props = withDefaults(
     weight?: "bold" | "regular" | "light";
     level?: number;
     font?: string;
+    quotes?: boolean;
+    spacing?: number;
   }>(),
   {
+    spacing: 1,
     size: "regular",
     color: "var(--global-color-primary)",
     weight: "bold",
@@ -17,33 +20,35 @@ const props = withDefaults(
   }
 );
 
-const fontClass = computed(() => {
-  return `typographySize__${props.size} typographyWeight__${props.weight}`;
+const titleClass = computed(() => {
+  return `typographySize__${props.size} typographyWeight__${props.weight} ${
+    props.quotes ? "title-quotes" : ""
+  }`;
 });
 </script>
 
 <template>
   <div class="typography">
-    <h1 v-if="props.level === 1" :class="fontClass">
+    <h1 v-if="props.level === 1" :class="titleClass">
       <slot />
     </h1>
-    <h2 v-else-if="props.level === 2" :class="fontClass">
+    <h2 v-else-if="props.level === 2" :class="titleClass">
       <slot />
     </h2>
-    <h3 v-else-if="props.level === 3" :class="fontClass">
+    <h3 v-else-if="props.level === 3" :class="titleClass">
       <slot />
     </h3>
-    <h4 v-else-if="props.level === 4" :class="fontClass">
+    <h4 v-else-if="props.level === 4" :class="titleClass">
       <slot />
     </h4>
-    <h5 v-else-if="props.level === 5" :class="fontClass">
+    <h5 v-else-if="props.level === 5" :class="titleClass">
       <slot />
     </h5>
-    <h6 v-else-if="props.level === 6" :class="fontClass">
+    <h6 v-else-if="props.level === 6" :class="titleClass">
       <slot />
     </h6>
     <template v-else>
-      <slot :class="fontClass" />
+      <slot :class="titleClass" />
     </template>
   </div>
 </template>
@@ -51,17 +56,17 @@ const fontClass = computed(() => {
 <style scoped>
 .typographySize__small {
   font-size: 1.375rem;
-  line-height: 1.375rem;
+  line-height: v-bind("`calc(1.375rem * ${props.spacing})`");
 }
 
 .typographySize__regular {
   font-size: 2.75rem;
-  line-height: 2.75rem;
+  line-height: v-bind("`calc(2.75rem * ${props.spacing})`");
 }
 
 .typographySize__big {
   font-size: 4rem;
-  line-height: 4rem;
+  line-height: v-bind("`calc(4rem * ${props.spacing})`");
 }
 
 .typographyWeight__light {
@@ -79,5 +84,13 @@ const fontClass = computed(() => {
 .typography {
   color: v-bind("props.color");
   font-family: v-bind("props.font");
+}
+
+.title-quotes::before {
+  content: open-quote;
+}
+
+.title-quotes::after {
+  content: close-quote;
 }
 </style>

@@ -18,7 +18,6 @@ const fetchCitizens = async () => {
   try {
     citizens.value = await getOwnedCitizens();
   } catch (e) {
-    console.log(e);
     isError.value = true;
   } finally {
     isLoading.value = false;

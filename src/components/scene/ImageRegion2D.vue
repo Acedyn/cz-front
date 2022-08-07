@@ -165,6 +165,10 @@ onBeforeMount(() => {
 
 .hover-content {
   position: absolute;
+  padding-top: 10%;
+  min-width: 20rem;
+  margin-left: auto;
+  margin-right: auto;
   top: 0;
   left: 0;
   width: 100%;
@@ -185,8 +189,8 @@ onBeforeMount(() => {
 .hover-background {
   background: radial-gradient(
     closest-side,
-    rgba(0, 0, 0, 0.5) 30%,
-    rgba(0, 0, 0, 0)
+    rgba(103, 55, 11, 0.73) 40%,
+    rgba(102, 54, 10, 0)
   );
 
   transition: opacity 0.3s ease-out, background-size 0.1s ease-out;

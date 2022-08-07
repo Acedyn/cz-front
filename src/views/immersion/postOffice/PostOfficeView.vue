@@ -59,6 +59,7 @@ const { t } = useI18n({
         @click="() => router.push('/')"
         ><template #hover>
           <DetailsRegion
+            icon="local_post_office"
             title="post office"
             :description="t('sections.post_office.description')"
           /> </template
@@ -74,6 +75,7 @@ const { t } = useI18n({
         ><template #hover>
           <DetailsRegion
             title="team"
+            icon="groups"
             description="lorem ipsum id dolor els istum dale rictus dolores ed astam maelicutis rotore"
           /> </template
       ></ImageRegion2D>
@@ -89,6 +91,7 @@ const { t } = useI18n({
         ><template #hover>
           <DetailsRegion
             title="bill of lading"
+            icon="local_library"
             description="lorem ipsum id dolor els istum dale rictus dolores ed astam maelicutis rotore"
           /> </template
       ></ImageRegion2D>
@@ -104,6 +107,7 @@ const { t } = useI18n({
         ><template #hover>
           <DetailsRegion
             title="warehouse"
+            icon="warehouse"
             description="lorem ipsum id dolor els istum dale rictus dolores ed astam maelicutis rotore"
           /> </template
       ></ImageRegion2D>
@@ -119,6 +123,7 @@ const { t } = useI18n({
         ><template #hover>
           <DetailsRegion
             title="break room"
+            icon="sports_esports"
             description="Comming soon !"
             noButton
           /> </template
@@ -135,6 +140,7 @@ const { t } = useI18n({
         ><template #hover>
           <DetailsRegion
             title="boutique"
+            icon="shopping_cart"
             description="Comming soon !"
             noButton
           /> </template

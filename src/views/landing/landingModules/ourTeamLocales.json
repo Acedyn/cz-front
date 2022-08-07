@@ -1,0 +1,35 @@
+{
+  "en": {
+    "title": {
+      "main": "Our Team",
+      "details": "To get a closer look to waht make Cardboard Citizens so great !"
+    },
+    "johndoe": {
+      "job": "Artist",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus ipsum viverra etiam.",
+      "tag": "CrazyGuy"
+    }
+  },
+  "fr": {
+    "title": {
+      "main": "Notre Equipe",
+      "details": "To get a closer look to waht make Cardboard Citizens so great !"
+    },
+    "johndoe": {
+      "job": "Artist",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus ipsum viverra etiam.",
+      "tag": "CrazyGuy"
+    }
+  },
+  "es": {
+    "title": {
+      "main": "Nuestro equipo",
+      "details": "To get a closer look to waht make Cardboard Citizens so great !"
+    },
+    "johndoe": {
+      "job": "Artist",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus ipsum viverra etiam.",
+      "tag": "CrazyGuy"
+    }
+  }
+}

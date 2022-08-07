@@ -6,7 +6,12 @@ import { useI18n } from "vue-i18n";
 const preferences = usePreferencesStore();
 const { locale } = useI18n({ useScope: "global" });
 
+const props = defineProps<{
+  color?: string;
+}>();
+
 const selectLanguage = (language: string) => {
+  language = language.toLowerCase();
   if (!["en", "es", "fr"].includes(language)) {
     return;
   }
@@ -16,8 +21,10 @@ const selectLanguage = (language: string) => {
 
 <template>
   <DropDownPicker
-    :options="['en', 'es', 'fr']"
+    :color="props.color"
+    icon="language"
+    :options="['en', 'es', 'fr'].map((l) => l.toUpperCase())"
     @select="selectLanguage"
-    :defaultOption="preferences.language"
+    :defaultOption="preferences.language.toUpperCase()"
   />
 </template>

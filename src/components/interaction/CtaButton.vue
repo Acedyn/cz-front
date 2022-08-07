@@ -7,14 +7,14 @@ const props = withDefaults(
     color?: string;
     colorHover?: string;
     colorHoverInvert?: string;
-    noTex?: boolean;
+    noText?: boolean;
     noIcon?: boolean;
     invert?: boolean;
     thickness?: string;
+    size?: number;
   }>(),
   {
-    noText: true,
-    invert: false,
+    size: 1,
     thickness: "0.188rem",
     color: "var(--global-color-primary)",
     colorHover: "var(--global-color-hover)",
@@ -66,9 +66,11 @@ const emit = defineEmits<{
   color: white;
   display: flex;
   align-items: center;
-  padding: 0.688rem 1.375rem;
-  border-radius: 0.5rem;
-  gap: 0.688rem;
+  padding: v-bind(
+    "`calc(0.688rem * ${props.size}) calc(1.375rem * ${props.size})`"
+  );
+  border-radius: v-bind("`calc(0.5rem * ${props.size})`");
+  gap: v-bind("`calc(0.688rem * ${props.size})`");
 
   transition: 0.2s;
   font-family: Poppins;
@@ -79,15 +81,16 @@ const emit = defineEmits<{
 }
 
 .no-text {
-  padding: 0.688rem;
+  padding: v-bind("`calc(0.688rem * ${props.size})`");
 }
 
 .inverted {
   background: transparent;
   color: v-bind("props.color");
-  box-sizing: border-box;
 
-  outline: v-bind("`solid ${props.thickness} ${props.color}`");
+  outline: v-bind(
+    "`solid calc(${props.thickness} * ${props.size}) ${props.color}`"
+  );
   outline-offset: v-bind("`-${props.thickness}`");
 }
 
@@ -96,6 +99,6 @@ const emit = defineEmits<{
 }
 
 .button-icon {
-  font-size: 2rem;
+  font-size: v-bind("`calc(2rem * ${props.size})`");
 }
 </style>
