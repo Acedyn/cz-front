@@ -6,6 +6,10 @@ import TitleBlock from "../../../components/utils/TitleBlock.vue";
 import { useI18n } from "vue-i18n";
 import locales from "./goodToEarnLocales.json";
 
+import frameOne from "/src/assets/landing/frames/frame_01.png";
+import frameTwo from "/src/assets/landing/frames/frame_02.png";
+import frameThree from "/src/assets/landing/frames/frame_03.png";
+
 const { t } = useI18n({
   messages: locales,
 });
@@ -14,17 +18,17 @@ const goodToEarnArguments = [
   {
     title: t("arguments.one.title"),
     details: t("arguments.one.details"),
-    image: new URL(`/src/assets/landing/frames/frame_03.png`, import.meta.url),
+    image: frameThree,
   },
   {
     title: t("arguments.two.title"),
     details: t("arguments.two.details"),
-    image: new URL(`/src/assets/landing/frames/frame_02.png`, import.meta.url),
+    image: frameTwo,
   },
   {
     title: t("arguments.three.title"),
     details: t("arguments.three.details"),
-    image: new URL(`/src/assets/landing/frames/frame_01.png`, import.meta.url),
+    image: frameOne,
   },
 ];
 

@@ -3,6 +3,11 @@ import { ref, onMounted } from "vue";
 import TitleBlock from "../../../components/utils/TitleBlock.vue";
 import TypographyText from "../../../components/utils/TypographyText.vue";
 
+import willie from "@/assets/landing/members/willie.jpg";
+import modsiw from "@/assets/landing/members/modsiw.jpg";
+import steven from "@/assets/landing/members/steven.jpg";
+import serge from "@/assets/landing/members/serge.jpg";
+
 import { useI18n } from "vue-i18n";
 import locales from "./ourTeamLocales.json";
 
@@ -14,32 +19,28 @@ const teamMembers = [
   {
     name: "Willie",
     description: t("willie.description"),
-    image: new URL("/src/assets/landing/members/willie.jpg", import.meta.url)
-      .href,
+    image: willie,
     job: t("willie.job"),
     jobIcon: "build",
   },
   {
     name: "Modsiw",
     description: t("modsiw.description"),
-    image: new URL("/src/assets/landing/members/modsiw.jpg", import.meta.url)
-      .href,
+    image: modsiw,
     job: t("modsiw.job"),
     jobIcon: "local_florist",
   },
   {
     name: "Steven",
     description: t("steven.description"),
-    image: new URL("/src/assets/landing/members/steven.jpg", import.meta.url)
-      .href,
+    image: steven,
     job: t("steven.job"),
     jobIcon: "palette",
   },
   {
     name: "Serge",
     description: t("serge.description"),
-    image: new URL("/src/assets/landing/members/serge.jpg", import.meta.url)
-      .href,
+    image: serge,
     job: t("serge.job"),
     jobIcon: "memory",
   },

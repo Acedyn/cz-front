@@ -5,6 +5,11 @@ import TitleBlock from "../../../components/utils/TitleBlock.vue";
 import { useI18n } from "vue-i18n";
 import locales from "./trustUsLocales.json";
 
+import humain from "@/assets/logos/humain.png";
+import environment from "@/assets/logos/environment.png";
+import innovation from "@/assets/logos/innovation.png";
+import art from "@/assets/logos/art.png";
+
 const { t } = useI18n({
   messages: locales,
 });
@@ -14,25 +19,25 @@ const trustArguments = [
     title: t("arguments.one.title"),
     name: "humain",
     details: t("arguments.one.details"),
-    image: new URL("/src/assets/logos/humain.png", import.meta.url).href,
+    image: humain,
   },
   {
     title: t("arguments.two.title"),
     name: "environment",
     details: t("arguments.two.details"),
-    image: new URL("/src/assets/logos/environment.png", import.meta.url).href,
+    image: environment,
   },
   {
     title: t("arguments.three.title"),
     name: "innovation",
     details: t("arguments.three.details"),
-    image: new URL("/src/assets/logos/innovation.png", import.meta.url).href,
+    image: innovation,
   },
   {
     title: t("arguments.four.title"),
     name: "art",
     details: t("arguments.four.details"),
-    image: new URL("/src/assets/logos/art.png", import.meta.url).href,
+    image: art,
   },
 ];
 
