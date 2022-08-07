@@ -16,15 +16,29 @@ const { t } = useI18n({
 
 const socialButtons = ["solana", "magiceden", "opensea"];
 const breakpoint = getBreakpoint(onMounted, onUnmounted);
+
+const images = ["01", "02", "03", "04", "05", "06", "07", "08", "09"].map(
+  (name) => {
+    return new URL(`/src/assets/landing/profile/${name}.jpg`, import.meta.url);
+  }
+);
 </script>
 
 <template>
   <div class="container">
-    <div class="details">
+    <div
+      :class="`details ${breakpoint <= Breakpoint.SM ? 'details-mobile' : ''}`"
+    >
       <div class="main-text">
         <TypographyTitle size="big" :level="1" :spacing="1.2">
           {{ t("mainText.discover") }}
         </TypographyTitle>
+        <div class="image-container" v-if="breakpoint <= Breakpoint.SM">
+          <img
+            src="https://dummyimage.com/780x680/ffecd6/aaa"
+            class="hero-image"
+          />
+        </div>
         <TypographyText :spacing="1.2" size="big">
           <p>{{ t("mainText.detailsOne") }}</p>
         </TypographyText>
@@ -75,6 +89,11 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
+}
+
+.details-mobile {
+  max-width: 100%;
+  text-align: center;
 }
 
 .main-text {

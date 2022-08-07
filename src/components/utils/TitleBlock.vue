@@ -12,6 +12,7 @@ const props = withDefaults(
     titleLevel?: number;
     titleColor?: string;
     textSize?: "small" | "regular" | "big";
+    textColor?: string;
     textAnimation?: "slide-up";
     maxWidth?: string;
     gap?: string;
@@ -67,6 +68,7 @@ onMounted(() => {
     <TypographyText
       :size="props.textSize"
       :class="`details-text idle-${props.textAnimation}`"
+      :color="props.textColor"
     >
       <slot />
     </TypographyText>

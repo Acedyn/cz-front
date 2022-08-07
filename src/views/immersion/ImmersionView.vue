@@ -1,20 +1,13 @@
 <script setup lang="ts">
 import { usePreferencesStore } from "@/stores/preferences";
-import { onBeforeMount, computed } from "vue";
-import router from "@/router";
+import { computed } from "vue";
 import { storeToRefs } from "pinia";
 
 const preferences = usePreferencesStore();
 const { theme } = storeToRefs(preferences);
 const transition = computed(() =>
-  theme.value.includes("dark") ? "fade-dark" : "fade-dark"
+  theme.value.includes("dark") ? "fade-dark" : "fade"
 );
-
-onBeforeMount(() => {
-  if (router.currentRoute.value.fullPath === "/immersion") {
-    router.push("/immersion/post-office");
-  }
-});
 </script>
 
 <template>

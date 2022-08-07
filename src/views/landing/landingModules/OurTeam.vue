@@ -14,7 +14,6 @@ const { t } = useI18n({
 const teamMembers = [
   {
     name: "John doe",
-    tag: t("johndoe.tag"),
     description: t("johndoe.description"),
     image: "https://dummyimage.com/650x540/ffecd6/aaa",
     job: t("johndoe.job"),
@@ -22,7 +21,6 @@ const teamMembers = [
   },
   {
     name: "John doe",
-    tag: t("johndoe.tag"),
     description: t("johndoe.description"),
     image: "https://dummyimage.com/650x540/ffecd6/aaa",
     job: t("johndoe.job"),
@@ -30,7 +28,6 @@ const teamMembers = [
   },
   {
     name: "John doe",
-    tag: t("johndoe.tag"),
     description: t("johndoe.description"),
     image: "https://dummyimage.com/650x540/ffecd6/aaa",
     job: t("johndoe.job"),
@@ -38,7 +35,6 @@ const teamMembers = [
   },
   {
     name: "John doe",
-    tag: t("johndoe.tag"),
     description: t("johndoe.description"),
     image: "https://dummyimage.com/650x540/ffecd6/aaa",
     job: t("johndoe.job"),
@@ -87,18 +83,7 @@ onMounted(() => {
           :style="`--i:${index}`"
           class="member-card"
         >
-          <div class="member-image">
-            <div class="member-tag">
-              <TypographyText
-                color="white"
-                font="Poppins"
-                weight="bold"
-                size="regular"
-              >
-                {{ teamMember.tag }}
-              </TypographyText>
-            </div>
-          </div>
+          <div class="member-image"></div>
           <div class="argument-details">
             <div class="member-name">
               <TypographyText
@@ -121,15 +106,9 @@ onMounted(() => {
               </TypographyText>
             </div>
             <span class="line-separator" />
-            <TypographyText color="var(--global-color-disable)">
+            <TypographyText color="var(--global-color-primary)">
               {{ teamMember.description }}
             </TypographyText>
-            <SimpleButton
-              color="var(--global-color-primary)"
-              textSize="big"
-              class="follow-button"
-              >Follow</SimpleButton
-            >
           </div>
         </div>
       </div>
@@ -189,20 +168,10 @@ onMounted(() => {
   margin-right: auto;
 }
 
-.member-tag {
-  border-radius: 0.1rem;
-  position: absolute;
-  top: 0.8rem;
-  left: 0.8rem;
-  width: fit-content;
-  padding: 0.2rem 1rem;
-  background: var(--global-color-primary);
-}
-
 .argument-details {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   gap: 1.063rem;
   width: 100%;
   flex-grow: 1;

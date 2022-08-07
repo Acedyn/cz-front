@@ -29,7 +29,6 @@ const goodToEarnArguments = [
 ];
 
 const breakpoint = getBreakpoint(onMounted, onUnmounted);
-
 const frames = ref<Element[]>();
 
 onMounted(() => {
@@ -38,7 +37,6 @@ onMounted(() => {
   }
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      console.log(entry);
       if (entry.isIntersecting) {
         entry.target.classList.add(`animation-frame`);
       } else if (entry.boundingClientRect.top > 0) {

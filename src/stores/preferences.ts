@@ -9,12 +9,17 @@ export const usePreferencesStore = defineStore({
   state: () => ({
     theme: preferencesLocal.theme || "light",
     language: preferencesLocal.language || "en",
+    headerCollapse: false,
   }),
   getters: {
     getTheme: (state) => state.theme,
     getLanguage: (state) => state.language,
+    getHeaderCollapse: (state) => state.headerCollapse,
   },
   actions: {
+    setHeaderCollapse(value: boolean) {
+      this.headerCollapse = value;
+    },
     toggleTheme() {
       this.theme = this.theme === "light" ? "dark" : "light";
 

@@ -6,6 +6,8 @@ import TopHeaderPanel from "./TopHeaderPanel.vue";
 import { useRoute, onBeforeRouteLeave } from "vue-router";
 import { getBreakpoint, Breakpoint } from "../../utils/breakpoints";
 import { ref, computed, onMounted, onUnmounted } from "vue";
+import { usePreferencesStore } from "../../stores/preferences";
+import { storeToRefs } from "pinia";
 import router from "@/router";
 
 import { useI18n } from "vue-i18n";
@@ -15,7 +17,8 @@ const { t } = useI18n({
   messages: locales,
 });
 
-const collapsed = ref(false);
+const preferences = usePreferencesStore();
+const { headerCollapse } = storeToRefs(preferences);
 
 const navButtons = [
   {
@@ -44,11 +47,11 @@ const buttonClass = (name: string) => {
 };
 
 onBeforeRouteLeave((to) => {
-  collapsed.value = !!to.meta.headerCollased;
+  headerCollapse.value = !!to.meta.headerCollased;
 });
 
 const isCollapsed = computed(() => {
-  return !collapsed.value && breakpoint.value > Breakpoint.SM;
+  return !headerCollapse.value && breakpoint.value > Breakpoint.SM;
 });
 
 const togglePanel = () => {
