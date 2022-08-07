@@ -72,7 +72,7 @@ onMounted(() => {
     >
       <img
         ref="frames"
-        :src="argument.image.href"
+        :src="argument.image"
         :class="`hero-image ${
           index % 2 === 0 && breakpoint > Breakpoint.XS
             ? 'left-argument left-frame'
