@@ -6,8 +6,12 @@ const props = withDefaults(
     color?: string;
     colorHover?: string;
     textSize?: "small" | "regular" | "big";
+    textFont?: string;
+    textWeight?: "light" | "regular" | "bold";
   }>(),
   {
+    textWeight: "Poppins",
+    textFont: "bold",
     color: "var(--global-color-primary)",
     colorHover: "var(--global-color-hover)",
     textSize: "regular",
@@ -22,6 +26,7 @@ const emit = defineEmits<{
 <template>
   <button class="clear-button-style simple-button" @click="() => emit('click')">
     <TypographyText
+      :textFont="props.textFont"
       :size="props.textSize"
       color="white"
       weight="bold"
@@ -49,7 +54,7 @@ const emit = defineEmits<{
   display: flex;
   align-items: center;
   padding: 0.688rem 1.375rem;
-  border-radius: 0.313rem;
+  border-radius: 0.375rem;
   gap: 0.688rem;
 
   transition: 0.2s;

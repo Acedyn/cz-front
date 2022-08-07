@@ -22,23 +22,25 @@ const onClick = (e: MouseEvent, force?: boolean) => {
 </script>
 
 <template>
-  <div
-    class="overlay-backdrop"
-    v-if="props.show"
-    @click="onClick"
-    ref="backdrop"
-  >
-    <CloseButton
-      v-if="!props.disableCloseButton"
-      colorLine="black"
-      colorBG="#664f3c"
-      size="40px"
-      class="close-button"
-      @click="(e) => onClick(e, true)"
-      ref="closeButton"
-    />
-    <slot />
-  </div>
+  <transition name="fade">
+    <div
+      class="overlay-backdrop"
+      v-if="props.show"
+      @click="onClick"
+      ref="backdrop"
+    >
+      <CloseButton
+        v-if="!props.disableCloseButton"
+        colorLine="black"
+        colorBG="#664f3c"
+        size="40px"
+        class="close-button"
+        @click="(e) => onClick(e, true)"
+        ref="closeButton"
+      />
+      <slot />
+    </div>
+  </transition>
 </template>
 
 <style scoped>
@@ -64,5 +66,15 @@ const onClick = (e: MouseEvent, force?: boolean) => {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

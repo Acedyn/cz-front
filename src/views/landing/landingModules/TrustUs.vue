@@ -44,7 +44,6 @@ onMounted(() => {
   }
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      console.log(entry);
       if (entry.isIntersecting) {
         entry.target.classList.add("animation-card-popup");
       } else if (entry.boundingClientRect.top > 0) {
@@ -78,16 +77,15 @@ onMounted(() => {
           <div class="argument-icon">
             <img :src="trustArgument.image" class="argument-image" />
           </div>
-          <div class="argument-details">
-            <TitleBlock
-              :title="trustArgument.title"
-              titleSize="small"
-              titleColor="rgba(0, 0, 0, 0.2)"
-              textSize="small"
-            >
-              {{ trustArgument.details }}
-            </TitleBlock>
-          </div>
+          <TitleBlock
+            :title="trustArgument.title"
+            titleWordSize="1.235rem"
+            titleSize="small"
+            titleColor="rgba(0, 0, 0, 0.2)"
+            textSize="regular"
+          >
+            {{ trustArgument.details }}
+          </TitleBlock>
         </div>
       </div>
     </div>
@@ -135,17 +133,19 @@ onMounted(() => {
   height: v-bind("`calc(${cardWidth} * ${cardAspectRatio})`");
   background: var(--global-color-primary);
 
-  display: grid;
-  grid-template-rows: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  gap: 2.063rem;
+  justify-content: center;
+  padding: 3.063rem;
   border-radius: 2rem;
   opacity: 0;
 }
 
 .argument-icon {
   width: 25%;
-  height: v-bind("`calc((${cardWidth} - 4rem) * 0.25`");
+  height: v-bind("`calc((${cardWidth} - 5.063rem) * 0.25`");
   margin-left: auto;
   margin-right: auto;
 }

@@ -12,21 +12,25 @@ export default {
       path: "",
       name: "post-office",
       component: PostOfficeView,
+      meta: { headerCollased: true },
     },
     {
       path: "post-office",
       name: "post-office",
       component: PostOfficeView,
+      meta: { headerCollased: true },
     },
     {
       path: "bill-of-lading",
       name: "bill-of-lading",
       component: BillOfLadingView,
+      meta: { headerCollased: true },
     },
     {
       path: "warehouse",
       name: "warehouse",
       component: WarehouseView,
+      meta: { headerCollased: true },
     },
   ],
 };

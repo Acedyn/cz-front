@@ -14,6 +14,7 @@ const { t } = useI18n({
   messages: locales,
 });
 
+const socialButtons = ["solana", "magiceden", "opensea"];
 const breakpoint = getBreakpoint(onMounted, onUnmounted);
 </script>
 
@@ -47,22 +48,11 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
         </TypographyText>
         <div class="social-buttons">
           <SocialButton
-            social="solana"
+            invert
+            :social="socialButton"
             :size="0.6"
-            color="var(--global-color-dark)"
             colorHover="var(--global-color-unavailable)"
-          />
-          <SocialButton
-            social="magiceden"
-            :size="0.6"
-            color="var(--global-color-dark)"
-            colorHover="var(--global-color-unavailable)"
-          />
-          <SocialButton
-            social="opensea"
-            :size="0.6"
-            color="var(--global-color-dark)"
-            colorHover="var(--global-color-unavailable)"
+            v-for="socialButton in socialButtons"
           />
         </div>
       </div>

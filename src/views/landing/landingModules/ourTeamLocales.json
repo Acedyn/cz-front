@@ -5,7 +5,9 @@
       "details": "To get a closer look to waht make Cardboard Citizens so great !"
     },
     "johndoe": {
-      "job": "Artist"
+      "job": "Artist",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus ipsum viverra etiam.",
+      "tag": "CrazyGuy"
     }
   },
   "fr": {
@@ -14,7 +16,9 @@
       "details": "To get a closer look to waht make Cardboard Citizens so great !"
     },
     "johndoe": {
-      "job": "Artist"
+      "job": "Artist",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus ipsum viverra etiam.",
+      "tag": "CrazyGuy"
     }
   },
   "es": {
@@ -23,7 +27,9 @@
       "details": "To get a closer look to waht make Cardboard Citizens so great !"
     },
     "johndoe": {
-      "job": "Artist"
+      "job": "Artist",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus ipsum viverra etiam.",
+      "tag": "CrazyGuy"
     }
   }
 }

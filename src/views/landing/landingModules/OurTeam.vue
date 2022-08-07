@@ -14,28 +14,40 @@ const { t } = useI18n({
 const teamMembers = [
   {
     name: "John doe",
+    tag: t("johndoe.tag"),
+    description: t("johndoe.description"),
     image: "https://dummyimage.com/650x540/ffecd6/aaa",
     job: t("johndoe.job"),
+    jobIcon: "palette",
   },
   {
     name: "John doe",
+    tag: t("johndoe.tag"),
+    description: t("johndoe.description"),
     image: "https://dummyimage.com/650x540/ffecd6/aaa",
     job: t("johndoe.job"),
+    jobIcon: "palette",
   },
   {
     name: "John doe",
+    tag: t("johndoe.tag"),
+    description: t("johndoe.description"),
     image: "https://dummyimage.com/650x540/ffecd6/aaa",
     job: t("johndoe.job"),
+    jobIcon: "palette",
   },
   {
     name: "John doe",
+    tag: t("johndoe.tag"),
+    description: t("johndoe.description"),
     image: "https://dummyimage.com/650x540/ffecd6/aaa",
     job: t("johndoe.job"),
+    jobIcon: "palette",
   },
 ];
 
-const cardWidth = "10.625rem";
-const cardAspectRatio = 1.8;
+const cardWidth = "22.5rem";
+const cardAspectRatio = 1.53;
 
 const cards = ref<Element>();
 
@@ -45,7 +57,6 @@ onMounted(() => {
   }
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      console.log(entry);
       if (entry.isIntersecting) {
         entry.target.classList.add("animation-card-popup");
       } else if (entry.boundingClientRect.top > 0) {
@@ -76,15 +87,47 @@ onMounted(() => {
           :style="`--i:${index}`"
           class="member-card"
         >
-          <div class="member-image"></div>
+          <div class="member-image">
+            <div class="member-tag">
+              <TypographyText
+                color="white"
+                font="Poppins"
+                weight="bold"
+                size="regular"
+              >
+                {{ teamMember.tag }}
+              </TypographyText>
+            </div>
+          </div>
           <div class="argument-details">
-            <TypographyText color="var(--global-color-primary)" weight="bold">
-              {{ teamMember.name }}
-            </TypographyText>
+            <div class="member-name">
+              <TypographyText
+                color="var(--global-color-primary)"
+                font="Poppins"
+                weight="bold"
+                size="big"
+              >
+                {{ teamMember.name }}
+              </TypographyText>
+              <span class="material-icons job-icon">
+                {{ teamMember.jobIcon }}
+              </span>
+              <TypographyText
+                color="var(--global-color-primary)"
+                weight="light"
+                size="big"
+              >
+                {{ teamMember.job }}
+              </TypographyText>
+            </div>
+            <span class="line-separator" />
             <TypographyText color="var(--global-color-disable)">
-              {{ teamMember.job }}
+              {{ teamMember.description }}
             </TypographyText>
-            <SimpleButton color="var(--global-color-primary)" textSize="small"
+            <SimpleButton
+              color="var(--global-color-primary)"
+              textSize="big"
+              class="follow-button"
               >Follow</SimpleButton
             >
           </div>
@@ -113,7 +156,7 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 3rem;
+  gap: 1.625rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -123,33 +166,68 @@ onMounted(() => {
   width: v-bind("cardWidth");
   height: v-bind("`calc(${cardWidth} * ${cardAspectRatio})`");
   background: var(--global-color-paragraph);
-  outline: solid 0.4rem var(--global-color-primary);
-  outline-offset: -0.4rem;
   box-shadow: rgb(0 0 0 / 20%) 0px 0.313rem 0.938rem;
 
-  display: grid;
-  grid-template-rows: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 1rem 2rem;
-  border-radius: 1.225rem;
+  padding: 1.625rem 1.9rem;
+  border-radius: 0.938rem;
   opacity: 0;
+  row-gap: 1.063rem;
+
+  outline: solid 0.188rem var(--global-color-primary);
+  outline-offset: -0.188rem;
 }
 
 .member-image {
   width: 100%;
-  height: v-bind("`calc(${cardWidth} - 4rem`");
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 50%;
+  height: v-bind("`calc(${cardWidth} * 0.92 - 4rem)`");
+  background: rgba(226, 156, 116, 0.35);
+  border-radius: 0.625rem;
   margin-left: auto;
   margin-right: auto;
 }
 
+.member-tag {
+  border-radius: 0.1rem;
+  position: absolute;
+  top: 0.8rem;
+  left: 0.8rem;
+  width: fit-content;
+  padding: 0.2rem 1rem;
+  background: var(--global-color-primary);
+}
+
 .argument-details {
-  text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  height: 100%;
+  justify-content: center;
+  gap: 1.063rem;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.member-name {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.job-icon {
+  color: var(--global-color-primary);
+  margin-left: auto;
+  margin-right: 0.5rem;
+}
+
+.line-separator {
+  background: var(--global-color-primary);
+  width: 100%;
+  height: 0.118rem;
+}
+
+.follow-button {
+  margin-top: auto;
 }
 
 .animation-card-popup .member-card {

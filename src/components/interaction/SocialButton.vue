@@ -18,13 +18,20 @@ const props = withDefaults(
       | "opensea"
       | "solana";
     color?: string;
+    fill?: string;
     size?: number;
     colorHover?: string;
+    invert?: boolean;
+    colorHoverInvert?: string;
+    thickness?: string;
   }>(),
   {
     size: 1,
+    thickness: "0.094rem",
+    fill: "var(--global-color-primary)",
     color: "var(--global-color-unavailable)",
     colorHover: "var(--global-color-hover)",
+    colorHoverInvert: "var(--global-color-secondary)",
   }
 );
 
@@ -50,7 +57,12 @@ const onClick = () => {
 </script>
 
 <template>
-  <button class="clear-button-style social-button" @click="onClick">
+  <button
+    :class="`clear-button-style social-button ${
+      props.invert ? 'inverted' : ''
+    }`"
+    @click="onClick"
+  >
     <DiscordLogo class="logo" v-if="props.social === 'discord'" />
     <TwitterLogo class="logo" v-if="props.social === 'twitter'" />
     <InstagramLogo class="logo" v-if="props.social === 'instagram'" />
@@ -87,8 +99,20 @@ const onClick = () => {
   background: v-bind("props.colorHover");
 }
 
+.inverted {
+  background: transparent;
+  color: v-bind("props.color");
+
+  outline: v-bind("`solid ${props.thickness} ${props.fill}`");
+  outline-offset: v-bind("`-${props.thickness}`");
+}
+
+.inverted:hover {
+  background: v-bind("props.colorHoverInvert");
+}
+
 .logo {
-  fill: var(--global-color-primary);
+  fill: v-bind("props.fill");
   width: v-bind("`calc(3rem * ${props.size})`");
   height: v-bind("`calc(3rem * ${props.size})`");
 }

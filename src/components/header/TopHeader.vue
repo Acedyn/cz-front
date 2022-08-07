@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import OverlayPopup from "../popup/OverlayPopup.vue";
 import TypographyText from "../utils/TypographyText.vue";
 import LanguagePicker from "../interaction/LanguagePicker.vue";
-import { useRoute } from "vue-router";
+import TopHeaderPanel from "./TopHeaderPanel.vue";
+import { useRoute, onBeforeRouteLeave } from "vue-router";
+import { ref } from "vue";
 
 import { useI18n } from "vue-i18n";
 import locales from "./topHeaderLocales.json";
@@ -10,14 +13,42 @@ const { t } = useI18n({
   messages: locales,
 });
 
+const collapsed = ref(false);
+
+const navButtons = [
+  {
+    name: t("buttons.home"),
+    link: "https://google.com",
+  },
+  {
+    name: t("buttons.world"),
+    link: "https://google.com",
+  },
+  {
+    name: t("buttons.tools"),
+    link: "https://google.com",
+  },
+  {
+    name: t("buttons.market"),
+    link: "https://google.com",
+  },
+];
+
+const showPanel = ref(true);
+
 const buttonClass = (name: string) => {
   return `menu-button ${useRoute().name === name ? "button-current" : ""}`;
 };
+
+onBeforeRouteLeave((to) => {
+  console.log(to);
+  collapsed.value = !!to.meta.headerCollased;
+});
 </script>
 
 <template>
   <header class="header-container">
-    <div class="header-left header-sides">
+    <div class="header-left header-sides" v-if="!collapsed">
       <div class="header-title">
         <img class="main-logo" src="@/assets/logos/brand_logo.png" />
         <TypographyText size="big" color="white" font="Poppins" weight="bold"
@@ -25,29 +56,20 @@ const buttonClass = (name: string) => {
         >
       </div>
       <nav class="menu">
-        <TypographyText size="big" weight="bold" font="Poppins" color=""
-          ><p :class="buttonClass('home')">
-            {{ t("buttons.home") }}
-          </p></TypographyText
-        >
-        <TypographyText size="big" weight="bold" font="Poppins" color="inerit"
-          ><p :class="buttonClass('immersion')">
-            {{ t("buttons.world") }}
-          </p></TypographyText
-        >
-        <TypographyText size="big" weight="bold" font="Poppins" color=""
-          ><p :class="buttonClass('tools')">
-            {{ t("buttons.tools") }}
-          </p></TypographyText
-        >
-        <TypographyText size="big" weight="bold" font="Poppins" color=""
-          ><p :class="buttonClass('market')">
-            {{ t("buttons.market") }}
+        <TypographyText
+          size="big"
+          weight="bold"
+          font="Poppins"
+          color=""
+          v-for="(navButton, index) in navButtons"
+          :key="index"
+          ><p :class="buttonClass(navButton.name.toLowerCase())">
+            {{ navButton.name }}
           </p></TypographyText
         >
       </nav>
     </div>
-    <div class="header-right header-sides">
+    <div class="header-right header-sides" v-if="!collapsed">
       <LanguagePicker />
       <button class="signin-button">
         <span class="material-icons signin-icon"> person </span>
@@ -58,6 +80,24 @@ const buttonClass = (name: string) => {
         >
       </button>
     </div>
+
+    <div class="collaped-header" v-else>
+      <div class="header-title">
+        <img class="main-logo" src="@/assets/logos/brand_logo.png" />
+        <TypographyText size="big" color="white" font="Poppins" weight="bold"
+          ><p class="menu-button">Cardboard Citizens</p></TypographyText
+        >
+      </div>
+    </div>
+
+    <OverlayPopup
+      :show="showPanel"
+      margin="0"
+      disableCloseButton
+      @exit="() => (showPanel = false)"
+    >
+      <TopHeaderPanel :navButtons="navButtons" />
+    </OverlayPopup>
   </header>
 </template>
 
@@ -92,7 +132,7 @@ const buttonClass = (name: string) => {
 }
 
 .main-logo {
-  filter: brightness(80%);
+  filter: invert(100%) brightness(200%);
   height: 5rem;
   object-fit: contain;
 }

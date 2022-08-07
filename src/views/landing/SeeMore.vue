@@ -27,7 +27,7 @@ const scrollDown = () => {
 
 <style scoped>
 .see-more {
-  z-index: 20;
+  z-index: 2;
   position: fixed;
   bottom: 0;
   width: 100%;

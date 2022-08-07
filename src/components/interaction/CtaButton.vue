@@ -15,7 +15,6 @@ const props = withDefaults(
   }>(),
   {
     size: 1,
-    invert: false,
     thickness: "0.188rem",
     color: "var(--global-color-primary)",
     colorHover: "var(--global-color-hover)",
@@ -88,9 +87,10 @@ const emit = defineEmits<{
 .inverted {
   background: transparent;
   color: v-bind("props.color");
-  box-sizing: border-box;
 
-  outline: v-bind("`solid ${props.thickness} ${props.color}`");
+  outline: v-bind(
+    "`solid calc(${props.thickness} * ${props.size}) ${props.color}`"
+  );
   outline-offset: v-bind("`-${props.thickness}`");
 }
 

@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import TopHeader from "./components/header/TopHeader.vue";
+import { useRoute } from "vue-router";
+
+const router = useRoute();
 </script>
 
 <template>
