@@ -14,3 +14,15 @@
   font-family: BlockHeadUnplugged;
   src: local("BlockHead"), url(@/assets/fonts/blockhead-unplugged-regular.otf);
 }
+@font-face {
+  font-family: Antonio;
+  src: local("BlockHead"), url(@/assets/fonts/Antonio-VariableFont_wght.ttf);
+}
+@font-face {
+  font-family: FredericaTheGreat;
+  src: local("BlockHead"), url(@/assets/fonts/FrederickatheGreat-Regular.ttf);
+}
+@font-face {
+  font-family: SegoeUi;
+  src: local("BlockHead"), url(@/assets/fonts/Segoe-UI.ttf);
+}

@@ -142,7 +142,7 @@ onMounted(() => {
   gap: 2.063rem;
   justify-content: center;
   padding: 0 1.5rem;
-  border-radius: 2rem;
+  border-radius: 0.938rem;
   opacity: 0;
 }
 

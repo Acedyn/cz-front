@@ -75,9 +75,9 @@ onMounted(() => {
         :src="argument.image"
         :class="`hero-image ${
           index % 2 === 0 && breakpoint > Breakpoint.XS
-            ? 'left-argument left-frame'
-            : 'right-argument right-frame'
-        }`"
+            ? 'left-argument'
+            : 'right-argument'
+        } ${index % 2 === 0 ? 'left-frame' : 'right-frame'}`"
       />
       <div
         :class="`argument-text ${
@@ -98,7 +98,7 @@ onMounted(() => {
           :titleLevel="3"
           gap="1.875rem"
         >
-          <p>{{ argument.details }}</p>
+          <p v-html="argument.details"></p>
         </TitleBlock>
       </div>
     </div>
@@ -122,7 +122,6 @@ onMounted(() => {
   display: grid;
   grid-column-start: 1;
   grid-row-start: 1;
-  gap: 1rem;
 }
 
 .argument-large {

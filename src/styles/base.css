@@ -16,8 +16,8 @@ body {
   background: var(--color-background);
   transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
-  font-family: "Courier Prime", Inter, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
+  font-family: SegoeUi, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
     "Helvetica Neue", sans-serif;
   font-size: 15px;
   text-rendering: optimizeLegibility;
@@ -34,4 +34,8 @@ body {
   --global-color-unavailable: #ffd8aa;
   --global-color-dark: #745454;
   --global-color-disable: #f9c4a6;
+}
+
+.global-important-text {
+  font-size: 1.1em;
 }
