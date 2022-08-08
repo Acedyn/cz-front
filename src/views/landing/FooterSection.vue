@@ -69,19 +69,20 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
 
 <style scoped>
 .container {
+  padding: 0 var(--app-padding-side);
   background: var(--global-color-primary);
   min-height: 25rem;
   width: 100%;
 
   display: grid;
   grid-template-rows: 1fr 4rem;
-  justify-content: center;
 }
 
 .content {
+  width: 100%;
   display: flex;
   flex-direction: row;
-  padding: 3rem 5.313rem;
+  padding: 3rem 0;
   gap: 11rem;
 }
 
@@ -122,10 +123,10 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
 }
 
 .copyright {
+  width: 100%;
   border-top: solid 0.02rem white;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 5.313rem;
 }
 </style>

@@ -2,6 +2,7 @@
 import TypographyText from "../../components/utils/TypographyText.vue";
 
 import { ref, onMounted, onUnmounted } from "vue";
+import { getBreakpoint, Breakpoint } from "../../utils/breakpoints";
 import { useI18n } from "vue-i18n";
 import locales from "./seeMoreLocales.json";
 
@@ -29,6 +30,7 @@ const onSrolling = () => {
   }
 };
 
+const breakpoint = getBreakpoint(onMounted, onUnmounted);
 onMounted(() => {
   window.addEventListener("scroll", onSrolling);
 });
@@ -39,7 +41,11 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div :class="`see-more ${hidden ? 'hidden' : ''}`" @click="scrollDown">
+  <div
+    :class="`see-more ${hidden ? 'hidden' : ''}`"
+    @click="scrollDown"
+    v-if="breakpoint > Breakpoint.MD"
+  >
     <TypographyText color="var(--global-color-primary)" size="big">
       <p>{{ t("seeMore") }}</p>
     </TypographyText>

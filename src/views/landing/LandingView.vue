@@ -54,14 +54,13 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
 }
 
 .landing-modules {
-  padding: 3.125rem 10.625rem;
+  padding: 3.125rem var(--app-padding-side);
   display: flex;
   flex-direction: column;
   gap: 3.125rem;
 }
 
 .landing-small {
-  padding: 0 5vw;
   align-items: center;
 }
 

@@ -11,7 +11,7 @@ const isSmall = computed(() => {
 
 <template>
   <TopHeader :class="`app-header ${isSmall ? 'app-header-small' : ''}`" />
-  <RouterView class="app-view" />
+  <RouterView :class="`app-view ${isSmall ? 'app-view-small' : ''}`" />
 </template>
 
 <style>
@@ -28,7 +28,7 @@ const isSmall = computed(() => {
 .app-header {
   position: absolute;
   z-index: 10;
-  padding: 0 2.815rem;
+  padding: 0 10.625rem;
 }
 
 .app-header-small {
@@ -36,6 +36,12 @@ const isSmall = computed(() => {
 }
 
 .app-view {
-  padding-top: 8.225rem;
+  padding-top: 7.8rem;
+  --app-padding-side: 10.625rem;
+}
+
+.app-view-small {
+  padding-top: 7.8rem;
+  --app-padding-side: 5vw;
 }
 </style>

@@ -16,7 +16,7 @@ const props = withDefaults(
     color: "var(--global-color-primary)",
     weight: "bold",
     level: 1,
-    font: "Inter",
+    font: "Antonio",
   }
 );
 

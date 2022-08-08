@@ -12,7 +12,7 @@ const props = withDefaults(
     size: "regular",
     color: "var(--global-color-paragraph)",
     weight: "regular",
-    font: "Inter",
+    font: "SegoeUi",
   }
 );
 

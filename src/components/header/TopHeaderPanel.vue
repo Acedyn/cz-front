@@ -5,13 +5,6 @@ import TypographyText from "../utils/TypographyText.vue";
 import LanguagePicker from "../interaction/LanguagePicker.vue";
 import { useRoute } from "vue-router";
 
-import { useI18n } from "vue-i18n";
-import locales from "./topHeaderLocales.json";
-
-const { t } = useI18n({
-  messages: locales,
-});
-
 const props = defineProps<{
   navButtons: {
     name: string;
@@ -42,6 +35,7 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
 
       <div class="panel-options">
         <LanguagePicker />
+        <!--
         <button class="signin-button">
           <span class="material-icons signin-icon"> person </span>
           <TypographyText size="big" weight="bold" font="Poppins" color=""
@@ -50,7 +44,7 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
             </p></TypographyText
           >
         </button>
-      </div>
+      --></div>
 
       <nav class="menu">
         <TypographyText
@@ -120,7 +114,7 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
   flex-direction: row;
   align-items: center;
   gap: 1rem;
-  justify-content: space-around;
+  justify-content: start;
 }
 
 .signin-button {

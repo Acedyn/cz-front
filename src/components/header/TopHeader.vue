@@ -72,7 +72,7 @@ const togglePanel = () => {
         <img class="main-logo" src="@/assets/logos/brand_logo.png" />
         <TypographyText size="big" color="white" font="Poppins" weight="bold"
           ><p class="menu-button" @click="navButtons[0].click">
-            Cardboard <br />Citizens
+            Cardboard Citizens
           </p></TypographyText
         >
       </div>
@@ -107,9 +107,18 @@ const togglePanel = () => {
     </div>
 
     <div class="collaped-header" v-else>
-      <button class="collapsed-button" @click="togglePanel">
-        <span class="material-icons" :style="{ fontSize: '5rem' }">menu</span>
-        <img class="colapsed-logo" src="@/assets/logos/brand_logo.png" />
+      <button class="collapsed-button">
+        <span
+          class="material-icons handburger-icon"
+          :style="{ fontSize: '4rem' }"
+          @click="togglePanel"
+          >menu</span
+        >
+        <img
+          class="colapsed-logo"
+          src="@/assets/logos/brand_logo.png"
+          @click="navButtons[0].click"
+        />
       </button>
     </div>
 
@@ -160,14 +169,14 @@ const togglePanel = () => {
 
 .main-logo {
   filter: invert(100%) brightness(200%);
-  height: 7rem;
+  height: 4.5rem;
   object-fit: contain;
 }
 
 .colapsed-logo {
   padding: 0 1rem;
   filter: invert(100%) brightness(200%);
-  height: 5rem;
+  height: 4rem;
   object-fit: contain;
 }
 
@@ -245,8 +254,16 @@ const togglePanel = () => {
   cursor: pointer;
   outline: inherit;
 
-  color: white;
   font-size: 4rem;
+}
+
+.handburger-icon {
+  transition: 0.2s;
+  color: white;
+}
+
+.handburger-icon:hover {
+  color: var(--global-color-hover);
 }
 
 *[tooltip]:before {
@@ -262,10 +279,9 @@ const togglePanel = () => {
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
 
   background: var(--global-color-dark);
-  text-transform: uppercase;
   font-weight: bolder;
   color: #efd7bc;
-  font-family: BlockHeadUnplugged;
+  font-family: Poppins;
   font-size: 1rem;
   width: 10rem;
   text-align: center;

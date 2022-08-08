@@ -2,7 +2,7 @@
   "en": {
     "mainText": {
       "discover": "Discover\nCardboard Citizens",
-      "detailsOne": "Cardboard Citizens is an NFT project minted in Solana Blockchain. Our Art is meant to become a profile picture (PFP) that our NFT holders will carry with pride along the journey that awaits!",
+      "detailsOne": "<b class='global-important-text'>Cardboard Citizens</b> is an NFT project in Solana Blockchain. Our Art is meant to become a <b class='global-important-text'>profile picture (PFP)</b> that our NFT holders will carry with pride along the <b class='global-important-text'>journey</b> that awaits!",
       "detailsTwo": "Solana Blockchain enables the smart contracts we design to suit our Customers’ needs to deliver transactions at great speeds while keeping a low cost. ",
       "detailsThree": "Every action done by our project will have the objective of driving Good to our Planet with the best technology and solutions the blockchain can provide. We selected Solana to build our solutions as it is also a GREEN blockchain meaning it has a very low impact on the environment."
     }
