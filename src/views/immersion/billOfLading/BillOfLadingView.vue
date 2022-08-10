@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import ImageRegion2D from "@/components/scene/ImageRegion2D.vue";
 import DetailsRegion from "@/components/scene/DetailsRegion.vue";
-import TypographyTitle from "@/components/scene/TypographyTitle.vue";
 import Scene2D from "@/components/scene/Scene2D.vue";
 import OverlayPopup from "@/components/popup/OverlayPopup.vue";
 import ProjectPopup from "./ProjectPopup.vue";
