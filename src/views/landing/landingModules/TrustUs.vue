@@ -162,7 +162,7 @@ onMounted(() => {
 }
 
 .innovation {
-  transform: scale(2.5);
+  transform: scale(2);
 }
 
 .important-footer {

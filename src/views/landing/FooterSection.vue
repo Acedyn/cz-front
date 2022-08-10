@@ -45,11 +45,11 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
         <RouterLink to="/immersion" style="text-decoration: none">
           <TypographyText color="white">World</TypographyText>
         </RouterLink>
-        <RouterLink to="/tools" style="text-decoration: none">
+        <RouterLink to="/" style="text-decoration: none">
           <TypographyText color="white">Tools</TypographyText>
         </RouterLink>
-        <RouterLink to="/dashboard" style="text-decoration: none">
-          <TypographyText color="white">Dashboard</TypographyText>
+        <RouterLink to="/marketplace" style="text-decoration: none">
+          <TypographyText color="white">Marketplace</TypographyText>
         </RouterLink>
       </div>
       <div class="join">
