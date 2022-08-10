@@ -16,6 +16,7 @@ const backdrop = ref<HTMLDivElement>();
 
 const onClick = (e: MouseEvent, force?: boolean) => {
   if (e.target == backdrop.value || force) {
+    console.log(e.target);
     emit("exit");
   }
 };
@@ -32,7 +33,7 @@ const onClick = (e: MouseEvent, force?: boolean) => {
       <CloseButton
         v-if="!props.disableCloseButton"
         colorLine="black"
-        colorBG="#664f3c"
+        colorBG="var(--global-color-primary)"
         size="40px"
         class="close-button"
         @click="(e) => onClick(e, true)"

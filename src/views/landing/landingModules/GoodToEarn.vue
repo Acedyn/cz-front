@@ -10,24 +10,23 @@ import frameOne from "/src/assets/landing/frames/frame_01.png";
 import frameTwo from "/src/assets/landing/frames/frame_02.png";
 import frameThree from "/src/assets/landing/frames/frame_03.png";
 
+import CoinImage from "@/assets/landing/coins/coin_good2earn.png";
+
 const { t } = useI18n({
   messages: locales,
 });
 
 const goodToEarnArguments = [
   {
-    title: t("arguments.one.title"),
-    details: t("arguments.one.details"),
+    key: "one",
     image: frameThree,
   },
   {
-    title: t("arguments.two.title"),
-    details: t("arguments.two.details"),
+    key: "two",
     image: frameTwo,
   },
   {
-    title: t("arguments.three.title"),
-    details: t("arguments.three.details"),
+    key: "three",
     image: frameOne,
   },
 ];
@@ -62,7 +61,7 @@ onMounted(() => {
     <TitleBlock
       :title="t('title.main')"
       maxWidth="34rem"
-      titleBackground="coins"
+      :titleBackground="CoinImage"
       titleColor="var(--global-color-paragraph)"
       gap="4rem"
     >
@@ -93,7 +92,7 @@ onMounted(() => {
       >
         <TitleBlock
           textAlign="justify"
-          :title="argument.title"
+          :title="t(`arguments.${argument.key}.title`)"
           :titleAnimation="
             index % 2 === 0 ? 'words-slide-left' : 'words-slide-right'
           "
@@ -103,7 +102,7 @@ onMounted(() => {
           :titleLevel="3"
           gap="1.875rem"
         >
-          <p v-html="argument.details"></p>
+          <p v-html="t(`arguments.${argument.key}.details`)"></p>
         </TitleBlock>
       </div>
     </div>
@@ -112,7 +111,7 @@ onMounted(() => {
 
 <style scoped>
 .container {
-  padding: 6.25rem 8.2rem;
+  padding: 10.25rem 8.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -120,7 +119,7 @@ onMounted(() => {
 }
 
 .container-small {
-  padding: 3.125rem 0vw;
+  padding: 10.125rem 0vw;
 }
 
 .argument {

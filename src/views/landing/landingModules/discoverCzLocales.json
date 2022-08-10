@@ -7,14 +7,14 @@
   },
   "fr": {
     "mainText": {
-      "discover": "Discover\nCardboard Citizens",
+      "discover": "Découvrez\nCardboard Citizens",
       "detailsOne": "<b class='global-important-text'>Cardboard Citizens</b> est un projet NFT sur la blockchain Solana. Notre Art est destiné à devenir <b class='global-important-text'>l’avatar</b> de nos holders/clients qui pourront représenter <b class='global-important-text'>notre projet et nos valeurs.</b>"
     }
   },
   "es": {
     "mainText": {
-      "discover": "Discover\nCardboard Citizens",
-      "detailsOne": "<b class='global-important-text'>Cardboard Citizens</b> is an NFT project in Solana Blockchain. Our Art is meant to become a <b class='global-important-text'>profile picture (PFP)</b> that our NFT holders will carry with pride along the <b class='global-important-text'>journey</b> that awaits!"
+      "discover": "Descuvre\nCardboard Citizens",
+      "detailsOne": "<b class='global-important-text'>Cardboard Citizens</b> es un proyecto de NFT en el Blockchain Solana.  ¡La funcionalidad primaria de nuestra colección de Arte es para usarlo como <b class='global-important-text'>Imagen de perfil</b> que los propietarios de los NFT podrán mostrar al mundo con orgullo durante nuestro <b class='global-important-text'>viaje juntos!</b>"
     }
   }
 }

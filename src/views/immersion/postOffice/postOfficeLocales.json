@@ -3,20 +3,65 @@
     "sections": {
       "post_office": {
         "description": "Exit the immersion view"
+      },
+      "team": {
+        "description": "Comming back soon !"
+      },
+      "boutique": {
+        "description": "Comming soon !"
+      },
+      "breakroom": {
+        "description": "Comming soon !"
+      },
+      "bill_of_lading": {
+        "description": "Get to know our future projects"
+      },
+      "warehouse": {
+        "description": "Customize your citizens"
       }
     }
   },
   "fr": {
     "sections": {
       "post_office": {
-        "description": "Quitter la page d'immersion"
+        "description": "Quitter la vue immersive"
+      },
+      "team": {
+        "description": "De retour bientot !"
+      },
+      "boutique": {
+        "description": "A venir bientot !"
+      },
+      "breakroom": {
+        "description": "A venir bientot !"
+      },
+      "bill_of_lading": {
+        "description": "Apprenez-en plus sur nos future projets"
+      },
+      "warehouse": {
+        "description": "Customisez vos cardboard citizens"
       }
     }
   },
   "es": {
     "sections": {
       "post_office": {
-        "description": "Salir de la vista de inmersión"
+        "description": "Exit the immersion view"
+      },
+      "team": {
+        "description": "Comming back soon !"
+      },
+      "boutique": {
+        "description": "Comming soon !"
+      },
+      "breakroom": {
+        "description": "Comming soon !"
+      },
+      "bill_of_lading": {
+        "description": "Get to know our future projects"
+      },
+      "warehouse": {
+        "description": "Customize your citizens"
       }
     }
   }
