@@ -3,14 +3,24 @@ import { onMounted, onUnmounted, computed } from "vue";
 import { getBreakpoint, Breakpoint } from "./utils/breakpoints";
 import TopHeader from "./components/header/TopHeader.vue";
 
+import { usePreferencesStore } from "./stores/preferences";
+import { storeToRefs } from "pinia";
+
 const breakpoint = getBreakpoint(onMounted, onUnmounted);
 const isSmall = computed(() => {
   return breakpoint.value < Breakpoint.MD;
 });
+
+const preferences = usePreferencesStore();
+const { headerCollapse } = storeToRefs(preferences);
 </script>
 
 <template>
-  <TopHeader :class="`app-header ${isSmall ? 'app-header-small' : ''}`" />
+  <TopHeader
+    :class="`app-header ${headerCollapse ? 'app-header-collapse' : ''} ${
+      isSmall ? 'app-header-small' : ''
+    }`"
+  />
   <RouterView :class="`app-view ${isSmall ? 'app-view-small' : ''}`" />
 </template>
 
@@ -29,6 +39,10 @@ const isSmall = computed(() => {
   position: absolute;
   z-index: 10;
   padding: 0 10.625rem;
+}
+
+.app-header-collapse {
+  padding: 0 2.625rem;
 }
 
 .app-header-small {
