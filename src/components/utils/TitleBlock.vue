@@ -2,6 +2,7 @@
 import { ref, onMounted } from "vue";
 import TypographyTitle from "./TypographyTitle.vue";
 import TypographyText from "./TypographyText.vue";
+import CoinImage from "../../assets/landing/coins.png";
 
 const props = withDefaults(
   defineProps<{
@@ -57,7 +58,7 @@ onMounted(() => {
     <div class="title-container">
       <img
         class="title-background"
-        src="@/assets/landing/coins.png"
+        :src="CoinImage"
         v-if="props.titleBackground"
       />
       <TypographyTitle
