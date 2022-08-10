@@ -127,11 +127,12 @@ const { t } = useI18n({
         :left="67.23"
         :width="17.89"
         :height="27.46"
+        disabled
         ><template #hover>
           <DetailsRegion
             title="Team"
             icon="groups"
-            description="lorem ipsum id dolor els istum dale rictus dolores ed astam maelicutis rotore"
+            :description="t('sections.team.description')"
           /> </template
       ></ImageRegion2D>
 
@@ -147,7 +148,7 @@ const { t } = useI18n({
           <DetailsRegion
             title="Bill of Lading"
             icon="local_library"
-            description="lorem ipsum id dolor els istum dale rictus dolores ed astam maelicutis rotore"
+            :description="t('sections.bill_of_lading.description')"
           /> </template
       ></ImageRegion2D>
 
@@ -163,7 +164,7 @@ const { t } = useI18n({
           <DetailsRegion
             title="Warehouse"
             icon="warehouse"
-            description="lorem ipsum id dolor els istum dale rictus dolores ed astam maelicutis rotore"
+            :description="t('sections.warehouse.description')"
           /> </template
       ></ImageRegion2D>
 
@@ -179,7 +180,7 @@ const { t } = useI18n({
           <DetailsRegion
             title="Break Room"
             icon="sports_esports"
-            description="Comming soon !"
+            :description="t('sections.breakroom.description')"
             noButton
           /> </template
       ></ImageRegion2D>
@@ -196,7 +197,7 @@ const { t } = useI18n({
           <DetailsRegion
             title="Boutique"
             icon="shopping_cart"
-            description="Comming soon !"
+            :description="t('sections.boutique.description')"
             noButton
           /> </template
       ></ImageRegion2D>

@@ -5,6 +5,8 @@ import TitleBlock from "../../../components/utils/TitleBlock.vue";
 import { useI18n } from "vue-i18n";
 import locales from "./trustUsLocales.json";
 
+import CoinImage from "@/assets/landing/coins/coin_values.png";
+
 import humain from "@/assets/logos/humain.png";
 import environment from "@/assets/logos/environment.png";
 import innovation from "@/assets/logos/innovation.png";
@@ -16,27 +18,23 @@ const { t } = useI18n({
 
 const trustArguments = [
   {
-    title: t("arguments.one.title"),
+    key: "one",
     name: "humain",
-    details: t("arguments.one.details"),
     image: humain,
   },
   {
-    title: t("arguments.two.title"),
     name: "environment",
-    details: t("arguments.two.details"),
+    key: "two",
     image: environment,
   },
   {
-    title: t("arguments.three.title"),
+    key: "three",
     name: "innovation",
-    details: t("arguments.three.details"),
     image: innovation,
   },
   {
-    title: t("arguments.four.title"),
+    key: "four",
     name: "art",
-    details: t("arguments.four.details"),
     image: art,
   },
 ];
@@ -70,7 +68,7 @@ onMounted(() => {
     <TitleBlock
       :title="t('title.main')"
       maxWidth="34rem"
-      titleBackground="coins"
+      :titleBackground="CoinImage"
       titleColor="var(--global-color-paragraph)"
       titleWordSize="3.75rem"
     >
@@ -90,13 +88,14 @@ onMounted(() => {
             />
           </div>
           <TitleBlock
-            :title="trustArgument.title"
-            titleWordSize="1.235rem"
+            class="argument-text"
+            :title="t(`arguments.${trustArgument.key}.title`)"
+            titleWordSize="2.235rem"
             titleSize="small"
             titleColor="var(--global-color-primary)"
             textSize="regular"
           >
-            {{ trustArgument.details }}
+            {{ t(`arguments.${trustArgument.key}.details`) }}
           </TitleBlock>
         </div>
       </div>
@@ -106,11 +105,12 @@ onMounted(() => {
 
 <style scoped>
 .container {
-  padding: 6.25rem 0;
+  padding-top: 2.25rem;
+  padding-bottom: 8.25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4.063rem;
+  gap: 8.063rem;
 }
 
 .arguments-scroll {
@@ -122,7 +122,7 @@ onMounted(() => {
 .argument-cards {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 3rem;
   padding: 0 2rem;
   margin-left: auto;
   margin-right: auto;
@@ -134,14 +134,11 @@ onMounted(() => {
   min-width: v-bind("cardWidth");
   width: v-bind("cardWidth");
   height: v-bind("`calc(${cardWidth} * ${cardAspectRatio})`");
-  background: rgba(0, 0, 0, 0.1);
-  border: solid 0.3rem var(--global-color-primary);
 
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2.063rem;
-  justify-content: center;
   padding: 0 1.5rem;
   border-radius: 0.938rem;
   opacity: 0;
@@ -149,9 +146,7 @@ onMounted(() => {
 
 .argument-icon {
   width: 25%;
-  height: v-bind("`calc((${cardWidth} - 3rem) * 0.25`");
-  margin-left: auto;
-  margin-right: auto;
+  margin-top: 25%;
 }
 
 .argument-image {
@@ -185,17 +180,18 @@ onMounted(() => {
 @keyframes card-slide-left {
   0% {
     transform: scale(0.6);
-    box-shadow: rgb(0 0 0 / 60%) 0px 0.15rem 0.6rem;
     opacity: 0;
   }
   70% {
     transform: scale(1.1);
-    box-shadow: rgb(0 0 0 / 15%) 0px 0.4rem 1.2rem;
   }
   100% {
     transform: scale(1);
-    box-shadow: rgb(0 0 0 / 20%) 0px 0.313rem 0.938rem;
     opacity: 1;
   }
+}
+
+.argument-text {
+  padding-top: 1rem;
 }
 </style>

@@ -53,7 +53,7 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
           font="Poppins"
           color=""
           v-for="(navButton, index) in props.navButtons"
-          @click="navButtons[0].click"
+          @click="navButton.click"
           :key="index"
           ><p :class="buttonClass(navButton.name.toLowerCase())">
             {{ navButton.name }}

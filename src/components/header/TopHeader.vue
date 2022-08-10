@@ -86,7 +86,7 @@ const togglePanel = () => {
       </div>
       <nav class="menu">
         <button
-          class="nav-button toto"
+          class="nav-button"
           :tooltip="navButton.soon ? 'Comming soon' : undefined"
           v-for="(navButton, index) in navButtons"
           :key="index"
@@ -133,7 +133,6 @@ const togglePanel = () => {
     <OverlayPopup
       :show="showPanel"
       margin="0"
-      disableCloseButton
       @exit="() => (showPanel = false)"
     >
       <TopHeaderPanel :navButtons="navButtons" />

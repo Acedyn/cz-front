@@ -11,6 +11,8 @@ import serge from "@/assets/landing/members/serge.jpg";
 import { useI18n } from "vue-i18n";
 import locales from "./ourTeamLocales.json";
 
+import CoinImage from "@/assets/landing/coins/coin_team.png";
+
 const { t } = useI18n({
   messages: locales,
 });
@@ -18,30 +20,26 @@ const { t } = useI18n({
 const teamMembers = [
   {
     name: "Willie",
-    description: t("willie.description"),
+    key: "willie",
     image: willie,
-    job: t("willie.job"),
     jobIcon: "build",
   },
   {
     name: "Modsiw",
-    description: t("modsiw.description"),
+    key: "modsiw",
     image: modsiw,
-    job: t("modsiw.job"),
     jobIcon: "local_florist",
   },
   {
     name: "Steven",
-    description: t("steven.description"),
+    key: "steven",
     image: steven,
-    job: t("steven.job"),
     jobIcon: "palette",
   },
   {
     name: "Serge",
-    description: t("serge.description"),
+    key: "serge",
     image: serge,
-    job: t("serge.job"),
     jobIcon: "memory",
   },
 ];
@@ -78,6 +76,7 @@ onMounted(() => {
   <div class="container">
     <TitleBlock
       :title="t('title.main')"
+      :titleBackground="CoinImage"
       maxWidth="34rem"
       titleBackground="coins"
       titleColor="var(--global-color-paragraph)"
@@ -111,12 +110,12 @@ onMounted(() => {
                 weight="light"
                 size="big"
               >
-                {{ teamMember.job }}
+                {{ t(`${teamMember.key}.job`) }}
               </TypographyText>
             </div>
             <span class="line-separator" />
             <TypographyText color="var(--global-color-paragraph)">
-              {{ teamMember.description }}
+              {{ t(`${teamMember.key}.description`) }}
             </TypographyText>
           </div>
         </div>

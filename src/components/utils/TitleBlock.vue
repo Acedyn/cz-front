@@ -2,7 +2,6 @@
 import { ref, onMounted } from "vue";
 import TypographyTitle from "./TypographyTitle.vue";
 import TypographyText from "./TypographyText.vue";
-import CoinImage from "../../assets/landing/coins.png";
 
 const props = withDefaults(
   defineProps<{
@@ -58,7 +57,7 @@ onMounted(() => {
     <div class="title-container">
       <img
         class="title-background"
-        :src="CoinImage"
+        :src="titleBackground"
         v-if="props.titleBackground"
       />
       <TypographyTitle
@@ -71,7 +70,9 @@ onMounted(() => {
           v-for="(titleWord, index) in props.title.split(' ')"
           :key="index"
           :style="`--i:${index}`"
-          :class="`title-words idle-${props.titleAnimation}`"
+          :class="`title-words idle-${props.titleAnimation} ${
+            props.titleBackground ? 'disabled-title' : ''
+          }`"
           >{{ titleWord + " " }}</span
         >
       </TypographyTitle>
@@ -99,6 +100,10 @@ onMounted(() => {
 .title-words {
   font-weight: inherit;
   font-size: v-bind("props.titleWordSize || 'inherit'");
+}
+
+.disabled-title {
+  opacity: 0;
 }
 
 .idle-words-slide-left {

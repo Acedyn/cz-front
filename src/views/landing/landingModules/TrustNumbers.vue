@@ -18,7 +18,7 @@ const statistics = [
     end: 6767,
     suffix: "",
     data: ref("0"),
-    details: "NFTs Minted",
+    details: "NFTs",
   },
   {
     value: 0,
@@ -118,6 +118,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   font-size: 3.75rem;
+  align-self: start;
 }
 
 .statistics {
@@ -143,7 +144,7 @@ onMounted(() => {
 }
 
 .numbers-large {
-  grid-template-columns: 4fr 5fr;
+  grid-template-columns: 5fr 5fr;
   column-gap: 15%;
 }
 

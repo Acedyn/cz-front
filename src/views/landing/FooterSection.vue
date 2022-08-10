@@ -27,13 +27,15 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
       <div class="infos">
         <div class="infos-text">
           <TypographyTitle color="white">Cardboard Citizens</TypographyTitle>
-          <TypographyText>{{ t("infos.text") }}</TypographyText>
+          <TypographyText size="small"
+            ><p class="disclamer">{{ t("infos.text") }}</p></TypographyText
+          >
         </div>
         <div class="infos-socials">
-          <SocialButton social="discord" :size="0.4" />
-          <SocialButton social="twitter" :size="0.4" />
-          <SocialButton social="instagram" :size="0.4" />
-          <SocialButton social="youtube" :size="0.4" />
+          <SocialButton social="discord" :size="0.4" fill="#39221dbd" />
+          <SocialButton social="twitter" :size="0.4" fill="#39221dbd" />
+          <SocialButton social="instagram" :size="0.4" fill="#39221dbd" />
+          <SocialButton social="youtube" :size="0.4" fill="#39221dbd" />
         </div>
       </div>
       <div class="navigation">
@@ -68,7 +70,7 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
 <style scoped>
 .container {
   padding: 0 var(--app-padding-side);
-  background: var(--global-color-primary);
+  background: #39221dbd;
   min-height: 25rem;
   width: 100%;
 
@@ -126,5 +128,9 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.disclamer {
+  padding: 1rem 0;
 }
 </style>

@@ -36,7 +36,7 @@ const props = withDefaults(
       v-if="!props.noButton"
       :icon="props.icon"
       textWeight="regular"
-      >{{ props.title }}</CtaButton
+      >Enter</CtaButton
     >
   </div>
 </template>
