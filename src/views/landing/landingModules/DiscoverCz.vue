@@ -79,7 +79,7 @@ onMounted(() => {
         <CtaButton icon="public" @click="() => router.push('/immersion')"
           >World</CtaButton
         >
-        <CtaButton icon="handyman" invert tooltip="Comming soon"
+        <CtaButton icon="handyman" invert tooltip="Coming soon"
           >Tools</CtaButton
         >
       </div>

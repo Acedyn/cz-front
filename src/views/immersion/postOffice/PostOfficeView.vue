@@ -15,11 +15,11 @@ const preferences = usePreferencesStore();
 const hightlightConfig = {
   dark: {
     visited: "#ffffff54",
-    new: "#fffa00",
+    new: "#86f1ff",
   },
   light: {
     visited: "black",
-    new: "#fffa00",
+    new: "#86f1ff",
   },
 };
 

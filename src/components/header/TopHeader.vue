@@ -87,7 +87,7 @@ const togglePanel = () => {
       <nav class="menu">
         <button
           class="nav-button"
-          :tooltip="navButton.soon ? 'Comming soon' : undefined"
+          :tooltip="navButton.soon ? 'Coming soon' : undefined"
           v-for="(navButton, index) in navButtons"
           :key="index"
           @click="navButton.click"
