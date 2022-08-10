@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import NavigationButton from "../interaction/NavigationButton.vue";
-import TypographyTitle from "../utils/TypographyText.vue";
+import CtaButton from "../interaction/CtaButton.vue";
+import TypographyTitle from "../utils/TypographyTitle.vue";
 import TypographyText from "../utils/TypographyText.vue";
 
 const props = withDefaults(
@@ -18,21 +18,25 @@ const props = withDefaults(
 </script>
 
 <template>
-  <div class="details-container">
+  <div class="details-container hover-background">
     <div class="region-header">
       <span v-if="props.icon" class="material-icons icon-title">
         {{ props.icon }}
       </span>
-      <TypographyTitle :level="3" color="white"
+      <TypographyTitle :level="3" color="white" weight="bold"
         ><span class="region-title">{{ props.title }}</span></TypographyTitle
       >
     </div>
-    <p class="text description">{{ props.description }}</p>
-    <NavigationButton
+    <TypographyText>
+      <p class="text description">{{ props.description }}</p>
+    </TypographyText>
+    <CtaButton
+      :noIcon="!props.icon"
+      :size="0.6"
       v-if="!props.noButton"
-      colorLine="#ffffff"
-      colorBG="#bd7947"
-      >{{ `Enter the ${props.title}` }}</NavigationButton
+      :icon="props.icon"
+      textWeight="regular"
+      >{{ props.title }}</CtaButton
     >
   </div>
 </template>
@@ -50,7 +54,7 @@ const props = withDefaults(
   padding: 0% 10%;
   gap: 10px;
 
-  overflow-y: auto;
+  overflow: visible;
 }
 
 .text {
@@ -64,19 +68,38 @@ const props = withDefaults(
 }
 
 .region-title {
-  font-size: 2.464rem;
-  font-weight: bolder;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
   text-transform: uppercase;
 }
 
 .icon-title {
   font-size: 2.464rem;
-  font-weight: bolder;
   color: white;
 }
 
 .description {
-  font-size: 15px;
   text-align: center;
+}
+
+.hover-background {
+  background: radial-gradient(
+    closest-side,
+    rgba(103, 55, 11, 0.73) 40%,
+    rgba(102, 54, 10, 0)
+  );
+
+  transition: opacity 0.3s ease-out, background-size 0.1s ease-out;
+  background-size: 20% 20%;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+}
+
+.hover-background:hover {
+  opacity: 1;
+  background-size: 100% 100%;
 }
 </style>

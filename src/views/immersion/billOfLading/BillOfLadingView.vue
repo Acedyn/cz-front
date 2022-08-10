@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ImageRegion2D from "@/components/scene/ImageRegion2D.vue";
 import DetailsRegion from "@/components/scene/DetailsRegion.vue";
+import TypographyTitle from "@/components/scene/TypographyTitle.vue";
 import Scene2D from "@/components/scene/Scene2D.vue";
 import OverlayPopup from "@/components/popup/OverlayPopup.vue";
 import ProjectPopup from "./ProjectPopup.vue";
@@ -41,7 +42,7 @@ const selectProject = (name: string | undefined) => {
         :height="11.25"
         noHoverImage
         @click="() => selectProject('proof_water')"
-        ><template #hover> <DetailsRegion title="proof of water" /> </template
+        ><template #hover> <DetailsRegion title="Proof of Water" /> </template
       ></ImageRegion2D>
 
       <ImageRegion2D
@@ -53,7 +54,7 @@ const selectProject = (name: string | undefined) => {
         :height="14.05"
         noHoverImage
         @click="() => selectProject('proof_scrap')"
-        ><template #hover> <DetailsRegion title="proof of scrap" /> </template
+        ><template #hover> <DetailsRegion title="Proof of Scrap" /> </template
       ></ImageRegion2D>
 
       <ImageRegion2D
@@ -66,7 +67,7 @@ const selectProject = (name: string | undefined) => {
         noHoverImage
         @click="() => selectProject('proof_knowledge')"
         ><template #hover>
-          <DetailsRegion title="proof of knowledge" /> </template
+          <DetailsRegion title="Proof of Knowledge" /> </template
       ></ImageRegion2D>
 
       <ImageRegion2D
@@ -78,7 +79,7 @@ const selectProject = (name: string | undefined) => {
         :height="16.66"
         noHoverImage
         @click="() => selectProject('proof_forest')"
-        ><template #hover> <DetailsRegion title="proof of forest" /> </template
+        ><template #hover> <DetailsRegion title="Proof of Forest" /> </template
       ></ImageRegion2D>
     </template>
 

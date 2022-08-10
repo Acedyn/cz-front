@@ -8,6 +8,7 @@ const props = withDefaults(
     colorHover?: string;
     colorHoverInvert?: string;
     noText?: boolean;
+    textWeight?: "bold" | "regular" | "light";
     noIcon?: boolean;
     invert?: boolean;
     thickness?: string;
@@ -16,6 +17,7 @@ const props = withDefaults(
   {
     size: 1,
     thickness: "0.188rem",
+    textWeight: "bold",
     color: "var(--global-color-primary)",
     colorHover: "var(--global-color-hover)",
     colorHoverInvert: "var(--global-color-secondary)",
@@ -41,7 +43,7 @@ const emit = defineEmits<{
       size="small"
       :color="props.invert ? props.color : 'white'"
       :level="4"
-      weight="bold"
+      :weight="props.textWeight"
       font="Poppins"
       v-if="!props.noText"
     >

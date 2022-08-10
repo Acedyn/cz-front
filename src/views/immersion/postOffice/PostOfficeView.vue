@@ -50,6 +50,61 @@ const { t } = useI18n({
   >
     <template #elements="{ sceneConfig }">
       <ImageRegion2D
+        name="tv"
+        :config="sceneConfig"
+        :top="64.89"
+        :left="24.47"
+        :width="7.03"
+        :height="13.98"
+        noHoverBackground
+        @click="toggleTV"
+        class="front-element"
+        ><template #hover><span /></template
+      ></ImageRegion2D>
+
+      <ImageRegion2D
+        name="lightmode"
+        :config="sceneConfig"
+        :top="11.71"
+        :left="47.63"
+        :width="4.45"
+        :height="6.99"
+        noHoverImage
+        noHoverBackground
+        class="front-element"
+        @click="preferences.toggleTheme"
+        ><template #hover><span /></template
+      ></ImageRegion2D>
+
+      <ImageRegion2D
+        name="discord"
+        :config="sceneConfig"
+        :top="11.71"
+        :left="51.95"
+        :width="4.45"
+        :height="6.99"
+        noHoverImage
+        noHoverBackground
+        class="front-element"
+        @click="() => openLink('http://discord.gg/cardboardcz')"
+        ><template #hover><span /></template
+      ></ImageRegion2D>
+
+      <ImageRegion2D
+        name="twitter"
+        :config="sceneConfig"
+        :top="11.85"
+        :left="56.61"
+        :width="4.47"
+        :height="6.9"
+        noHoverImage
+        noHoverBackground
+        class="front-element"
+        @click="() => openLink('https://twitter.com/CardboardCtzNFT')"
+        ><template #hover><span /></template
+      ></ImageRegion2D>
+
+      <ImageRegion2D
         name="post_office"
         :config="sceneConfig"
         :top="15.47"
@@ -60,7 +115,7 @@ const { t } = useI18n({
         ><template #hover>
           <DetailsRegion
             icon="local_post_office"
-            title="post office"
+            title="Post Office"
             :description="t('sections.post_office.description')"
           /> </template
       ></ImageRegion2D>
@@ -74,7 +129,7 @@ const { t } = useI18n({
         :height="27.46"
         ><template #hover>
           <DetailsRegion
-            title="team"
+            title="Team"
             icon="groups"
             description="lorem ipsum id dolor els istum dale rictus dolores ed astam maelicutis rotore"
           /> </template
@@ -90,7 +145,7 @@ const { t } = useI18n({
         @click="() => router.push('/immersion/bill-of-lading')"
         ><template #hover>
           <DetailsRegion
-            title="bill of lading"
+            title="Bill of Lading"
             icon="local_library"
             description="lorem ipsum id dolor els istum dale rictus dolores ed astam maelicutis rotore"
           /> </template
@@ -106,7 +161,7 @@ const { t } = useI18n({
         @click="() => router.push('/immersion/warehouse')"
         ><template #hover>
           <DetailsRegion
-            title="warehouse"
+            title="Warehouse"
             icon="warehouse"
             description="lorem ipsum id dolor els istum dale rictus dolores ed astam maelicutis rotore"
           /> </template
@@ -122,7 +177,7 @@ const { t } = useI18n({
         disabled
         ><template #hover>
           <DetailsRegion
-            title="break room"
+            title="Break Room"
             icon="sports_esports"
             description="Comming soon !"
             noButton
@@ -139,62 +194,11 @@ const { t } = useI18n({
         disabled
         ><template #hover>
           <DetailsRegion
-            title="boutique"
+            title="Boutique"
             icon="shopping_cart"
             description="Comming soon !"
             noButton
           /> </template
-      ></ImageRegion2D>
-
-      <ImageRegion2D
-        name="tv"
-        :config="sceneConfig"
-        :top="64.89"
-        :left="24.47"
-        :width="7.03"
-        :height="13.98"
-        noHoverBackground
-        @click="toggleTV"
-        ><template #hover><span /></template
-      ></ImageRegion2D>
-
-      <ImageRegion2D
-        name="lightmode"
-        :config="sceneConfig"
-        :top="11.71"
-        :left="47.63"
-        :width="4.45"
-        :height="6.99"
-        noHoverImage
-        noHoverBackground
-        @click="preferences.toggleTheme"
-        ><template #hover><span /></template
-      ></ImageRegion2D>
-
-      <ImageRegion2D
-        name="discord"
-        :config="sceneConfig"
-        :top="11.71"
-        :left="51.95"
-        :width="4.45"
-        :height="6.99"
-        noHoverImage
-        noHoverBackground
-        @click="() => openLink('http://discord.gg/cardboardcz')"
-        ><template #hover><span /></template
-      ></ImageRegion2D>
-
-      <ImageRegion2D
-        name="twitter"
-        :config="sceneConfig"
-        :top="11.85"
-        :left="56.61"
-        :width="4.47"
-        :height="6.9"
-        noHoverImage
-        noHoverBackground
-        @click="() => openLink('https://twitter.com/CardboardCtzNFT')"
-        ><template #hover><span /></template
       ></ImageRegion2D>
     </template>
 
@@ -221,5 +225,8 @@ const { t } = useI18n({
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.front-element {
+  z-index: 1;
 }
 </style>

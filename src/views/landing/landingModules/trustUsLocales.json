@@ -25,25 +25,49 @@
   },
   "fr": {
     "title": {
-      "main": "Pourquoi nous croire ?",
+      "main": "No valeurs",
       "details": "To get a closer look to waht make Cardboard Citizens so great !"
     },
     "arguments": {
       "one": {
-        "title": "Member one",
-        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi morbi sit consectetur elit."
+        "title": "Humain",
+        "details": "Nous respectons toutes personnes avec amour, patience et bienveillance"
+      },
+      "two": {
+        "title": "Environnement",
+        "details": "Nous voulons aider la planete avec nos differentes solutions"
+      },
+      "three": {
+        "title": "Innovation",
+        "details": "Nous ne cessons de nous challenger avec cette nouvelle technologie qu’est la blockchain."
+      },
+      "four": {
+        "title": "Art",
+        "details": "L’art est le meilleur moyen de rassembler des être humains…"
       }
     }
   },
   "es": {
     "title": {
-      "main": "¿Por qué creernos?",
+      "main": "Our Values",
       "details": "To get a closer look to waht make Cardboard Citizens so great !"
     },
     "arguments": {
       "one": {
-        "title": "Member one",
-        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi morbi sit consectetur elit."
+        "title": "Human",
+        "details": "We believe in treating others with respect, love, patience and kindness.."
+      },
+      "two": {
+        "title": "Social & Environment",
+        "details": "Earth is our home and we place it in the core of our initiatives. "
+      },
+      "three": {
+        "title": "Innovation",
+        "details": "We innovate through the blockchain to bring solutions to the world."
+      },
+      "four": {
+        "title": "Art",
+        "details": "Art is the best way to bring people together and convey ideas. "
       }
     }
   }

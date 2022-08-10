@@ -59,8 +59,13 @@ onMounted(() => {
   <div
     :class="`container ${breakpoint < Breakpoint.LD ? 'container-small' : ''}`"
   >
-    <TitleBlock :title="t('title.main')" maxWidth="34rem">
-      <p>{{ t("title.details") }}</p>
+    <TitleBlock
+      :title="t('title.main')"
+      maxWidth="34rem"
+      titleBackground="coins"
+      titleColor="var(--global-color-paragraph)"
+      gap="4rem"
+    >
     </TitleBlock>
 
     <div
@@ -170,12 +175,12 @@ onMounted(() => {
 
 .right-argument {
   order: 1;
-  justify-self: start;
+  justify-self: center;
 }
 
 .right-argument {
   order: 1;
-  justify-self: end;
+  justify-self: center;
 }
 
 .argument-details::before {

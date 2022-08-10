@@ -70,9 +70,10 @@ onMounted(() => {
     <TitleBlock
       :title="t('title.main')"
       maxWidth="34rem"
+      titleBackground="coins"
+      titleColor="var(--global-color-paragraph)"
       titleWordSize="3.75rem"
     >
-      <p>{{ t("title.details") }}</p>
     </TitleBlock>
     <div class="arguments-scroll">
       <div class="argument-cards" ref="cards">

@@ -3,7 +3,7 @@ import OverlayPopup from "../popup/OverlayPopup.vue";
 import TypographyText from "../utils/TypographyText.vue";
 import LanguagePicker from "../interaction/LanguagePicker.vue";
 import TopHeaderPanel from "./TopHeaderPanel.vue";
-import { useRoute, onBeforeRouteLeave } from "vue-router";
+import { useRoute } from "vue-router";
 import { getBreakpoint, Breakpoint } from "../../utils/breakpoints";
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import { usePreferencesStore } from "../../stores/preferences";
@@ -20,39 +20,47 @@ const { t } = useI18n({
 const preferences = usePreferencesStore();
 const { headerCollapse } = storeToRefs(preferences);
 
+const showPanel = ref(false);
+const breakpoint = getBreakpoint(onMounted, onUnmounted);
+
 const navButtons = [
   {
     name: t("buttons.home"),
-    click: () => router.push("/"),
+    click: () => {
+      router.push("/");
+      showPanel.value = false;
+    },
     soon: false,
   },
   {
     name: t("buttons.world"),
-    click: () => router.push("/immersion"),
+    click: () => {
+      router.push("/immersion");
+      showPanel.value = false;
+    },
     soon: false,
   },
   {
     name: t("buttons.tools"),
-    click: () => router.push("/"),
+    click: () => {
+      router.push("/");
+      showPanel.value = false;
+    },
     soon: true,
   },
   {
     name: t("buttons.market"),
-    click: () => router.push("/marketplace"),
+    click: () => {
+      router.push("/marketplace");
+      showPanel.value = false;
+    },
     soon: false,
   },
 ];
 
-const showPanel = ref(false);
-const breakpoint = getBreakpoint(onMounted, onUnmounted);
-
 const buttonClass = (name: string) => {
   return `menu-button ${useRoute().name === name ? "button-current" : ""}`;
 };
-
-onBeforeRouteLeave((to) => {
-  headerCollapse.value = !!to.meta.headerCollased;
-});
 
 const isCollapsed = computed(() => {
   return !headerCollapse.value && breakpoint.value > Breakpoint.SM;
@@ -280,7 +288,7 @@ const togglePanel = () => {
 
   background: var(--global-color-dark);
   font-weight: bolder;
-  color: #efd7bc;
+  color: white;
   font-family: Poppins;
   font-size: 1rem;
   width: 10rem;

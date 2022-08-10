@@ -6,6 +6,7 @@ import TypographyText from "./TypographyText.vue";
 const props = withDefaults(
   defineProps<{
     title: string;
+    titleBackground?: string;
     titleSize?: "small" | "regular" | "big";
     titleWordSize?: string;
     titleAnimation?: "words-slide-left" | "words-slide-right";
@@ -53,20 +54,27 @@ onMounted(() => {
 
 <template>
   <div class="title-block" ref="root">
-    <TypographyTitle
-      :size="props.titleSize"
-      :level="props.titleLevel"
-      :color="props.titleColor"
-      :quotes="props.quotes"
-    >
-      <span
-        v-for="(titleWord, index) in props.title.split(' ')"
-        :key="index"
-        :style="`--i:${index}`"
-        :class="`title-words idle-${props.titleAnimation}`"
-        >{{ titleWord + " " }}</span
+    <div class="title-container">
+      <img
+        class="title-background"
+        src="@/assets/landing/coins.png"
+        v-if="props.titleBackground"
+      />
+      <TypographyTitle
+        :size="props.titleSize"
+        :level="props.titleLevel"
+        :color="props.titleColor"
+        :quotes="props.quotes"
       >
-    </TypographyTitle>
+        <span
+          v-for="(titleWord, index) in props.title.split(' ')"
+          :key="index"
+          :style="`--i:${index}`"
+          :class="`title-words idle-${props.titleAnimation}`"
+          >{{ titleWord + " " }}</span
+        >
+      </TypographyTitle>
+    </div>
     <TypographyText
       :size="props.textSize"
       :class="`details-text idle-${props.textAnimation}`"
@@ -158,5 +166,19 @@ onMounted(() => {
     transform: translateY(0%);
     opacity: 1;
   }
+}
+
+.title-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-background {
+  position: absolute;
+  width: 280%;
+  object-fit: contain;
+  z-index: 0;
 }
 </style>

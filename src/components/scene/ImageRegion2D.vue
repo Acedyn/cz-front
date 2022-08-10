@@ -166,9 +166,7 @@ onBeforeMount(() => {
 .hover-content {
   position: absolute;
   padding-top: 10%;
-  min-width: 20rem;
-  margin-left: auto;
-  margin-right: auto;
+  justify-content: center;
   top: 0;
   left: 0;
   width: 100%;
@@ -184,24 +182,5 @@ onBeforeMount(() => {
   filter: v-bind(
     "highlightColor ? `drop-shadow(0px 0px 6px ${highlightColor})` : ''"
   );
-}
-
-.hover-background {
-  background: radial-gradient(
-    closest-side,
-    rgba(103, 55, 11, 0.73) 40%,
-    rgba(102, 54, 10, 0)
-  );
-
-  transition: opacity 0.3s ease-out, background-size 0.1s ease-out;
-  opacity: 0;
-  background-size: 20% 20%;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.hover-background:hover {
-  opacity: 1;
-  background-size: 100% 100%;
 }
 </style>
