@@ -47,26 +47,30 @@ const teamMembers = [
 ];
 
 const cardWidth = "22.5rem";
-const cardAspectRatio = 1.53;
+const cardAspectRatio = 425 / 332;
 
 const cards = ref<Element>();
+const scroll = ref<Element>();
 
 onMounted(() => {
-  if (!cards.value) {
+  if (!cards.value || !scroll.value) {
     return;
   }
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("animation-card-popup");
+        entry.target.classList.add("scroll-animated");
       } else if (entry.boundingClientRect.top > 0) {
         entry.target.classList.remove("animation-card-popup");
+        entry.target.classList.remove("scroll-animated");
       }
     });
   });
 
   // Tell the observer which elements to track
   observer.observe(cards.value);
+  observer.observe(scroll.value);
 });
 </script>
 
@@ -75,11 +79,12 @@ onMounted(() => {
     <TitleBlock
       :title="t('title.main')"
       maxWidth="34rem"
+      titleBackground="coins"
+      titleColor="var(--global-color-paragraph)"
       titleWordSize="3.75rem"
     >
-      <p>{{ t("title.details") }}</p>
     </TitleBlock>
-    <div class="members-scroll">
+    <div class="members-scroll" ref="scroll">
       <div class="member-cards" ref="cards">
         <div
           v-for="(teamMember, index) in teamMembers"
@@ -102,7 +107,7 @@ onMounted(() => {
                 {{ teamMember.jobIcon }}
               </span>
               <TypographyText
-                color="var(--global-color-primary)"
+                color="var(--global-color-paragraph)"
                 weight="light"
                 size="big"
               >
@@ -110,7 +115,7 @@ onMounted(() => {
               </TypographyText>
             </div>
             <span class="line-separator" />
-            <TypographyText color="var(--global-color-dark)">
+            <TypographyText color="var(--global-color-paragraph)">
               {{ teamMember.description }}
             </TypographyText>
           </div>
@@ -125,13 +130,24 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4.063rem;
+  gap: 7.063rem;
 }
 
 .members-scroll {
   overflow-x: auto;
   width: 100vw;
   display: flex;
+}
+
+.scroll-animated {
+  animation: hide-scroll calc(0.4s + 0.1s * 4);
+}
+
+@keyframes hide-scroll {
+  from,
+  to {
+    overflow: visible;
+  }
 }
 
 .member-cards {
@@ -147,28 +163,27 @@ onMounted(() => {
 .member-card {
   --argument-card-width: 18.75rem;
   width: v-bind("cardWidth");
-  height: v-bind("`calc(${cardWidth} * ${cardAspectRatio})`");
-  background: var(--global-color-paragraph);
-  box-shadow: rgb(0 0 0 / 20%) 0px 0.313rem 0.938rem;
+  height: v-bind("`calc(${cardWidth} * ${cardAspectRatio} * 1.1)`");
+  filter: drop-shadow(0px 0.313rem 0.938rem rgb(0 0 0 / 20%));
+  background-image: url(@/assets/landing/members/card.png);
+  background-repeat: no-repeat;
+  background-size: contain;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.625rem 1.9rem;
+  padding: 1.6rem 4.5rem;
   border-radius: 0.938rem;
   opacity: 0;
-  row-gap: 1.063rem;
-
-  outline: solid 0.188rem var(--global-color-primary);
-  outline-offset: -0.188rem;
+  row-gap: 2.063rem;
 }
 
 .member-image {
   background-size: cover;
   background-position: center;
   width: 100%;
-  height: v-bind("`calc(${cardWidth} * 0.92 - 4rem)`");
-  border-radius: 0.625rem;
+  height: v-bind("`calc(${cardWidth} * 0.8 - 4.5rem)`");
+  border-radius: 0.125rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -177,7 +192,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   justify-content: start;
-  gap: 1.063rem;
+  gap: 0.3rem;
   width: 100%;
   flex-grow: 1;
 }
@@ -189,7 +204,7 @@ onMounted(() => {
 }
 
 .job-icon {
-  color: var(--global-color-primary);
+  color: var(--global-color-paragraph);
   margin-left: auto;
   margin-right: 0.5rem;
 }
@@ -210,6 +225,17 @@ onMounted(() => {
   animation-fill-mode: forwards;
 }
 
+@keyframes words-slide-left {
+  0% {
+    transform: translateX(500%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
 .modsiw {
   background-size: cover;
   background-image: url(@/assets/landing/members/modsiw.jpg);
@@ -225,16 +251,5 @@ onMounted(() => {
 
 .serge {
   background-image: url(@/assets/landing/members/serge.jpg);
-}
-
-@keyframes words-slide-left {
-  0% {
-    transform: translateX(500%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0%);
-    opacity: 1;
-  }
 }
 </style>

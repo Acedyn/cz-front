@@ -34,7 +34,7 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
       </div>
 
       <div class="panel-options">
-        <LanguagePicker />
+        <LanguagePicker class="language-picker" />
         <!--
         <button class="signin-button">
           <span class="material-icons signin-icon"> person </span>
@@ -53,6 +53,7 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
           font="Poppins"
           color=""
           v-for="(navButton, index) in props.navButtons"
+          @click="navButtons[0].click"
           :key="index"
           ><p :class="buttonClass(navButton.name.toLowerCase())">
             {{ navButton.name }}
@@ -182,5 +183,9 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
 .slide-enter-from,
 .slide-leave-to {
   transform: transformX(-100%);
+}
+
+.language-picker {
+  z-index: 1;
 }
 </style>

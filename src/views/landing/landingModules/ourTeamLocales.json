@@ -26,21 +26,43 @@
       "main": "Notre Equipe",
       "details": "To get a closer look to waht make Cardboard Citizens so great !"
     },
-    "johndoe": {
+    "willie": {
+      "job": "Builder",
+      "description": "Willie se passioné pour les sujets du Web3 et veut participer à la croissance de ces nouvelles technologie ! "
+    },
+    "modsiw": {
+      "job": "Nerd",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus ipsum viverra etiam."
+    },
+    "steven": {
       "job": "Artist",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus ipsum viverra etiam.",
-      "tag": "CrazyGuy"
+      "description": "Steven est un artiste avec beaucoup d’expérience. Il dessine depuis son plus jeune age…"
+    },
+    "serge": {
+      "job": "Developer",
+      "description": "Serge est un développeur backend qui peut faire"
     }
   },
   "es": {
     "title": {
-      "main": "Nuestro equipo",
+      "main": "Our Team",
       "details": "To get a closer look to waht make Cardboard Citizens so great !"
     },
-    "johndoe": {
+    "willie": {
+      "job": "Builder",
+      "description": "Willie is the CEO of Cardboard Citizens. "
+    },
+    "modsiw": {
+      "job": "Nerd",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus ipsum viverra etiam."
+    },
+    "steven": {
       "job": "Artist",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus ipsum viverra etiam.",
-      "tag": "CrazyGuy"
+      "description": "Experienced graphic designer, Kodaz has a deep interest in characters illustration."
+    },
+    "serge": {
+      "job": "Developer",
+      "description": "A deeply experienced web developper, Serge codes as he breathes."
     }
   }
 }

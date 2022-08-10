@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
+import { preloadImages } from "../../../utils/loader";
 import { getBreakpoint, Breakpoint } from "../../../utils/breakpoints";
 import TypographyTitle from "../../../components/utils/TypographyTitle.vue";
 import TypographyText from "../../../components/utils/TypographyText.vue";
@@ -28,6 +29,7 @@ const nextSlide = () => {
 };
 
 onMounted(() => {
+  preloadImages(images.map((image) => image.href));
   nextSlide();
 });
 </script>
@@ -244,7 +246,7 @@ onMounted(() => {
 
   background: var(--global-color-dark);
   font-weight: bolder;
-  color: #efd7bc;
+  color: white;
   font-family: Poppins;
   font-size: 1rem;
   width: 10rem;

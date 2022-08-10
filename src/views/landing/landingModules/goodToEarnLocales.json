@@ -7,27 +7,35 @@
     "arguments": {
       "one": {
         "title": "Provide Accountability ",
-        "details": "We will work with profit and non-profit organizations <b class='global-important-text'>by providing them accountability</b> through our protocols for their Social Actions. (Recycling, reforestation, cleaning oceans..)<br>We use the <b class='global-important-text'>Solana Blockchain</b> enables the smart contracts we design to suit our <b class='global-important-text'>Customers’ needs</b> to deliver transactions at great speeds while keeping <b class='global-important-text'>a low cost and low impact for the environment.</b>"
+        "details": "<ul><li style='padding: 0.5rem 0'>Develop protocols to <b class='global-important-text'>provide accountability on social actions</b></li><li style='padding: 0.5rem 0'>Our protocols are designed to help profit and non-profit organizations</li><li style='padding: 0.5rem 0'>Recycling, reforestation and many more good actions will be supported.. </li><li style='padding: 0.5rem 0'><b class='global-important-text'>Use Solana Blockchain</b> to suit our Customer’s needs </li><ul><li>Fast Transactions</li><li>Low Costs</li><li>Low Carbon Emission</li></ul></ul><a href='immersion/bill-of-lading'><br/><b>Check our detailed Roadmap !</b></a>"
       },
       "two": {
         "title": "Incentives for good actions",
-        "details": "<b class='global-important-text'>The Community</b> will have multiple activities that will allow them to earn income for the <b class='global-important-text'>good actions</b> they take. This income will be in the shape of <b class='global-important-text'>local claimable</b> coupons, NFT, SOL, SPL tokens, allowing to <b>everyone</b> multiple venues into taking actions."
+        "details": "<ul><li style='padding: 0.5rem 0'><b class='global-important-text'>Cardboard Citizens NFT holders</b> will be involved in our <b class='global-important-text'>Web3 protocols</b></li><li style='padding: 0.5rem 0'>Our NFT holders will be responsible of the validation process for providing accountability</li><li style='padding: 0.5rem 0'>Vote system will be put in place to interact on key aspects of the project</li></ul>"
       },
       "three": {
         "title": "The Community though our Protocols",
-        "details": "<b class='global-important-text'>Citizens</b> are the parties involved in operations of Cardboard Citizens web3 validation on our Solana smart contracts. Holders will be responsible for most of the web3 and blockchain responsibilities along the way.<br/>These will be done by using their NFT token as their voting/validation weight to interact on key aspects along the journey of the project."
+        "details": "<ul><li style='padding: 0.5rem 0'>Multiple activities to <b class='global-important-text'>earn income for the Community</b></li><li style='padding: 0.5rem 0'><b class='global-important-text'>Good actions</b> to be rewarded in various forms (NFT, SOL, SPL tokens, coupons..)</li><li style='padding: 0.5rem 0'>Soon available in our platform Cz_Breakroom:<ul><li>Twitter/Instagram/Facebook/Tik Tok participation.</li><li>Discord games and activities.</li><li>Participating in our free classes and events.</li></ul></li></ul>"
       }
     }
   },
   "fr": {
     "title": {
       "main": "Good to Earn",
-      "details": "Pour voir de plus près ce qui rend les Cardboard Citizens si formidables !"
+      "details": "Good2Earn is a whole new concept designed by Cardboard Citizens... You have to do good to earn and all of our protocols aim at benefits the real world."
     },
     "arguments": {
       "one": {
-        "title": "This is argument one",
-        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi morbi sit consectetur elit."
+        "title": "Provide Accountability ",
+        "details": "<ul><li style='padding: 0.5rem 0'>Des protocoles ayant pour but de rendre des <b class='global-important-text'>actions sociales evidentes</b></li><li style='padding: 0.5rem 0'>Nos systemes ont été designé pour venir en aide aux organisations publics privés</li><li style='padding: 0.5rem 0'>Le recyclage, la reforestation et bien d’autres actions pris en charge !</li><li style='padding: 0.5rem 0'>Solana Blockchain et la <b class='global-important-text'>meilleure solution</b> car </li><ul><li>Transactions rapide</li><li>Prix avantageux</li><li>Respectueux de l’environnement</li></ul></ul><a href='immersion/bill-of-lading'><br/><b>Venez voir notre Roadmap !</b></a>"
+      },
+      "two": {
+        "title": "Incentives for good actions",
+        "details": "<ul><li style='padding: 0.5rem 0'><b class='global-important-text'>Nos holders</b> seront au centre des process de nos <b class='global-important-text'>protocoles Web3</b></li><li style='padding: 0.5rem 0'>La procédure de validation des protocoles nécessitera la communauté</li><li style='padding: 0.5rem 0'>Un système de vote sera mis en place pour inclure les holders dans les choix Good2Earn du projet </li></ul><br/>More activities TBA soon !"
+      },
+      "three": {
+        "title": "The Community though our Protocols",
+        "details": "<ul><li style='padding: 0.5rem 0'>Plusieurs Activités disponible pour <b class='global-important-text'>génerer des revenus pour la communauté</b></li><li style='padding: 0.5rem 0'><b class='global-important-text'>Récompense</b> diverses (NFT, SOL, SPL tokens, coupons…)</li><li style='padding: 0.5rem 0'>Bientôt disponible sur notre plateforme Cz_Breakroom<ul><li>Participation aux évènements sur nos réseaux</li><li>Jeux et activités dans notre discord</li><li>Participation à nos cours gratuit (Crypto, dev, design etc….)</li></ul></li></ul><br/>Plus d’activités à venir bientôt !"
       }
     }
   },

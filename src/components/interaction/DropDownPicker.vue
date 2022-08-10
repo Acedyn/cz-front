@@ -98,7 +98,7 @@ const selectOption = (option: string) => {
   font: inherit;
   cursor: pointer;
   outline: inherit;
-  z-index: 1;
+  z-index: 2;
 }
 
 .picker-button {
@@ -112,7 +112,7 @@ const selectOption = (option: string) => {
 
   transition: 0.2s;
   font-family: Poppins;
-  z-index: 2;
+  z-index: 5;
 }
 
 .picker-selecting {

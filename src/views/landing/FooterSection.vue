@@ -3,7 +3,6 @@ import { onMounted, onUnmounted } from "vue";
 import { getBreakpoint, Breakpoint } from "../../utils/breakpoints";
 import TypographyTitle from "../../components/utils/TypographyTitle.vue";
 import TypographyText from "../../components/utils/TypographyText.vue";
-import LanguagePicker from "../../components/interaction/LanguagePicker.vue";
 import SocialButton from "../../components/interaction/SocialButton.vue";
 
 import { useI18n } from "vue-i18n";
@@ -50,7 +49,6 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
         <RouterLink to="/dashboard" style="text-decoration: none">
           <TypographyText color="white">Dashboard</TypographyText>
         </RouterLink>
-        <LanguagePicker color="var(--global-color-unavailable)" />
       </div>
       <div class="join">
         <TypographyText weight="light">{{ t("join.title") }}</TypographyText>

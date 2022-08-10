@@ -36,6 +36,11 @@ body {
   --global-color-disable: #f9c4a6;
 }
 
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
 .global-important-text {
   font-size: 1.1em;
 }
