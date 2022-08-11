@@ -10,6 +10,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: "exit"): void;
+  (e: "entered"): void;
 }>();
 
 const backdrop = ref<HTMLDivElement>();
@@ -23,7 +24,7 @@ const onClick = (e: MouseEvent, force?: boolean) => {
 </script>
 
 <template>
-  <transition name="fade">
+  <transition name="fade" @after-enter="emit('entered')">
     <div
       class="overlay-backdrop"
       v-if="props.show"

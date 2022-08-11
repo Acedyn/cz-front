@@ -132,6 +132,8 @@ const { t } = useI18n({
           <DetailsRegion
             title="Team"
             icon="groups"
+            disabled
+            noButton
             :description="t('sections.team.description')"
           /> </template
       ></ImageRegion2D>
@@ -180,6 +182,7 @@ const { t } = useI18n({
           <DetailsRegion
             title="Break Room"
             icon="sports_esports"
+            disabled
             :description="t('sections.breakroom.description')"
             noButton
           /> </template
@@ -197,6 +200,7 @@ const { t } = useI18n({
           <DetailsRegion
             title="Boutique"
             icon="shopping_cart"
+            disabled
             :description="t('sections.boutique.description')"
             noButton
           /> </template

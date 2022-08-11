@@ -10,6 +10,7 @@ const props = withDefaults(
     description?: string;
     noButton?: boolean;
     icon?: string;
+    disabled?: boolean;
   }>(),
   {
     textColor: "white",
@@ -30,14 +31,16 @@ const props = withDefaults(
     <TypographyText>
       <p class="text description">{{ props.description }}</p>
     </TypographyText>
-    <CtaButton
-      :noIcon="!props.icon"
-      :size="0.6"
-      v-if="!props.noButton"
-      :icon="props.icon"
-      textWeight="regular"
-      >Enter</CtaButton
-    >
+    <div :class="props.disabled ? 'disabled-button' : ''">
+      <CtaButton
+        :noIcon="!props.icon"
+        :size="0.6"
+        v-if="!props.noButton"
+        :icon="props.icon"
+        textWeight="regular"
+        >Enter</CtaButton
+      >
+    </div>
   </div>
 </template>
 
@@ -82,6 +85,10 @@ const props = withDefaults(
 
 .description {
   text-align: center;
+}
+
+.disabled-button {
+  pointer-events: none;
 }
 
 .hover-background {
