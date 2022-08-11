@@ -21,7 +21,9 @@ const emit = defineEmits<{
 
 const buttonClass = (path: string) => {
   return `menu-button ${
-    useRoute().fullPath.includes(path) ? "button-current" : ""
+    useRoute().fullPath.includes(path) || useRoute().name === path
+      ? "button-current"
+      : ""
   }`;
 };
 

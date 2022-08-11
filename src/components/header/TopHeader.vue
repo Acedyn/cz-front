@@ -64,7 +64,11 @@ const navButtons = [
 ];
 
 const buttonClass = (path: string) => {
-  return `menu-button ${useRoute().name === path ? "button-current" : ""}`;
+  return `menu-button ${
+    useRoute().fullPath.includes(path) || useRoute().name === path
+      ? "button-current"
+      : ""
+  }`;
 };
 
 const isCollapsed = computed(() => {
