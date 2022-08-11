@@ -55,15 +55,15 @@
     "arguments": {
       "one": {
         "title": "Human",
-        "details": "We believe in treating others with respect, love, patience and kindness.."
+        "details": "We believe in treating others with respect, love and kindness.."
       },
       "two": {
-        "title": "Social & Environment",
+        "title": "Environment",
         "details": "Earth is our home and we place it in the core of our initiatives. "
       },
       "three": {
         "title": "Innovation",
-        "details": "We innovate through the blockchain to bring solutions to the world."
+        "details": "We innovate through the blockchain to bring solutions."
       },
       "four": {
         "title": "Art",

@@ -27,7 +27,7 @@
     "arguments": {
       "one": {
         "title": "Nos protocoles",
-        "details": "<ul><li style='padding: 0.5rem 0'>Des protocoles ayant pour but de rendre des <b class='global-important-text'>actions sociales évidentes</b></li><li style='padding: 0.5rem 0'>Nos systemes ont été designé pour venir en aide aux organisations publics privés</li><li style='padding: 0.5rem 0'>Le recyclage, la reforestation et bien d’autres actions pris en charge !</li><li style='padding: 0.5rem 0'>Solana Blockchain et la <b class='global-important-text'>meilleure solution</b> car </li><ul><li>Transactions rapide</li><li>Prix avantageux</li><li>Respectueux de l’environnement</li></ul></ul><a href='immersion/bill-of-lading'><br/><b>Venez voir notre Roadmap !</b></a>"
+        "details": "<ul><li style='padding: 0.5rem 0'>Des protocoles ayant pour but de rendre des <b class='global-important-text'>actions sociales évidentes</b></li><li style='padding: 0.5rem 0'>Nos systemes ont été designé pour venir en aide aux organisations publics privés</li><li style='padding: 0.5rem 0'>Le recyclage, la reforestation et bien d’autres actions pris en charge !</li><li style='padding: 0.5rem 0'>Solana Blockchain et la <b class='global-important-text'>meilleure solution</b> car </li><ul><li>Transactions rapide</li><li>Prix avantageux</li><li>Respectueux de l’environnement</li></ul></ul><a href='immersion/bill-of-lading'><br/><b style='text-decoration: underline'>Venez voir notre Roadmap !</b></a>"
       },
       "two": {
         "title": "Les holders au centre",
