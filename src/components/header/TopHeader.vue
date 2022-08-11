@@ -270,6 +270,14 @@ const isCollapsed = computed(() => {
   font-size: 4rem;
 }
 
+.colapsed-logo {
+  transition: 0.2s ease-out;
+}
+
+.colapsed-logo:hover {
+  transform: scale(1.1);
+}
+
 .handburger-icon {
   transition: 0.2s;
   color: white;

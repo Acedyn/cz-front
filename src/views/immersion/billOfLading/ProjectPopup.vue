@@ -40,7 +40,7 @@ const images = ref<
 const breakpoint = getBreakpoint(onMounted, onUnmounted);
 const onMobile = computed(() => breakpoint.value < Breakpoint.MD);
 const getContainerStyle = () => {
-  if (!onMobile) {
+  if (!onMobile.value) {
     return { backgroundImage: "url(" + images.value[props.source].url + ")" };
   }
   return {};

@@ -17,7 +17,6 @@ const backdrop = ref<HTMLDivElement>();
 
 const onClick = (e: MouseEvent, force?: boolean) => {
   if (e.target == backdrop.value || force) {
-    console.log(e.target);
     emit("exit");
   }
 };

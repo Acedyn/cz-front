@@ -20,7 +20,6 @@ const emit = defineEmits<{
 }>();
 
 const buttonClass = (path: string) => {
-  console.log(useRoute().fullPath);
   return `menu-button ${
     useRoute().fullPath.includes(path) ? "button-current" : ""
   }`;
@@ -43,7 +42,9 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
       <div class="panel-title">
         <img class="main-logo" src="@/assets/logos/brand_logo.png" />
         <TypographyText size="big" color="white" font="Poppins" weight="bold"
-          ><p class="title-text">Cardboard Citizens</p></TypographyText
+          ><p class="title-text" @click="props.navButtons[0].click">
+            Cardboard Citizens
+          </p></TypographyText
         >
       </div>
 
