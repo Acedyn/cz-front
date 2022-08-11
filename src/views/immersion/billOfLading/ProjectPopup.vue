@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
+import { getBreakpoint, Breakpoint } from "../../../utils/breakpoints";
 
 const props = defineProps<{
   source: string;
@@ -36,9 +37,10 @@ const images = ref<
   },
 });
 
-const onMobile = ref<boolean>(false);
+const breakpoint = getBreakpoint(onMounted, onUnmounted);
+const onMobile = computed(() => breakpoint.value < Breakpoint.MD);
 const getContainerStyle = () => {
-  if (!onMobile.value) {
+  if (!onMobile) {
     return { backgroundImage: "url(" + images.value[props.source].url + ")" };
   }
   return {};

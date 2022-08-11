@@ -32,8 +32,6 @@ const onClick = (e: MouseEvent, force?: boolean) => {
     >
       <CloseButton
         v-if="!props.disableCloseButton"
-        colorLine="black"
-        colorBG="var(--global-color-primary)"
         size="40px"
         class="close-button"
         @click="(e) => onClick(e, true)"

@@ -45,7 +45,7 @@ const teamMembers = [
 ];
 
 const cardWidth = "22.5rem";
-const cardAspectRatio = 425 / 332;
+const cardAspectRatio = 385 / 332;
 
 const cards = ref<Element>();
 const scroll = ref<Element>();
@@ -78,7 +78,6 @@ onMounted(() => {
       :title="t('title.main')"
       :titleBackground="CoinImage"
       maxWidth="34rem"
-      titleBackground="coins"
       titleColor="var(--global-color-paragraph)"
       titleWordSize="3.75rem"
     >
@@ -115,7 +114,9 @@ onMounted(() => {
             </div>
             <span class="line-separator" />
             <TypographyText color="var(--global-color-paragraph)">
-              {{ t(`${teamMember.key}.description`) }}
+              <p class="member-description">
+                {{ t(`${teamMember.key}.description`) }}
+              </p>
             </TypographyText>
           </div>
         </div>
@@ -182,6 +183,7 @@ onMounted(() => {
   background-position: center;
   width: 100%;
   height: v-bind("`calc(${cardWidth} * 0.8 - 4.5rem)`");
+  min-height: 54%;
   border-radius: 0.125rem;
   margin-left: auto;
   margin-right: auto;
@@ -194,12 +196,18 @@ onMounted(() => {
   gap: 0.3rem;
   width: 100%;
   flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .member-name {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.member-description {
+  text-align: justify;
 }
 
 .job-icon {
@@ -212,6 +220,7 @@ onMounted(() => {
   background: var(--global-color-primary);
   width: 100%;
   height: 0.118rem;
+  min-height: 0.118rem;
 }
 
 .follow-button {
