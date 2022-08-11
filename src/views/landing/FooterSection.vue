@@ -55,7 +55,11 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
       <div class="join">
         <TypographyText weight="light">{{ t("join.title") }}</TypographyText>
         <TypographyText size="small" weight="light">
-          <p v-html="t('join.text')"></p>
+          <a
+            href="mailto:cardboardctz@gmail.com"
+            style="text-decoration: underline"
+            >cardboardctz@gmail.com</a
+          >
         </TypographyText>
       </div>
     </div>
