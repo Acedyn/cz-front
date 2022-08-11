@@ -119,11 +119,8 @@ onBeforeMount(() => {
     @mouseleave="isHover = false"
     :class="`${props.disabled ? 'disabled' : ''}`"
   >
-    <template v-if="isHover">
-      <div
-        :class="`hover-content ${noHoverBackground ? '' : 'hover-background'}`"
-        @click="onClick"
-      >
+    <template v-if="true">
+      <div :class="`hover-content`" @click="onClick">
         <slot name="hover">
           <DetailsRegion
             :title="props.name.replaceAll('_', ' ')"
@@ -175,6 +172,7 @@ onBeforeMount(() => {
   cursor: v-bind("props.disabled ? 'inherit' : 'pointer'");
   z-index: 1;
   display: flex;
+  align-items: center;
 }
 
 .hover-content:hover + .region-image {

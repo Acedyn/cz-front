@@ -20,6 +20,7 @@ const props = withDefaults(
 
 <template>
   <div class="details-container hover-background">
+    <span class="background-container" />
     <div class="region-header">
       <span v-if="props.icon" class="material-icons icon-title">
         {{ props.icon }}
@@ -48,7 +49,6 @@ const props = withDefaults(
 .details-container {
   margin-left: auto;
   margin-right: auto;
-  height: 100%;
 
   display: flex;
   flex-direction: column;
@@ -91,21 +91,38 @@ const props = withDefaults(
   pointer-events: none;
 }
 
-.hover-background {
+.background-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  transform: scale(1.2, 2);
+
   background: radial-gradient(
     closest-side,
     rgba(103, 55, 11, 0.73) 40%,
     rgba(102, 54, 10, 0)
   );
 
-  transition: opacity 0.3s ease-out, background-size 0.1s ease-out;
+  transition: background-size 0.15s ease-out;
   background-size: 20% 20%;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.hover-background {
+  transition: opacity 0.3s ease-out;
   opacity: 0;
 }
 
 .hover-background:hover {
+  opacity: 1;
+  background-size: 100% 100%;
+}
+
+.hover-background:hover .background-container {
   opacity: 1;
   background-size: 100% 100%;
 }
