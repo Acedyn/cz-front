@@ -25,7 +25,7 @@ const teamMembers = [
     jobIcon: "build",
   },
   {
-    name: "Modsiw",
+    name: "modsiw",
     key: "modsiw",
     image: modsiw,
     jobIcon: "local_florist",

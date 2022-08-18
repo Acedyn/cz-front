@@ -111,7 +111,8 @@ onMounted(() => {
 <style scoped>
 .container {
   display: grid;
-  padding: 6.25rem 0;
+  padding-top: 6.25rem;
+  padding-bottom: 2.25rem;
 }
 
 .trust-title {

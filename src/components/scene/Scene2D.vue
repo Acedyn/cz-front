@@ -152,7 +152,8 @@ onBeforeUnmount(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
 
 .background-image {
@@ -167,5 +168,6 @@ onBeforeUnmount(() => {
   min-width: 100%;
   min-height: v-bind("`calc(100vw / ${props.aspectRatio})`");
   transform: translateY(calc((100vh - 100%) / 2));
+  overflow: hidden;
 }
 </style>

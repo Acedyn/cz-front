@@ -4,7 +4,8 @@ import DetailsRegion from "@/components/scene/DetailsRegion.vue";
 import Scene2D from "@/components/scene/Scene2D.vue";
 import OverlayPopup from "@/components/popup/OverlayPopup.vue";
 import ProjectPopup from "./ProjectPopup.vue";
-import { ref } from "vue";
+import { preloadImages } from "../../../utils/loader";
+import { ref, onBeforeMount } from "vue";
 
 const hightlightConfig = {
   dark: {
@@ -21,14 +22,26 @@ const selectedProject = ref<string | undefined>();
 const selectProject = (name: string | undefined) => {
   selectedProject.value = name;
 };
+
+const displaysRootURL = "src/assets/immersion/scenes/bill_of_lading/displays";
+
+onBeforeMount(() => {
+  preloadImages([
+    new URL(`/${displaysRootURL}/proof_of_water.png`, import.meta.url).href,
+    new URL(`/${displaysRootURL}/proof_of_knowledge.png`, import.meta.url).href,
+    new URL(`/${displaysRootURL}/proof_of_scrap.png`, import.meta.url).href,
+    new URL(`/${displaysRootURL}/proof_of_forest.png`, import.meta.url).href,
+  ]);
+});
 </script>
+new URL(`/${displaysRootURL}/proof_of_water.png`, import.meta.url).href
 
 <template>
   <Scene2D
     name="bill_of_lading"
     :noAutoScrolling="selectedProject != undefined"
     :highlight="hightlightConfig"
-    :aspectRatio="2429 / 1050"
+    :aspectRatio="2395 / 1050"
     noDark
   >
     <template #elements="{ sceneConfig }">
@@ -41,7 +54,12 @@ const selectProject = (name: string | undefined) => {
         :height="11.25"
         noHoverImage
         @click="() => selectProject('proof_water')"
-        ><template #hover> <DetailsRegion title="Proof of Water" /> </template
+        ><template #hover>
+          <DetailsRegion
+            title="Proof of Water"
+            backgroundGradiantA="rgb(32 77 106 / 80%)"
+            backgroundGradiantB="rgb(10 39 102 / 0%)"
+          /> </template
       ></ImageRegion2D>
 
       <ImageRegion2D
@@ -53,7 +71,12 @@ const selectProject = (name: string | undefined) => {
         :height="14.05"
         noHoverImage
         @click="() => selectProject('proof_scrap')"
-        ><template #hover> <DetailsRegion title="Proof of Scrap" /> </template
+        ><template #hover>
+          <DetailsRegion
+            title="Proof of Scrap"
+            backgroundGradiantA="rgb(32 77 106 / 80%)"
+            backgroundGradiantB="rgb(10 39 102 / 0%)"
+          /> </template
       ></ImageRegion2D>
 
       <ImageRegion2D
@@ -66,7 +89,11 @@ const selectProject = (name: string | undefined) => {
         noHoverImage
         @click="() => selectProject('proof_knowledge')"
         ><template #hover>
-          <DetailsRegion title="Proof of Knowledge" /> </template
+          <DetailsRegion
+            title="Proof of Knowledge"
+            backgroundGradiantA="rgb(32 77 106 / 80%)"
+            backgroundGradiantB="rgb(10 39 102 / 0%)"
+          /> </template
       ></ImageRegion2D>
 
       <ImageRegion2D
@@ -78,7 +105,12 @@ const selectProject = (name: string | undefined) => {
         :height="16.66"
         noHoverImage
         @click="() => selectProject('proof_forest')"
-        ><template #hover> <DetailsRegion title="Proof of Forest" /> </template
+        ><template #hover>
+          <DetailsRegion
+            title="Proof of Forest"
+            backgroundGradiantA="rgb(32 77 106 / 80%)"
+            backgroundGradiantB="rgb(10 39 102 / 0%)"
+          /> </template
       ></ImageRegion2D>
     </template>
 
@@ -88,7 +120,11 @@ const selectProject = (name: string | undefined) => {
         margin="10%"
         @exit="() => selectProject(undefined)"
       >
-        <ProjectPopup :source="selectedProject as string" />
+        <ProjectPopup
+          :source="selectedProject as string"
+          backgroundGradiantA="rgb(32 77 106 / 80%)"
+          backgroundGradiantB="rgb(10 39 102 / 0%)"
+        />
       </OverlayPopup>
     </template>
   </Scene2D>

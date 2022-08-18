@@ -8,12 +8,18 @@ const props = withDefaults(
     title: string;
     textColor?: string;
     description?: string;
+    buttonColor?: string;
+    buttonColorHover?: string;
     noButton?: boolean;
     icon?: string;
     disabled?: boolean;
+    backgroundGradiantA?: string;
+    backgroundGradiantB?: string;
   }>(),
   {
     textColor: "white",
+    backgroundGradiantA: "rgba(103, 55, 11, 0.73)",
+    backgroundGradiantB: "rgba(102, 54, 10, 0)",
   }
 );
 </script>
@@ -34,6 +40,8 @@ const props = withDefaults(
     </TypographyText>
     <div :class="props.disabled ? 'disabled-button' : ''">
       <CtaButton
+        :color="props.buttonColor"
+        :colorHover="props.buttonColorHover"
         :noIcon="!props.icon"
         :size="0.6"
         v-if="!props.noButton"
@@ -100,21 +108,19 @@ const props = withDefaults(
 
   transform: scale(1.2, 2);
 
-  background: radial-gradient(
-    closest-side,
-    rgba(103, 55, 11, 0.73) 40%,
-    rgba(102, 54, 10, 0)
+  background: v-bind(
+    "`radial-gradient(closest-side, ${props.backgroundGradiantA} 40%, ${props.backgroundGradiantB})`"
   );
 
   transition: background-size 0.15s ease-out;
-  background-size: 20% 20%;
+  /* background-size: 20% 20%; */
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .hover-background {
   transition: opacity 0.3s ease-out;
-  opacity: 0;
+  /* opacity: 0; */
 }
 
 .hover-background:hover {

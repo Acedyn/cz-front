@@ -44,3 +44,21 @@ a {
 .global-important-text {
   font-size: 1.1em;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #453527;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #efd7bc;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #352b22;
+}
