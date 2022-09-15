@@ -113,14 +113,14 @@ const props = withDefaults(
   );
 
   transition: background-size 0.15s ease-out;
-  /* background-size: 20% 20%; */
+  background-size: 20% 20%;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .hover-background {
   transition: opacity 0.3s ease-out;
-  /* opacity: 0; */
+  opacity: 0;
 }
 
 .hover-background:hover {

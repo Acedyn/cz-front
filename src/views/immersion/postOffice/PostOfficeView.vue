@@ -47,6 +47,7 @@ const { t } = useI18n({
     name="post_office"
     :highlight="hightlightConfig"
     :noAutoScrolling="isTvVisibile"
+    sliderColor="#19140bcc"
   >
     <template #elements="{ sceneConfig }">
       <ImageRegion2D

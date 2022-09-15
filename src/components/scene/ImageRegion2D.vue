@@ -119,7 +119,7 @@ onBeforeMount(() => {
     @mouseleave="isHover = false"
     :class="`${props.disabled ? 'disabled' : ''}`"
   >
-    <template v-if="true">
+    <template v-if="isHover">
       <div :class="`hover-content`" @click="onClick">
         <slot name="hover">
           <DetailsRegion

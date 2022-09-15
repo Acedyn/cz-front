@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { usePreferencesStore } from "../../stores/preferences";
 import { preloadImages } from "../../utils/loader";
-import { onBeforeMount, onBeforeUnmount, ref, computed } from "vue";
+import { onBeforeMount, onMounted, onBeforeUnmount, ref, computed } from "vue";
 import { storeToRefs } from "pinia";
 import OverlayPopup from "../../components/popup/OverlayPopup.vue";
 
@@ -15,6 +15,7 @@ const props = withDefaults(
     noScrolling?: boolean;
     noAutoScrolling?: boolean;
     noDark?: boolean;
+    sliderColor?: string;
   }>(),
   {
     root: "src/assets/immersion/scenes",
@@ -22,11 +23,14 @@ const props = withDefaults(
     aspectRatio: 16 / 9,
     noScrolling: false,
     noDark: false,
+    sliderColor: "black",
   }
 );
 
 const containerRef = ref<HTMLDivElement>();
 const backgroundRef = ref<HTMLImageElement>();
+const slideTrigerLeft = ref<Element>();
+const slideTrigerRight = ref<Element>();
 const preferences = usePreferencesStore();
 const { theme } = storeToRefs(preferences);
 
@@ -61,19 +65,25 @@ const scrollToCenter = () => {
 };
 
 let lastTimestamp = 0;
+// The fetching of the mouse position and the sliding are asynchronous
 const mousePosition = { x: 0, y: 0 };
+const isHoveringSlider = ref<boolean>(false);
 const getMousePosition = (e: MouseEvent) => {
   mousePosition.x = e.clientX;
   mousePosition.y = e.clientY;
 };
+
+// Scoll the view according to the mouse position on every ticks
 const slideMouse = (e: number) => {
   const deltaTime = e - lastTimestamp;
   lastTimestamp = e;
   window.requestAnimationFrame(slideMouse);
 
+  if (!isHoveringSlider.value) return;
   if (!containerRef.value || props.noAutoScrolling) {
     return;
   }
+  // Safe zone on the top 20% of the screen
   if (mousePosition.y / window.innerHeight < 0.2) {
     return;
   }
@@ -118,6 +128,21 @@ onBeforeMount(() => {
   isReady.value = false;
 });
 
+onMounted(() => {
+  slideTrigerLeft.value?.addEventListener("mouseenter", () => {
+    isHoveringSlider.value = true;
+  });
+  slideTrigerLeft.value?.addEventListener("mouseleave", () => {
+    isHoveringSlider.value = false;
+  });
+  slideTrigerRight.value?.addEventListener("mouseenter", () => {
+    isHoveringSlider.value = true;
+  });
+  slideTrigerRight.value?.addEventListener("mouseleave", () => {
+    isHoveringSlider.value = false;
+  });
+});
+
 onBeforeUnmount(() => {
   window.removeEventListener("mousemove", getMousePosition);
 });
@@ -135,6 +160,8 @@ onBeforeUnmount(() => {
     <div class="scene-elements">
       <slot name="elements" :sceneConfig="sceneConfig" />
     </div>
+    <span class="slide-trigger slide-left" ref="slideTrigerLeft" />
+    <span class="slide-trigger slide-right" ref="slideTrigerRight" />
     <slot name="overlay" />
     <slot v-if="!isReady" name="loading">
       <OverlayPopup :show="true" margin="20%" disableCloseButton>
@@ -169,5 +196,29 @@ onBeforeUnmount(() => {
   min-height: v-bind("`calc(100vw / ${props.aspectRatio})`");
   transform: translateY(calc((100vh - 100%) / 2));
   overflow: hidden;
+}
+
+.slide-trigger {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 30%;
+  opacity: 0;
+  transition: 0.2s;
+}
+.slide-trigger:hover {
+  opacity: 1;
+}
+.slide-left {
+  left: 0;
+  background: v-bind(
+    "`linear-gradient(90deg, ${props.sliderColor}, transparent)`"
+  );
+}
+.slide-right {
+  right: 0;
+  background: v-bind(
+    "`linear-gradient(270deg, ${props.sliderColor}, transparent)`"
+  );
 }
 </style>

@@ -42,6 +42,7 @@ new URL(`/${displaysRootURL}/proof_of_water.png`, import.meta.url).href
     :noAutoScrolling="selectedProject != undefined"
     :highlight="hightlightConfig"
     :aspectRatio="2395 / 1050"
+    sliderColor="#0e1e22cc"
     noDark
   >
     <template #elements="{ sceneConfig }">
