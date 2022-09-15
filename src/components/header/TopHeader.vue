@@ -37,7 +37,7 @@ const navButtons = [
   {
     name: t("buttons.world"),
     click: () => {
-      router.push("/immersion");
+      router.push("/immersion/post-office");
       showPanel.value = false;
     },
     soon: false,
