@@ -84,7 +84,7 @@ new URL(`/${displaysRootURL}/proof_of_water.png`, import.meta.url).href
         name="proof_knowledge"
         :config="sceneConfig"
         :top="27.47"
-        :left="83.93"
+        :left="84.93"
         :width="16.11"
         :height="20.55"
         noHoverImage

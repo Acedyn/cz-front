@@ -40,7 +40,7 @@ const emit = defineEmits<{
 }>();
 
 const links = {
-  discord: "https://discord.gg/TzqNrrSYcn",
+  discord: "http://discord.gg/cardboard",
   twitter: "https://twitter.com/CardboardCtzNFT",
   instagram: "https://www.instagram.com/cardboardctz/",
   youtube: "https://www.youtube.com/channel/UChi9hIKIzGNTEzWQufm5r6g",

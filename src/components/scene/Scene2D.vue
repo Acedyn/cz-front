@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { usePreferencesStore } from "../../stores/preferences";
 import { preloadImages } from "../../utils/loader";
-import { onBeforeMount, onMounted, onBeforeUnmount, ref, computed } from "vue";
+import { onBeforeMount, onUpdated, onBeforeUnmount, ref, computed } from "vue";
 import { storeToRefs } from "pinia";
 import OverlayPopup from "../../components/popup/OverlayPopup.vue";
+
+const SCROLL_SPEED = 0.001;
 
 const props = withDefaults(
   defineProps<{
@@ -68,6 +70,7 @@ let lastTimestamp = 0;
 // The fetching of the mouse position and the sliding are asynchronous
 const mousePosition = { x: 0, y: 0 };
 const isHoveringSlider = ref<boolean>(false);
+const sliderEnable = ref<[boolean, boolean]>([true, true]);
 const getMousePosition = (e: MouseEvent) => {
   mousePosition.x = e.clientX;
   mousePosition.y = e.clientY;
@@ -87,8 +90,28 @@ const slideMouse = (e: number) => {
   if (mousePosition.y / window.innerHeight < 0.2) {
     return;
   }
-  const offset = (mousePosition.x - window.innerWidth / 2) * deltaTime * 0.001;
+  const offset =
+    (mousePosition.x - window.innerWidth / 2) * deltaTime * SCROLL_SPEED;
   containerRef.value.scrollTo(containerRef.value.scrollLeft + offset, 10);
+
+  const scrollLeft = containerRef.value.scrollLeft;
+  const clientWidth = containerRef.value.clientWidth;
+  const child = containerRef.value.firstChild as HTMLElement;
+  const fullWidth = child.clientWidth;
+
+  // The tolerance is the scroll distance where the slider will disapear
+  // When the user is on the extreme left - the tolerance, the slider will disapear
+  const TOLERANCE = 5;
+  if (scrollLeft < TOLERANCE) {
+    sliderEnable.value[0] = false;
+  } else {
+    sliderEnable.value[0] = true;
+  }
+  if (Math.round(scrollLeft + clientWidth) > fullWidth - TOLERANCE) {
+    sliderEnable.value[1] = false;
+  } else {
+    sliderEnable.value[1] = true;
+  }
 };
 
 const isReady = ref(false);
@@ -128,7 +151,7 @@ onBeforeMount(() => {
   isReady.value = false;
 });
 
-onMounted(() => {
+onUpdated(() => {
   slideTrigerLeft.value?.addEventListener("mouseenter", () => {
     isHoveringSlider.value = true;
   });
@@ -160,8 +183,19 @@ onBeforeUnmount(() => {
     <div class="scene-elements">
       <slot name="elements" :sceneConfig="sceneConfig" />
     </div>
-    <span class="slide-trigger slide-left" ref="slideTrigerLeft" />
-    <span class="slide-trigger slide-right" ref="slideTrigerRight" />
+    <span
+      :class="`slide-trigger slide-left ${
+        sliderEnable[0] ? '' : 'slide-disable'
+      }`"
+      ref="slideTrigerLeft"
+      v-if="sliderEnable[0]"
+    />
+    <span
+      :class="`slide-trigger slide-right ${
+        sliderEnable[1] ? '' : 'slide-disable'
+      }`"
+      ref="slideTrigerRight"
+    />
     <slot name="overlay" />
     <slot v-if="!isReady" name="loading">
       <OverlayPopup :show="true" margin="20%" disableCloseButton>
@@ -181,6 +215,11 @@ onBeforeUnmount(() => {
   height: 100%;
   overflow-y: hidden;
   overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.scene-container::-webkit-scrollbar {
+  display: none;
 }
 
 .background-image {
@@ -199,6 +238,7 @@ onBeforeUnmount(() => {
 }
 
 .slide-trigger {
+  pointer-events: auto;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -220,5 +260,9 @@ onBeforeUnmount(() => {
   background: v-bind(
     "`linear-gradient(270deg, ${props.sliderColor}, transparent)`"
   );
+}
+.slide-disable {
+  pointer-events: none;
+  opacity: 0 !important;
 }
 </style>

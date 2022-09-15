@@ -162,12 +162,13 @@ const { t } = useI18n({
         :left="64.45"
         :width="35.54"
         :height="46.08"
-        @click="() => router.push('/immersion/warehouse')"
+        disabled
         ><template #hover>
           <DetailsRegion
             title="Warehouse"
             icon="warehouse"
             :description="t('sections.warehouse.description')"
+            noButton
           /> </template
       ></ImageRegion2D>
 
