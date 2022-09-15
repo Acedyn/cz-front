@@ -188,7 +188,6 @@ onBeforeUnmount(() => {
         sliderEnable[0] ? '' : 'slide-disable'
       }`"
       ref="slideTrigerLeft"
-      v-if="sliderEnable[0]"
     />
     <span
       :class="`slide-trigger slide-right ${
