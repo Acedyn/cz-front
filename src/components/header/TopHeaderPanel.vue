@@ -9,27 +9,44 @@ const props = defineProps<{
   navButtons: {
     name: string;
     click: () => void;
+    soon: boolean;
+    path: string;
   }[];
+  show?: boolean;
 }>();
 
-const buttonClass = (name: string) => {
-  return `menu-button ${useRoute().name === name ? "button-current" : ""}`;
+const emit = defineEmits<{
+  (e: "exited"): void;
+}>();
+
+const buttonClass = (path: string) => {
+  return `menu-button ${
+    useRoute().fullPath.includes(path) || useRoute().name === path
+      ? "button-current"
+      : ""
+  }`;
 };
 
 const breakpoint = getBreakpoint(onMounted, onUnmounted);
 </script>
 
 <template>
-  <transition name="slide" appear>
+  <transition
+    :name="breakpoint < Breakpoint.SM ? 'slide-mobile' : 'slide'"
+    @after-leave="emit('exited')"
+  >
     <div
       :class="`panel-container ${
         breakpoint < Breakpoint.SM ? 'panel-mobile' : ''
       }`"
+      v-if="props.show"
     >
       <div class="panel-title">
         <img class="main-logo" src="@/assets/logos/brand_logo.png" />
         <TypographyText size="big" color="white" font="Poppins" weight="bold"
-          ><p class="title-text">Cardboard Citizens</p></TypographyText
+          ><p class="title-text" @click="props.navButtons[0].click">
+            Cardboard Citizens
+          </p></TypographyText
         >
       </div>
 
@@ -55,7 +72,7 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
           v-for="(navButton, index) in props.navButtons"
           @click="navButton.click"
           :key="index"
-          ><p :class="buttonClass(navButton.name.toLowerCase())">
+          ><p :class="buttonClass(navButton.path)">
             {{ navButton.name }}
           </p></TypographyText
         >
@@ -93,7 +110,7 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
 }
 
 .main-logo {
-  filter: brightness(80%);
+  filter: invert(100%) brightness(200%);
   height: 5rem;
   object-fit: contain;
 }
@@ -115,7 +132,7 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
   flex-direction: row;
   align-items: center;
   gap: 1rem;
-  justify-content: start;
+  justify-content: end;
 }
 
 .signin-button {
@@ -177,12 +194,24 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
 
 .slide-enter-active,
 .slide-leave-active {
-  transition: transform 0.2s ease;
+  transition: 0.2s ease-out;
+  transform: translateX(0%) translateY(0%);
 }
 
 .slide-enter-from,
 .slide-leave-to {
-  transform: transformX(-100%);
+  transform: translateX(-100%);
+}
+
+.slide-mobile-enter-active,
+.slide-mobile-leave-active {
+  transition: 0.2s ease-out;
+  transform: translateX(0%) translateY(0%);
+}
+
+.slide-mobile-enter-from,
+.slide-mobile-leave-to {
+  transform: translateY(-100%);
 }
 
 .language-picker {

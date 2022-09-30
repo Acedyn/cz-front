@@ -54,9 +54,13 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
       </div>
       <div class="join">
         <TypographyText weight="light">{{ t("join.title") }}</TypographyText>
-        <TypographyText size="small" weight="light">{{
-          t("join.text")
-        }}</TypographyText>
+        <TypographyText size="small" weight="light">
+          <a
+            href="mailto:cardboardctz@gmail.com"
+            style="text-decoration: underline"
+            >cardboardctz@gmail.com</a
+          >
+        </TypographyText>
       </div>
     </div>
     <div class="copyright">

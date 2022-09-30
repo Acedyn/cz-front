@@ -47,6 +47,7 @@ const { t } = useI18n({
     name="post_office"
     :highlight="hightlightConfig"
     :noAutoScrolling="isTvVisibile"
+    sliderColor="#19140bcc"
   >
     <template #elements="{ sceneConfig }">
       <ImageRegion2D
@@ -132,6 +133,8 @@ const { t } = useI18n({
           <DetailsRegion
             title="Team"
             icon="groups"
+            disabled
+            noButton
             :description="t('sections.team.description')"
           /> </template
       ></ImageRegion2D>
@@ -159,12 +162,13 @@ const { t } = useI18n({
         :left="64.45"
         :width="35.54"
         :height="46.08"
-        @click="() => router.push('/immersion/warehouse')"
+        disabled
         ><template #hover>
           <DetailsRegion
             title="Warehouse"
             icon="warehouse"
             :description="t('sections.warehouse.description')"
+            noButton
           /> </template
       ></ImageRegion2D>
 
@@ -180,6 +184,7 @@ const { t } = useI18n({
           <DetailsRegion
             title="Break Room"
             icon="sports_esports"
+            disabled
             :description="t('sections.breakroom.description')"
             noButton
           /> </template
@@ -197,6 +202,7 @@ const { t } = useI18n({
           <DetailsRegion
             title="Boutique"
             icon="shopping_cart"
+            disabled
             :description="t('sections.boutique.description')"
             noButton
           /> </template

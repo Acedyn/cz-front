@@ -20,6 +20,7 @@ const { t } = useI18n({
 const preferences = usePreferencesStore();
 const { headerCollapse } = storeToRefs(preferences);
 
+const showOverlay = ref(false);
 const showPanel = ref(false);
 const breakpoint = getBreakpoint(onMounted, onUnmounted);
 
@@ -31,14 +32,16 @@ const navButtons = [
       showPanel.value = false;
     },
     soon: false,
+    path: "home",
   },
   {
     name: t("buttons.world"),
     click: () => {
-      router.push("/immersion");
+      router.push("/immersion/post-office");
       showPanel.value = false;
     },
     soon: false,
+    path: "immersion",
   },
   {
     name: t("buttons.tools"),
@@ -47,6 +50,7 @@ const navButtons = [
       showPanel.value = false;
     },
     soon: true,
+    path: "tools",
   },
   {
     name: t("buttons.market"),
@@ -55,20 +59,21 @@ const navButtons = [
       showPanel.value = false;
     },
     soon: false,
+    path: "marketplace",
   },
 ];
 
-const buttonClass = (name: string) => {
-  return `menu-button ${useRoute().name === name ? "button-current" : ""}`;
+const buttonClass = (path: string) => {
+  return `menu-button ${
+    useRoute().fullPath.includes(path) || useRoute().name === path
+      ? "button-current"
+      : ""
+  }`;
 };
 
 const isCollapsed = computed(() => {
   return !headerCollapse.value && breakpoint.value > Breakpoint.SM;
 });
-
-const togglePanel = () => {
-  showPanel.value = !showPanel.value;
-};
 </script>
 
 <template>
@@ -93,7 +98,7 @@ const togglePanel = () => {
           @click="navButton.click"
         >
           <TypographyText size="big" weight="bold" font="Poppins" color=""
-            ><p :class="buttonClass(navButton.name.toLowerCase())">
+            ><p :class="buttonClass(navButton.path)">
               {{ navButton.name }}
             </p></TypographyText
           >
@@ -119,7 +124,7 @@ const togglePanel = () => {
         <span
           class="material-icons handburger-icon"
           :style="{ fontSize: '4rem' }"
-          @click="togglePanel"
+          @click="showOverlay = !showOverlay"
           >menu</span
         >
         <img
@@ -131,11 +136,16 @@ const togglePanel = () => {
     </div>
 
     <OverlayPopup
-      :show="showPanel"
+      :show="showOverlay"
       margin="0"
-      @exit="() => (showPanel = false)"
+      @exit="showPanel = false"
+      @entered="showPanel = true"
     >
-      <TopHeaderPanel :navButtons="navButtons" />
+      <TopHeaderPanel
+        :navButtons="navButtons"
+        :show="showPanel"
+        @exited="showOverlay = false"
+      />
     </OverlayPopup>
   </header>
 </template>
@@ -262,6 +272,14 @@ const togglePanel = () => {
   outline: inherit;
 
   font-size: 4rem;
+}
+
+.colapsed-logo {
+  transition: 0.2s ease-out;
+}
+
+.colapsed-logo:hover {
+  transform: scale(1.1);
 }
 
 .handburger-icon {

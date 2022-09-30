@@ -18,16 +18,16 @@ const { t } = useI18n({
 
 const goodToEarnArguments = [
   {
-    key: "one",
-    image: frameThree,
+    key: "three",
+    image: frameOne,
   },
   {
     key: "two",
     image: frameTwo,
   },
   {
-    key: "three",
-    image: frameOne,
+    key: "one",
+    image: frameThree,
   },
 ];
 
@@ -119,7 +119,7 @@ onMounted(() => {
 }
 
 .container-small {
-  padding: 10.125rem 0vw;
+  padding: 12.125rem 0vw;
 }
 
 .argument {

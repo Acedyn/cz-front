@@ -10,20 +10,20 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: "exit"): void;
+  (e: "entered"): void;
 }>();
 
 const backdrop = ref<HTMLDivElement>();
 
 const onClick = (e: MouseEvent, force?: boolean) => {
   if (e.target == backdrop.value || force) {
-    console.log(e.target);
     emit("exit");
   }
 };
 </script>
 
 <template>
-  <transition name="fade">
+  <transition name="fade" @after-enter="emit('entered')">
     <div
       class="overlay-backdrop"
       v-if="props.show"
@@ -32,8 +32,6 @@ const onClick = (e: MouseEvent, force?: boolean) => {
     >
       <CloseButton
         v-if="!props.disableCloseButton"
-        colorLine="black"
-        colorBG="var(--global-color-primary)"
         size="40px"
         class="close-button"
         @click="(e) => onClick(e, true)"

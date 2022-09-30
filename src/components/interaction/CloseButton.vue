@@ -1,10 +1,19 @@
 <script setup lang="ts">
-const props = defineProps<{
-  colorLine: string;
-  colorBG: string;
-  round?: boolean;
-  size: string;
-}>();
+const props = withDefaults(
+  defineProps<{
+    colorLine?: string;
+    outline?: boolean;
+    colorBG?: string;
+    colorHover?: string;
+    round?: boolean;
+    size: string;
+  }>(),
+  {
+    colorLine: "white",
+    colorBG: "var(--global-color-primary)",
+    colorHover: "var(--global-color-hover)",
+  }
+);
 
 const emit = defineEmits<{
   (e: "click", eventType: MouseEvent): void;
@@ -12,7 +21,10 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <button class="button-container" @click="(e: MouseEvent) => emit('click', e)">
+  <button
+    :class="`button-container ${props.outline ? 'outline' : ''}`"
+    @click="(e: MouseEvent) => emit('click', e)"
+  >
     <span class="background" />
     <span class="cross" @click="(e: MouseEvent) => emit('click', e)" />
   </button>
@@ -28,10 +40,18 @@ const emit = defineEmits<{
   outline: inherit;
   position: relative;
 
-  border: v-bind("`solid var(--line-thickness) ${props.colorLine}`");
   cursor: pointer;
-
   border-radius: v-bind("props.round ? '50%' : '4px'");
+  transition: 0.2s;
+  border: none;
+}
+
+.button-container:hover {
+  background: v-bind("props.colorHover");
+}
+
+.outline {
+  border: v-bind("`solid var(--line-thickness) ${props.colorLine}`");
 }
 
 .background {
@@ -69,8 +89,8 @@ const emit = defineEmits<{
   background: v-bind("props.colorLine");
   top: calc(50% - (var(--line-thickness) / 2));
   bottom: calc(50% - (var(--line-thickness) / 2));
-  right: 10%;
-  left: 10%;
+  right: 20%;
+  left: 20%;
 
   transform: rotate(45deg);
   border-radius: 2px;
@@ -82,8 +102,8 @@ const emit = defineEmits<{
   background: v-bind("props.colorLine");
   top: calc(50% - (var(--line-thickness) / 2));
   bottom: calc(50% - (var(--line-thickness) / 2));
-  right: 10%;
-  left: 10%;
+  right: 20%;
+  left: 20%;
 
   transform: rotate(-45deg);
   border-radius: 2px;

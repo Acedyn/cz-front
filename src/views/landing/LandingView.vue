@@ -7,6 +7,7 @@ import GoodToEarn from "./landingModules/GoodToEarn.vue";
 import TrustUs from "./landingModules/TrustUs.vue";
 import OurTeam from "./landingModules/OurTeam.vue";
 import TrustNumbers from "./landingModules/TrustNumbers.vue";
+import ExploreWorld from "./landingModules/ExploreWorld.vue";
 import FooterSection from "./FooterSection.vue";
 import SeeMore from "./SeeMore.vue";
 
@@ -40,6 +41,7 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
       <TrustUs class="trust-us module" />
       <OurTeam class="our-team module" />
       <TrustNumbers class="trust-numbers module" />
+      <ExploreWorld class="explore-world module" />
     </div>
     <FooterSection class="footer-section" />
   </div>
