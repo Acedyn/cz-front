@@ -1,29 +1,29 @@
 <script setup lang="ts">
-import { reactive } from "vue";
+import ControlsGenerator from "../../../histoire/ControlsGenerator.vue";
 import TapeButton from "../../components/interaction/TapeButton.vue";
 
-const state = reactive({
-  size: 1,
-});
+const learnMoreState = () => {
+  return {
+    state: {
+      size: 1,
+    },
+  };
+};
 </script>
 
 <template>
-  <Story
-    title="Interaction/Tape Button"
-    :layout="{ type: 'grid', width: '100%' }"
-  >
-    <template #controls>
-      <HstSlider
-        v-model="state.size"
-        title="Size"
-        :min="0"
-        :max="4"
-        :step="0.1"
+  <Story title="Interaction/Tape Button" :layout="{ type: 'grid' }">
+    <template #controls="{ state }">
+      <ControlsGenerator
+        v-model="state.state"
+        :propsDef="state._hPropDefs[0]"
       />
     </template>
 
-    <Variant title="Learn more">
-      <TapeButton v-bind="state"> LEARN MORE </TapeButton>
+    <Variant title="Learn more" :initState="learnMoreState">
+      <template #default="{ state }">
+        <TapeButton v-bind="state.state"> LEARN MORE </TapeButton>
+      </template>
     </Variant>
   </Story>
 </template>

@@ -23,11 +23,11 @@ const props = withDefaults(
     colorHover?: string;
     invert?: boolean;
     colorHoverInvert?: string;
-    thickness?: string;
+    thickness?: number;
   }>(),
   {
     size: 1,
-    thickness: "0.094rem",
+    thickness: 0.094,
     fill: "var(--global-color-primary)",
     color: "var(--global-color-unavailable)",
     colorHover: "var(--global-color-hover)",
@@ -103,8 +103,8 @@ const onClick = () => {
   background: transparent;
   color: v-bind("props.color");
 
-  outline: v-bind("`solid ${props.thickness} ${props.fill}`");
-  outline-offset: v-bind("`-${props.thickness}`");
+  outline: v-bind("`solid ${props.thickness}rem ${props.fill}`");
+  outline-offset: v-bind("`-${props.thickness}rem`");
 }
 
 .inverted:hover {

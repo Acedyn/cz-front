@@ -1,46 +1,34 @@
 <script setup lang="ts">
+import CategoryTag from "../../components/atoms/CategoryTag.vue";
 import ControlsGenerator from "../../../histoire/ControlsGenerator.vue";
-import SocialButton from "../../components/interaction/SocialButton.vue";
 
 const discordState = () => {
   return {
-    state: {
-      size: 1,
-      social: "discord",
-    },
+    state: { color: "#6b71ff" },
   };
 };
 
 const twitterState = () => {
   return {
-    state: {
-      size: 1,
-      social: "twitter",
-    },
+    state: { color: "#6BCAFF" },
   };
 };
 
-const solanaState = () => {
+const eventState = () => {
   return {
-    state: {
-      size: 1,
-      social: "solana",
-    },
+    state: { color: "#75BC74" },
   };
 };
 
-const magicedenState = () => {
+const basicState = () => {
   return {
-    state: {
-      size: 1,
-      social: "magiceden",
-    },
+    state: { color: "#C0590E" },
   };
 };
 </script>
 
 <template>
-  <Story title="Interaction/Social Button" :layout="{ type: 'grid' }">
+  <Story title="Atoms/Category Tag" :layout="{ type: 'grid' }">
     <template #controls="{ state }">
       <ControlsGenerator
         v-model="state.state"
@@ -50,25 +38,25 @@ const magicedenState = () => {
 
     <Variant title="Discord" :initState="discordState">
       <template #default="{ state }">
-        <SocialButton v-bind="state.state" />
+        <CategoryTag v-bind="state.state">DISCORD</CategoryTag>
       </template>
     </Variant>
 
     <Variant title="Twitter" :initState="twitterState">
       <template #default="{ state }">
-        <SocialButton v-bind="state.state" />
+        <CategoryTag v-bind="state.state">TWITTER</CategoryTag>
       </template>
     </Variant>
 
-    <Variant title="Solana" :initState="solanaState">
+    <Variant title="Event" :initState="eventState">
       <template #default="{ state }">
-        <SocialButton v-bind="state.state" />
+        <CategoryTag v-bind="state.state">EVENT</CategoryTag>
       </template>
     </Variant>
 
-    <Variant title="Magic eden" :initState="magicedenState">
+    <Variant title="Basic" :initState="basicState">
       <template #default="{ state }">
-        <SocialButton v-bind="state.state" />
+        <CategoryTag v-bind="state.state">BASIC</CategoryTag>
       </template>
     </Variant>
   </Story>

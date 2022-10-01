@@ -11,12 +11,12 @@ const props = withDefaults(
     textWeight?: "bold" | "regular" | "light";
     noIcon?: boolean;
     invert?: boolean;
-    thickness?: string;
+    thickness?: number;
     size?: number;
   }>(),
   {
     size: 1,
-    thickness: "0.188rem",
+    thickness: 0.188,
     textWeight: "bold",
     color: "var(--global-color-primary)",
     colorHover: "var(--global-color-hover)",
@@ -91,9 +91,9 @@ const emit = defineEmits<{
   color: v-bind("props.color");
 
   outline: v-bind(
-    "`solid calc(${props.thickness} * ${props.size}) ${props.color}`"
+    "`solid calc(${props.thickness}rem * ${props.size}) ${props.color}`"
   );
-  outline-offset: v-bind("`-${props.thickness}`");
+  outline-offset: v-bind("`-${props.thickness}rem`");
 }
 
 .inverted:hover {
