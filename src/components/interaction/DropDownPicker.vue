@@ -104,6 +104,8 @@ const selectOption = (option: string) => {
 .picker-button {
   display: flex;
   flex-direction: row;
+  width: 100%;
+  justify-content: center;
   align-items: center;
   padding: v-bind(
     "`calc(0.344rem * ${props.size}) calc(0.782rem * ${props.size})`"
