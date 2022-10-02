@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import CtaButton from "../../components/interaction/CtaButton.vue";
-import ControlsGenerator from "../../../histoire/ControlsGenerator.vue";
+import ControlsGenerator from "../../ControlsGenerator.vue";
+import CtaButton from "../../../src/components/interaction/CtaButton.vue";
 
 const worldState = () => {
   return {
@@ -16,7 +16,7 @@ const toolsState = () => {
 </script>
 
 <template>
-  <Story title="Interaction/CTA Button" :layout="{ type: 'grid' }">
+  <Story title="Global/Interaction/CTA Button" :layout="{ type: 'grid' }">
     <template #controls="{ state }">
       <ControlsGenerator
         v-model="state.state"

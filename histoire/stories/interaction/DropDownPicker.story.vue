@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import ControlsGenerator from "../../../histoire/ControlsGenerator.vue";
-import DropDownPicker from "../../components/interaction/DropDownPicker.vue";
-import LanguagePicker from "../../components/interaction/LanguagePicker.vue";
+import ControlsGenerator from "../../ControlsGenerator.vue";
+import DropDownPicker from "../../../src/components/interaction/DropDownPicker.vue";
+import LanguagePicker from "../../../src/components/interaction/LanguagePicker.vue";
 
 const genericState = () => {
   return {
@@ -21,7 +21,7 @@ const languageState = () => {
 </script>
 
 <template>
-  <Story title="Interaction/Dropdown Picker" :layout="{ type: 'grid' }">
+  <Story title="Global/Interaction/Dropdown Picker" :layout="{ type: 'grid' }">
     <template #controls="{ state }">
       <ControlsGenerator
         v-model="state.state"

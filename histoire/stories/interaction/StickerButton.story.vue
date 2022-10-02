@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import ControlsGenerator from "../../../histoire/ControlsGenerator.vue";
-import SocialButton from "../../components/interaction/SocialButton.vue";
+import ControlsGenerator from "../../ControlsGenerator.vue";
+import StickerButton from "../../../src/components/interaction/StickerButton.vue";
 
 const discordState = () => {
   return {
     state: {
-      size: 1,
-      social: "discord",
+      hue: 150,
     },
   };
 };
@@ -14,33 +13,33 @@ const discordState = () => {
 const twitterState = () => {
   return {
     state: {
-      size: 1,
-      social: "twitter",
+      hue: 180,
     },
   };
 };
 
-const solanaState = () => {
+const eventState = () => {
   return {
     state: {
-      size: 1,
-      social: "solana",
+      hue: 50,
     },
   };
 };
 
-const magicedenState = () => {
+const basicState = () => {
   return {
-    state: {
-      size: 1,
-      social: "magiceden",
-    },
+    state: {},
   };
 };
+
+const text = "LEARN MORE";
 </script>
 
 <template>
-  <Story title="Interaction/Social Button" :layout="{ type: 'grid' }">
+  <Story
+    title="Global/Interaction/Sticker Button"
+    :layout="{ type: 'grid', width: '20rem' }"
+  >
     <template #controls="{ state }">
       <ControlsGenerator
         v-model="state.state"
@@ -50,25 +49,25 @@ const magicedenState = () => {
 
     <Variant title="Discord" :initState="discordState">
       <template #default="{ state }">
-        <SocialButton v-bind="state.state" />
+        <StickerButton v-bind="state.state"> {{ text }} </StickerButton>
       </template>
     </Variant>
 
     <Variant title="Twitter" :initState="twitterState">
       <template #default="{ state }">
-        <SocialButton v-bind="state.state" />
+        <StickerButton v-bind="state.state"> {{ text }} </StickerButton>
       </template>
     </Variant>
 
-    <Variant title="Solana" :initState="solanaState">
+    <Variant title="Event" :initState="eventState">
       <template #default="{ state }">
-        <SocialButton v-bind="state.state" />
+        <StickerButton v-bind="state.state"> {{ text }} </StickerButton>
       </template>
     </Variant>
 
-    <Variant title="Magic eden" :initState="magicedenState">
+    <Variant title="Basic" :initState="basicState">
       <template #default="{ state }">
-        <SocialButton v-bind="state.state" />
+        <StickerButton v-bind="state.state"> {{ text }} </StickerButton>
       </template>
     </Variant>
   </Story>

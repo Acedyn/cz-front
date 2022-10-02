@@ -41,13 +41,22 @@ const selectOption = (option: string) => {
   selection.value = option;
   emit("select", option);
 };
+
+const isDropDown = ref(false);
+const onDropDown = () => {
+  isDropDown.value = true;
+};
+
+const onDropUp = () => {
+  isDropDown.value = false;
+};
 </script>
 
 <template>
   <div class="dropdown-container">
     <button
       :class="`clear-button-style picker-button ${
-        isSelecting ? 'picker-selecting' : ''
+        isDropDown ? 'picker-selecting' : ''
       }`"
       @click="toggleSelecting"
     >
@@ -66,7 +75,11 @@ const selectOption = (option: string) => {
         arrow_drop_down
       </span>
     </button>
-    <transition name="dropdown">
+    <transition
+      name="dropdown"
+      @before-enter="onDropDown"
+      @after-leave="onDropUp"
+    >
       <div class="dropdown-menu" v-if="isSelecting">
         <button
           class="clear-button-style"

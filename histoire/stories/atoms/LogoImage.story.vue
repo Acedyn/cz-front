@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import ControlsGenerator from "../../../histoire/ControlsGenerator.vue";
-import LogoImage from "../../components/atoms/LogoImage.vue";
+import ControlsGenerator from "../../ControlsGenerator.vue";
+import LogoImage from "../../../src/components/atoms/LogoImage.vue";
 
 const worldState = () => {
   return {
     state: {
-      logo: "world",
+      type: "world",
     },
   };
 };
@@ -13,7 +13,7 @@ const worldState = () => {
 const toolsState = () => {
   return {
     state: {
-      logo: "tools",
+      type: "tools",
     },
   };
 };
@@ -21,7 +21,7 @@ const toolsState = () => {
 const timeWatchState = () => {
   return {
     state: {
-      logo: "time_watch",
+      type: "time_watch",
     },
   };
 };
@@ -29,7 +29,7 @@ const timeWatchState = () => {
 const profileState = () => {
   return {
     state: {
-      logo: "profile",
+      type: "profile",
     },
   };
 };
@@ -37,7 +37,7 @@ const profileState = () => {
 const homeState = () => {
   return {
     state: {
-      logo: "home",
+      type: "home",
     },
   };
 };
@@ -45,7 +45,7 @@ const homeState = () => {
 const dashboardState = () => {
   return {
     state: {
-      logo: "dashboard",
+      type: "dashboard",
     },
   };
 };
@@ -53,7 +53,7 @@ const dashboardState = () => {
 const boxPointState = () => {
   return {
     state: {
-      logo: "box_point",
+      type: "box_point",
     },
   };
 };
@@ -61,7 +61,7 @@ const boxPointState = () => {
 const boxOpenedState = () => {
   return {
     state: {
-      logo: "box_opened",
+      type: "box_opened",
     },
   };
 };
@@ -69,14 +69,14 @@ const boxOpenedState = () => {
 const boxClosedState = () => {
   return {
     state: {
-      logo: "box_closed",
+      type: "box_closed",
     },
   };
 };
 </script>
 
 <template>
-  <Story title="Atoms/Logo Image" :layout="{ type: 'grid' }">
+  <Story title="Global/Atoms/Logo Image" :layout="{ type: 'grid' }">
     <template #controls="{ state }">
       <ControlsGenerator
         v-model="state.state"
