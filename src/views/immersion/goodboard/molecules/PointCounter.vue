@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import TypographyDropShadow from "../../../components/utils/TypographyDropShadow.vue";
-import StickerImage from "../../../components/atoms/StickerImage.vue";
-import LogoImage from "../../../components/atoms/LogoImage.vue";
+import TypographyDropShadow from "../../../../components/utils/TypographyDropShadow.vue";
+import StickerImage from "../../../../components/atoms/StickerImage.vue";
+import LogoImage from "../../../../components/atoms/LogoImage.vue";
 
 const props = withDefaults(
   defineProps<{

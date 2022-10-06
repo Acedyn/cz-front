@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import TypographyText from "../../../components/utils/TypographyText.vue";
-import TypographyDropShadow from "../../../components/utils/TypographyDropShadow.vue";
-import UserStrip from "../../../components/atoms/UserStrip.vue";
+import TypographyText from "../../../../components/utils/TypographyText.vue";
+import TypographyDropShadow from "../../../../components/utils/TypographyDropShadow.vue";
+import UserStrip from "../../../../components/atoms/UserStrip.vue";
 
-import type News from "../../../types/news";
+import type News from "../../../../types/news";
 
 const props = withDefaults(
   defineProps<{

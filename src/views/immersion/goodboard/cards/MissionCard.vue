@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import TypographyText from "../../../components/utils/TypographyText.vue";
-import TypographyDropShadow from "../../../components/utils/TypographyDropShadow.vue";
-import CategoryTag from "../../../components/atoms/CategoryTag.vue";
-import StickerButton from "../../../components/interaction/StickerButton.vue";
+import TypographyText from "../../../../components/utils/TypographyText.vue";
+import TypographyDropShadow from "../../../../components/utils/TypographyDropShadow.vue";
+import CategoryTag from "../../../../components/atoms/CategoryTag.vue";
+import StickerButton from "../../../../components/interaction/StickerButton.vue";
 import PointCounter from "../molecules/PointCounter.vue";
-import LogoImage from "../../../components/atoms/LogoImage.vue";
-import StickerImage from "../../../components/atoms/StickerImage.vue";
+import LogoImage from "../../../../components/atoms/LogoImage.vue";
+import StickerImage from "../../../../components/atoms/StickerImage.vue";
 
-import type Mission from "../../../types/mission";
+import type Mission from "../../../../types/mission";
 
 const props = withDefaults(
   defineProps<{
