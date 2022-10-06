@@ -179,7 +179,8 @@ const { t } = useI18n({
         :left="13.12"
         :width="22.96"
         :height="35.34"
-        disabled
+        noHoverImage
+        @click="() => router.push('/immersion/goodboard')"
         ><template #hover>
           <DetailsRegion
             title="Break Room"

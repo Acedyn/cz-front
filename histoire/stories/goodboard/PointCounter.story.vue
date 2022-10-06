@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ControlsGenerator from "../../ControlsGenerator.vue";
-import PointCounter from "../../../src/views/goodboard/molecules/PointCounter.vue";
+import PointCounter from "../../../src/views/immersion/goodboard/molecules/PointCounter.vue";
 
 const gainState = () => {
   return {

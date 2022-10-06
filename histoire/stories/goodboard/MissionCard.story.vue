@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ControlsGenerator from "../../ControlsGenerator.vue";
-import MissionCard from "../../../src/views/goodboard/cards/MissionCard.vue";
+import MissionCard from "../../../src/views/immersion/goodboard/cards/MissionCard.vue";
 import Mission from "../../../src/types/mission";
 
 const discordState = () => {
