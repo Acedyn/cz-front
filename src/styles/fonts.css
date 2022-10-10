@@ -28,3 +28,7 @@
   font-family: SegoeUi;
   src: local("BlockHead"), url(@/assets/fonts/Segoe-UI.ttf);
 }
+@font-face {
+  font-family: RubikOne;
+  src: local("BlockHead"), url(@/assets/fonts/RubikOne-Regular.ttf);
+}

@@ -6,6 +6,7 @@ const props = withDefaults(
     weight?: "bold" | "regular" | "light";
     font?: string;
     spacing?: number;
+    fontStyle?: "normal" | "italic";
   }>(),
   {
     spacing: 1.5,
@@ -13,11 +14,12 @@ const props = withDefaults(
     color: "var(--global-color-paragraph)",
     weight: "regular",
     font: "SegoeUi",
+    fontStyle: "normal",
   }
 );
 
 function getClass() {
-  return `typographySize__${props.size} typographyWeight__${props.weight} typographyColor`;
+  return `typographySize__${props.size} typographyWeight__${props.weight} typographyStyle__${props.fontStyle} typographyColor`;
 }
 </script>
 
@@ -53,6 +55,14 @@ function getClass() {
 
 .typographyWeight__bold {
   font-weight: 700;
+}
+
+.typographyStyle__normal {
+  font-style: normal;
+}
+
+.typographyStyle__italic {
+  font-style: italic;
 }
 
 .typographyColor {

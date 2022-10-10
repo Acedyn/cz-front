@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted } from "vue";
-import { getBreakpoint, Breakpoint } from "../../utils/breakpoints";
+import { onMounted, onUnmounted, ref } from "vue";
+import { getBreakpoint, Breakpoint } from "@/utils/breakpoints";
+import { useRoute } from "vue-router";
+
 import TypographyText from "../utils/TypographyText.vue";
 import LanguagePicker from "../interaction/LanguagePicker.vue";
-import { useRoute } from "vue-router";
+import MenuItem from "@/components/atoms/MenuItem.vue";
+
+import type { LogoImageType } from "@/types/logoImage";
 
 const props = defineProps<{
   navButtons: {
@@ -11,6 +15,7 @@ const props = defineProps<{
     click: () => void;
     soon: boolean;
     path: string;
+    icon: LogoImageType;
   }[];
   show?: boolean;
 }>();
@@ -27,17 +32,26 @@ const buttonClass = (path: string) => {
   }`;
 };
 
+const checkActive = (path: string) => {
+  return useRoute().fullPath.includes(path) || useRoute().name === path;
+};
+
 const breakpoint = getBreakpoint(onMounted, onUnmounted);
+
+const miniVariant = ref(true);
 </script>
 
 <template>
   <transition
     :name="breakpoint < Breakpoint.SM ? 'slide-mobile' : 'slide'"
     @after-leave="emit('exited')"
+    @mouseenter="miniVariant = false"
+    @mouseleave="miniVariant = true"
   >
     <div
+      ref="topHeader"
       :class="`panel-container ${
-        breakpoint < Breakpoint.SM ? 'panel-mobile' : ''
+        breakpoint < Breakpoint.SM ? 'panel-mobile' : 'panel-mini'
       }`"
       v-if="props.show"
     >
@@ -64,18 +78,15 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
       --></div>
 
       <nav class="menu">
-        <TypographyText
-          size="big"
-          weight="bold"
-          font="Poppins"
-          color=""
+        <MenuItem
           v-for="(navButton, index) in props.navButtons"
-          @click="navButton.click"
           :key="index"
-          ><p :class="buttonClass(navButton.path)">
-            {{ navButton.name }}
-          </p></TypographyText
-        >
+          :text="navButton.name.toUpperCase()"
+          :icon="navButton.icon"
+          :mini="breakpoint > Breakpoint.SM && miniVariant"
+          :active="checkActive(navButton.path)"
+          @click="navButton.click"
+        />
       </nav>
     </div>
   </transition>
@@ -84,15 +95,19 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
 <style scoped>
 .panel-container {
   position: absolute;
-  padding: 2rem;
+  padding: 2rem 1.25rem;
   top: 0;
   left: 0;
-  width: 30rem;
   height: 100vh;
-  background: var(--global-color-dark);
+  /*background: var(--global-color-dark);*/
+  background-color: #893a27;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.panel-mini:hover {
+  width: 30rem;
 }
 
 .panel-mobile {
@@ -101,12 +116,24 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
   min-height: 70vh;
 }
 
+.panel-mini {
+  width: 120px;
+}
+
 .panel-title {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 1rem;
   align-self: center;
+}
+
+.panel-title p {
+  display: none;
+}
+
+.panel-container:hover .panel-title p {
+  display: block;
 }
 
 .main-logo {
@@ -132,6 +159,14 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
   flex-direction: row;
   align-items: center;
   gap: 1rem;
+  justify-content: end;
+}
+
+.panel-mini .panel-options {
+  justify-content: center;
+}
+
+.panel-mini:hover .panel-options {
   justify-content: end;
 }
 
@@ -169,11 +204,28 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
 }
 
 .menu {
-  margin-top: 4rem;
+  /*margin-top: 4rem;*/
+  max-width: 55%;
   display: flex;
   flex-direction: column;
   gap: 3rem;
   justify-content: space-between;
+  margin: 0 auto;
+}
+
+/*.menu div {*/
+/*  width: 100%;*/
+/*}*/
+
+.panel-mini .menu {
+  align-items: center;
+  align-self: center;
+}
+
+.panel-full .menu,
+.panel-mini:hover .menu {
+  align-items: start;
+  align-self: start;
 }
 
 .menu-button {
@@ -216,5 +268,21 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
 
 .language-picker {
   z-index: 1;
+}
+
+@media only screen and (min-width: 768px) {
+  .panel-container {
+    border-width: 0;
+    border-right: 20px solid;
+    border-image: url("/src/assets/header/header_border.png") 0 100%;
+  }
+
+  .menu {
+    min-width: 55%;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
 </style>

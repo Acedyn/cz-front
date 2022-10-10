@@ -3,7 +3,7 @@ import type User from "../../types/user";
 
 const props = withDefaults(
   defineProps<{
-    users: User;
+    users: User[];
     size?: number;
   }>(),
   {

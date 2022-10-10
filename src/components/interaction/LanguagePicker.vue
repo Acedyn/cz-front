@@ -29,7 +29,7 @@ const selectLanguage = (language: string) => {
 <template>
   <DropDownPicker
     :color="props.color"
-    :colorHover="props.colorHoover"
+    :colorHover="props.colorHover"
     icon="language"
     :options="['en', 'es', 'fr'].map((l) => l.toUpperCase())"
     @select="selectLanguage"

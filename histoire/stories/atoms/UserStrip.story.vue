@@ -64,7 +64,10 @@ const largeState = () => {
 </script>
 
 <template>
-  <Story title="Global/Atoms/UserStrip" :layout="{ type: 'grid', width: '100%' }">
+  <Story
+    title="Global/Atoms/UserStrip"
+    :layout="{ type: 'grid', width: '100%' }"
+  >
     <template #controls="{ state }">
       <ControlsGenerator
         v-model="state.state"

@@ -8,8 +8,8 @@ interface MissionData {
   reward: number;
   canceled: boolean;
   initialized: boolean;
-  closeAt: number;
-  parameters: Record<string, string>;
+  closeAt?: number;
+  parameters?: Record<string, string>;
 }
 
 interface MissionColors {
