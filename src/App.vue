@@ -59,4 +59,10 @@ const { headerCollapse } = storeToRefs(preferences);
   padding-top: 7.8rem;
   --app-padding-side: 5vw;
 }
+
+/*@media only screen and (min-width: 768px) {*/
+/*  #app {*/
+/*    left: 120px;*/
+/*  }*/
+/*}*/
 </style>

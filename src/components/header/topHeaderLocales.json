@@ -4,7 +4,9 @@
       "home": "Home",
       "tools": "Tools",
       "market": "Marketplace",
-      "world": "World"
+      "world": "World",
+      "profile": "Profile",
+      "settings": "Settings"
     },
     "preferences": {
       "login": "Sign In"
@@ -15,7 +17,9 @@
       "home": "Home",
       "tools": "Tools",
       "market": "Marketplace",
-      "world": "World"
+      "world": "World",
+      "profile": "Profile",
+      "settings": "Settings"
     },
     "preferences": {
       "login": "Sign In"
@@ -26,7 +30,9 @@
       "home": "Home",
       "tools": "Tools",
       "market": "Marketplace",
-      "world": "World"
+      "world": "World",
+      "profile": "Profile",
+      "settings": "Settings"
     },
     "preferences": {
       "login": "Sign In"

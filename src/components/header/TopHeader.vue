@@ -3,6 +3,7 @@ import OverlayPopup from "../popup/OverlayPopup.vue";
 import TypographyText from "../utils/TypographyText.vue";
 import LanguagePicker from "../interaction/LanguagePicker.vue";
 import TopHeaderPanel from "./TopHeaderPanel.vue";
+import type { LogoImageType } from "@/types/logoImage";
 import { useRoute } from "vue-router";
 import { getBreakpoint, Breakpoint } from "../../utils/breakpoints";
 import { ref, computed, onMounted, onUnmounted } from "vue";
@@ -33,6 +34,7 @@ const navButtons = [
     },
     soon: false,
     path: "home",
+    icon: "home" as LogoImageType,
   },
   {
     name: t("buttons.world"),
@@ -42,6 +44,7 @@ const navButtons = [
     },
     soon: false,
     path: "immersion",
+    icon: "world" as LogoImageType,
   },
   {
     name: t("buttons.tools"),
@@ -51,16 +54,37 @@ const navButtons = [
     },
     soon: true,
     path: "tools",
+    icon: "tools" as LogoImageType,
   },
   {
-    name: t("buttons.market"),
+    name: t("buttons.profile"),
     click: () => {
-      router.push("/marketplace");
+      router.push("/");
       showPanel.value = false;
     },
-    soon: false,
-    path: "marketplace",
+    soon: true,
+    path: "profile",
+    icon: "profile" as LogoImageType,
   },
+  {
+    name: t("buttons.settings"),
+    click: () => {
+      router.push("/");
+      showPanel.value = false;
+    },
+    soon: true,
+    path: "settings",
+    icon: "dashboard" as LogoImageType,
+  },
+  // {
+  //   name: t("buttons.market"),
+  //   click: () => {
+  //     router.push("/marketplace");
+  //     showPanel.value = false;
+  //   },
+  //   soon: false,
+  //   path: "marketplace",
+  // },
 ];
 
 const buttonClass = (path: string) => {
@@ -134,7 +158,6 @@ const isCollapsed = computed(() => {
         />
       </button>
     </div>
-
     <OverlayPopup
       :show="showOverlay"
       margin="0"

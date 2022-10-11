@@ -1,16 +1,10 @@
 <script setup lang="ts">
+import { computed } from "vue";
+import type { LogoImageType } from "@/types/logoImage";
+
 const props = withDefaults(
   defineProps<{
-    type:
-      | "box_closed"
-      | "box_opened"
-      | "box_point"
-      | "dashboard"
-      | "home"
-      | "profile"
-      | "time_watch"
-      | "tools"
-      | "world";
+    type: LogoImageType;
     size?: number;
   }>(),
   {
@@ -18,8 +12,9 @@ const props = withDefaults(
   }
 );
 
-const imageUrl = new URL(`/src/assets/logos/${props.type}.png`, import.meta.url)
-  .href;
+const imageUrl = computed(
+  () => new URL(`/src/assets/logos/${props.type}.png`, import.meta.url).href
+);
 </script>
 
 <template>
