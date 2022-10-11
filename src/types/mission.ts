@@ -3,6 +3,7 @@ interface MissionData {
   shortDescription: string;
   longDescription: string;
   category: string;
+  image?: string;
   logo: string;
   class: string;
   reward: number;

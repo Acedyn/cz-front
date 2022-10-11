@@ -9,10 +9,15 @@ import type Mission from "../../../../types/mission";
 const props = withDefaults(
   defineProps<{
     mission: Mission;
-    image?: string;
   }>(),
   {}
 );
+
+const emit = defineEmits<{(e: "handleClose"): void }>()
+
+const handleClose = () => {
+  emit("handleClose");
+};
 </script>
 
 <template>
@@ -22,11 +27,11 @@ const props = withDefaults(
         <p>{{ props.mission.data.name }}</p>
       </TypographyText>
       <div class="mini-image">
-        <CloseButton class="close-button" size="30px" />
-        <img :src="props.image" alt="mission image" />
+        <CloseButton class="close-button" size="30px" @click="handleClose" />
+        <img :src="props.mission.data.image" alt="mission image" />
       </div>
       <TypographyText font="Marvel" size="regular" weight="light">
-        {{ props.mission.data.shortDescription }}
+        {{ props.mission.data.longDescription }}
       </TypographyText>
       <div class="timer-point">
         <div>
@@ -51,8 +56,8 @@ const props = withDefaults(
       </StickerButton>
     </div>
     <div class="image">
-      <CloseButton class="close-button" size="30px" />
-      <img :src="props.image" alt="mission image" />
+      <CloseButton class="close-button" size="30px" @click="handleClose"/>
+      <img :src="props.mission.data.image" alt="mission image" />
     </div>
   </div>
 </template>
@@ -69,6 +74,7 @@ const props = withDefaults(
 .content {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   gap: 2rem;
   width: 50%;
 }

@@ -16,12 +16,12 @@ const { headerCollapse } = storeToRefs(preferences);
 </script>
 
 <template>
-  <TopHeader
-    :class="`app-header ${headerCollapse ? 'app-header-collapse' : ''} ${
+    <TopHeader
+        :class="`app-header ${headerCollapse ? 'app-header-collapse' : ''} ${
       isSmall ? 'app-header-small' : ''
     }`"
-  />
-  <RouterView :class="`app-view ${isSmall ? 'app-view-small' : ''}`" />
+    />
+    <RouterView :class="`app-view ${isSmall ? 'app-view-small' : ''}`" />
 </template>
 
 <style>
@@ -31,8 +31,8 @@ const { headerCollapse } = storeToRefs(preferences);
 #app {
   position: absolute;
   top: 0;
-  bottom: 0;
   left: 0;
+  bottom: 0;
   right: 0;
 }
 

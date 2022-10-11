@@ -101,76 +101,82 @@ const isCollapsed = computed(() => {
 </script>
 
 <template>
-  <header
-    :class="`header-container ${isCollapsed ? '' : 'container-collapsed'}`"
-  >
-    <div class="header-left header-sides" v-if="isCollapsed">
-      <div class="header-title">
-        <img class="main-logo" src="@/assets/logos/brand_logo.png" />
-        <TypographyText size="big" color="white" font="Poppins" weight="bold"
-          ><p class="menu-button" @click="navButtons[0].click">
-            Cardboard Citizens
-          </p></TypographyText
-        >
-      </div>
-      <nav class="menu">
-        <button
-          class="nav-button"
-          :tooltip="navButton.soon ? 'Coming soon' : undefined"
-          v-for="(navButton, index) in navButtons"
-          :key="index"
-          @click="navButton.click"
-        >
-          <TypographyText size="big" weight="bold" font="Poppins" color=""
-            ><p :class="buttonClass(navButton.path)">
-              {{ navButton.name }}
-            </p></TypographyText
-          >
-        </button>
-      </nav>
-    </div>
-    <div class="header-right header-sides" v-if="isCollapsed">
-      <LanguagePicker />
-      <!--
-      <button class="signin-button">
-        <span class="material-icons signin-icon"> person </span>
-        <TypographyText size="big" weight="bold" font="Poppins" color=""
-          ><p class="signin-text">
-            {{ t("preferences.login") }}
-          </p></TypographyText
-        >
-      </button>
-      -->
-    </div>
+  <TopHeaderPanel
+    style="position: fixed"
+    :navButtons="navButtons"
+    :show="true"
+  />
 
-    <div class="collaped-header" v-else>
-      <button class="collapsed-button">
-        <span
-          class="material-icons handburger-icon"
-          :style="{ fontSize: '4rem' }"
-          @click="showOverlay = !showOverlay"
-          >menu</span
-        >
-        <img
-          class="colapsed-logo"
-          src="@/assets/logos/brand_logo.png"
-          @click="navButtons[0].click"
-        />
-      </button>
-    </div>
-    <OverlayPopup
-      :show="showOverlay"
-      margin="0"
-      @exit="showPanel = false"
-      @entered="showPanel = true"
-    >
-      <TopHeaderPanel
-        :navButtons="navButtons"
-        :show="showPanel"
-        @exited="showOverlay = false"
-      />
-    </OverlayPopup>
-  </header>
+  <!--  <header-->
+  <!--    :class="`header-container ${isCollapsed ? '' : 'container-collapsed'}`"-->
+  <!--  >-->
+  <!--    <div class="header-left header-sides" v-if="isCollapsed">-->
+  <!--      <div class="header-title">-->
+  <!--        <img class="main-logo" src="@/assets/logos/brand_logo.png" />-->
+  <!--        <TypographyText size="big" color="white" font="Poppins" weight="bold"-->
+  <!--          ><p class="menu-button" @click="navButtons[0].click">-->
+  <!--            Cardboard Citizens-->
+  <!--          </p></TypographyText-->
+  <!--        >-->
+  <!--      </div>-->
+  <!--      <nav class="menu">-->
+  <!--        <button-->
+  <!--          class="nav-button"-->
+  <!--          :tooltip="navButton.soon ? 'Coming soon' : undefined"-->
+  <!--          v-for="(navButton, index) in navButtons"-->
+  <!--          :key="index"-->
+  <!--          @click="navButton.click"-->
+  <!--        >-->
+  <!--          <TypographyText size="big" weight="bold" font="Poppins" color=""-->
+  <!--            ><p :class="buttonClass(navButton.path)">-->
+  <!--              {{ navButton.name }}-->
+  <!--            </p></TypographyText-->
+  <!--          >-->
+  <!--        </button>-->
+  <!--      </nav>-->
+  <!--    </div>-->
+  <!--    <div class="header-right header-sides" v-if="isCollapsed">-->
+  <!--      <LanguagePicker />-->
+  <!--      &lt;!&ndash;-->
+  <!--      <button class="signin-button">-->
+  <!--        <span class="material-icons signin-icon"> person </span>-->
+  <!--        <TypographyText size="big" weight="bold" font="Poppins" color=""-->
+  <!--          ><p class="signin-text">-->
+  <!--            {{ t("preferences.login") }}-->
+  <!--          </p></TypographyText-->
+  <!--        >-->
+  <!--      </button>-->
+  <!--      &ndash;&gt;-->
+  <!--    </div>-->
+
+  <!--    <div class="collaped-header" v-else>-->
+  <!--      <button class="collapsed-button">-->
+  <!--        <span-->
+  <!--          class="material-icons handburger-icon"-->
+  <!--          :style="{ fontSize: '4rem' }"-->
+  <!--          @click="showOverlay = !showOverlay"-->
+  <!--          >menu</span-->
+  <!--        >-->
+  <!--        <img-->
+  <!--          class="colapsed-logo"-->
+  <!--          src="@/assets/logos/brand_logo.png"-->
+  <!--          @click="navButtons[0].click"-->
+  <!--        />-->
+  <!--      </button>-->
+  <!--    </div>-->
+  <!--    <OverlayPopup-->
+  <!--      :show="showOverlay"-->
+  <!--      margin="0"-->
+  <!--      @exit="showPanel = false"-->
+  <!--      @entered="showPanel = true"-->
+  <!--    >-->
+  <!--      <TopHeaderPanel-->
+  <!--        :navButtons="navButtons"-->
+  <!--        :show="showPanel"-->
+  <!--        @exited="showOverlay = false"-->
+  <!--      />-->
+  <!--    </OverlayPopup>-->
+  <!--  </header>-->
 </template>
 
 <style scoped>
