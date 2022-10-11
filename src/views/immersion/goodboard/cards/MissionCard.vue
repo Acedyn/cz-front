@@ -15,6 +15,14 @@ const props = withDefaults(
   }>(),
   {}
 );
+
+const emit = defineEmits<{
+  (e: "handleLearnMore", payload: Mission): void;
+}>();
+
+const log = (payload: Mission) => {
+  emit("handleLearnMore", payload);
+};
 </script>
 
 <template>
@@ -25,7 +33,7 @@ const props = withDefaults(
       class="mission-card-sticker"
     />
     <div class="mission-card-header">
-      <TypographyDropShadow font="Paytone One" size="big">
+      <TypographyDropShadow font="Paytone One" size="big" style="text-align: left">
         {{ props.mission.data.name }}
       </TypographyDropShadow>
 
@@ -42,7 +50,7 @@ const props = withDefaults(
       >
         {{ props.mission.data.shortDescription }}
       </TypographyText>
-      <StickerButton :hue="props.mission.getColors().hue">{{
+      <StickerButton class="cta-button" :hue="props.mission.getColors().hue" @click="log(props.mission)">{{
         "LEARN MORE"
       }}</StickerButton>
     </div>
@@ -117,5 +125,9 @@ const props = withDefaults(
   align-items: end;
   gap: 0.5rem;
   word-spacing: -0.7rem;
+}
+
+.cta-button {
+  border: 0;
 }
 </style>
