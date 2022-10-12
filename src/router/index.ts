@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LandingView from "@/views/landing/LandingView.vue";
-import { usePreferencesStore } from "../stores/preferences";
+import { usePreferencesStore } from "@/stores/preferences";
 
+import authRoutes from "./authRoutes";
 import immersionRoute from "./immersionRoutes";
 
 const router = createRouter({
@@ -14,7 +15,7 @@ const router = createRouter({
       beforeEnter() {
         const preferences = usePreferencesStore();
         preferences.setHeaderCollapse(false);
-      }
+      },
     },
     {
       path: "/marketplace",
@@ -28,6 +29,8 @@ const router = createRouter({
     },
 
     immersionRoute,
+
+    ...authRoutes,
   ],
 });
 

@@ -12,7 +12,7 @@ const isSmall = computed(() => {
 });
 
 const preferences = usePreferencesStore();
-const { headerCollapse } = storeToRefs(preferences);
+const { headerCollapse, pageLeft } = storeToRefs(preferences);
 </script>
 
 <template>
@@ -20,8 +20,9 @@ const { headerCollapse } = storeToRefs(preferences);
     :class="`app-header ${headerCollapse ? 'app-header-collapse' : ''} ${
       isSmall ? 'app-header-small' : ''
     }`"
+    style="position: fixed"
   />
-  <RouterView :class="`app-view ${isSmall ? 'app-view-small' : ''}`" />
+  <RouterView :class="`app-view ${isSmall ? 'app-view-small' : ''}`" :style="{left: pageLeft}" style="overflow:hidden"/>
 </template>
 
 <style>
@@ -34,6 +35,12 @@ const { headerCollapse } = storeToRefs(preferences);
   bottom: 0;
   left: 0;
   right: 0;
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
+#app::-webkit-scrollbar {
+  display: none;
 }
 
 .app-header {
