@@ -4,11 +4,8 @@ import TypographyTitle from "@/components/utils/TypographyTitle.vue";
 import TextInput from "@/components/interaction/TextInput.vue";
 import CheckBox from "@/components/interaction/Checkbox.vue";
 import Button from "@/components/interaction/Button.vue";
-import { usePreferencesStore } from "../../stores/preferences";
-import { storeToRefs } from "pinia";
-
-const preferences = usePreferencesStore();
-const { pageLeft } = storeToRefs(preferences);
+import SocialMediaButton from "@/components/interaction/SocialMediaButton.vue";
+import { RouterLink } from "vue-router";
 
 const user = reactive({
   email: "",
@@ -29,14 +26,14 @@ const isLoginDisabled = computed(() => {
           font="Paytone One"
           color="var(--global-color-typography)"
         >
-          Se connecter
+          <a> Se connecter </a>
         </TypographyTitle>
         <TypographyTitle
           class="selection"
           font="Paytone One"
           color="var(--global-color-typography)"
         >
-          <a href="/register"> S’inscrire </a>
+          <router-link :to="{ name: 'registerPage' }"> S’inscrire </router-link>
         </TypographyTitle>
       </div>
 
@@ -44,20 +41,22 @@ const isLoginDisabled = computed(() => {
         v-model="user.email"
         type="email"
         placeholder="E-mail"
-        icon="handyman"
+        icon="tools"
       />
       <TextInput
         v-model="user.password"
         type="password"
-        placeholder="Password"
-        icon="handyman"
+        placeholder="Mot de passe"
+        icon="tools"
       />
 
       <div class="text-line">
         <CheckBox label="Se souvenir de moi" />
         <p>
-          <a href="/reset-password" style="text-decoration: underline"
-            >Mot de passe oublié ?</a
+          <router-link
+            :to="{ name: 'resetPassword' }"
+            style="text-decoration: underline"
+            >Mot de passe oublié ?</router-link
           >
         </p>
       </div>
@@ -72,26 +71,28 @@ const isLoginDisabled = computed(() => {
 
       <div class="divider"></div>
 
-      <Button
-        icon="fab fa-facebook-f"
+      <SocialMediaButton
+        icon="facebook"
         color="#00A3FF"
         color-hover="#00A3FF"
         text-color="white"
         >Continue with Facebook
-      </Button>
-      <Button
-        icon="fab fa-google"
+      </SocialMediaButton>
+      <SocialMediaButton
+        icon="google"
         color="#F5F5F5"
         color-hover="#F5F5F5"
         text-color="var(--global-color-dark)"
         >Continue with Google
-      </Button>
+      </SocialMediaButton>
 
       <div class="text-line">
         <p>Pas encore de compte ?</p>
         <p>
-          <a href="/register" style="text-decoration: underline"
-            >En créer un gratuitement</a
+          <router-link
+            :to="{ name: 'registerPage' }"
+            style="text-decoration: underline"
+            >En créer un gratuitement</router-link
           >
         </p>
       </div>
@@ -151,10 +152,23 @@ p {
 }
 
 @media only screen and (max-width: 768px) {
+  .auth-container {
+    padding-top: 160px;
+    height: 100vh;
+  }
+
   .login-register-container {
     width: 100%;
     max-width: 400px;
-    padding: 1rem;
+    padding: 0 2rem 0;
+  }
+
+  .selection a {
+    font-size: 2rem;
+  }
+
+  .text-line {
+    text-align: center;
   }
 }
 </style>

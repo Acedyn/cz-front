@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { reactive, computed } from "vue";
+import { RouterLink } from "vue-router";
 import TypographyTitle from "@/components/utils/TypographyTitle.vue";
 import TextInput from "@/components/interaction/TextInput.vue";
 import Button from "@/components/interaction/Button.vue";
+import SocialMediaButton from "@/components/interaction/SocialMediaButton.vue";
 
 const user = reactive({
   email: "",
@@ -30,14 +32,14 @@ const isLoginDisabled = computed(() => {
           font="Paytone One"
           color="var(--global-color-typography)"
         >
-          <a href="/login"> Se connecter </a>
+          <router-link :to="{ name: 'loginPage' }"> Se connecter </router-link>
         </TypographyTitle>
         <TypographyTitle
           class="selection active"
           font="Paytone One"
           color="var(--global-color-typography)"
         >
-          S’inscrire
+          <a> S’inscrire </a>
         </TypographyTitle>
       </div>
 
@@ -45,25 +47,25 @@ const isLoginDisabled = computed(() => {
         v-model="user.email"
         type="email"
         placeholder="E-mail"
-        icon="handyman"
+        icon="tools"
       />
       <TextInput
         v-model="user.username"
         type="text"
         placeholder="Nom d’utilisateur"
-        icon="handyman"
+        icon="tools"
       />
       <TextInput
         v-model="user.password"
         type="password"
         placeholder="Mot de passe"
-        icon="handyman"
+        icon="tools"
       />
       <TextInput
         v-model="user.confirmPassword"
         type="password"
         placeholder="Répéter le mot de passe"
-        icon="handyman"
+        icon="tools"
       />
 
       <Button :disabled="isLoginDisabled" height="58px" color="#D77A37">
@@ -72,25 +74,27 @@ const isLoginDisabled = computed(() => {
 
       <div class="divider"></div>
 
-      <Button
-        icon="fab fa-facebook-f"
+      <SocialMediaButton
+        icon="facebook"
         color="#00A3FF"
-        color-hover="#00A3FF"
         text-color="white"
         >Continue with Facebook
-      </Button>
-      <Button
-        icon="fab fa-google"
+      </SocialMediaButton>
+      <SocialMediaButton
+        icon="google"
         color="#F5F5F5"
-        color-hover="#F5F5F5"
         text-color="var(--global-color-dark)"
         >Continue with Google
-      </Button>
+      </SocialMediaButton>
 
       <div class="text-line">
         <p>Vous êtes déjà inscrit ?</p>
         <p>
-          <a href="/login" style="text-decoration: underline">Se connecter</a>
+          <router-link
+            :to="{ name: 'loginPage' }"
+            style="text-decoration: underline"
+            >Se connecter</router-link
+          >
         </p>
       </div>
     </div>
@@ -152,7 +156,17 @@ p {
   .login-register-container {
     width: 100%;
     max-width: 400px;
-    padding: 1rem;
+    padding: 0 2rem 0;
+    overflow: auto;
+  }
+
+  .selection a {
+    font-size: 2rem;
+  }
+
+  .text-line {
+    justify-content: center;
+    gap: 1rem;
   }
 }
 </style>

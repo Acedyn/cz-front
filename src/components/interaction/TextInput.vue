@@ -1,15 +1,20 @@
 <script setup lang="ts">
+import { ref } from "vue";
+import LogoImage from "../atoms/LogoImage.vue";
+import IconEye from "../icons/iconEye.vue";
+
 import type { InputType } from "@/types/inputType";
+import type { LogoImageType } from "@/types/logoImage";
 
 const props = withDefaults(
   defineProps<{
     modelValue?: string;
-    label: string;
+    label?: string;
     placeholder: string;
     type: InputType;
-    required: boolean;
-    disabled: boolean;
-    icon: string;
+    required?: boolean;
+    disabled?: boolean;
+    icon: LogoImageType;
   }>(),
   {
     label: " ",
@@ -19,33 +24,69 @@ const props = withDefaults(
   }
 );
 
+const eyeStatus = ref<"open" | "close">("close");
+const inputType = ref(props.type);
+
 const emits = defineEmits<{ (e: "update:modelValue", value: string): void }>();
 
 const updateValue = (e: Event): void => {
   const target = e.target as HTMLInputElement;
   emits("update:modelValue", target.value);
 };
+
+const handleEye = () => {
+  inputType.value = eyeStatus.value === "close" ? "text" : "password";
+  eyeStatus.value = eyeStatus.value === "close" ? "open" : "close";
+};
 </script>
 
 <template>
-  <label v-if="props.label">
-    {{ props.label }}
-    <div>
-      <span class="prepend-icon material-icons">{{ props.icon }}</span>
-      <input
-        :type="props.type"
-        :placeholder="props.placeholder ? props.placeholder : props.label || ''"
-        @input="updateValue"
-        :value="props.modelValue"
-      />
+  <div class="text-input-container">
+    <div v-if="props.label" class="label">{{ props.label }}</div>
+    <div class="text-input">
+      <div class="leading-icon">
+        <LogoImage :type="props.icon" />
+      </div>
+      <div class="input">
+        <input
+          :type="inputType"
+          :placeholder="props.placeholder"
+          :disabled="props.disabled"
+          :required="props.required"
+          @input="updateValue"
+          :value="props.modelValue"
+        />
+      </div>
+      <div v-if="props.type === 'password'" class="trailing-icon">
+        <IconEye :type="eyeStatus" size="2rem" @update:eye="handleEye" />
+      </div>
     </div>
-  </label>
+  </div>
 </template>
 
 <style scoped>
 * {
   --detail-dark: #f1a54f;
   --detial-light: #ffd3ba;
+}
+
+.text-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.text-input {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border: 2px solid var(--detail-dark);
+  border-radius: 8px;
+  background-color: var(--detial-light);
+}
+
+.input {
+  flex: 2;
 }
 
 label {
@@ -55,10 +96,10 @@ label {
 input {
   width: 100%;
   height: 40px;
-  padding: 2rem 0 2rem 3.5rem;
+  padding: 1rem 0 1rem 1rem;
   outline: none;
-  color: var(--detail-dark);
-  border: 2px solid var(--detail-dark);
+  color: var(--global-color-typography-dark);
+  border: 0;
   border-radius: 8px;
   font-family: "Quick Sand", serif;
   font-weight: 700;
@@ -84,15 +125,5 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
   border: 3px solid darkorange;
   background-color: var(--detial-light) !important;
-}
-
-.prepend-icon {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 1rem 8px;
-  color: var(--detail-dark);
-  font-size: 38px;
-  z-index: 99;
 }
 </style>

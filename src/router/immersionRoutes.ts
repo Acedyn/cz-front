@@ -6,6 +6,9 @@ import PostOfficeView from "@/views/immersion/postOffice/PostOfficeView.vue";
 import BillOfLadingView from "@/views/immersion/billOfLading/BillOfLadingView.vue";
 import WarehouseView from "@/views/immersion/warehouse/WarehouseView.vue";
 import GoodboardView from "@/views/immersion/goodboard/GoodboardView.vue";
+import LoginPage from "@/views/auth/loginPage.vue";
+import RegisterPage from "@/views/auth/registerPage.vue";
+import ResetPassword from "@/views/auth/resetPassword.vue";
 
 export default {
   path: "/immersion",
@@ -54,6 +57,21 @@ export default {
       name: "warehouse",
       component: WarehouseView,
       meta: { headerCollased: true },
+    },
+    {
+      path: "goodboard/login",
+      name: "loginPage",
+      component: LoginPage,
+    },
+    {
+      path: "goodboard/register",
+      name: "registerPage",
+      component: RegisterPage,
+    },
+    {
+      path: "goodboard/reset-password",
+      name: "resetPassword",
+      component: ResetPassword,
     },
   ],
 };

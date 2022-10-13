@@ -10,6 +10,7 @@ export const usePreferencesStore = defineStore({
     theme: preferencesLocal.theme || "light",
     language: preferencesLocal.language || "en",
     pageLeft: "120px",
+    pageTop: "0",
     headerCollapse: false,
   }),
   getters: {
@@ -30,6 +31,9 @@ export const usePreferencesStore = defineStore({
     },
     setPageLeft(value: string) {
       this.pageLeft = value;
+    },
+    setPageTop(value: string) {
+      this.pageTop = value;
     },
     setLanguage(language: "en" | "fr" | "es", locale: Ref<string>) {
       this.language = language;

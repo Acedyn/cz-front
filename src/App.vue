@@ -12,7 +12,7 @@ const isSmall = computed(() => {
 });
 
 const preferences = usePreferencesStore();
-const { headerCollapse, pageLeft } = storeToRefs(preferences);
+const { headerCollapse, pageLeft, pageTop } = storeToRefs(preferences);
 </script>
 
 <template>
@@ -22,7 +22,11 @@ const { headerCollapse, pageLeft } = storeToRefs(preferences);
     }`"
     style="position: fixed"
   />
-  <RouterView :class="`app-view ${isSmall ? 'app-view-small' : ''}`" :style="{left: pageLeft}" style="overflow:hidden"/>
+  <RouterView
+    :class="`app-view ${isSmall ? 'app-view-small' : ''}`"
+    :style="{ top: pageTop, left: pageLeft }"
+    style="overflow: hidden"
+  />
 </template>
 
 <style>
@@ -37,6 +41,8 @@ const { headerCollapse, pageLeft } = storeToRefs(preferences);
   right: 0;
   overflow: scroll;
   scrollbar-width: none;
+  background-image: url("/src/assets/background/background.png"),
+  radial-gradient(76.99% 76.99% at 50% 53.41%, #925637 0%, #411f12 100%);
 }
 
 #app::-webkit-scrollbar {

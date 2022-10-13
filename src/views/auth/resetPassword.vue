@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
+import { RouterLink } from "vue-router";
 import TypographyTitle from "@/components/utils/TypographyTitle.vue";
 import TextInput from "@/components/interaction/TextInput.vue";
 import Button from "@/components/interaction/Button.vue";
@@ -24,7 +25,7 @@ const isLoginDisabled = computed(() => {
         v-model="email"
         type="email"
         placeholder="E-mail"
-        icon="handyman"
+        icon="tools"
       />
       <Button
         :invert="true"
@@ -36,8 +37,10 @@ const isLoginDisabled = computed(() => {
       <div class="no-account-line">
         <p>Pas encore de compte ?</p>
         <p>
-          <a href="/register" style="text-decoration: underline"
-            >En créer un gratuitement</a
+          <router-link
+            :to="{ name: 'registerPage' }"
+            style="text-decoration: underline"
+            >En créer un gratuitement</router-link
           >
         </p>
       </div>

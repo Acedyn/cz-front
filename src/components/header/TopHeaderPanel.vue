@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, toRefs, computed, onMounted, onUnmounted } from "vue";
 import { useRoute } from "vue-router";
-import { useBreakpoints } from "@vueuse/core";
+import { getBreakpoint, Breakpoint } from "@/utils/breakpoints";
 import { usePreferencesStore } from "../../stores/preferences";
 
 import TypographyText from "../utils/TypographyText.vue";
@@ -11,6 +11,8 @@ import MenuItem from "@/components/atoms/MenuItem.vue";
 import type { LogoImageType } from "@/types/logoImage";
 
 const preferences = usePreferencesStore();
+
+const breakpoints = getBreakpoint(onMounted, onUnmounted);
 
 const props = defineProps<{
   navButtons: {
@@ -39,11 +41,15 @@ const checkActive = (path: string) => {
   return useRoute().fullPath.includes(path) || useRoute().name === path;
 };
 
-const breakpoints = useBreakpoints({
-  sm: 425,
-  md: 768,
-  lg: 1024,
-  xl: 1440,
+const isSmallScreen = computed(() => {
+  if (breakpoints.value < Breakpoint.SM) {
+    preferences.setPageLeft("0");
+    preferences.setPageTop("80px");
+  } else {
+    preferences.setPageLeft("120px");
+    preferences.setPageTop("0");
+  }
+  return breakpoints.value < Breakpoint.SM;
 });
 
 const isMenuOpen = ref(false);
@@ -56,45 +62,62 @@ const brandIcon = computed(() => {
 
 const panelClass = computed(() => {
   if (isMenuOpen.value) {
+    if (isSmallScreen.value) {
+      return "panel-container panel-mobile-open";
+    }
     return "panel-container panel-open";
   } else {
+    if (isSmallScreen.value) {
+      return "panel-container panel-mobile-close";
+    }
     return "panel-container panel-close";
   }
 });
 
 const handleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
-  if (isMenuOpen.value) {
-    preferences.setPageLeft("30rem");
-  } else {
-    preferences.setPageLeft("120px");
+  if (!isSmallScreen.value) {
+    if (isMenuOpen.value) {
+      preferences.setPageLeft("30rem");
+    } else {
+      preferences.setPageLeft("120px");
+    }
   }
 };
 </script>
 
 <template>
   <transition
-    :name="breakpoints.isSmaller('md') ? 'slide-mobile' : 'slide'"
+    :name="isSmallScreen ? 'slide-mobile' : 'slide'"
     @after-leave="emit('exited')"
   >
-    <div :class="panelClass" v-if="props.show">
-      <div class="panel-title">
+    <div>
+      <div class="panel-mobile">
         <img
-          class="main-logo"
+          class="main-logo main-logo-mobile"
           :src="brandIcon"
           alt="brand_logo"
           @click="handleMenu"
         />
-        <TypographyText size="big" color="white" font="Poppins" weight="bold"
-          ><p class="title-text" @click="props.navButtons[0].click">
-            Cardboard Citizens
-          </p></TypographyText
-        >
       </div>
+      <div :class="panelClass" v-if="props.show">
+        <div class="panel-title">
+          <img
+            class="main-logo"
+            :src="brandIcon"
+            alt="brand_logo"
+            @click="handleMenu"
+          />
+          <TypographyText size="big" color="white" font="Poppins" weight="bold"
+            ><p class="title-text" @click="props.navButtons[0].click">
+              Cardboard Citizens
+            </p></TypographyText
+          >
+        </div>
 
-      <div class="panel-options">
-        <LanguagePicker class="language-picker" />
-        <!--
+        <div class="panel-options">
+          <LanguagePicker class="language-picker" />
+          <!--
         <button class="signin-button">
           <span class="material-icons signin-icon"> person </span>
           <TypographyText size="big" weight="bold" font="Poppins" color=""
@@ -102,20 +125,21 @@ const handleMenu = () => {
               {{ t("preferences.login") }}
             </p></TypographyText
           >
-        </button>
-      --></div>
+        </button> -->
+        </div>
 
-      <nav class="menu">
-        <MenuItem
-          v-for="(navButton, index) in props.navButtons"
-          :key="index"
-          :text="navButton.name.toUpperCase()"
-          :icon="navButton.icon"
-          :mini="!isMenuOpen"
-          :active="checkActive(navButton.path)"
-          @click="navButton.click"
-        />
-      </nav>
+        <nav class="menu">
+          <MenuItem
+            v-for="(navButton, index) in props.navButtons"
+            :key="index"
+            :text="navButton.name.toUpperCase()"
+            :icon="navButton.icon"
+            :mini="!isMenuOpen"
+            :active="checkActive(navButton.path)"
+            @click="navButton.click"
+          />
+        </nav>
+      </div>
     </div>
   </transition>
 </template>
@@ -139,9 +163,24 @@ const handleMenu = () => {
 }
 
 .panel-mobile {
+}
+
+.panel-mobile-close {
   width: 100vw;
   height: fit-content;
-  min-height: 70vh;
+  max-height: 80px;
+}
+
+.panel-mobile-close * {
+  display: none;
+}
+
+.panel-mobile-open {
+  width: 100vw;
+  min-height: 100vh;
+  border-width: 0;
+  border-bottom: 20px solid;
+  border-image: url("/src/assets/header/header_border2.png") 100% 0;
 }
 
 .panel-close {
@@ -166,8 +205,18 @@ const handleMenu = () => {
 
 .main-logo {
   /*filter: invert(100%) brightness(200%);*/
-  height: 5rem;
+  height: 3.5rem;
   object-fit: contain;
+  z-index: 99;
+}
+
+.main-logo-mobile {
+  display: block;
+  margin-top: 1rem;
+}
+
+.panel-mobile-open .main-logo {
+  display: none;
 }
 
 .title-text {
@@ -310,6 +359,10 @@ const handleMenu = () => {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+  }
+
+  .main-logo-mobile {
+    display: none;
   }
 }
 </style>
