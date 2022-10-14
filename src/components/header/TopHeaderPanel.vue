@@ -1,13 +1,18 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from "vue";
-import { getBreakpoint, Breakpoint } from "@/utils/breakpoints";
+import { ref, toRefs, computed, onMounted, onUnmounted } from "vue";
 import { useRoute } from "vue-router";
+import { getBreakpoint, Breakpoint } from "@/utils/breakpoints";
+import { usePreferencesStore } from "../../stores/preferences";
 
 import TypographyText from "../utils/TypographyText.vue";
 import LanguagePicker from "../interaction/LanguagePicker.vue";
 import MenuItem from "@/components/atoms/MenuItem.vue";
 
 import type { LogoImageType } from "@/types/logoImage";
+
+const preferences = usePreferencesStore();
+
+const breakpoints = getBreakpoint(onMounted, onUnmounted);
 
 const props = defineProps<{
   navButtons: {
@@ -36,37 +41,83 @@ const checkActive = (path: string) => {
   return useRoute().fullPath.includes(path) || useRoute().name === path;
 };
 
-const breakpoint = getBreakpoint(onMounted, onUnmounted);
+const isSmallScreen = computed(() => {
+  if (breakpoints.value < Breakpoint.SM) {
+    preferences.setPageLeft("0");
+    preferences.setPageTop("80px");
+  } else {
+    preferences.setPageLeft("120px");
+    preferences.setPageTop("0");
+  }
+  return breakpoints.value < Breakpoint.SM;
+});
 
-const miniVariant = ref(true);
+const isMenuOpen = ref(false);
+const brandIcon = computed(() => {
+  if (isMenuOpen.value) {
+    return new URL("/src/assets/logos/box_opened.png", import.meta.url).href;
+  }
+  return new URL("/src/assets/logos/box_closed.png", import.meta.url).href;
+});
+
+const panelClass = computed(() => {
+  if (isMenuOpen.value) {
+    if (isSmallScreen.value) {
+      return "panel-container panel-mobile-open";
+    }
+    return "panel-container panel-open";
+  } else {
+    if (isSmallScreen.value) {
+      return "panel-container panel-mobile-close";
+    }
+    return "panel-container panel-close";
+  }
+});
+
+const handleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+  if (!isSmallScreen.value) {
+    if (isMenuOpen.value) {
+      preferences.setPageLeft("30rem");
+    } else {
+      preferences.setPageLeft("120px");
+    }
+  }
+};
 </script>
 
 <template>
   <transition
-    :name="breakpoint < Breakpoint.SM ? 'slide-mobile' : 'slide'"
+    :name="isSmallScreen ? 'slide-mobile' : 'slide'"
     @after-leave="emit('exited')"
-    @mouseenter="miniVariant = false"
-    @mouseleave="miniVariant = true"
   >
-    <div
-      ref="topHeader"
-      :class="`panel-container ${
-        breakpoint < Breakpoint.SM ? 'panel-mobile' : 'panel-mini'
-      }`"
-      v-if="props.show"
-    >
-      <div class="panel-title">
-        <img class="main-logo" src="@/assets/logos/brand_logo.png" />
-        <TypographyText size="big" color="white" font="Poppins" weight="bold"
-          ><p class="title-text" @click="props.navButtons[0].click">
-            Cardboard Citizens
-          </p></TypographyText
-        >
+    <div>
+      <div class="panel-mobile">
+        <img
+          class="main-logo main-logo-mobile"
+          :src="brandIcon"
+          alt="brand_logo"
+          @click="handleMenu"
+        />
       </div>
+      <div :class="panelClass" v-if="props.show">
+        <div class="panel-title">
+          <img
+            class="main-logo"
+            :src="brandIcon"
+            alt="brand_logo"
+            @click="handleMenu"
+          />
+          <TypographyText size="big" color="white" font="Poppins" weight="bold"
+            ><p class="title-text" @click="props.navButtons[0].click">
+              Cardboard Citizens
+            </p></TypographyText
+          >
+        </div>
 
-      <div class="panel-options">
-        <LanguagePicker class="language-picker" />
-        <!--
+        <div class="panel-options">
+          <LanguagePicker class="language-picker" />
+          <!--
         <button class="signin-button">
           <span class="material-icons signin-icon"> person </span>
           <TypographyText size="big" weight="bold" font="Poppins" color=""
@@ -74,20 +125,21 @@ const miniVariant = ref(true);
               {{ t("preferences.login") }}
             </p></TypographyText
           >
-        </button>
-      --></div>
+        </button> -->
+        </div>
 
-      <nav class="menu">
-        <MenuItem
-          v-for="(navButton, index) in props.navButtons"
-          :key="index"
-          :text="navButton.name.toUpperCase()"
-          :icon="navButton.icon"
-          :mini="breakpoint > Breakpoint.SM && miniVariant"
-          :active="checkActive(navButton.path)"
-          @click="navButton.click"
-        />
-      </nav>
+        <nav class="menu">
+          <MenuItem
+            v-for="(navButton, index) in props.navButtons"
+            :key="index"
+            :text="navButton.name.toUpperCase()"
+            :icon="navButton.icon"
+            :mini="!isMenuOpen"
+            :active="checkActive(navButton.path)"
+            @click="navButton.click"
+          />
+        </nav>
+      </div>
     </div>
   </transition>
 </template>
@@ -106,17 +158,32 @@ const miniVariant = ref(true);
   gap: 1rem;
 }
 
-.panel-mini:hover {
+.panel-open {
   width: 30rem;
 }
 
 .panel-mobile {
-  width: 100vw;
-  height: fit-content;
-  min-height: 70vh;
 }
 
-.panel-mini {
+.panel-mobile-close {
+  width: 100vw;
+  height: fit-content;
+  max-height: 80px;
+}
+
+.panel-mobile-close * {
+  display: none;
+}
+
+.panel-mobile-open {
+  width: 100vw;
+  min-height: 100vh;
+  border-width: 0;
+  border-bottom: 20px solid;
+  border-image: url("/src/assets/header/header_border2.png") 100% 0;
+}
+
+.panel-close {
   width: 120px;
 }
 
@@ -132,14 +199,24 @@ const miniVariant = ref(true);
   display: none;
 }
 
-.panel-container:hover .panel-title p {
+.panel-open .panel-title p {
   display: block;
 }
 
 .main-logo {
-  filter: invert(100%) brightness(200%);
-  height: 5rem;
+  /*filter: invert(100%) brightness(200%);*/
+  height: 3.5rem;
   object-fit: contain;
+  z-index: 99;
+}
+
+.main-logo-mobile {
+  display: block;
+  margin-top: 1rem;
+}
+
+.panel-mobile-open .main-logo {
+  display: none;
 }
 
 .title-text {
@@ -162,11 +239,11 @@ const miniVariant = ref(true);
   justify-content: end;
 }
 
-.panel-mini .panel-options {
+.panel-close .panel-options {
   justify-content: center;
 }
 
-.panel-mini:hover .panel-options {
+.panel-open .panel-options {
   justify-content: end;
 }
 
@@ -217,13 +294,12 @@ const miniVariant = ref(true);
 /*  width: 100%;*/
 /*}*/
 
-.panel-mini .menu {
+.panel-close .menu {
   align-items: center;
   align-self: center;
 }
 
-.panel-full .menu,
-.panel-mini:hover .menu {
+.panel-open .menu {
   align-items: start;
   align-self: start;
 }
@@ -283,6 +359,10 @@ const miniVariant = ref(true);
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+  }
+
+  .main-logo-mobile {
+    display: none;
   }
 }
 </style>

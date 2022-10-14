@@ -31,6 +31,8 @@ body {
   --global-color-hover: #913b2e;
   --global-color-secondary: #fea03338;
   --global-color-paragraph: #f4e9de;
+  --global-color-typography: #ffd3ba;
+  --global-color-typography-dark: #3f1103;
   --global-color-unavailable: #ffd8aa;
   --global-color-dark: #745454;
   --global-color-disable: #f9c4a6;
