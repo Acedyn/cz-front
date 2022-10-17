@@ -1,5 +1,5 @@
 import type { RouteLocationNormalized, NavigationGuardNext } from "vue-router";
-import { usePreferencesStore } from "../stores/preferences";
+import { usePreferencesStore } from "@/stores/preferences";
 
 import ImmersionView from "@/views/immersion/ImmersionView.vue";
 import PostOfficeView from "@/views/immersion/postOffice/PostOfficeView.vue";
@@ -9,6 +9,8 @@ import GoodboardView from "@/views/immersion/goodboard/GoodboardView.vue";
 import LoginPage from "@/views/auth/loginPage.vue";
 import RegisterPage from "@/views/auth/registerPage.vue";
 import ResetPassword from "@/views/auth/resetPassword.vue";
+import SettingView from "@/views/settings/settingView.vue";
+import MyDetailView from "@/views/settings/sections/myDetail.vue";
 
 export default {
   path: "/immersion",
@@ -72,6 +74,19 @@ export default {
       path: "goodboard/reset-password",
       name: "resetPassword",
       component: ResetPassword,
+    },
+    {
+      path: "goodboard/settings",
+      name: "settings",
+      component: SettingView,
+      children: [
+        {
+          path: "",
+          name: "settings-my-detail",
+          component: MyDetailView,
+          meta: { headerCollased: true },
+        },
+      ],
     },
   ],
 };

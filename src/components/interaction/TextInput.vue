@@ -42,7 +42,7 @@ const handleEye = () => {
 
 <template>
   <div class="text-input-container">
-    <div v-if="props.label" class="label">{{ props.label }}</div>
+    <p v-if="props.label" class="text-input-label">{{ props.label }}</p>
     <div class="text-input">
       <div class="leading-icon">
         <LogoImage :type="props.icon" />
@@ -73,7 +73,7 @@ const handleEye = () => {
 .text-input-container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .text-input {
@@ -89,7 +89,10 @@ const handleEye = () => {
   flex: 2;
 }
 
-label {
+.text-input-label {
+  font-family: Quicksand, serif;
+  font-weight: 700;
+  font-size: 1rem;
   color: var(--global-color-typography);
 }
 
