@@ -13,6 +13,7 @@ const props = withDefaults(
     invert?: boolean;
     thickness?: number;
     size?: number;
+    disabled?: boolean;
   }>(),
   {
     size: 1,
@@ -21,6 +22,7 @@ const props = withDefaults(
     color: "var(--global-color-primary)",
     colorHover: "var(--global-color-hover)",
     colorHoverInvert: "var(--global-color-secondary)",
+    disabled: false,
   }
 );
 
@@ -33,7 +35,8 @@ const emit = defineEmits<{
   <button
     :class="`clear-button-style cta-button ${props.noText ? 'no-text' : ''} ${
       props.invert ? 'inverted' : ''
-    }`"
+    } ${props.disabled ? 'disabled' : ''}`"
+    :disabled="props.disabled"
     @click="() => emit('click')"
   >
     <span v-if="!props.noIcon" class="material-icons button-icon">{{
@@ -84,6 +87,12 @@ const emit = defineEmits<{
 
 .no-text {
   padding: v-bind("`calc(0.688rem * ${props.size})`");
+}
+
+.cta-button.disabled,
+.cta-button.disabled:hover {
+  cursor: default;
+  background-color: transparent;
 }
 
 .inverted {

@@ -15,12 +15,14 @@ const props = withDefaults(
     required?: boolean;
     disabled?: boolean;
     icon: LogoImageType;
+    invalid?: boolean;
   }>(),
   {
     label: " ",
     type: "text" as InputType,
     disabled: false,
     required: false,
+    invalid: false,
   }
 );
 
@@ -43,18 +45,19 @@ const handleEye = () => {
 <template>
   <div class="text-input-container">
     <p v-if="props.label" class="text-input-label">{{ props.label }}</p>
-    <div class="text-input">
+    <div :class="`text-input ${props.invalid ? 'invalid' : ''}`">
       <div class="leading-icon">
         <LogoImage :type="props.icon" />
       </div>
       <div class="input">
         <input
+          :class="props.invalid ? 'invalid' : ''"
           :type="inputType"
           :placeholder="props.placeholder"
           :disabled="props.disabled"
           :required="props.required"
-          @input="updateValue"
           :value="props.modelValue"
+          @input="updateValue"
         />
       </div>
       <div v-if="props.type === 'password'" class="trailing-icon">
@@ -67,7 +70,7 @@ const handleEye = () => {
 <style scoped>
 * {
   --detail-dark: #f1a54f;
-  --detial-light: #ffd3ba;
+  --detail-light: #ffd3ba;
 }
 
 .text-input-container {
@@ -82,7 +85,11 @@ const handleEye = () => {
   padding: 1rem;
   border: 2px solid var(--detail-dark);
   border-radius: 8px;
-  background-color: var(--detial-light);
+  background-color: var(--detail-light);
+}
+
+.text-input.invalid {
+  border: 2px solid #ff2f00;
 }
 
 .input {
@@ -107,7 +114,7 @@ input {
   font-family: "Quick Sand", serif;
   font-weight: 700;
   font-size: 16px;
-  background-color: var(--detial-light);
+  background-color: var(--detail-light);
 }
 
 input::placeholder {
@@ -120,13 +127,19 @@ input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
-input:autofill,
-input:autofill:hover,
-input:autofill:focus,
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
-input:-webkit-autofill:focus {
-  border: 3px solid darkorange;
-  background-color: var(--detial-light) !important;
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  box-shadow: 0 0 0 1000px var(--detail-light) inset;
+}
+
+input.invalid {
+  color: #ff2f00;
 }
 </style>

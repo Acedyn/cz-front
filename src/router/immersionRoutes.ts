@@ -11,6 +11,9 @@ import RegisterPage from "@/views/auth/registerPage.vue";
 import ResetPassword from "@/views/auth/resetPassword.vue";
 import SettingView from "@/views/settings/settingView.vue";
 import MyDetailView from "@/views/settings/sections/myDetail.vue";
+import SettingOther from "@/views/settings/sections/settingOther.vue";
+import SettingSocial from "@/views/settings/sections/settingSocial.vue";
+
 
 export default {
   path: "/immersion",
@@ -84,6 +87,18 @@ export default {
           path: "",
           name: "settings-my-detail",
           component: MyDetailView,
+          meta: { headerCollased: true },
+        },
+        {
+          path: "social",
+          name: "settings-socials",
+          component: SettingSocial,
+          meta: { headerCollased: true },
+        },
+        {
+          path: "other",
+          name: "settings-other",
+          component: SettingOther,
           meta: { headerCollased: true },
         },
       ],

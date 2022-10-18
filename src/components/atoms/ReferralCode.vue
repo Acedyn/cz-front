@@ -9,22 +9,19 @@ const props = withDefaults(
 </script>
 
 <template>
-  <div class="referral-code-container">
+  <div>
     <p class="referral-label">{{ props.label }}</p>
-    <div class="referral-code-inner-container">
-      <p>{{ props.code }}</p>
-    </div>
+    <span class="referral-code-inner-container">
+      {{ props.code }}
+    </span>
   </div>
 </template>
 
 <style scoped>
-.referral-code-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
 .referral-code-inner-container {
+  font-family: "Paytone One", sans-serif;
+  font-size: 2.6rem;
+  color: var(--global-color-typography);
   border-radius: 8px;
   padding: 8px 16px;
   background-color: #d77a37;
@@ -41,5 +38,6 @@ const props = withDefaults(
   font-weight: 700;
   font-size: 1rem;
   color: var(--global-color-typography);
+  margin-bottom: 1rem;
 }
 </style>

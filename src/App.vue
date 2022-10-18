@@ -42,7 +42,7 @@ const { headerCollapse, pageLeft, pageTop } = storeToRefs(preferences);
   overflow: scroll;
   scrollbar-width: none;
   background-image: url("/src/assets/background/background.png"),
-  radial-gradient(76.99% 76.99% at 50% 53.41%, #925637 0%, #411f12 100%);
+    radial-gradient(76.99% 76.99% at 50% 53.41%, #925637 0%, #411f12 100%);
 }
 
 #app::-webkit-scrollbar {

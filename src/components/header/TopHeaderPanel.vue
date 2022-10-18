@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, toRefs, computed, onMounted, onUnmounted } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useRoute } from "vue-router";
 import { getBreakpoint, Breakpoint } from "@/utils/breakpoints";
 import { usePreferencesStore } from "../../stores/preferences";
@@ -162,7 +162,13 @@ const handleMenu = () => {
   width: 30rem;
 }
 
-.panel-mobile {
+.panel-mobile {}
+
+.panel-mobile-close,
+.panel-mobile-open {
+  border-width: 0;
+  border-bottom: 12px solid;
+  border-image: url("/src/assets/header/header_border2.png") 100% 0;
 }
 
 .panel-mobile-close {
@@ -178,9 +184,9 @@ const handleMenu = () => {
 .panel-mobile-open {
   width: 100vw;
   min-height: 100vh;
-  border-width: 0;
-  border-bottom: 20px solid;
-  border-image: url("/src/assets/header/header_border2.png") 100% 0;
+  /*border-width: 0;*/
+  /*border-bottom: 20px solid;*/
+  /*border-image: url("/src/assets/header/header_border2.png") 100% 0;*/
 }
 
 .panel-close {
