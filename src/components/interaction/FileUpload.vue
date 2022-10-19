@@ -28,7 +28,7 @@ const isFileAvailable = computed(() => {
 <template>
   <div class="file-upload-container">
     <p v-if="props.label" class="file-upload-label">{{ props.label }}</p>
-    <div ref="dropZone" class="file-upload-inner-container" @click="open">
+    <div ref="dropZone" class="file-upload-inner-container" @click="open()">
       <LogoImage type="tools" />
       <TypographyText font="Quicksand" color="var(--global-color-typography)">
         <p>Click to upload or drag and drop</p>
