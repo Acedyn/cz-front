@@ -6,7 +6,7 @@ import type User from "@/types/user";
 const props = withDefaults(
   defineProps<{
     user: User;
-    size?: "sm" | "md" | "lg";
+    size?: "sm" | "md" | "lg" | "xl" | "2xl";
     borderColor?: string;
   }>(),
   {
@@ -17,9 +17,20 @@ const props = withDefaults(
 const imageUrl = computed(
   () => new URL(props.user.data.image, import.meta.url).href
 );
-const imageSize = computed(() =>
-  props.size === "sm" ? "24px" : props.size === "md" ? "30px" : "36px"
-);
+const imageSize = computed(() => {
+  switch (props.size) {
+    case "2xl":
+      return "130px";
+    case "xl":
+      return "60px";
+    case "lg":
+      return "36px";
+    case "md":
+      return "30px";
+    default:
+      return "24px";
+  }
+});
 </script>
 
 <template>

@@ -4,24 +4,24 @@ import TypographyTitle from "../utils/TypographyTitle.vue";
 
 const props = withDefaults(
   defineProps<{
-    icon: string;
-    color?: string;
-    textColor?: string;
-    textWeight?: "bold" | "regular" | "light";
+    type: string;
     height?: string;
     disabled?: boolean;
   }>(),
   {
     height: "58px",
-    color: "var(--global-color-primary)",
-    textColor: "var(--global-color-typography)",
     disabled: false,
   }
 );
 
 const icon = ref(
-  new URL(`/src/assets/social_icons/${props.icon}.png`, import.meta.url).href
+  new URL(`/src/assets/social_icons/${props.type}.png`, import.meta.url).href
 );
+
+const textColor = ref(
+  props.type === "google" ? "var(--text-dark)" : "var(--text-light)"
+);
+const backgroundColor = ref(`var(--${props.type})`);
 
 const emit = defineEmits<{
   (e: "click"): void;
@@ -30,37 +30,33 @@ const emit = defineEmits<{
 
 <template>
   <button
-    class="clear-button-style cta-button"
+    class="cta-button"
     :disabled="props.disabled"
     @click="() => emit('click')"
   >
-    <img :src="icon" :alt="props.icon" style="width: 24px; height: 24px; margin-right: 1rem"/>
-    <TypographyTitle
-      size="small"
-      :color="props.textColor"
-      :level="4"
-      :weight="props.textWeight"
-      font="Poppins"
-    >
+    <img
+      :src="icon"
+      :alt="icon"
+      style="width: 24px; height: 24px; margin-right: 1rem"
+    />
+    <TypographyTitle size="small" :color="textColor" :level="4" font="Poppins">
       <slot />
     </TypographyTitle>
   </button>
 </template>
 
 <style scoped>
-.clear-button-style {
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
+* {
+  --facebook: #00a3ff;
+  --google: #f5f5f5;
+  --discord: #9095ff;
+  --twitter: #90d7ff;
+  --text-light: #f5f5f5;
+  --text-dark: #3f1103;
 }
-
 .cta-button {
-  background: v-bind("props.color");
-  color: white;
+  background-color: v-bind("backgroundColor");
+  color: v-bind("textColor");
   display: flex;
   align-items: center;
   outline: 0;
@@ -79,5 +75,6 @@ const emit = defineEmits<{
 
 :not(.cta-button:disabled).cta-button:hover {
   filter: brightness(0.8);
+  cursor: pointer;
 }
 </style>

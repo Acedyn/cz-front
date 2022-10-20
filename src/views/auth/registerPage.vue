@@ -74,17 +74,11 @@ const isLoginDisabled = computed(() => {
 
       <div class="divider"></div>
 
-      <SocialMediaButton
-        icon="facebook"
-        color="#00A3FF"
-        text-color="white"
-        >Continue with Facebook
+      <SocialMediaButton type="facebook">
+        Continue with Facebook
       </SocialMediaButton>
-      <SocialMediaButton
-        icon="google"
-        color="#F5F5F5"
-        text-color="var(--global-color-dark)"
-        >Continue with Google
+      <SocialMediaButton type="google">
+        Continue with Google
       </SocialMediaButton>
 
       <div class="text-line">

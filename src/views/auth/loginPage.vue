@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { reactive, computed } from "vue";
+import {reactive, computed} from "vue";
 import TypographyTitle from "@/components/utils/TypographyTitle.vue";
 import TextInput from "@/components/interaction/TextInput.vue";
 import CheckBox from "@/components/interaction/Checkbox.vue";
 import Button from "@/components/interaction/Button.vue";
 import SocialMediaButton from "@/components/interaction/SocialMediaButton.vue";
-import { RouterLink } from "vue-router";
+import {RouterLink} from "vue-router";
 
 const user = reactive({
   email: "",
@@ -22,77 +22,71 @@ const isLoginDisabled = computed(() => {
     <div class="login-register-container">
       <div class="page-selector">
         <TypographyTitle
-          class="selection active"
-          font="Paytone One"
-          color="var(--global-color-typography)"
+            class="selection active"
+            font="Paytone One"
+            color="var(--global-color-typography)"
         >
           <a> Se connecter </a>
         </TypographyTitle>
         <TypographyTitle
-          class="selection"
-          font="Paytone One"
-          color="var(--global-color-typography)"
+            class="selection"
+            font="Paytone One"
+            color="var(--global-color-typography)"
         >
-          <router-link :to="{ name: 'registerPage' }"> S’inscrire </router-link>
+          <router-link :to="{ name: 'registerPage' }"> S’inscrire</router-link>
         </TypographyTitle>
       </div>
 
       <TextInput
-        v-model="user.email"
-        type="email"
-        placeholder="E-mail"
-        icon="tools"
+          v-model="user.email"
+          type="email"
+          placeholder="E-mail"
+          icon="tools"
       />
       <TextInput
-        v-model="user.password"
-        type="password"
-        placeholder="Mot de passe"
-        icon="tools"
+          v-model="user.password"
+          type="password"
+          placeholder="Mot de passe"
+          icon="tools"
       />
 
       <div class="text-line">
-        <CheckBox label="Se souvenir de moi" />
+        <CheckBox label="Se souvenir de moi"/>
         <p>
           <router-link
-            :to="{ name: 'resetPassword' }"
-            style="text-decoration: underline"
-            >Mot de passe oublié ?</router-link
+              :to="{ name: 'resetPassword' }"
+              style="text-decoration: underline"
+          >Mot de passe oublié ?
+          </router-link
           >
         </p>
       </div>
 
       <Button
-        :invert="true"
-        :disabled="isLoginDisabled"
-        height="58px"
-        :color-hover-invert="isLoginDisabled ? '' : 'var(--global-color-hover)'"
-        >Login
+          :invert="true"
+          :disabled="isLoginDisabled"
+          height="58px"
+          :color-hover-invert="isLoginDisabled ? '' : 'var(--global-color-hover)'"
+      >Login
       </Button>
 
       <div class="divider"></div>
 
-      <SocialMediaButton
-        icon="facebook"
-        color="#00A3FF"
-        color-hover="#00A3FF"
-        text-color="white"
-        >Continue with Facebook
+      <SocialMediaButton type="facebook">
+        Continue with Facebook
       </SocialMediaButton>
-      <SocialMediaButton
-        icon="google"
-        color="#F5F5F5"
-        color-hover="#F5F5F5"
-        text-color="var(--global-color-dark)"
-        >Continue with Google
+      <SocialMediaButton type="google">
+        Continue with Google
       </SocialMediaButton>
 
       <div class="text-line">
         <p>Pas encore de compte ?</p>
         <p>
           <router-link
-            :to="{ name: 'registerPage' }"
-            style="text-decoration: underline"
-            >En créer un gratuitement</router-link
+              :to="{ name: 'registerPage' }"
+              style="text-decoration: underline"
+          >En créer un gratuitement
+          </router-link
           >
         </p>
       </div>
@@ -104,7 +98,7 @@ const isLoginDisabled = computed(() => {
 .auth-container {
   height: 100%;
   background-image: url("/src/assets/background/background.png"),
-    radial-gradient(76.99% 76.99% at 50% 53.41%, #925637 0%, #411f12 100%);
+  radial-gradient(76.99% 76.99% at 50% 53.41%, #925637 0%, #411f12 100%);
 }
 
 .login-register-container {
