@@ -36,13 +36,11 @@ const { headerCollapse, pageLeft, pageTop } = storeToRefs(preferences);
 #app {
   position: absolute;
   top: 0;
-  bottom: 0;
   left: 0;
+  bottom: 0;
   right: 0;
   overflow: scroll;
   scrollbar-width: none;
-  background-image: url("/src/assets/background/background.png"),
-    radial-gradient(76.99% 76.99% at 50% 53.41%, #925637 0%, #411f12 100%);
 }
 
 #app::-webkit-scrollbar {
@@ -66,6 +64,10 @@ const { headerCollapse, pageLeft, pageTop } = storeToRefs(preferences);
 .app-view {
   padding-top: 7.8rem;
   --app-padding-side: 10.625rem;
+  min-height: 100vh;
+  background-repeat: repeat;
+  background-image: url("/src/assets/background/background.png"),
+    radial-gradient(76.99% 76.99% at 50% 53.41%, #925637 0%, #411f12 100%);
 }
 
 .app-view-small {

@@ -12,9 +12,18 @@ import type Mission from "../../../../types/mission";
 const props = withDefaults(
   defineProps<{
     mission: Mission;
+    flip: boolean;
   }>(),
-  {}
+  { flip: false }
 );
+
+const emit = defineEmits<{
+  (e: "handleLearnMore", payload: Mission): void;
+}>();
+
+const log = (payload: Mission) => {
+  emit("handleLearnMore", payload);
+};
 </script>
 
 <template>
@@ -25,7 +34,11 @@ const props = withDefaults(
       class="mission-card-sticker"
     />
     <div class="mission-card-header">
-      <TypographyDropShadow font="Paytone One" size="big">
+      <TypographyDropShadow
+        font="Paytone One"
+        size="big"
+        style="text-align: left"
+      >
         {{ props.mission.data.name }}
       </TypographyDropShadow>
 
@@ -42,9 +55,12 @@ const props = withDefaults(
       >
         {{ props.mission.data.shortDescription }}
       </TypographyText>
-      <StickerButton :hue="props.mission.getColors().hue">{{
-        "LEARN MORE"
-      }}</StickerButton>
+      <StickerButton
+        class="cta-button"
+        :hue="props.mission.getColors().hue"
+        @click="log(props.mission)"
+        >{{ "LEARN MORE" }}</StickerButton
+      >
     </div>
     <div class="mission-card-separator"></div>
     <div class="mission-card-footer">
@@ -62,13 +78,20 @@ const props = withDefaults(
 
 <style scoped>
 .mission-card-container {
-  padding: 1.5rem 2rem;
-  background: url(@/assets/goodboard/mission_card.png);
-  background-size: 100% 100%;
-  filter: drop-shadow(0px 8px 9px rgba(0, 0, 0, 0.5));
+  padding: 2rem;
+  filter: drop-shadow(0px 8px 4px rgba(0, 0, 0, 0.5));
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.mission-card-container:before {
+  content: "";
+  position: absolute;
+  scale: v-bind("props.flip ? '1 -100%' : '1'");
+  inset: 0;
+  background: url(@/assets/goodboard/mission_card.png);
+  background-size: 100% 100%;
 }
 
 .mission-card-separator {
@@ -80,11 +103,12 @@ const props = withDefaults(
 }
 
 .mission-card-sticker {
+  height: 3rem;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  width: 8.75rem;
+  width: 10.75rem;
   margin-left: auto;
   margin-right: auto;
   translate: 0 -50%;
@@ -92,6 +116,7 @@ const props = withDefaults(
 
 .mission-card-header,
 .mission-card-footer {
+  gap: 0.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -117,5 +142,9 @@ const props = withDefaults(
   align-items: end;
   gap: 0.5rem;
   word-spacing: -0.7rem;
+}
+
+.cta-button {
+  border: 0;
 }
 </style>

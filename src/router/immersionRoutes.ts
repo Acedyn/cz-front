@@ -9,7 +9,7 @@ import LoginPage from "@/views/auth/loginPage.vue";
 import RegisterPage from "@/views/auth/registerPage.vue";
 import ResetPassword from "@/views/auth/resetPassword.vue";
 import SettingView from "@/views/settings/settingView.vue";
-import MyDetailView from "@/views/settings/sections/myDetail.vue";
+import SettingDetail from "@/views/settings/sections/settingDetail.vue";
 import SettingOther from "@/views/settings/sections/settingOther.vue";
 import SettingSocial from "@/views/settings/sections/settingSocial.vue";
 
@@ -78,7 +78,7 @@ export default {
         {
           path: "",
           name: "settings-my-detail",
-          component: MyDetailView,
+          component: SettingDetail,
           meta: { headerCollased: true },
         },
         {

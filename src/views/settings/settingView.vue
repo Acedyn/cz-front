@@ -137,7 +137,7 @@ const handleSaveBtn = () => {
   flex-direction: column;
   gap: 2rem;
   max-width: 60%;
-  margin: 1rem auto;
+  margin: 4rem auto;
 }
 
 .section-selector-row {

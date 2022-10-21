@@ -59,13 +59,23 @@ const props = withDefaults(defineProps<{ items: Rank[] }>(), {});
   background-size: 100% 100%;
   filter: drop-shadow(0px 8px 9px rgba(0, 0, 0, 0.5));
   min-height: 500px;
-  max-width: 500px;
   margin: 0 auto;
   padding: 6rem 4rem 2rem;
 }
 
+.ranking-card-container:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 30%;
+  height: 10%;
+  transform: translate(-50%, -60%);
+  background-image: url("/src/assets/goodboard/clip.png");
+  background-size: 100% 100%;
+}
+
 .ranking-container {
-  max-width: 600px;
   margin: 1rem auto;
 }
 

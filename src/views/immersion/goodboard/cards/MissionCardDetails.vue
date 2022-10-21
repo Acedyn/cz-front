@@ -9,36 +9,41 @@ import type Mission from "../../../../types/mission";
 const props = withDefaults(
   defineProps<{
     mission: Mission;
-    image?: string;
   }>(),
   {}
 );
+
+const emit = defineEmits<{ (e: "handleClose"): void }>();
+
+const handleClose = () => {
+  emit("handleClose");
+};
 </script>
 
 <template>
   <div class="mission-detail-container">
     <div class="content">
       <TypographyText class="title" font="Paytone One" size="big" weight="bold">
-        <p>{{ props.mission.data.name }}</p>
+        <h3>{{ props.mission.data.name }}</h3>
       </TypographyText>
       <div class="mini-image">
-        <CloseButton class="close-button" size="30px" />
-        <img :src="props.image" alt="mission image" />
+        <CloseButton class="close-button" size="30px" @click="handleClose" />
+        <img :src="props.mission.data.image" alt="mission image" />
       </div>
       <TypographyText font="Marvel" size="regular" weight="light">
-        {{ props.mission.data.shortDescription }}
+        <p class="description">{{ props.mission.data.longDescription }}</p>
       </TypographyText>
       <div class="timer-point">
         <div>
           <LogoImage type="time_watch" :size="2" />
           <TypographyText font="RubikOne" size="big" weight="bold">
-            <p>{{ "1D 12H" }}</p>
+            <p class="mission-stats">{{ "1D 12H" }}</p>
           </TypographyText>
         </div>
         <div>
           <LogoImage type="box_point" :size="2" />
           <TypographyText font="RubikOne" size="big" weight="bold">
-            <p>{{ "20 BP" }}</p>
+            <p class="mission-stats">{{ "20 BP" }}</p>
           </TypographyText>
         </div>
       </div>
@@ -47,12 +52,18 @@ const props = withDefaults(
         :hue="props.mission.getColors().hue"
         style="width: 80%; align-self: center"
       >
-        {{ "LEARN MORE" }}
+        <label style="font-size: 1.5rem">LEARN MORE</label>
       </StickerButton>
     </div>
     <div class="image">
-      <CloseButton class="close-button" size="30px" />
-      <img :src="props.image" alt="mission image" />
+      <CloseButton
+        class="close-button"
+        size="30px"
+        @click="handleClose"
+        colorLine="#530f03"
+        colorBD="var(--global-color-primary)"
+      />
+      <img :src="props.mission.data.image" alt="mission image" />
     </div>
   </div>
 </template>
@@ -60,21 +71,28 @@ const props = withDefaults(
 <style scoped>
 .mission-detail-container {
   display: flex;
-  gap: 1rem;
+  gap: 3rem;
   padding: 3rem;
-  background-image: url("/src/assets/goodboard/mission_card_detail.png");
-  background-size: 100% 100%;
+  border-width: 20px;
+  border-style: solid;
+  border-image-source: url("/src/assets/goodboard/mission_card_detail.png");
+  border-image-repeat: round;
+  border-image-slice: 60 fill;
+  height: fit-content;
+  margin-block: auto;
+  min-height: 70vh;
 }
 
 .content {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 2rem;
   width: 50%;
 }
 
-.title p {
-  font-size: 2.5rem;
+.title h3 {
+  font-size: 3.75rem;
   text-decoration: underline var(--global-color-paragraph);
 }
 
@@ -107,6 +125,14 @@ const props = withDefaults(
 .image img {
   height: 100%;
   width: 100%;
+  position: absolute;
+  border: solid var(--global-color-primary) 0.5rem;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+
+.mission-stats {
+  font-size: 2.25rem;
 }
 
 .mini-image {
@@ -114,8 +140,19 @@ const props = withDefaults(
   width: 100%;
 }
 
+.description {
+  font-style: italic;
+  font-size: 1.5rem;
+}
+
 .cta-button {
+  max-width: 30rem;
   border: 0;
+  padding: 1.5rem 0;
+}
+
+.cta-text label {
+  font-size: 2rem;
 }
 
 .close-button {

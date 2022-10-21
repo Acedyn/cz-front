@@ -20,7 +20,7 @@ const imageUrl = computed(
 const imageSize = computed(() => {
   switch (props.size) {
     case "2xl":
-      return "130px";
+      return "8.5rem";
     case "xl":
       return "60px";
     case "lg":

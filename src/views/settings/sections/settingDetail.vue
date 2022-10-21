@@ -11,6 +11,7 @@ const { currentUser } = useAuthStore();
 // Temporary Data
 const accountDetail = reactive({
   username: currentUser.data?.name,
+  image: currentUser.data?.image,
   mail: currentUser.data?.email,
   password: "",
   passwordConfirm: "",
@@ -103,7 +104,10 @@ const validations = computed(() => {
         }}match
       </p>
     </div>
-    <FileUpload label="Upload your picture" />
+    <FileUpload
+      label="Upload your picture"
+      :defaultImage="currentUser.data?.image"
+    />
   </div>
 </template>
 
