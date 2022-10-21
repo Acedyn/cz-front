@@ -1,20 +1,23 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, onMounted, onUnmounted } from "vue";
 import TypographyText from "@/components/utils/TypographyText.vue";
 import TypographyDropShadow from "@/components/utils/TypographyDropShadow.vue";
 import Count from "@/components/atoms/Count.vue";
 import UserStrip from "@/components/atoms/UserStrip.vue";
+import { Breakpoint, getBreakpoint } from "@/utils/breakpoints";
 
 import type News from "@/types/news";
 
 const props = withDefaults(
   defineProps<{
     news: News;
-    type: "default" | "discord";
-    showImage: boolean;
-    showFooter: boolean;
-    textColor: string;
-    textClip: boolean;
+    type?: "default" | "discord";
+    showImage?: boolean;
+    showFooter?: boolean;
+    textColor?: string;
+    textClip?: boolean;
+    descTextSize?: string;
+    isDetailCard?: boolean;
   }>(),
   {
     type: "default",
@@ -22,8 +25,20 @@ const props = withDefaults(
     showFooter: true,
     textClip: true,
     textColor: "var(--global-color-paragraph)",
+    descTextSize: "14px",
+    isDetailCard: false,
   }
 );
+
+const breakpoints = getBreakpoint(onMounted, onUnmounted);
+
+const isSmallScreen = computed(() => {
+  return breakpoints.value < Breakpoint.MD;
+});
+
+const showScrollbar = computed(() => {
+  return isSmallScreen.value || !props.isDetailCard ? "none" : "block";
+});
 
 const backgroundColor = computed(() =>
   props.type === "discord" ? "#858FF5" : "#673226"
@@ -66,19 +81,24 @@ const handleNewsClick = (news: News) => {
       </TypographyText>
     </div>
     <div class="news-card-content">
-      <img
-        v-if="props.showImage"
-        :src="props.news.data.image"
-        alt="news image"
-      />
+      <div class="image-container">
+        <img
+          v-if="props.showImage"
+          :src="props.news.data.image"
+          alt="news image"
+          style="margin: 0 auto"
+        />
+      </div>
       <TypographyText
         weight="light"
-        :class="descClampClass"
         font="Marvel"
         font-style="italic"
         :color="textColor"
+        :style="{ overflowY: 'auto' }"
       >
-        {{ props.news.data.description }}
+        <p :class="`description ${descClampClass}`">
+          {{ props.news.data.description }}
+        </p>
       </TypographyText>
     </div>
     <div v-if="props.showFooter" class="news-card-footer">
@@ -102,6 +122,10 @@ const handleNewsClick = (news: News) => {
 </template>
 
 <style scoped>
+::-webkit-scrollbar {
+  display: v-bind("showScrollbar");
+}
+
 .news-card-container {
   display: flex;
   flex-direction: column;
@@ -110,7 +134,8 @@ const handleNewsClick = (news: News) => {
   border: v-bind("`4px solid ${borderColor}`");
   border-radius: 0.5rem;
   padding: 2rem;
-  min-width: 500px;
+  overflow: hidden;
+  /*min-width: 500px;*/
 }
 
 .news-card-header {
@@ -145,15 +170,22 @@ const handleNewsClick = (news: News) => {
   height: 80%;
 }
 
+.image-container {
+  display: flex;
+  /*justify-items: center;*/
+  /*align-items: center;*/
+}
+
 .news-card-content img {
-  min-height: 100%;
+  /*max-height: 50%;*/
+  max-width: 100%;
   background-color: #d9d9d9;
   border: 4px solid #ffd3ba;
   border-radius: 0.75rem;
   object-fit: cover;
 }
 
-.news-card-content * {
+.news-card-content div {
   flex: 1;
 }
 
@@ -167,7 +199,12 @@ const handleNewsClick = (news: News) => {
 }
 
 .description-clamp {
-  -webkit-line-clamp: 5;
+  text-align: left;
+  -webkit-line-clamp: 10;
+}
+
+.description {
+  font-size: v-bind("descTextSize");
 }
 
 .news-card-footer {
@@ -188,7 +225,7 @@ const handleNewsClick = (news: News) => {
   }
 
   .news-card-content img {
-    max-height: 200px;
+    /*max-height: 200px;*/
   }
 }
 </style>

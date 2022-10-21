@@ -20,7 +20,7 @@ const props = withDefaults(
   }
 );
 
-const emit = defineEmits<{(e: "handleClose"): void }>()
+const emit = defineEmits<{ (e: "handleClose"): void }>();
 
 const handleClose = () => emit("handleClose");
 </script>
@@ -29,10 +29,12 @@ const handleClose = () => emit("handleClose");
   <NewsCard
     :news="props.news"
     :type="props.type"
-    :showImage="props.showImage"
-    :showFooter="props.showFooter"
-    :textColor="props.textColor"
-    :textClip="false"
+    :show-image="props.showImage"
+    :show-footer="props.showFooter"
+    :text-color="props.textColor"
+    :text-clip="false"
+    :is-detail-card="true"
+    desc-text-size="16px"
   />
   <CloseButton class="close-button" size="30px" @click="handleClose" />
 </template>

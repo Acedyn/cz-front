@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive, computed } from "vue";
+import {ref, reactive, computed, onMounted, onUnmounted} from "vue";
 import TypographyText from "@/components/utils/TypographyText.vue";
 import LogoImage from "@/components/atoms/LogoImage.vue";
 import MissionCardSlider from "./molecules/MissionCardsSlider.vue";
@@ -7,10 +7,18 @@ import NewsCardSlider from "./molecules/NewsCardsSlider.vue";
 import RankingCard from "./cards/RankingCard.vue";
 import MissionCardModal from "../goodboard/MissionCardModal.vue";
 import NewsCardModal from "../goodboard/NewsCardModal.vue";
+import {Breakpoint, getBreakpoint} from "@/utils/breakpoints";
 
 import type Mission from "@/types/mission";
 import type News from "@/types/news";
 import User from "@/types/user";
+
+
+const breakpoints = getBreakpoint(onMounted, onUnmounted);
+
+const isSmallScreen = computed(() => {
+  return breakpoints.value < Breakpoint.SM;
+});
 
 const rankingItems = [
   {
@@ -106,52 +114,56 @@ const handleToggle = (e: any) => {
 </script>
 
 <template>
-  <div class="goodboard">
-    <TypographyText class="page-title" font="Rubik Mono One">
-      <h1>The Goodboard</h1>
-    </TypographyText>
+  <div>
+    <div class="goodboard">
+      <TypographyText class="page-title" font="Rubik Mono One">
+        <h1>The Goodboard</h1>
+      </TypographyText>
 
-    <div class="task-selection">
-      <div>
-        <LogoImage type="envelope_open" />
-        <TypographyText id="raidTask" :class="raidTaskClass" font="Paytone One" color="#ffd3ba" @click="handleToggle">
-          Raid Task
-        </TypographyText>
-      </div>
-      <div>
-        <LogoImage type="envelope_close" />
-        <TypographyText id="completedTask" :class="completedTaskClass" font="Paytone One" @click="handleToggle"> Completed </TypographyText>
-      </div>
-      <div style="margin: 0 auto" />
-      <div>
+      <div class="task-selection">
+        <div>
+          <LogoImage type="envelope_open"/>
+          <TypographyText id="raidTask" :class="raidTaskClass" font="Paytone One" color="#ffd3ba" @click="handleToggle">
+            Raid Task
+          </TypographyText>
+        </div>
+        <div>
+          <LogoImage type="envelope_close"/>
+          <TypographyText id="completedTask" :class="completedTaskClass" font="Paytone One" @click="handleToggle">
+            Completed
+          </TypographyText>
+        </div>
+        <div style="margin: 0 auto"/>
+        <div v-if="!isSmallScreen">
         <span class="material-icons" style="color: #ffd3ba">
           chevron_left
         </span>
-      </div>
-      <div>
+        </div>
+        <div v-if="!isSmallScreen">
         <span class="material-icons" style="color: #ffd3ba">
           chevron_right
         </span>
+        </div>
+      </div>
+
+      <MissionCardSlider @handleLearnMore="handleMissionModal"/>
+
+      <div class="news-and-ranking-container">
+        <div style="flex: 2; overflow: hidden">
+          <NewsCardSlider @handleClick="handleNewsClick" style="height: 100%"/>
+        </div>
+        <RankingCard style="flex: 1" :items="rankingItems"/>
       </div>
     </div>
 
-    <MissionCardSlider @handleLearnMore="handleMissionModal" />
+    <MissionCardModal
+        :show="missionModal.show"
+        :payload="missionModal.payload"
+        @handleClose="handleClose"
+    />
 
-    <div style="display: flex">
-      <div style="flex: 2; overflow: hidden">
-        <NewsCardSlider @handleClick="handleNewsClick" style="height: 100%" />
-      </div>
-      <RankingCard style="flex: 1" :items="rankingItems" />
-    </div>
+    <NewsCardModal :payload="newsModal.payload" :show="newsModal.show" @handleClose="handleClose"/>
   </div>
-
-  <MissionCardModal
-    :show="missionModal.show"
-    :payload="missionModal.payload"
-    @handleClose="handleClose"
-  />
-
-  <NewsCardModal :payload="newsModal.payload" :show="newsModal.show" @handleClose="handleClose"/>
 </template>
 
 <style scoped>
@@ -164,8 +176,8 @@ const handleToggle = (e: any) => {
   flex-direction: column;
   gap: 3rem;
   background-image: url("/src/assets/goodboard/goodboard.png"),
-    radial-gradient(76.99% 76.99% at 50% 53.41%, #925637 0%, #411f12 100%);
-  margin-left: 120px;
+  radial-gradient(76.99% 76.99% at 50% 53.41%, #925637 0%, #411f12 100%);
+  /*margin-left: 120px;*/
   padding: 2rem 1rem;
 }
 
@@ -204,10 +216,18 @@ const handleToggle = (e: any) => {
   border-radius: 0.75rem;
 }
 
+.news-and-ranking-container {
+  display: flex;
+}
+
 @media only screen and (max-width: 767px) {
   .page-title h1 {
     font-size: 2rem;
-    text-align: center;
+    /*text-align: center;*/
+  }
+
+  .news-and-ranking-container {
+    flex-direction: column-reverse;
   }
 }
 </style>

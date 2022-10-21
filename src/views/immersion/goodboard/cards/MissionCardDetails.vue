@@ -13,7 +13,7 @@ const props = withDefaults(
   {}
 );
 
-const emit = defineEmits<{(e: "handleClose"): void }>()
+const emit = defineEmits<{ (e: "handleClose"): void }>();
 
 const handleClose = () => {
   emit("handleClose");
@@ -56,7 +56,7 @@ const handleClose = () => {
       </StickerButton>
     </div>
     <div class="image">
-      <CloseButton class="close-button" size="30px" @click="handleClose"/>
+      <CloseButton class="close-button" size="30px" @click="handleClose" />
       <img :src="props.mission.data.image" alt="mission image" />
     </div>
   </div>
@@ -150,6 +150,11 @@ const handleClose = () => {
     width: 100%;
     height: 200px;
     object-fit: cover;
+  }
+  .timer-point {
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
   }
 }
 </style>
