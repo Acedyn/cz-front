@@ -4,7 +4,6 @@ import { usePreferencesStore } from "@/stores/preferences";
 import ImmersionView from "@/views/immersion/ImmersionView.vue";
 import PostOfficeView from "@/views/immersion/postOffice/PostOfficeView.vue";
 import BillOfLadingView from "@/views/immersion/billOfLading/BillOfLadingView.vue";
-import WarehouseView from "@/views/immersion/warehouse/WarehouseView.vue";
 import GoodboardView from "@/views/immersion/goodboard/GoodboardView.vue";
 import LoginPage from "@/views/auth/loginPage.vue";
 import RegisterPage from "@/views/auth/registerPage.vue";
@@ -13,7 +12,6 @@ import SettingView from "@/views/settings/settingView.vue";
 import MyDetailView from "@/views/settings/sections/myDetail.vue";
 import SettingOther from "@/views/settings/sections/settingOther.vue";
 import SettingSocial from "@/views/settings/sections/settingSocial.vue";
-
 
 export default {
   path: "/immersion",
@@ -55,12 +53,6 @@ export default {
       path: "goodboard",
       name: "goodboard",
       component: GoodboardView,
-      meta: { headerCollased: true },
-    },
-    {
-      path: "warehouse",
-      name: "warehouse",
-      component: WarehouseView,
       meta: { headerCollased: true },
     },
     {

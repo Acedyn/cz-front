@@ -5,22 +5,30 @@ import TypographyTitle from "@/components/utils/TypographyTitle.vue";
 import TextInput from "@/components/interaction/TextInput.vue";
 import Button from "@/components/interaction/Button.vue";
 import SocialMediaButton from "@/components/interaction/SocialMediaButton.vue";
+import { useAuthStore } from "@/stores/auth";
 
-const user = reactive({
+const { signin } = useAuthStore();
+
+const registerState = reactive({
   email: "",
   username: "",
   password: "",
   confirmPassword: "",
 });
 
-const isLoginDisabled = computed(() => {
+const isRegisterDisabled = computed(() => {
   return !(
-    user.email &&
-    user.username &&
-    user.password &&
-    user.confirmPassword
+    registerState.email &&
+    registerState.username &&
+    registerState.password &&
+    registerState.confirmPassword &&
+    registerState.confirmPassword === registerState.password
   );
 });
+
+const signinUser = () => {
+  signin(registerState.username, registerState.password, registerState.email);
+};
 </script>
 
 <template>
@@ -44,31 +52,36 @@ const isLoginDisabled = computed(() => {
       </div>
 
       <TextInput
-        v-model="user.email"
+        v-model="registerState.email"
         type="email"
         placeholder="E-mail"
         icon="tools"
       />
       <TextInput
-        v-model="user.username"
+        v-model="registerState.username"
         type="text"
         placeholder="Nom d’utilisateur"
         icon="tools"
       />
       <TextInput
-        v-model="user.password"
+        v-model="registerState.password"
         type="password"
         placeholder="Mot de passe"
         icon="tools"
       />
       <TextInput
-        v-model="user.confirmPassword"
+        v-model="registerState.confirmPassword"
         type="password"
         placeholder="Répéter le mot de passe"
         icon="tools"
       />
 
-      <Button :disabled="isLoginDisabled" height="58px" color="#D77A37">
+      <Button
+        :disabled="isRegisterDisabled"
+        height="58px"
+        color="#D77A37"
+        @click="signinUser"
+      >
         S’inscrire
       </Button>
 
@@ -98,6 +111,7 @@ const isLoginDisabled = computed(() => {
 <style scoped>
 .auth-container {
   height: 100%;
+  font-family: "Quicksand", serif;
   background-image: url("/src/assets/background/background.png"),
     radial-gradient(76.99% 76.99% at 50% 53.41%, #925637 0%, #411f12 100%);
 }

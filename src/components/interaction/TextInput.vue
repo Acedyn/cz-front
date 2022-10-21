@@ -111,7 +111,7 @@ input {
   color: var(--global-color-typography-dark);
   border: 0;
   border-radius: 8px;
-  font-family: "Quick Sand", serif;
+  font-family: "Quicksand", serif;
   font-weight: 700;
   font-size: 16px;
   background-color: var(--detail-light);

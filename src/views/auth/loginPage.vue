@@ -1,20 +1,28 @@
 <script setup lang="ts">
-import {reactive, computed} from "vue";
+import { reactive, computed } from "vue";
 import TypographyTitle from "@/components/utils/TypographyTitle.vue";
 import TextInput from "@/components/interaction/TextInput.vue";
 import CheckBox from "@/components/interaction/Checkbox.vue";
 import Button from "@/components/interaction/Button.vue";
 import SocialMediaButton from "@/components/interaction/SocialMediaButton.vue";
-import {RouterLink} from "vue-router";
+import { useAuthStore } from "@/stores/auth";
+import { RouterLink } from "vue-router";
 
-const user = reactive({
+const { login } = useAuthStore();
+
+const loginState = reactive({
   email: "",
   password: "",
+  remember: false,
 });
 
 const isLoginDisabled = computed(() => {
-  return !(user.email.length > 1 && user.password.length > 1);
+  return !(loginState.email.length > 1 && loginState.password.length > 1);
 });
+
+const loginUser = () => {
+  login(loginState.email, loginState.password);
+};
 </script>
 
 <template>
@@ -22,52 +30,54 @@ const isLoginDisabled = computed(() => {
     <div class="login-register-container">
       <div class="page-selector">
         <TypographyTitle
-            class="selection active"
-            font="Paytone One"
-            color="var(--global-color-typography)"
+          class="selection active"
+          font="Paytone One"
+          color="var(--global-color-typography)"
         >
           <a> Se connecter </a>
         </TypographyTitle>
         <TypographyTitle
-            class="selection"
-            font="Paytone One"
-            color="var(--global-color-typography)"
+          class="selection"
+          font="Paytone One"
+          color="var(--global-color-typography)"
         >
           <router-link :to="{ name: 'registerPage' }"> S’inscrire</router-link>
         </TypographyTitle>
       </div>
 
       <TextInput
-          v-model="user.email"
-          type="email"
-          placeholder="E-mail"
-          icon="tools"
+        ref="email"
+        v-model="loginState.email"
+        type="email"
+        placeholder="Nom d'utilisateur"
+        icon="tools"
       />
       <TextInput
-          v-model="user.password"
-          type="password"
-          placeholder="Mot de passe"
-          icon="tools"
+        ref="password"
+        v-model="loginState.password"
+        type="password"
+        placeholder="Mot de passe"
+        icon="tools"
       />
 
       <div class="text-line">
-        <CheckBox label="Se souvenir de moi"/>
+        <CheckBox label="Se souvenir de moi" />
         <p>
           <router-link
-              :to="{ name: 'resetPassword' }"
-              style="text-decoration: underline"
-          >Mot de passe oublié ?
-          </router-link
-          >
+            :to="{ name: 'resetPassword' }"
+            style="text-decoration: underline"
+            >Mot de passe oublié ?
+          </router-link>
         </p>
       </div>
 
       <Button
-          :invert="true"
-          :disabled="isLoginDisabled"
-          height="58px"
-          :color-hover-invert="isLoginDisabled ? '' : 'var(--global-color-hover)'"
-      >Login
+        :disabled="isLoginDisabled"
+        color="#D77A37"
+        height="58px"
+        :color-hover-invert="isLoginDisabled ? '' : 'var(--global-color-hover)'"
+        @click="loginUser"
+        >Login
       </Button>
 
       <div class="divider"></div>
@@ -83,11 +93,10 @@ const isLoginDisabled = computed(() => {
         <p>Pas encore de compte ?</p>
         <p>
           <router-link
-              :to="{ name: 'registerPage' }"
-              style="text-decoration: underline"
-          >En créer un gratuitement
-          </router-link
-          >
+            :to="{ name: 'registerPage' }"
+            style="text-decoration: underline"
+            >En créer un gratuitement
+          </router-link>
         </p>
       </div>
     </div>
@@ -96,9 +105,10 @@ const isLoginDisabled = computed(() => {
 
 <style scoped>
 .auth-container {
+  font-family: "Quicksand", serif;
   height: 100%;
   background-image: url("/src/assets/background/background.png"),
-  radial-gradient(76.99% 76.99% at 50% 53.41%, #925637 0%, #411f12 100%);
+    radial-gradient(76.99% 76.99% at 50% 53.41%, #925637 0%, #411f12 100%);
 }
 
 .login-register-container {

@@ -1,3 +1,22 @@
+import { get } from "@/utils/restClient";
+import { useAuthStore } from "@/stores/auth";
+
+const baseUrl = `${import.meta.env.VITE_MISSION_API}`;
+
+interface MissionAPIData {
+  name: string;
+  short_description: string;
+  long_description: string;
+  category: string;
+  logo: string;
+  class: string;
+  reward: number;
+  canceled: boolean;
+  initialized: boolean;
+  close_at: number;
+  parameters?: Record<string, string>;
+}
+
 interface MissionData {
   name: string;
   shortDescription: string;
@@ -8,7 +27,7 @@ interface MissionData {
   reward: number;
   canceled: boolean;
   initialized: boolean;
-  closeAt?: number;
+  closeAt?: Date;
   parameters?: Record<string, string>;
 }
 
@@ -48,3 +67,18 @@ export default class Mission {
     return colors || COLOR_MAPPING.default;
   };
 }
+
+export const getAvailableMissions = async () => {
+  const response: { data: MissionAPIData[] } = await get(
+    `${baseUrl}/missions/opened`,
+    null
+  );
+  return response.data.map((missionData) => {
+    return new Mission({
+      ...missionData,
+      longDescription: missionData.long_description,
+      shortDescription: missionData.short_description,
+      closeAt: new Date(missionData.close_at),
+    });
+  });
+};

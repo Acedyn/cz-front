@@ -6,5 +6,6 @@
 .goodboard-container {
   height: 100%;
   background: pink;
+  font-family: "Quicksand", serif;
 }
 </style>
