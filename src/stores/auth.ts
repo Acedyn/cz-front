@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { post, get } from "@/utils/restClient";
+import router from "@/router";
 import User from "@/types/user";
-import { getAvailableMissions } from "@/types/mission";
 
 const baseUrl = `${import.meta.env.VITE_AUTH_API}`;
 
@@ -31,7 +31,6 @@ export const useAuthStore = defineStore({
     },
 
     async login(name: string, password: string) {
-      console.log(await getAvailableMissions());
       const response = await post(`${baseUrl}/login`, {
         nickname: name,
         password,
@@ -50,7 +49,6 @@ export const useAuthStore = defineStore({
         return;
       }
 
-      console.log(userDetails);
       this.user = new User({
         ...userDetails,
         name,
@@ -59,6 +57,7 @@ export const useAuthStore = defineStore({
 
       authLocal.user = this.user;
       localStorage.setItem("auth", JSON.stringify(authLocal));
+      router.push("/immersion/goodboard/settings");
     },
 
     logout() {
