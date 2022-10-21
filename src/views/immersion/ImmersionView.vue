@@ -1,20 +1,6 @@
-<script setup lang="ts">
-import { usePreferencesStore } from "@/stores/preferences";
-import { computed } from "vue";
-import { storeToRefs } from "pinia";
-
-const preferences = usePreferencesStore();
-const { theme } = storeToRefs(preferences);
-const transition = computed(() =>
-  theme.value.includes("dark") ? "fade-dark" : "fade"
-);
-</script>
-
 <template>
   <router-view v-slot="{ Component }">
-    <transition :name="transition">
-      <component :is="Component" />
-    </transition>
+    <component :is="Component" />
   </router-view>
 </template>
 

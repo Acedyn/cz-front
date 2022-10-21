@@ -7,7 +7,9 @@ import Avatar from "../../components/atoms/Avatar.vue";
 import TypographyTitle from "../../components/utils/TypographyTitle.vue";
 import CTAButton from "../../components/interaction/CtaButton.vue";
 import LoadingModal from "../../components/popup/LoadingPopup.vue";
-import User from "@/types/user";
+import { useAuthStore } from "@/stores/auth";
+
+const { currentUser } = useAuthStore();
 
 const isLoading = ref(false);
 
@@ -25,10 +27,7 @@ type SectionBtnType = {
 const route = useRoute();
 const router = useRouter();
 
-const user = new User({
-  name: "Cardboard",
-  image: "/src/assets/landing/profile/01.png",
-});
+const user = currentUser;
 
 const section_btn = ref<SectionBtnType[]>([
   {
@@ -117,8 +116,8 @@ const handleSaveBtn = () => {
   width: 100%;
   height: 286px;
   background-image: url("/src/assets/settings/header.png");
-  background-size: 100% 100%;
-  background-position: top;
+  background-size: cover;
+  background-position: center;
 }
 
 .title-row {

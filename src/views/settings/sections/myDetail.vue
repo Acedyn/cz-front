@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import { ref, reactive, computed } from "vue";
+import { reactive, computed } from "vue";
 import TextInput from "@/components/interaction/TextInput.vue";
 import FileUpload from "@/components/interaction/FileUpload.vue";
 import IconChecked from "@/components/icons/iconCheckedSolid.vue";
 import IconUncheked from "@/components/icons/iconUncheckedOutline.vue";
+import { useAuthStore } from "@/stores/auth";
+
+const { currentUser } = useAuthStore();
 
 // Temporary Data
 const accountDetail = reactive({
-  username: "",
+  username: currentUser.data?.name,
+  mail: currentUser.data?.email,
   password: "",
   passwordConfirm: "",
 });
-
-const isValidated = ref<boolean>(false);
 
 const validations = computed(() => {
   const capitalLetterRegex = new RegExp("(?=.*[A-Z])");
@@ -37,10 +39,20 @@ const validations = computed(() => {
     <div class="text-container">
       <TextInput
         v-model="accountDetail.username"
+        type="text"
+        label="Username"
+        icon="tools"
+        placeholder="username"
+      />
+      <div></div>
+    </div>
+    <div class="text-container">
+      <TextInput
+        v-model="accountDetail.mail"
         type="email"
         label="Email"
         icon="tools"
-        placeholder="randomadress@gmail.com"
+        placeholder="email@mail.com"
       />
       <div></div>
     </div>
@@ -54,7 +66,7 @@ const validations = computed(() => {
       />
       <TextInput
         v-model="accountDetail.passwordConfirm"
-        label="Password"
+        label="Confirm Password"
         icon="tools"
         placeholder="ChopChop54!"
         type="password"
