@@ -3,7 +3,7 @@ import { ref, onMounted, onUnmounted, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { getBreakpoint, Breakpoint } from "@/utils/breakpoints";
 import SectionButton from "@/components/interaction/SectionButton.vue";
-import Avatar from "../../components/atoms/Avatar.vue";
+import AvatarBubble from "../../components/atoms/AvatarBubble.vue";
 import TypographyTitle from "../../components/utils/TypographyTitle.vue";
 import CTAButton from "../../components/interaction/CtaButton.vue";
 import LoadingModal from "../../components/popup/LoadingPopup.vue";
@@ -55,6 +55,12 @@ const handleSaveBtn = () => {
     isLoading.value = false;
   }, 30 * 1000);
 };
+
+onMounted(async () => {
+  if (!currentUser.data) {
+    router.push("/immersion/goodboard/login");
+  }
+});
 </script>
 
 <template>
@@ -62,7 +68,7 @@ const handleSaveBtn = () => {
     <div class="header-image"></div>
     <div class="title-row">
       <div style="display: flex">
-        <Avatar
+        <AvatarBubble
           :size="isSmallScreen ? 'xl' : '2xl'"
           :user="user"
           :style="{

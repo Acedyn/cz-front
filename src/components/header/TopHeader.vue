@@ -38,14 +38,14 @@ const navButtons = [
       showPanel.value = false;
     },
     soon: false,
-    path: "immersion",
+    path: "immersion/post-office",
     icon: "world" as LogoImageType,
   },
   {
     name: t("buttons.tools"),
     click: () => {
-      router.push("/");
-      showPanel.value = false;
+      /* router.push("/"); */
+      /* showPanel.value = false; */
     },
     soon: true,
     path: "tools",
@@ -54,21 +54,21 @@ const navButtons = [
   {
     name: t("buttons.profile"),
     click: () => {
-      router.push("/");
+      router.push("/immersion/goodboard/settings");
       showPanel.value = false;
     },
-    soon: true,
-    path: "profile",
+    soon: false,
+    path: "goodboard/settings",
     icon: "profile" as LogoImageType,
   },
   {
-    name: t("buttons.settings"),
+    name: t("buttons.goodboard"),
     click: () => {
-      router.push("/");
+      router.push("/immersion/goodboard");
       showPanel.value = false;
     },
-    soon: true,
-    path: "settings",
+    soon: false,
+    path: "goodboard",
     icon: "dashboard" as LogoImageType,
   },
   // {
@@ -94,10 +94,7 @@ const isCollapsed = computed(() => {
 </script>
 
 <template>
-  <TopHeaderPanel
-    :navButtons="navButtons"
-    :show="true"
-  />
+  <TopHeaderPanel :navButtons="navButtons" :show="true" />
 
   <!--  <header-->
   <!--    :class="`header-container ${isCollapsed ? '' : 'container-collapsed'}`"-->

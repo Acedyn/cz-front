@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import TypographyText from "../../../../components/utils/TypographyText.vue";
 import TypographyDropShadow from "../../../../components/utils/TypographyDropShadow.vue";
 import CategoryTag from "../../../../components/atoms/CategoryTag.vue";
@@ -7,7 +8,7 @@ import PointCounter from "../molecules/PointCounter.vue";
 import LogoImage from "../../../../components/atoms/LogoImage.vue";
 import StickerImage from "../../../../components/atoms/StickerImage.vue";
 
-import type Mission from "../../../../types/mission";
+import type Mission from "@/types/mission";
 
 const props = withDefaults(
   defineProps<{
@@ -24,6 +25,12 @@ const emit = defineEmits<{
 const log = (payload: Mission) => {
   emit("handleLearnMore", payload);
 };
+
+const deadline = computed(() => {
+  const closeDate = props.mission.data.closeAt?.getTime() || Date.now();
+  const difference = new Date(closeDate - Date.now());
+  return `${difference.getDate()}D ${difference.getHours()}H`;
+});
 </script>
 
 <template>
@@ -68,7 +75,7 @@ const log = (payload: Mission) => {
         <LogoImage type="time_watch" />
 
         <TypographyDropShadow font="Rubik Mono One" size="big" color="#3F1103">
-          {{ "2d 29h" }}
+          {{ deadline }}
         </TypographyDropShadow>
       </div>
       <PointCounter :count="props.mission.data.reward" />
@@ -123,6 +130,7 @@ const log = (payload: Mission) => {
 }
 
 .mission-card-content {
+  justify-content: space-between;
   display: flex;
   flex-direction: column;
   align-items: center;

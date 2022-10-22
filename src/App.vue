@@ -12,7 +12,7 @@ const isSmall = computed(() => {
 });
 
 const preferences = usePreferencesStore();
-const { headerCollapse, pageLeft, pageTop } = storeToRefs(preferences);
+const { headerCollapse } = storeToRefs(preferences);
 </script>
 
 <template>
@@ -20,13 +20,8 @@ const { headerCollapse, pageLeft, pageTop } = storeToRefs(preferences);
     :class="`app-header ${headerCollapse ? 'app-header-collapse' : ''} ${
       isSmall ? 'app-header-small' : ''
     }`"
-    style="position: fixed"
   />
-  <RouterView
-    :class="`app-view ${isSmall ? 'app-view-small' : ''}`"
-    :style="{ top: pageTop, left: pageLeft }"
-    style="overflow: hidden"
-  />
+  <RouterView class="app-view" />
 </template>
 
 <style>
@@ -41,6 +36,7 @@ const { headerCollapse, pageLeft, pageTop } = storeToRefs(preferences);
   right: 0;
   overflow: scroll;
   scrollbar-width: none;
+  display: flex;
 }
 
 #app::-webkit-scrollbar {
@@ -48,31 +44,20 @@ const { headerCollapse, pageLeft, pageTop } = storeToRefs(preferences);
 }
 
 .app-header {
-  position: absolute;
   z-index: 10;
-  padding: 0 10.625rem;
-}
-
-.app-header-collapse {
-  padding: 0 2.625rem;
 }
 
 .app-header-small {
   padding: 0 5vw;
 }
 
-.app-view {
-  padding-top: 7.8rem;
-  --app-padding-side: 10.625rem;
-  min-height: 100vh;
-  background-repeat: repeat;
-  background-image: url("/src/assets/background/background.png"),
-    radial-gradient(76.99% 76.99% at 50% 53.41%, #925637 0%, #411f12 100%);
-}
-
 .app-view-small {
   padding-top: 7.8rem;
   --app-padding-side: 5vw;
+}
+
+.app-view {
+  width: 100%;
 }
 
 /*@media only screen and (min-width: 768px) {*/

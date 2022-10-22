@@ -3,7 +3,8 @@ import { post, get } from "@/utils/restClient";
 import router from "@/router";
 import User from "@/types/user";
 
-const baseUrl = `${import.meta.env.VITE_AUTH_API}`;
+const authUrl = `${import.meta.env.VITE_AUTH_API}`;
+const missionsUrl = `${import.meta.env.VITE_MISSION_API}`;
 
 const authLocal = JSON.parse(localStorage.getItem("auth") || "{}");
 export const useAuthStore = defineStore({
@@ -20,7 +21,7 @@ export const useAuthStore = defineStore({
     },
 
     async signin(name: string, password: string, email: string) {
-      await post(`${baseUrl}/users`, {
+      await post(`${authUrl}/users`, {
         nickname: name,
         password,
         email,
@@ -30,20 +31,15 @@ export const useAuthStore = defineStore({
       await this.login(name, password);
     },
 
-    async login(name: string, password: string) {
-      const response = await post(`${baseUrl}/login`, {
-        nickname: name,
-        password,
-      });
-
-      this.user = new User({
-        tokens: {
-          refreshToken: response.refresh_token,
-          accessToken: response.access_token,
-        },
-      });
-
-      const userDetails = await get(`${baseUrl}/users/${response.id}`, null);
+    async refreshUser() {
+      const userDetails = await get(
+        `${authUrl}/users/${this.user.data.id}`,
+        null
+      );
+      const userGoodboard = await get(
+        `${missionsUrl}/users/${this.user.data.id}/user`,
+        null
+      );
       if (userDetails.error) {
         this.logout();
         return;
@@ -51,12 +47,30 @@ export const useAuthStore = defineStore({
 
       this.user = new User({
         ...userDetails,
-        name,
+        ...userGoodboard.data,
+        name: userDetails.nickname,
         tokens: this.user.tokens,
       });
 
       authLocal.user = this.user;
       localStorage.setItem("auth", JSON.stringify(authLocal));
+    },
+
+    async login(name: string, password: string) {
+      const response = await post(`${authUrl}/login`, {
+        nickname: name,
+        password,
+      });
+
+      this.user = new User({
+        id: response.id,
+        tokens: {
+          refreshToken: response.refresh_token,
+          accessToken: response.access_token,
+        },
+      });
+
+      this.refreshUser();
       router.push("/immersion/goodboard/settings");
     },
 

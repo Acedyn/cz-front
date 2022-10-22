@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed, onMounted } from "vue";
 import TypographyText from "@/components/utils/TypographyText.vue";
 import TypographyDropShadow from "@/components/utils/TypographyDropShadow.vue";
 import LogoImage from "@/components/atoms/LogoImage.vue";
@@ -8,74 +8,18 @@ import NewsCardSlider from "./molecules/NewsCardsSlider.vue";
 import RankingCard from "./cards/RankingCard.vue";
 import MissionCardModal from "../goodboard/MissionCardModal.vue";
 import NewsCardModal from "../goodboard/NewsCardModal.vue";
-import Avatar from "../../../components/atoms/Avatar.vue";
-import UserBubble from "./molecules/UserBubble.vue";
+import AvatarBubble from "../../../components/atoms/AvatarBubble.vue";
 import { useAuthStore } from "@/stores/auth";
 import router from "@/router";
 
-const { currentUser } = useAuthStore();
 import type Mission from "@/types/mission";
 import type News from "@/types/news";
-import User from "@/types/user";
+import type User from "@/types/user";
 
-const rankingItems = [
-  {
-    id: 1,
-    user: new User({
-      name: "cardboard",
-      image: "/src/assets/landing/profile/01.png",
-    }),
-    rank: 19,
-  },
-  {
-    id: 2,
-    user: new User({
-      name: "cardboard",
-      image: "/src/assets/landing/profile/02.png",
-    }),
-    rank: 20,
-  },
-  {
-    id: 3,
-    user: new User({
-      name: "cardboard",
-      image: "/src/assets/landing/profile/03.png",
-    }),
-    rank: 21,
-  },
-  {
-    id: 4,
-    user: new User({
-      name: "cardboard",
-      image: "/src/assets/landing/profile/04.png",
-    }),
-    rank: 22,
-  },
-  {
-    id: 5,
-    user: new User({
-      name: "cardboard",
-      image: "/src/assets/landing/profile/05.png",
-    }),
-    rank: 23,
-  },
-  {
-    id: 6,
-    user: new User({
-      name: "cardboard",
-      image: "/src/assets/landing/profile/06.png",
-    }),
-    rank: 24,
-  },
-  {
-    id: 7,
-    user: new User({
-      name: "cardboard",
-      image: "/src/assets/landing/profile/07.png",
-    }),
-    rank: 25,
-  },
-];
+import { getAvailableMissions, getCompletedMissions } from "@/types/mission";
+import { getTopUsers } from "@/types/user";
+
+const { currentUser, refreshUser } = useAuthStore();
 
 const missionModal = reactive({
   show: false,
@@ -113,6 +57,22 @@ const completedTaskClass = computed(() =>
 const handleToggle = (e: any) => {
   currentToggleActive.value = e.target.id;
 };
+
+const availableMissions = ref<Mission[]>([]);
+const completedMissions = ref<Mission[]>([]);
+const topUsers = ref<User[]>([]);
+
+const fetchMissions = async () => {
+  availableMissions.value = await getAvailableMissions();
+  completedMissions.value = await getCompletedMissions();
+  await refreshUser();
+};
+
+onMounted(async () => {
+  await fetchMissions();
+  topUsers.value = await getTopUsers();
+  await refreshUser();
+});
 </script>
 
 <template>
@@ -121,13 +81,26 @@ const handleToggle = (e: any) => {
       <TypographyText class="page-title" font="Rubik Dirt" size="big">
         <h1>The Goodboard</h1>
       </TypographyText>
-      <div>
-        <Avatar
-          :size="isSmallScreen ? 'xl' : '2xl'"
-          class="goodboard-avatar"
-          :user="currentUser"
-          @click="router.push('/immersion/goodboard/settings')"
-        />
+
+      <div
+        class="goodboard-avatar"
+        @click="router.push('/immersion/goodboard/settings')"
+      >
+        <div
+          style="display: flex; align-items: center; gap: 0.5rem"
+          v-if="currentUser.data"
+        >
+          <LogoImage type="box_point" :size="1.2" />
+          <TypographyText font="RubikOne" size="big" weight="bold">
+            <p class="mission-stats">
+              {{ `${currentUser.data.points || 0} BP` }}
+            </p>
+          </TypographyText>
+        </div>
+        <TypographyText font="RubikOne" size="big" weight="bold" v-else>
+          <p class="mission-stats">Signin / Login</p>
+        </TypographyText>
+        <AvatarBubble :size="'xl'" :user="currentUser" />
       </div>
     </div>
 
@@ -136,7 +109,7 @@ const handleToggle = (e: any) => {
         <LogoImage :size="2" type="envelope_open" />
         <TypographyDropShadow font="Paytone One" @click="handleToggle">
           <label id="raidTask" :class="`goodboard-tab ${raidTaskClass}`"
-            >Raid tasks</label
+            >Raid tasks ( {{ availableMissions.length }} )</label
           >
         </TypographyDropShadow>
       </div>
@@ -146,7 +119,7 @@ const handleToggle = (e: any) => {
           <label
             id="completedTask"
             :class="`goodboard-tab ${completedTaskClass}`"
-            >Completed</label
+            >Completed ( {{ completedMissions.length }} )</label
           >
         </TypographyText>
       </div>
@@ -163,13 +136,20 @@ const handleToggle = (e: any) => {
       </div>
     </div>
 
-    <MissionCardSlider @handleLearnMore="handleMissionModal" />
+    <MissionCardSlider
+      @handleLearnMore="handleMissionModal"
+      :missions="
+        currentToggleActive === 'raidTask'
+          ? availableMissions
+          : completedMissions
+      "
+    />
 
     <div class="bottom-section">
       <div style="flex: 2; overflow: hidden">
         <NewsCardSlider @handleClick="handleNewsClick" style="height: 100%" />
       </div>
-      <RankingCard style="flex: 1" :items="rankingItems" />
+      <RankingCard style="flex: 1" :users="topUsers" />
     </div>
   </div>
 
@@ -177,6 +157,7 @@ const handleToggle = (e: any) => {
     :show="missionModal.show"
     :payload="missionModal.payload"
     @handleClose="handleClose"
+    @claim="fetchMissions"
   />
 
   <NewsCardModal
@@ -193,12 +174,15 @@ const handleToggle = (e: any) => {
 
 .goodboard-avatar {
   position: absolute;
+  gap: 1rem;
   height: 100%;
   width: auto;
-  inset: 0;
-  translate: -100% 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
   transition: 0.2s;
   cursor: pointer;
+  align-items: center;
 }
 
 .goodboard-avatar:hover {
@@ -210,14 +194,18 @@ const handleToggle = (e: any) => {
   justify-content: space-between;
 }
 
+.goodboard-user {
+  display: flex;
+}
+
 .goodboard {
   display: flex;
   flex-direction: column;
   gap: 3rem;
   background-image: url("/src/assets/goodboard/goodboard.png"),
     radial-gradient(76.99% 76.99% at 50% 53.41%, #925637 0%, #411f12 100%);
-  margin-left: 120px;
   padding: 2rem 3rem;
+  overflow: auto;
 }
 
 .page-title h1 {
@@ -274,8 +262,9 @@ const handleToggle = (e: any) => {
 }
 
 .bottom-section {
-  display: flex;
+  display: grid;
   gap: 2rem;
+  grid-template-columns: 2fr 1fr;
   margin-top: 3rem;
 }
 

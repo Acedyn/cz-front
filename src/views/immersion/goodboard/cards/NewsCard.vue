@@ -10,11 +10,11 @@ import type News from "@/types/news";
 const props = withDefaults(
   defineProps<{
     news: News;
-    type: "default" | "discord";
-    showImage: boolean;
-    showFooter: boolean;
-    textColor: string;
-    textClip: boolean;
+    type?: "default" | "discord";
+    showImage?: boolean;
+    showFooter?: boolean;
+    textColor?: string;
+    textClip?: boolean;
   }>(),
   {
     type: "default",

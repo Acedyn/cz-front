@@ -1,10 +1,20 @@
 <template>
   <router-view v-slot="{ Component }">
-    <component :is="Component" />
+    <component :is="Component" class="app-view" />
   </router-view>
 </template>
 
 <style scoped>
+.app-view {
+  padding-top: 7.8rem;
+  --app-padding-side: 10.625rem;
+  min-height: 100vh;
+  background-repeat: repeat;
+  overflow: auto;
+  background-image: url("/src/assets/background/background.png"),
+    radial-gradient(76.99% 76.99% at 50% 53.41%, #925637 0%, #411f12 100%);
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 1s ease;

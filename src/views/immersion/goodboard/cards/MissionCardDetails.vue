@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import TypographyText from "../../../../components/utils/TypographyText.vue";
 import LogoImage from "../../../../components/atoms/LogoImage.vue";
 import StickerButton from "../../../../components/interaction/StickerButton.vue";
 import CloseButton from "@/components/interaction/CloseButton.vue";
+import { validateMission } from "@/types/mission";
 
 import type Mission from "../../../../types/mission";
 
@@ -13,59 +15,104 @@ const props = withDefaults(
   {}
 );
 
-const emit = defineEmits<{ (e: "handleClose"): void }>();
+const emit = defineEmits<{
+  (e: "participate"): void;
+  (e: "claim"): void;
+  (e: "handleClose"): void;
+}>();
+
+const deadline = computed(() => {
+  const closeDate = props.mission.data.closeAt?.getTime() || Date.now();
+  const difference = new Date(closeDate - Date.now());
+  return `${difference.getDate()}D ${difference.getHours()}H`;
+});
 
 const handleClose = () => {
   emit("handleClose");
 };
+
+const participateMission = () => {
+  emit("participate");
+  if (props.mission.data.parameters?.link) {
+    const w = window.open(props.mission.data.parameters.link, "_blank");
+    if (w) w.focus();
+  }
+};
+
+const claimMission = async () => {
+  await validateMission(props.mission);
+  setTimeout(() => {
+    emit("claim");
+    handleClose();
+  }, 1000);
+};
 </script>
 
 <template>
-  <div class="mission-detail-container">
-    <div class="content">
-      <TypographyText class="title" font="Paytone One" size="big" weight="bold">
-        <h3>{{ props.mission.data.name }}</h3>
-      </TypographyText>
-      <div class="mini-image">
-        <CloseButton class="close-button" size="30px" @click="handleClose" />
+  <transition appear>
+    <div class="mission-detail-container">
+      <div class="content">
+        <TypographyText
+          class="title"
+          font="Paytone One"
+          size="big"
+          weight="bold"
+        >
+          <h3>{{ props.mission.data.name }}</h3>
+        </TypographyText>
+        <div class="mini-image">
+          <CloseButton class="close-button" size="30px" @click="handleClose" />
+          <img :src="props.mission.data.image" alt="mission image" />
+        </div>
+        <TypographyText font="Marvel" size="regular" weight="light">
+          <p class="description">{{ props.mission.data.longDescription }}</p>
+        </TypographyText>
+        <div class="timer-point">
+          <div>
+            <LogoImage type="time_watch" :size="2" />
+            <TypographyText font="RubikOne" size="big" weight="bold">
+              <p class="mission-stats">{{ deadline }}</p>
+            </TypographyText>
+          </div>
+          <div>
+            <LogoImage type="box_point" :size="2" />
+            <TypographyText font="RubikOne" size="big" weight="bold">
+              <p class="mission-stats">
+                {{ `${props.mission.data.reward} BP` }}
+              </p>
+            </TypographyText>
+          </div>
+        </div>
+        <div class="buttons-row">
+          <StickerButton
+            class="cta-button"
+            :hue="props.mission.getColors().hue"
+            @click="participateMission"
+            v-if="props.mission.data.parameters?.link"
+          >
+            <label style="font-size: 1.5rem">PARTICIPATE</label>
+          </StickerButton>
+          <StickerButton
+            class="cta-button"
+            :hue="props.mission.getColors().hue"
+            @click="claimMission"
+          >
+            <label style="font-size: 1.5rem">CLAIM REWARD</label>
+          </StickerButton>
+        </div>
+      </div>
+      <div class="image">
+        <CloseButton
+          class="close-button"
+          size="30px"
+          @click="handleClose"
+          colorLine="#530f03"
+          colorBD="var(--global-color-primary)"
+        />
         <img :src="props.mission.data.image" alt="mission image" />
       </div>
-      <TypographyText font="Marvel" size="regular" weight="light">
-        <p class="description">{{ props.mission.data.longDescription }}</p>
-      </TypographyText>
-      <div class="timer-point">
-        <div>
-          <LogoImage type="time_watch" :size="2" />
-          <TypographyText font="RubikOne" size="big" weight="bold">
-            <p class="mission-stats">{{ "1D 12H" }}</p>
-          </TypographyText>
-        </div>
-        <div>
-          <LogoImage type="box_point" :size="2" />
-          <TypographyText font="RubikOne" size="big" weight="bold">
-            <p class="mission-stats">{{ "20 BP" }}</p>
-          </TypographyText>
-        </div>
-      </div>
-      <StickerButton
-        class="cta-button"
-        :hue="props.mission.getColors().hue"
-        style="width: 80%; align-self: center"
-      >
-        <label style="font-size: 1.5rem">LEARN MORE</label>
-      </StickerButton>
     </div>
-    <div class="image">
-      <CloseButton
-        class="close-button"
-        size="30px"
-        @click="handleClose"
-        colorLine="#530f03"
-        colorBD="var(--global-color-primary)"
-      />
-      <img :src="props.mission.data.image" alt="mission image" />
-    </div>
-  </div>
+  </transition>
 </template>
 
 <style scoped>
@@ -146,13 +193,21 @@ const handleClose = () => {
 }
 
 .cta-button {
-  max-width: 30rem;
+  max-width: 25rem;
+  width: 100%;
+  cursor: pointer;
   border: 0;
   padding: 1.5rem 0;
 }
 
 .cta-text label {
   font-size: 2rem;
+}
+
+.buttons-row {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
 }
 
 .close-button {
@@ -181,6 +236,25 @@ const handleClose = () => {
     width: 100%;
     height: 200px;
     object-fit: cover;
+  }
+}
+
+.v-enter-active,
+.v-leave-active {
+  animation: bounce-in 0.5s;
+}
+
+@keyframes pulse {
+  from {
+    scale: 1;
+  }
+
+  50% {
+    scale: 1.05;
+  }
+
+  to {
+    scale: 1;
   }
 }
 </style>

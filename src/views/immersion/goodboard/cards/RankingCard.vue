@@ -4,13 +4,7 @@ import TypographyText from "../../../../components/utils/TypographyText.vue";
 
 import type User from "@/types/user";
 
-interface Rank {
-  id: number;
-  user: User;
-  rank?: number;
-}
-
-const props = withDefaults(defineProps<{ items: Rank[] }>(), {});
+const props = withDefaults(defineProps<{ users: User[] }>(), {});
 </script>
 
 <template>
@@ -36,17 +30,17 @@ const props = withDefaults(defineProps<{ items: Rank[] }>(), {});
       </div>
 
       <svg height="30" width="100%">
-        <g fill="none" stroke="#FFD3BA" stroke-width="4">
+        <g fill="none" stroke="#FFD3BA" stroke-width="6">
           <line stroke-dasharray="5%, 2%" x1="0" x2="100%" y1="10" y2="10" />
         </g>
       </svg>
 
       <div class="rankings">
         <Ranking
-          v-for="item in props.items"
-          :key="item.id"
-          :user="item.user"
-          :rank="item.rank"
+          v-for="(user, index) in props.users"
+          :key="index"
+          :user="user"
+          :rank="index"
         />
       </div>
     </div>
@@ -58,9 +52,7 @@ const props = withDefaults(defineProps<{ items: Rank[] }>(), {});
   background-image: url("@/assets/goodboard/ranking_card.png");
   background-size: 100% 100%;
   filter: drop-shadow(0px 8px 9px rgba(0, 0, 0, 0.5));
-  min-height: 500px;
-  margin: 0 auto;
-  padding: 6rem 4rem 2rem;
+  padding: 2rem 3rem;
 }
 
 .ranking-card-container:before {
@@ -89,7 +81,7 @@ const props = withDefaults(defineProps<{ items: Rank[] }>(), {});
   background-color: #a26041;
   border: 8px solid #965f3f;
   border-radius: 12px;
-  padding: 0 3rem;
+  padding: 0 2.5rem;
 }
 
 @media screen and (max-width: 700px) {

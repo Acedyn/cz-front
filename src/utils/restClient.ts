@@ -13,7 +13,7 @@ const authHeader = (url: string): Record<string, string> => {
 
 const request = (method: string) => {
   return async (url: string, body: Record<string, string> | null) => {
-    const requestOptions = {
+    const requestOptions: any = {
       method,
       headers: authHeader(url),
     };

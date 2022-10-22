@@ -52,6 +52,7 @@ const breakpoint = getBreakpoint(onMounted, onUnmounted);
   overflow-x: hidden;
   background-color: #512208;
 
+  padding: 0 8rem;
   display: flex;
   flex-direction: column;
   gap: 3.125rem;

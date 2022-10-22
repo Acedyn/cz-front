@@ -27,29 +27,33 @@ const backgroundImage = computed(() =>
 <template>
   <div :class="`menu-item-container ${props.active ? 'active' : ''}`">
     <div class="menu-icon">
-      <LogoImage :type="props.icon" />
+      <LogoImage :type="props.icon" :size="1.5" />
     </div>
 
-    <TypographyText
-      v-if="!props.mini"
-      class="menu-text"
-      size="big"
-      weight="bold"
-      font="Poppins"
-      color="var(--global-color-paragraph)"
-    >
-      <p>
-        {{ props.text }}
-      </p>
-    </TypographyText>
+    <transition>
+      <TypographyText
+        v-if="!props.mini"
+        class="menu-text"
+        weight="bold"
+        font="Paytone One"
+        :color="props.active ? '#893a27' : 'var(--global-color-paragraph)'"
+      >
+        <p class="menu-text-content">
+          {{ props.text }}
+        </p>
+      </TypographyText>
+    </transition>
   </div>
 </template>
 
 <style scoped>
 .menu-item-container {
+  gap: 1rem;
   display: flex;
   align-items: center;
-  width: 100%;
+  padding: 0.5rem 1rem;
+  transition: 0.1s;
+  border-radius: 0.5rem;
 }
 
 .menu-icon {
@@ -64,24 +68,30 @@ const backgroundImage = computed(() =>
   margin-left: 0.5rem;
 }
 
+.menu-text-content {
+  font-size: 1.25rem;
+}
+
 .menu-item-container:hover,
 .menu-icon:hover {
   cursor: pointer;
 }
 
-.menu-item-container:hover,
-.active {
-  background-image: v-bind("backgroundImage");
-  background-size: 100% 60%;
-  background-position: right;
-  background-repeat: no-repeat;
+.menu-item-container:hover {
+  background: #ffd3ba;
 }
 
-.menu-item-container:hover .menu-icon,
-.menu-icon:hover,
-.active .menu-icon {
-  background-image: url("/src/assets/stickers/sticker_bold.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+.active {
+  background: #ffd3ba;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: 0.1s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>

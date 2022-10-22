@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { useDropZone, useFileDialog } from "@vueuse/core";
+import { useFileDialog } from "@vueuse/core";
 import LogoImage from "../atoms/LogoImage.vue";
 import TypographyText from "../utils/TypographyText.vue";
 
@@ -12,19 +11,40 @@ const props = withDefaults(
   {}
 );
 
-const { files, open, reset } = useFileDialog();
+const { files, open } = useFileDialog();
+const uploadImage = () => {
+  open();
 
-const dropZone = ref<HTMLDivElement>();
-const onDrop = (files: File[] | null) => {
-  console.log(files);
+  if (!files.value) {
+    return;
+  }
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    const dataURL = reader.result;
+
+    fetch("https://upload.gyazo.com/api/upload", {
+      method: "post",
+      headers: {
+        Authorization: "Client-ID jRC49zXUyjXibRwFiSVgp1IXm1kfTw2nKeKrop7JfOc",
+      },
+      body: JSON.stringify({
+        imagedata: dataURL,
+      }),
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
+  reader.readAsDataURL(files.value[0]);
 };
-const { isOverDropZone } = useDropZone(dropZone, onDrop);
 </script>
 
 <template>
   <div class="file-upload-container">
     <p v-if="props.label" class="file-upload-label">{{ props.label }}</p>
-    <div ref="dropZone" class="file-upload-inner-container" @click="open()">
+    <div class="file-upload-inner-container" @click="uploadImage">
       <LogoImage type="tools" />
       <TypographyText font="Quicksand" color="var(--global-color-typography)">
         <p>Click to upload</p>
@@ -58,8 +78,7 @@ const { isOverDropZone } = useDropZone(dropZone, onDrop);
   position: absolute;
   inset: 0;
   filter: contrast(0.5) brightness(0.5);
-  background: url("https://img-cdn.magiceden.dev/rs:fill:400:400:0:0/plain/https://bafybeic4fhsqfehej4z5gg53osxiktlbkdllpz2wta4gubdtez7c55m62u.ipfs.dweb.link/")
-    no-repeat;
+  background: v-bind("`url('${defaultImage}') no-repeat`");
   background-size: cover;
   background-position: center;
 }
