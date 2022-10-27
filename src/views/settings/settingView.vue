@@ -58,7 +58,7 @@ const handleSaveBtn = () => {
 
 onMounted(async () => {
   if (!currentUser.data) {
-    router.push("/immersion/goodboard/login");
+    router.push("/auth/login");
   }
 });
 </script>

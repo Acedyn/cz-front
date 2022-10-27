@@ -50,6 +50,7 @@ const isLoginDisabled = computed(() => {
 
 <style scoped>
 .auth-container {
+  overflow: auto;
   height: 100%;
   background-image: url("/src/assets/background/background.png"),
     radial-gradient(76.99% 76.99% at 50% 53.41%, #925637 0%, #411f12 100%);

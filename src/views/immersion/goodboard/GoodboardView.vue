@@ -82,10 +82,7 @@ onMounted(async () => {
         <h1>The Goodboard</h1>
       </TypographyText>
 
-      <div
-        class="goodboard-avatar"
-        @click="router.push('/immersion/goodboard/settings')"
-      >
+      <div class="goodboard-avatar" @click="router.push('/auth/settings')">
         <div
           style="display: flex; align-items: center; gap: 0.5rem"
           v-if="currentUser.data"

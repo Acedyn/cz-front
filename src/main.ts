@@ -27,7 +27,11 @@ const preferencesLocal = JSON.parse(
 
 app.use(createPinia());
 app.use(
-  createI18n({ locale: preferencesLocal.language || "en", legacy: false })
+  createI18n({
+    locale: preferencesLocal.language || "en",
+    legacy: false,
+    warnHtmlInMessage: false,
+  })
 );
 app.use(router);
 app.use(SolanaWallets, {
@@ -39,7 +43,7 @@ app.use(SolanaWallets, {
     new SlopeWalletAdapter(),
     new TorusWalletAdapter(),
   ],
-  autoConnect: false,
+  autoConnect: true,
 });
 
 app.mount("#app");

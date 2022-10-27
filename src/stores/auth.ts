@@ -72,13 +72,13 @@ export const useAuthStore = defineStore({
       });
 
       this.refreshUser();
-      router.push("/immersion/goodboard/settings");
+      router.push("/auth/settings");
     },
 
     logout() {
       delete this.user;
       localStorage.removeItem("auth");
-      router.push("/immersion/goodboard/login");
+      router.push("/auth/login");
     },
 
     isLoggedIn() {

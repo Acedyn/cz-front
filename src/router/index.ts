@@ -3,6 +3,7 @@ import LandingView from "@/views/landing/LandingView.vue";
 import { usePreferencesStore } from "@/stores/preferences";
 
 import immersionRoute from "./immersionRoutes";
+import authRoute from "./authRoutes";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,7 @@ const router = createRouter({
     },
 
     immersionRoute,
+    authRoute,
   ],
 });
 

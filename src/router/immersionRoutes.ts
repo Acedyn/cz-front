@@ -6,13 +6,6 @@ import PostOfficeView from "@/views/immersion/postOffice/PostOfficeView.vue";
 import BillOfLadingView from "@/views/immersion/billOfLading/BillOfLadingView.vue";
 import GoodboardView from "@/views/immersion/goodboard/GoodboardView.vue";
 import RewardView from "@/views/immersion/goodboard/RewardView.vue";
-import LoginPage from "@/views/auth/loginPage.vue";
-import RegisterPage from "@/views/auth/registerPage.vue";
-import ResetPassword from "@/views/auth/resetPassword.vue";
-import SettingView from "@/views/settings/settingView.vue";
-import SettingDetail from "@/views/settings/sections/settingDetail.vue";
-import SettingOther from "@/views/settings/sections/settingOther.vue";
-import SettingSocial from "@/views/settings/sections/settingSocial.vue";
 
 export default {
   path: "/immersion",
@@ -57,49 +50,9 @@ export default {
       meta: { headerCollased: true },
     },
     {
-      path: "goodboard/login",
-      name: "loginPage",
-      component: LoginPage,
-    },
-    {
-      path: "goodboard/register",
-      name: "registerPage",
-      component: RegisterPage,
-    },
-    {
       path: "goodboard/rewards",
       name: "rewards",
       component: RewardView,
-    },
-    {
-      path: "goodboard/reset-password",
-      name: "resetPassword",
-      component: ResetPassword,
-    },
-    {
-      path: "goodboard/settings",
-      name: "settings",
-      component: SettingView,
-      children: [
-        {
-          path: "",
-          name: "settings-my-detail",
-          component: SettingDetail,
-          meta: { headerCollased: true },
-        },
-        {
-          path: "social",
-          name: "settings-socials",
-          component: SettingSocial,
-          meta: { headerCollased: true },
-        },
-        {
-          path: "other",
-          name: "settings-other",
-          component: SettingOther,
-          meta: { headerCollased: true },
-        },
-      ],
     },
   ],
 };

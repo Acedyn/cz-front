@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import RewardCard from "./cards/RewardCard.vue";
-import RewardDetails from "./cards/RewardDetails.vue";
-import RewardHeader from "./cards/RewardHeader.vue";
+import RewardDetails from "./sections/RewardDetails.vue";
+import RewardHeader from "./sections/RewardHeader.vue";
 import OverlayPopup from "@/components/popup/OverlayPopup.vue";
 import { useI18n } from "vue-i18n";
 import locales from "./rewardViewLocales.json";
@@ -40,9 +40,9 @@ const rewards = ref([
 
 const getCardRotation = (index: number, max: number) => {
   const angle = 10;
-  return `${
-    angle * (index + 1) - (angle * Math.abs(Math.min(max, 4) + 1)) / 2
-  }deg`;
+  const rotation =
+    angle * (index + 1) - (angle * Math.abs(Math.min(max, 4) + 1)) / 2;
+  return `${rotation}deg`;
 };
 
 const toggledCard = ref<number | undefined>();
@@ -111,6 +111,7 @@ const updateCard = (index: number, count: number) => {
       />
       <RewardDetails
         class="reward-details"
+        :type="reward.type"
         :title="reward.title"
         :description="reward.description"
         :show="toggledCard === index"

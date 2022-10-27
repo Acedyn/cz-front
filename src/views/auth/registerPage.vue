@@ -110,6 +110,7 @@ const signinUser = () => {
 
 <style scoped>
 .auth-container {
+  overflow: auto;
   height: 100%;
   font-family: "Quicksand", serif;
   background-image: url("/src/assets/background/background.png"),

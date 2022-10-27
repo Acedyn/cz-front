@@ -4,6 +4,9 @@ import CounterButton from "@/components/interaction/CounterButton.vue";
 import TypographyText from "@/components/utils/TypographyText.vue";
 import TypographyTitle from "@/components/utils/TypographyTitle.vue";
 import LogoImage from "@/components/atoms/LogoImage.vue";
+import { post } from "@/utils/restClient";
+import { useAuthStore } from "@/stores/auth";
+import { useWallet } from "solana-wallets-vue";
 
 const props = withDefaults(
   defineProps<{
@@ -12,6 +15,7 @@ const props = withDefaults(
     show: boolean;
     price: number;
     count: number;
+    type: string;
   }>(),
   {}
 );
@@ -21,6 +25,20 @@ const emit = defineEmits<{
   (e: "up"): void;
   (e: "down"): void;
 }>();
+
+const missionsUrl = `${import.meta.env.VITE_MISSION_API}`;
+const { currentUser } = useAuthStore();
+const { wallet } = useWallet();
+
+const buyReward = () => {
+  if (!wallet.value) {
+    return;
+  }
+  post(
+    `${missionsUrl}/rewards/claim/${props.type}?user=${currentUser.data.id}&address=${wallet.value.publicKey}?amount=${props.count}`,
+    null
+  );
+};
 </script>
 
 <template>
@@ -55,7 +73,7 @@ const emit = defineEmits<{
           @up="() => emit('up')"
           @down="() => emit('down')"
         />
-        <CTAButton>
+        <CTAButton @click="buyReward">
           <div style="display: flex; gap: 1rem; align-items: center">
             <LogoImage type="tools" :size="1.5" />
             <TypographyTitle
@@ -93,6 +111,7 @@ const emit = defineEmits<{
 }
 
 .reward-details-top {
+  overflow: auto;
   max-width: 40rem;
   display: flex;
   flex-direction: column;
@@ -109,6 +128,7 @@ const emit = defineEmits<{
   align-items: center;
   display: flex;
   gap: 3.5rem;
+  flex-wrap: wrap;
 }
 
 .reward-details-price {

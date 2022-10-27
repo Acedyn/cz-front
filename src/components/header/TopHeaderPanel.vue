@@ -31,6 +31,7 @@ const emit = defineEmits<{
 }>();
 
 const checkActive = (path: string) => {
+  console.log(useRoute().fullPath);
   return useRoute().fullPath.includes(path) || useRoute().name === path;
 };
 

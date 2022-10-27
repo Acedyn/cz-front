@@ -43,10 +43,7 @@ const navButtons = [
   },
   {
     name: t("buttons.tools"),
-    click: () => {
-      /* router.push("/"); */
-      /* showPanel.value = false; */
-    },
+    click: () => {},
     soon: true,
     path: "tools",
     icon: "tools" as LogoImageType,
@@ -54,11 +51,11 @@ const navButtons = [
   {
     name: t("buttons.profile"),
     click: () => {
-      router.push("/immersion/goodboard/settings");
+      router.push("/auth/settings");
       showPanel.value = false;
     },
     soon: false,
-    path: "goodboard/settings",
+    path: "auth/settings",
     icon: "profile" as LogoImageType,
   },
   {

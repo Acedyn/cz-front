@@ -105,6 +105,7 @@ const loginUser = () => {
 
 <style scoped>
 .auth-container {
+  overflow: auto;
   font-family: "Quicksand", serif;
   height: 100%;
   background-image: url("/src/assets/background/background.png"),
