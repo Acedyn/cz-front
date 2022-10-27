@@ -62,8 +62,9 @@ export const useAuthStore = defineStore({
         password,
       });
 
+      const parsedJwt = parseJwt(response.access_token);
       this.user = new User({
-        id: response.id,
+        id: parsedJwt.user_id,
         tokens: {
           refreshToken: response.refresh_token,
           accessToken: response.access_token,
@@ -77,6 +78,7 @@ export const useAuthStore = defineStore({
     logout() {
       delete this.user;
       localStorage.removeItem("auth");
+      router.push("/immersion/goodboard/login");
     },
 
     isLoggedIn() {
@@ -84,3 +86,19 @@ export const useAuthStore = defineStore({
     },
   },
 });
+
+const parseJwt = (token: string) => {
+  const base64Url = token.split(".")[1];
+  const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  const jsonPayload = decodeURIComponent(
+    window
+      .atob(base64)
+      .split("")
+      .map(function (c) {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+
+  return JSON.parse(jsonPayload);
+};

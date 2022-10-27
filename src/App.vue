@@ -1,15 +1,8 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, computed } from "vue";
-import { getBreakpoint, Breakpoint } from "./utils/breakpoints";
 import TopHeader from "./components/header/TopHeader.vue";
 
 import { usePreferencesStore } from "./stores/preferences";
 import { storeToRefs } from "pinia";
-
-const breakpoint = getBreakpoint(onMounted, onUnmounted);
-const isSmall = computed(() => {
-  return breakpoint.value < Breakpoint.MD;
-});
 
 const preferences = usePreferencesStore();
 const { headerCollapse } = storeToRefs(preferences);
@@ -17,9 +10,7 @@ const { headerCollapse } = storeToRefs(preferences);
 
 <template>
   <TopHeader
-    :class="`app-header ${headerCollapse ? 'app-header-collapse' : ''} ${
-      isSmall ? 'app-header-small' : ''
-    }`"
+    :class="`app-header ${headerCollapse ? 'app-header-collapse' : ''}`"
   />
   <RouterView class="app-view" />
 </template>
@@ -44,11 +35,7 @@ const { headerCollapse } = storeToRefs(preferences);
 }
 
 .app-header {
-  z-index: 10;
-}
-
-.app-header-small {
-  padding: 0 5vw;
+  z-index: 100;
 }
 
 .app-view-small {

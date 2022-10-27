@@ -1,0 +1,20 @@
+{
+  "en": {
+    "rewards": {
+      "solana": {
+        "title": "Solana Tokens",
+        "description": "Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim.<ul><li>Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi.</li><li>Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et.</li><li>Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim.</li><li>Elit aute irure tempor cupidatat incididunt, Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et.</li></ul>"
+      },
+      "nft": {
+        "title": "Surprise NFT",
+        "description": "Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim.<ul><li>Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi.</li><li>Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et.</li><li>Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim.</li><li>Elit aute irure tempor cupidatat incididunt, Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et.</li></ul>"
+      },
+      "flower": {
+        "title": "FLWR Tokens",
+        "description": "Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim.<ul><li>Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi.</li><li>Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et.</li><li>Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim.</li><li>Elit aute irure tempor cupidatat incididunt, Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et.</li></ul>"
+      }
+    }
+  },
+  "fr": {},
+  "es": {}
+}

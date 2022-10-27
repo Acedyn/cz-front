@@ -5,6 +5,7 @@ import ImmersionView from "@/views/immersion/ImmersionView.vue";
 import PostOfficeView from "@/views/immersion/postOffice/PostOfficeView.vue";
 import BillOfLadingView from "@/views/immersion/billOfLading/BillOfLadingView.vue";
 import GoodboardView from "@/views/immersion/goodboard/GoodboardView.vue";
+import RewardView from "@/views/immersion/goodboard/RewardView.vue";
 import LoginPage from "@/views/auth/loginPage.vue";
 import RegisterPage from "@/views/auth/registerPage.vue";
 import ResetPassword from "@/views/auth/resetPassword.vue";
@@ -64,6 +65,11 @@ export default {
       path: "goodboard/register",
       name: "registerPage",
       component: RegisterPage,
+    },
+    {
+      path: "goodboard/rewards",
+      name: "rewards",
+      component: RewardView,
     },
     {
       path: "goodboard/reset-password",

@@ -10,9 +10,9 @@ const { currentUser } = useAuthStore();
 
 // Temporary Data
 const accountDetail = reactive({
-  username: currentUser.data?.name,
-  image: currentUser.data?.image,
-  mail: currentUser.data?.email,
+  username: currentUser.data?.twitter_username || "",
+  image: currentUser.data?.image || "",
+  mail: currentUser.data?.email || "",
   password: "",
   passwordConfirm: "",
 });
@@ -62,14 +62,14 @@ const validations = computed(() => {
         v-model="accountDetail.password"
         label="Password"
         icon="tools"
-        placeholder="ChopChop54!"
+        placeholder="insert new password"
         type="password"
       />
       <TextInput
         v-model="accountDetail.passwordConfirm"
         label="Confirm Password"
         icon="tools"
-        placeholder="ChopChop54!"
+        placeholder="confirm new password"
         type="password"
         :invalid="
           accountDetail.passwordConfirm.length > 0 &&

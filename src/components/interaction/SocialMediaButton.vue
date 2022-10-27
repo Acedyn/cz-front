@@ -37,7 +37,7 @@ const emit = defineEmits<{
     <img
       :src="icon"
       :alt="icon"
-      style="width: 24px; height: 24px; margin-right: 1rem"
+      style="width: auto; height: 24px; margin-right: 1rem"
     />
     <TypographyTitle size="small" :color="textColor" :level="4" font="Poppins">
       <slot />

@@ -9,7 +9,7 @@ import CTAButton from "../../components/interaction/CtaButton.vue";
 import LoadingModal from "../../components/popup/LoadingPopup.vue";
 import { useAuthStore } from "@/stores/auth";
 
-const { currentUser } = useAuthStore();
+const { currentUser, logout } = useAuthStore();
 
 const isLoading = ref(false);
 
@@ -64,7 +64,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div style="padding-top: 0">
+  <div style="padding-top: 0" class="settings-view">
     <div class="header-image"></div>
     <div class="title-row">
       <div style="display: flex">
@@ -89,6 +89,7 @@ onMounted(async () => {
         </TypographyTitle>
       </div>
       <div v-if="!isSmallScreen" class="action-button-container">
+        <CTAButton invert no-icon @click="logout">Logout</CTAButton>
         <CTAButton invert no-icon :disabled="true">Cancel</CTAButton>
         <CTAButton invert no-icon :disabled="true" @click="handleSaveBtn"
           >Save</CTAButton
@@ -118,6 +119,10 @@ onMounted(async () => {
 </template>
 
 <style scoped>
+.settings-view {
+  overflow: auto;
+}
+
 .header-image {
   width: 100%;
   height: 286px;

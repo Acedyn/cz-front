@@ -4,17 +4,26 @@ import TypographyText from "../../../components/utils/TypographyText.vue";
 import SocialMediaButton from "../../../components/interaction/SocialMediaButton.vue";
 import IconClose from "../../../components/icons/iconClose.vue";
 import IconLink from "../../../components/icons/iconLink.vue";
+import { useAuthStore } from "@/stores/auth";
+
+const oauthUrl = `${import.meta.env.VITE_OAUTH_API}`;
+const { currentUser } = useAuthStore();
 
 const socialMediaBtn = reactive({
-  facebook: "Facebook",
   discord: "Discord",
-  google: "Google",
   twitter: "Twitter",
 });
 
 const activeSocialAccount = reactive({
-  account: ["Facebook", "Discord", "Google", "Twitter"],
+  account: ["Discord", "Twitter"],
 });
+
+const linkSocial = (social: string) => {
+  window.open(
+    `${oauthUrl}/auth/${social}/callback?id=${currentUser.data.id}`,
+    "_blank"
+  );
+};
 </script>
 
 <template>
@@ -39,7 +48,11 @@ const activeSocialAccount = reactive({
       </div>
     </div>
     <div class="button-grid-container buttons">
-      <SocialMediaButton v-for="(v, k) in socialMediaBtn" :key="k" :type="k"
+      <SocialMediaButton
+        v-for="(v, k) in socialMediaBtn"
+        :key="k"
+        :type="k"
+        @click="() => linkSocial(k)"
         >{{ v }} Sign-in
       </SocialMediaButton>
     </div>
