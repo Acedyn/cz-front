@@ -80,7 +80,9 @@ const genericState = () => {
     </template>
     <variant title="default" :initState="genericState">
       <template #default="{ state }">
-        <RankingCard v-bind="state.state" />
+        <div style="margin-top: 3rem">
+          <RankingCard v-bind="state.state" />
+        </div>
       </template>
     </variant>
   </Story>

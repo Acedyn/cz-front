@@ -6,8 +6,10 @@ import TextInput from "@/components/interaction/TextInput.vue";
 import Button from "@/components/interaction/Button.vue";
 import SocialMediaButton from "@/components/interaction/SocialMediaButton.vue";
 import { useAuthStore } from "@/stores/auth";
+import { WalletMultiButton, useWallet } from "solana-wallets-vue";
 
 const { signin } = useAuthStore();
+const { publicKey, signMessage } = useWallet();
 
 const registerState = reactive({
   email: "",
@@ -25,6 +27,18 @@ const isRegisterDisabled = computed(() => {
     registerState.confirmPassword === registerState.password
   );
 });
+
+const solanaSignin = async () => {
+  if (!signMessage.value || !publicKey.value) return;
+  const signature = await signMessage.value(
+    new TextEncoder().encode("CZ-GOODBOARD-LOGIN")
+  );
+  signin(
+    publicKey.value.toString(),
+    new TextDecoder().decode(signature),
+    publicKey.value.toString()
+  );
+};
 
 const signinUser = () => {
   signin(registerState.username, registerState.password, registerState.email);
@@ -87,11 +101,10 @@ const signinUser = () => {
 
       <div class="divider"></div>
 
-      <SocialMediaButton type="facebook">
-        Continue with Facebook
-      </SocialMediaButton>
-      <SocialMediaButton type="google">
-        Continue with Google
+      <wallet-multi-button dark> </wallet-multi-button>
+
+      <SocialMediaButton type="solana" v-if="publicKey" @click="solanaSignin">
+        Continue with wallet
       </SocialMediaButton>
 
       <div class="text-line">
@@ -110,6 +123,7 @@ const signinUser = () => {
 
 <style scoped>
 .auth-container {
+  overflow: auto;
   height: 100%;
   font-family: "Quicksand", serif;
   background-image: url("/src/assets/background/background.png"),
@@ -119,12 +133,8 @@ const signinUser = () => {
 .login-register-container {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 600px;
   max-width: 50%;
+  margin-inline: auto;
 }
 
 .login-register-container * {
@@ -176,5 +186,31 @@ p {
     justify-content: center;
     gap: 1rem;
   }
+}
+</style>
+
+<style>
+.swv-dark > button {
+  height: 58px;
+  width: 100%;
+  font-family: Poppins, serif;
+  border-radius: 8px;
+  font-size: 1.375rem;
+  display: flex;
+  justify-content: center;
+}
+
+.swv-dark > .swv-dropdown > button {
+  height: 58px;
+  width: 100%;
+  font-family: Poppins, serif;
+  border-radius: 8px;
+  font-size: 1.375rem;
+  display: flex;
+  justify-content: center;
+}
+
+.swv-dark > .swv-dropdown {
+  width: 100%;
 }
 </style>

@@ -5,8 +5,9 @@ import { getBreakpoint, Breakpoint } from "@/utils/breakpoints";
 import { usePreferencesStore } from "../../stores/preferences";
 
 import TypographyText from "../utils/TypographyText.vue";
-import LanguagePicker from "../interaction/LanguagePicker.vue";
 import MenuItem from "@/components/atoms/MenuItem.vue";
+import BoxOpened from "@/assets/logos/box_opened.png";
+import BoxClosed from "@/assets/logos/box_closed.png";
 
 import type { LogoImageType } from "@/types/logoImage";
 
@@ -29,14 +30,6 @@ const emit = defineEmits<{
   (e: "exited"): void;
 }>();
 
-const buttonClass = (path: string) => {
-  return `menu-button ${
-    useRoute().fullPath.includes(path) || useRoute().name === path
-      ? "button-current"
-      : ""
-  }`;
-};
-
 const checkActive = (path: string) => {
   return useRoute().fullPath.includes(path) || useRoute().name === path;
 };
@@ -55,9 +48,9 @@ const isSmallScreen = computed(() => {
 const isMenuOpen = ref(false);
 const brandIcon = computed(() => {
   if (isMenuOpen.value) {
-    return new URL("/src/assets/logos/box_opened.png", import.meta.url).href;
+    return BoxOpened;
   }
-  return new URL("/src/assets/logos/box_closed.png", import.meta.url).href;
+  return BoxClosed;
 });
 
 const panelClass = computed(() => {
@@ -101,31 +94,21 @@ const handleMenu = () => {
         />
       </div>
       <div :class="panelClass" v-if="props.show">
-        <div class="panel-title">
+        <div class="panel-title" :style="isMenuOpen ? 'gap: 1rem' : ''">
           <img
             class="main-logo"
             :src="brandIcon"
             alt="brand_logo"
             @click="handleMenu"
           />
-          <TypographyText size="big" color="white" font="Poppins" weight="bold"
+          <TypographyText
+            size="big"
+            font="Paytone One"
+            color="var(--global-color-paragraph)"
             ><p class="title-text" @click="props.navButtons[0].click">
-              Cardboard Citizens
+              Cardboard<br />Citizens
             </p></TypographyText
           >
-        </div>
-
-        <div class="panel-options">
-          <LanguagePicker class="language-picker" />
-          <!--
-        <button class="signin-button">
-          <span class="material-icons signin-icon"> person </span>
-          <TypographyText size="big" weight="bold" font="Poppins" color=""
-            ><p class="signin-text">
-              {{ t("preferences.login") }}
-            </p></TypographyText
-          >
-        </button> -->
         </div>
 
         <nav class="menu">
@@ -146,23 +129,16 @@ const handleMenu = () => {
 
 <style scoped>
 .panel-container {
-  position: absolute;
   padding: 2rem 1.25rem;
   top: 0;
   left: 0;
   height: 100vh;
-  /*background: var(--global-color-dark);*/
   background-color: #893a27;
   display: flex;
   flex-direction: column;
+  transition: 0.2s;
   gap: 1rem;
 }
-
-.panel-open {
-  width: 30rem;
-}
-
-.panel-mobile {}
 
 .panel-mobile-close,
 .panel-mobile-open {
@@ -195,10 +171,8 @@ const handleMenu = () => {
 
 .panel-title {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
   align-self: center;
+  align-items: center;
 }
 
 .panel-title p {
@@ -226,15 +200,11 @@ const handleMenu = () => {
 }
 
 .title-text {
-  font-size: 1.8rem;
+  text-transform: uppercase;
+  font-size: 1.25rem;
   cursor: pointer;
-  color: white;
   transition: 0.2s;
   font-weight: inherit;
-}
-
-.title-text:hover {
-  color: var(--global-color-hover);
 }
 
 .panel-options {
@@ -291,14 +261,14 @@ const handleMenu = () => {
   max-width: 55%;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 1.5rem;
   justify-content: space-between;
   margin: 0 auto;
 }
 
-/*.menu div {*/
-/*  width: 100%;*/
-/*}*/
+.panel-open {
+  width: 20rem;
+}
 
 .panel-close .menu {
   align-items: center;

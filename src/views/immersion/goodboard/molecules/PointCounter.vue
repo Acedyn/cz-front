@@ -43,7 +43,7 @@ const props = withDefaults(
   align-items: center;
 
   height: v-bind("`${2.5 * props.size}rem`");
-  width: v-bind("`${2.5 * props.size * props.ratio}rem`");
+  width: v-bind("`${2 * props.size * props.ratio}rem`");
   min-width: auto;
   min-height: auto;
 }

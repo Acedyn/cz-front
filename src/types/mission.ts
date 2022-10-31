@@ -15,13 +15,16 @@ interface MissionAPIData {
   initialized: boolean;
   close_at: number;
   parameters?: Record<string, string>;
+  id: number;
 }
 
 interface MissionData {
   name: string;
+  id: number;
   shortDescription: string;
   longDescription: string;
   category: string;
+  image?: string;
   logo: string;
   class: string;
   reward: number;
@@ -68,17 +71,55 @@ export default class Mission {
   };
 }
 
+const fromApiData = (missionApiData: MissionAPIData) => {
+  return new Mission({
+    ...missionApiData,
+    shortDescription: missionApiData.short_description,
+    longDescription: missionApiData.long_description,
+    closeAt: new Date(missionApiData.close_at),
+    image:
+      missionApiData.parameters?.image || "/src/assets/landing/profile/01.png",
+  });
+};
+
 export const getAvailableMissions = async () => {
+  const { currentUser } = useAuthStore();
+
+  if (!currentUser.data) {
+    const response: { data: MissionAPIData[] } = await get(
+      `${baseUrl}/missions/opened`,
+      null
+    );
+    return response.data.map(fromApiData);
+  }
+
   const response: { data: MissionAPIData[] } = await get(
-    `${baseUrl}/missions/opened`,
+    `${baseUrl}/missions/available?user=${currentUser.data.id}`,
     null
   );
-  return response.data.map((missionData) => {
-    return new Mission({
-      ...missionData,
-      longDescription: missionData.long_description,
-      shortDescription: missionData.short_description,
-      closeAt: new Date(missionData.close_at),
-    });
-  });
+  return response.data.map(fromApiData);
+};
+
+export const getCompletedMissions = async () => {
+  const { currentUser } = useAuthStore();
+
+  if (!currentUser.data) {
+    return [];
+  }
+
+  const response: { data: MissionAPIData[] } = await get(
+    `${baseUrl}/missions/completed?user=${currentUser.data.id}`,
+    null
+  );
+  return response.data.map(fromApiData);
+};
+
+export const validateMission = async (mission: Mission) => {
+  const { currentUser } = useAuthStore();
+
+  const response: { errors: string[] } = await get(
+    `${baseUrl}/missions/${mission.data.id}/validate?user=${currentUser.data.id}`,
+    null
+  );
+  return response.errors.length < 1;
 };

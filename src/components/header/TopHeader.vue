@@ -10,21 +10,16 @@ import { ref, computed, onMounted, onUnmounted } from "vue";
 import { usePreferencesStore } from "@/stores/preferences";
 import { storeToRefs } from "pinia";
 import router from "@/router";
-
 import { useI18n } from "vue-i18n";
 import locales from "./topHeaderLocales.json";
-
 const { t } = useI18n({
   messages: locales,
 });
-
 const preferences = usePreferencesStore();
 const { headerCollapse } = storeToRefs(preferences);
-
 // const showOverlay = ref(false);
 const showPanel = ref(false);
 const breakpoint = getBreakpoint(onMounted, onUnmounted);
-
 const navButtons = [
   {
     name: t("buttons.home"),
@@ -43,15 +38,12 @@ const navButtons = [
       showPanel.value = false;
     },
     soon: false,
-    path: "immersion",
+    path: "immersion/post-office",
     icon: "world" as LogoImageType,
   },
   {
     name: t("buttons.tools"),
-    click: () => {
-      router.push("/");
-      showPanel.value = false;
-    },
+    click: () => {},
     soon: true,
     path: "tools",
     icon: "tools" as LogoImageType,
@@ -59,134 +51,37 @@ const navButtons = [
   {
     name: t("buttons.profile"),
     click: () => {
-      router.push("/");
+      router.push("/auth");
       showPanel.value = false;
     },
-    soon: true,
-    path: "profile",
+    soon: false,
+    path: "auth",
     icon: "profile" as LogoImageType,
   },
   {
-    name: t("buttons.settings"),
+    name: t("buttons.goodboard"),
     click: () => {
-      router.push("/");
+      router.push("/immersion/goodboard");
       showPanel.value = false;
     },
-    soon: true,
-    path: "settings",
+    soon: false,
+    path: "goodboard",
     icon: "dashboard" as LogoImageType,
   },
-  // {
-  //   name: t("buttons.market"),
-  //   click: () => {
-  //     router.push("/marketplace");
-  //     showPanel.value = false;
-  //   },
-  //   soon: false,
-  //   path: "marketplace",
-  // },
 ];
-
-const buttonClass = (path: string) => {
-  return `menu-button ${
-    useRoute().fullPath.includes(path) || useRoute().name === path
-      ? "button-current"
-      : ""
-  }`;
-};
-
-const isCollapsed = computed(() => {
-  return !headerCollapse.value && breakpoint.value > Breakpoint.SM;
-});
 </script>
 
 <template>
-  <TopHeaderPanel
-    :navButtons="navButtons"
-    :show="true"
-  />
-
-  <!--  <header-->
-  <!--    :class="`header-container ${isCollapsed ? '' : 'container-collapsed'}`"-->
-  <!--  >-->
-  <!--    <div class="header-left header-sides" v-if="isCollapsed">-->
-  <!--      <div class="header-title">-->
-  <!--        <img class="main-logo" src="@/assets/logos/brand_logo.png" />-->
-  <!--        <TypographyText size="big" color="white" font="Poppins" weight="bold"-->
-  <!--          ><p class="menu-button" @click="navButtons[0].click">-->
-  <!--            Cardboard Citizens-->
-  <!--          </p></TypographyText-->
-  <!--        >-->
-  <!--      </div>-->
-  <!--      <nav class="menu">-->
-  <!--        <button-->
-  <!--          class="nav-button"-->
-  <!--          :tooltip="navButton.soon ? 'Coming soon' : undefined"-->
-  <!--          v-for="(navButton, index) in navButtons"-->
-  <!--          :key="index"-->
-  <!--          @click="navButton.click"-->
-  <!--        >-->
-  <!--          <TypographyText size="big" weight="bold" font="Poppins" color=""-->
-  <!--            ><p :class="buttonClass(navButton.path)">-->
-  <!--              {{ navButton.name }}-->
-  <!--            </p></TypographyText-->
-  <!--          >-->
-  <!--        </button>-->
-  <!--      </nav>-->
-  <!--    </div>-->
-  <!--    <div class="header-right header-sides" v-if="isCollapsed">-->
-  <!--      <LanguagePicker />-->
-  <!--      &lt;!&ndash;-->
-  <!--      <button class="signin-button">-->
-  <!--        <span class="material-icons signin-icon"> person </span>-->
-  <!--        <TypographyText size="big" weight="bold" font="Poppins" color=""-->
-  <!--          ><p class="signin-text">-->
-  <!--            {{ t("preferences.login") }}-->
-  <!--          </p></TypographyText-->
-  <!--        >-->
-  <!--      </button>-->
-  <!--      &ndash;&gt;-->
-  <!--    </div>-->
-
-  <!--    <div class="collaped-header" v-else>-->
-  <!--      <button class="collapsed-button">-->
-  <!--        <span-->
-  <!--          class="material-icons handburger-icon"-->
-  <!--          :style="{ fontSize: '4rem' }"-->
-  <!--          @click="showOverlay = !showOverlay"-->
-  <!--          >menu</span-->
-  <!--        >-->
-  <!--        <img-->
-  <!--          class="colapsed-logo"-->
-  <!--          src="@/assets/logos/brand_logo.png"-->
-  <!--          @click="navButtons[0].click"-->
-  <!--        />-->
-  <!--      </button>-->
-  <!--    </div>-->
-  <!--    <OverlayPopup-->
-  <!--      :show="showOverlay"-->
-  <!--      margin="0"-->
-  <!--      @exit="showPanel = false"-->
-  <!--      @entered="showPanel = true"-->
-  <!--    >-->
-  <!--      <TopHeaderPanel-->
-  <!--        :navButtons="navButtons"-->
-  <!--        :show="showPanel"-->
-  <!--        @exited="showOverlay = false"-->
-  <!--      />-->
-  <!--    </OverlayPopup>-->
-  <!--  </header>-->
+  <TopHeaderPanel :navButtons="navButtons" :show="true" />
 </template>
 
 <style scoped>
 .header-container {
   width: 100%;
 }
-
 .container-collapsed {
   width: fit-content;
 }
-
 .header-container,
 .header-sides {
   display: flex;
@@ -196,35 +91,29 @@ const isCollapsed = computed(() => {
   gap: 1rem;
   justify-content: space-between;
 }
-
 .header-sides {
   border-bottom: 0.079rem solid rgba(255, 255, 255, 0.8);
 }
-
 .header-left {
   min-width: 50%;
 }
-
 .header-title {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 1rem;
 }
-
 .main-logo {
   filter: invert(100%) brightness(200%);
   height: 4.5rem;
   object-fit: contain;
 }
-
 .colapsed-logo {
   padding: 0 1rem;
   filter: invert(100%) brightness(200%);
   height: 4rem;
   object-fit: contain;
 }
-
 .menu {
   min-width: 55%;
   display: flex;
@@ -232,7 +121,6 @@ const isCollapsed = computed(() => {
   gap: 1rem;
   justify-content: space-between;
 }
-
 .nav-button {
   background: none;
   color: inherit;
@@ -242,7 +130,6 @@ const isCollapsed = computed(() => {
   cursor: pointer;
   outline: inherit;
 }
-
 .menu-button {
   font-size: 1.118rem;
   cursor: pointer;
@@ -250,15 +137,12 @@ const isCollapsed = computed(() => {
   transition: 0.2s;
   font-weight: inherit;
 }
-
 .menu-button:hover {
   color: var(--global-color-hover);
 }
-
 .button-current {
   color: var(--global-color-primary);
 }
-
 .signin-button {
   background: none;
   color: inherit;
@@ -267,7 +151,6 @@ const isCollapsed = computed(() => {
   font: inherit;
   cursor: pointer;
   outline: inherit;
-
   padding: 0.344rem 0.782rem;
   border-radius: 0.5rem;
   display: flex;
@@ -276,49 +159,39 @@ const isCollapsed = computed(() => {
   transition: 0.2s;
   gap: 0.688rem;
 }
-
 .signin-button:hover {
   background: var(--global-color-hover);
 }
-
 .signin-text {
   color: white;
   font-weight: inherit;
   font-size: 1.118rem;
 }
-
 .signin-icon {
   color: var(--global-color-primary);
   font-size: 2rem;
 }
-
 .collapsed-button {
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
   outline: inherit;
-
   font-size: 4rem;
 }
-
 .colapsed-logo {
   transition: 0.2s ease-out;
 }
-
 .colapsed-logo:hover {
   transform: scale(1.1);
 }
-
 .handburger-icon {
   transition: 0.2s;
   color: white;
 }
-
 .handburger-icon:hover {
   color: var(--global-color-hover);
 }
-
 *[tooltip]:before {
   content: attr(tooltip);
   transform: scale(0);
@@ -330,7 +203,6 @@ const isCollapsed = computed(() => {
   border-radius: 5px;
   padding: 5px;
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
-
   background: var(--global-color-dark);
   font-weight: bolder;
   color: white;

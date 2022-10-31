@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ControlsGenerator from "../../ControlsGenerator.vue";
-import Avatar from "../../../src/components/atoms/Avatar.vue";
+import AvatarBubble from "../../../src/components/atoms/AvatarBubble.vue";
 
 import User from "../../../src/types/user";
 
@@ -51,17 +51,17 @@ const largeAvatar = () => {
     </template>
     <variant title="Small" :initState="smallAvatar">
       <template #default="{ state }">
-        <Avatar v-bind="state.state" />
+        <AvatarBubble v-bind="state.state" />
       </template>
     </variant>
     <variant title="Medium" :initState="mediumAvatar">
       <template #default="{ state }">
-        <Avatar v-bind="state.state" />
+        <AvatarBubble v-bind="state.state" />
       </template>
     </variant>
     <variant title="Large" :initState="largeAvatar">
       <template #default="{ state }">
-        <Avatar v-bind="state.state" />
+        <AvatarBubble v-bind="state.state" />
       </template>
     </variant>
   </story>

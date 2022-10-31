@@ -1,80 +1,157 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import TypographyText from "../../../../components/utils/TypographyText.vue";
 import LogoImage from "../../../../components/atoms/LogoImage.vue";
 import StickerButton from "../../../../components/interaction/StickerButton.vue";
 import CloseButton from "@/components/interaction/CloseButton.vue";
+import { validateMission } from "@/types/mission";
+import Tweet from "vue-tweet";
 
 import type Mission from "../../../../types/mission";
 
 const props = withDefaults(
   defineProps<{
     mission: Mission;
-    image?: string;
   }>(),
   {}
 );
+
+const emit = defineEmits<{
+  (e: "participate"): void;
+  (e: "claim"): void;
+  (e: "handleClose"): void;
+}>();
+
+const deadline = computed(() => {
+  const closeDate = props.mission.data.closeAt?.getTime() || Date.now();
+  const difference = new Date(closeDate - Date.now());
+  return `${difference.getDate()}D ${difference.getHours()}H`;
+});
+
+const handleClose = () => {
+  emit("handleClose");
+};
+
+const participateMission = () => {
+  emit("participate");
+  if (props.mission.data.parameters?.link) {
+    const w = window.open(props.mission.data.parameters.link, "_blank");
+    if (w) w.focus();
+  }
+};
+
+const claimMission = async () => {
+  await validateMission(props.mission);
+  emit("claim");
+  handleClose();
+};
+
+const tweetId = computed(() => {
+  const parameters = props.mission.data.parameters;
+  return parameters ? parameters["post-id"] : parameters;
+});
 </script>
 
 <template>
-  <div class="mission-detail-container">
-    <div class="content">
-      <TypographyText class="title" font="Paytone One" size="big" weight="bold">
-        <p>{{ props.mission.data.name }}</p>
-      </TypographyText>
-      <div class="mini-image">
-        <CloseButton class="close-button" size="30px" />
-        <img :src="props.image" alt="mission image" />
-      </div>
-      <TypographyText font="Marvel" size="regular" weight="light">
-        {{ props.mission.data.shortDescription }}
-      </TypographyText>
-      <div class="timer-point">
-        <div>
-          <LogoImage type="time_watch" :size="2" />
-          <TypographyText font="RubikOne" size="big" weight="bold">
-            <p>{{ "1D 12H" }}</p>
-          </TypographyText>
+  <transition appear>
+    <div class="mission-detail-container">
+      <div class="content">
+        <TypographyText
+          class="title"
+          font="Paytone One"
+          size="big"
+          weight="bold"
+        >
+          <h3>{{ props.mission.data.name }}</h3>
+        </TypographyText>
+        <div class="mini-image">
+          <CloseButton class="close-button" size="30px" @click="handleClose" />
+          <img :src="props.mission.data.image" alt="mission image" />
         </div>
-        <div>
-          <LogoImage type="box_point" :size="2" />
-          <TypographyText font="RubikOne" size="big" weight="bold">
-            <p>{{ "20 BP" }}</p>
-          </TypographyText>
+        <TypographyText font="Marvel" size="regular" weight="light">
+          <p class="description">{{ props.mission.data.longDescription }}</p>
+        </TypographyText>
+        <div class="timer-point">
+          <div>
+            <LogoImage type="time_watch" :size="2" />
+            <TypographyText font="RubikOne" size="big" weight="bold">
+              <p class="mission-stats">{{ deadline }}</p>
+            </TypographyText>
+          </div>
+          <div>
+            <LogoImage type="box_point" :size="2" />
+            <TypographyText font="RubikOne" size="big" weight="bold">
+              <p class="mission-stats">
+                {{ `${props.mission.data.reward} BP` }}
+              </p>
+            </TypographyText>
+          </div>
+        </div>
+        <div class="buttons-row">
+          <StickerButton
+            class="cta-button"
+            :hue="props.mission.getColors().hue"
+            @click="participateMission"
+            v-if="props.mission.data.parameters?.link"
+          >
+            <label style="font-size: 1.5rem">PARTICIPATE</label>
+          </StickerButton>
+          <StickerButton
+            class="cta-button"
+            :hue="props.mission.getColors().hue"
+            @click="claimMission"
+          >
+            <label style="font-size: 1.5rem">CLAIM REWARD</label>
+          </StickerButton>
         </div>
       </div>
-      <StickerButton
-        class="cta-button"
-        :hue="props.mission.getColors().hue"
-        style="width: 80%; align-self: center"
-      >
-        {{ "LEARN MORE" }}
-      </StickerButton>
+      <div class="image">
+        <CloseButton
+          class="close-button"
+          size="30px"
+          @click="handleClose"
+          colorLine="#530f03"
+          colorBD="var(--global-color-primary)"
+        />
+        <Tweet
+          v-if="tweetId"
+          :tweet-id="tweetId"
+          class="tweet-preview"
+          cards="hidden"
+          align="center"
+        />
+
+        <img :src="props.mission.data.image" alt="mission image" v-else />
+      </div>
     </div>
-    <div class="image">
-      <CloseButton class="close-button" size="30px" />
-      <img :src="props.image" alt="mission image" />
-    </div>
-  </div>
+  </transition>
 </template>
 
 <style scoped>
 .mission-detail-container {
   display: flex;
-  gap: 1rem;
+  gap: 3rem;
   padding: 3rem;
-  background-image: url("/src/assets/goodboard/mission_card_detail.png");
-  background-size: 100% 100%;
+  border-width: 20px;
+  border-style: solid;
+  border-image-source: url("/src/assets/goodboard/mission_card_detail.png");
+  border-image-repeat: round;
+  border-image-slice: 60 fill;
+  height: fit-content;
+  margin-block: auto;
+  min-height: 70vh;
 }
 
 .content {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 2rem;
   width: 50%;
 }
 
-.title p {
-  font-size: 2.5rem;
+.title h3 {
+  font-size: 3.75rem;
   text-decoration: underline var(--global-color-paragraph);
 }
 
@@ -107,6 +184,14 @@ const props = withDefaults(
 .image img {
   height: 100%;
   width: 100%;
+  position: absolute;
+  border: solid var(--global-color-primary) 0.5rem;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+
+.mission-stats {
+  font-size: 2.25rem;
 }
 
 .mini-image {
@@ -114,8 +199,27 @@ const props = withDefaults(
   width: 100%;
 }
 
+.description {
+  font-style: italic;
+  font-size: 1.5rem;
+}
+
 .cta-button {
+  max-width: 25rem;
+  width: 100%;
+  cursor: pointer;
   border: 0;
+  padding: 1.5rem 0;
+}
+
+.cta-text label {
+  font-size: 2rem;
+}
+
+.buttons-row {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
 }
 
 .close-button {
@@ -145,5 +249,32 @@ const props = withDefaults(
     height: 200px;
     object-fit: cover;
   }
+}
+
+.v-enter-active,
+.v-leave-active {
+  animation: bounce-in 0.5s;
+}
+
+@keyframes pulse {
+  from {
+    scale: 1;
+  }
+
+  50% {
+    scale: 1.05;
+  }
+
+  to {
+    scale: 1;
+  }
+}
+</style>
+
+<style>
+.tweet-preview {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 </style>

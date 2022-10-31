@@ -2,10 +2,11 @@
 import { computed } from "vue";
 
 import type User from "@/types/user";
+import BoxClosed from "@/assets/logos/box_closed.png";
 
 const props = withDefaults(
   defineProps<{
-    user: User;
+    user?: User;
     size?: "sm" | "md" | "lg" | "xl" | "2xl";
     borderColor?: string;
   }>(),
@@ -14,13 +15,16 @@ const props = withDefaults(
   }
 );
 
-const imageUrl = computed(
-  () => new URL(props.user.data.image, import.meta.url).href
-);
+const imageUrl = computed(() => {
+  if (props.user?.data?.image) {
+    return new URL(props.user?.data?.image, import.meta.url).href;
+  }
+  return BoxClosed;
+});
 const imageSize = computed(() => {
   switch (props.size) {
     case "2xl":
-      return "130px";
+      return "8.5rem";
     case "xl":
       return "60px";
     case "lg":

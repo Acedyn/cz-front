@@ -37,7 +37,7 @@ const emit = defineEmits<{
     <img
       :src="icon"
       :alt="icon"
-      style="width: 24px; height: 24px; margin-right: 1rem"
+      style="width: auto; height: 24px; margin-right: 1rem"
     />
     <TypographyTitle size="small" :color="textColor" :level="4" font="Poppins">
       <slot />
@@ -49,6 +49,7 @@ const emit = defineEmits<{
 * {
   --facebook: #00a3ff;
   --google: #f5f5f5;
+  --solana: #068194;
   --discord: #9095ff;
   --twitter: #90d7ff;
   --text-light: #f5f5f5;

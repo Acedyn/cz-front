@@ -32,17 +32,14 @@ function getClass() {
 <style scoped>
 .typographySize__small {
   font-size: 0.813rem;
-  line-height: v-bind("`calc(0.813rem * ${props.spacing})`");
 }
 
 .typographySize__regular {
   font-size: 1rem;
-  line-height: v-bind("`calc(1rem * ${props.spacing})`");
 }
 
 .typographySize__big {
   font-size: 1.306rem;
-  line-height: v-bind("`calc(1.3rem * ${props.spacing})`");
 }
 
 .typographyWeight__light {

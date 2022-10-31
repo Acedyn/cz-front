@@ -2,19 +2,31 @@
 import { reactive } from "vue";
 import TypographyText from "../../../components/utils/TypographyText.vue";
 import SocialMediaButton from "../../../components/interaction/SocialMediaButton.vue";
+import IconCheckedSolid from "../../../components/icons/iconCheckedSolid.vue";
 import IconClose from "../../../components/icons/iconClose.vue";
 import IconLink from "../../../components/icons/iconLink.vue";
+import { WalletMultiButton, useWallet } from "solana-wallets-vue";
+import { useAuthStore } from "@/stores/auth";
+
+const oauthUrl = `${import.meta.env.VITE_OAUTH_API}`;
+const authStore = useAuthStore();
+const { connected } = useWallet();
 
 const socialMediaBtn = reactive({
-  facebook: "Facebook",
   discord: "Discord",
-  google: "Google",
   twitter: "Twitter",
 });
 
 const activeSocialAccount = reactive({
-  account: ["Facebook", "Discord", "Google", "Twitter"],
+  account: { Discord: false, Twitter: false, Wallet: connected },
 });
+
+const linkSocial = (social: string) => {
+  window.open(
+    `${oauthUrl}/auth/${social}/callback?id=${authStore.user.data.id}`,
+    "_blank"
+  );
+};
 </script>
 
 <template>
@@ -32,16 +44,25 @@ const activeSocialAccount = reactive({
         </p>
       </TypographyText>
       <div class="button-grid-container">
-        <p v-for="btn in activeSocialAccount.account" :key="btn">
-          <IconClose size="1.5rem" />
-          My {{ btn }}
+        <p
+          v-for="(active, social) in activeSocialAccount.account"
+          :key="social"
+        >
+          <IconCheckedSolid size="1.5rem" v-if="active" />
+          <IconClose size="1.5rem" v-else />
+          My {{ social }}
         </p>
       </div>
     </div>
     <div class="button-grid-container buttons">
-      <SocialMediaButton v-for="(v, k) in socialMediaBtn" :key="k" :type="k"
-        >{{ v }} Sign-in
+      <SocialMediaButton
+        v-for="(v, k) in socialMediaBtn"
+        :key="k"
+        :type="k"
+        @click="() => linkSocial(k)"
+        >{{ v }}
       </SocialMediaButton>
+      <wallet-multi-button dark></wallet-multi-button>
     </div>
   </div>
 </template>
@@ -87,5 +108,31 @@ const activeSocialAccount = reactive({
   .button-grid-container.buttons {
     grid-template-columns: 1fr;
   }
+}
+</style>
+
+<style>
+.swv-dark > button {
+  height: 58px;
+  width: 100%;
+  font-family: Poppins, serif;
+  border-radius: 8px;
+  font-size: 1.375rem;
+  display: flex;
+  justify-content: center;
+}
+
+.swv-dark > .swv-dropdown > button {
+  height: 58px;
+  width: 100%;
+  font-family: Poppins, serif;
+  border-radius: 8px;
+  font-size: 1.375rem;
+  display: flex;
+  justify-content: center;
+}
+
+.swv-dark > .swv-dropdown {
+  width: 100%;
 }
 </style>

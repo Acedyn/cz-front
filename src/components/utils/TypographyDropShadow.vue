@@ -46,7 +46,9 @@ const props = withDefaults(
   text-shadow: 0px 2.5px 1px rgba(0, 0, 0, 0.7);
   mix-blend-mode: overlay;
   position: absolute;
+  filter: blur(0.2px);
   inset: 0;
+  opacity: 0.8;
 }
 
 .typography-shadow-top {

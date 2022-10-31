@@ -3,13 +3,13 @@ import { ref, onMounted, onUnmounted, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { getBreakpoint, Breakpoint } from "@/utils/breakpoints";
 import SectionButton from "@/components/interaction/SectionButton.vue";
-import Avatar from "../../components/atoms/Avatar.vue";
+import AvatarBubble from "../../components/atoms/AvatarBubble.vue";
 import TypographyTitle from "../../components/utils/TypographyTitle.vue";
 import CTAButton from "../../components/interaction/CtaButton.vue";
 import LoadingModal from "../../components/popup/LoadingPopup.vue";
 import { useAuthStore } from "@/stores/auth";
 
-const { currentUser } = useAuthStore();
+const authStore = useAuthStore();
 
 const isLoading = ref(false);
 
@@ -26,8 +26,6 @@ type SectionBtnType = {
 
 const route = useRoute();
 const router = useRouter();
-
-const user = currentUser;
 
 const section_btn = ref<SectionBtnType[]>([
   {
@@ -55,16 +53,22 @@ const handleSaveBtn = () => {
     isLoading.value = false;
   }, 30 * 1000);
 };
+
+onMounted(async () => {
+  if (!authStore.user.data) {
+    router.push("/auth/login");
+  }
+});
 </script>
 
 <template>
-  <div style="padding-top: 0">
+  <div style="padding-top: 0" class="settings-view">
     <div class="header-image"></div>
     <div class="title-row">
       <div style="display: flex">
-        <Avatar
+        <AvatarBubble
           :size="isSmallScreen ? 'xl' : '2xl'"
-          :user="user"
+          :user="authStore.user"
           :style="{
             marginTop: `${isSmallScreen ? '-20%' : '-25%'}`,
             marginRight: '5%',
@@ -83,6 +87,7 @@ const handleSaveBtn = () => {
         </TypographyTitle>
       </div>
       <div v-if="!isSmallScreen" class="action-button-container">
+        <CTAButton invert no-icon @click="authStore.logout">Logout</CTAButton>
         <CTAButton invert no-icon :disabled="true">Cancel</CTAButton>
         <CTAButton invert no-icon :disabled="true" @click="handleSaveBtn"
           >Save</CTAButton
@@ -112,6 +117,10 @@ const handleSaveBtn = () => {
 </template>
 
 <style scoped>
+.settings-view {
+  overflow: auto;
+}
+
 .header-image {
   width: 100%;
   height: 286px;
@@ -137,7 +146,7 @@ const handleSaveBtn = () => {
   flex-direction: column;
   gap: 2rem;
   max-width: 60%;
-  margin: 1rem auto;
+  margin: 4rem auto;
 }
 
 .section-selector-row {
