@@ -14,13 +14,13 @@ const defaultState = () => {
         longDescription:
           "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
         category: "",
-        image: "/src/assets/landing/profile/01.png",
         logo: "",
         class: "",
         reward: 10,
         canceled: false,
         initialized: false,
       }),
+      image: "/src/assets/landing/profile/01.png",
     },
   };
 };

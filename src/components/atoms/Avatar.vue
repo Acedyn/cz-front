@@ -15,7 +15,7 @@ const props = withDefaults(
 );
 
 const imageUrl = computed(
-  () => new URL(props.user.data.image as string | URL, import.meta.url).href
+  () => new URL(props.user.data.image, import.meta.url).href
 );
 const imageSize = computed(() => {
   switch (props.size) {

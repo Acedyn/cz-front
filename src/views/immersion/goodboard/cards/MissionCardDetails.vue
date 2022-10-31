@@ -9,15 +9,10 @@ import type Mission from "../../../../types/mission";
 const props = withDefaults(
   defineProps<{
     mission: Mission;
+    image?: string;
   }>(),
   {}
 );
-
-const emit = defineEmits<{ (e: "handleClose"): void }>();
-
-const handleClose = () => {
-  emit("handleClose");
-};
 </script>
 
 <template>
@@ -27,11 +22,11 @@ const handleClose = () => {
         <p>{{ props.mission.data.name }}</p>
       </TypographyText>
       <div class="mini-image">
-        <CloseButton class="close-button" size="30px" @click="handleClose" />
-        <img :src="props.mission.data.image" alt="mission image" />
+        <CloseButton class="close-button" size="30px" />
+        <img :src="props.image" alt="mission image" />
       </div>
       <TypographyText font="Marvel" size="regular" weight="light">
-        {{ props.mission.data.longDescription }}
+        {{ props.mission.data.shortDescription }}
       </TypographyText>
       <div class="timer-point">
         <div>
@@ -56,8 +51,8 @@ const handleClose = () => {
       </StickerButton>
     </div>
     <div class="image">
-      <CloseButton class="close-button" size="30px" @click="handleClose" />
-      <img :src="props.mission.data.image" alt="mission image" />
+      <CloseButton class="close-button" size="30px" />
+      <img :src="props.image" alt="mission image" />
     </div>
   </div>
 </template>
@@ -74,7 +69,6 @@ const handleClose = () => {
 .content {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   gap: 2rem;
   width: 50%;
 }
@@ -150,11 +144,6 @@ const handleClose = () => {
     width: 100%;
     height: 200px;
     object-fit: cover;
-  }
-  .timer-point {
-    flex-direction: column;
-    justify-content: center;
-    gap: 2rem;
   }
 }
 </style>
