@@ -35,7 +35,7 @@ const isLoginDisabled = computed(() => {
         >Continuer
       </Button>
       <div class="no-account-line">
-        <p>Pas encore de compte?</p>
+        <p>Pas encore de compte ?</p>
         <p>
           <router-link
             :to="{ name: 'registerPage' }"
@@ -85,10 +85,6 @@ p {
     width: 100%;
     max-width: 400px;
     padding: 1rem;
-  }
-  .no-account-line p {
-    font-size: 1.3rem;
-    text-align: center;
   }
 }
 </style>

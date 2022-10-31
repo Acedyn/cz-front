@@ -16,7 +16,6 @@ const request = (method: string) => {
     const requestOptions = {
       method,
       headers: authHeader(url),
-      body: null as string | null,
     };
     if (body) {
       requestOptions.headers["Content-Type"] = "application/json";

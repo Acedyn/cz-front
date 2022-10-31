@@ -2,9 +2,7 @@
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useRoute } from "vue-router";
 import { getBreakpoint, Breakpoint } from "@/utils/breakpoints";
-import { usePreferencesStore } from "@/stores/preferences";
-import IconMenu from "@/components/icons/iconMenu.vue";
-import IconClose from "@/components/icons/iconMenuClose.vue";
+import { usePreferencesStore } from "../../stores/preferences";
 
 import TypographyText from "../utils/TypographyText.vue";
 import LanguagePicker from "../interaction/LanguagePicker.vue";
@@ -95,17 +93,12 @@ const handleMenu = () => {
   >
     <div>
       <div class="panel-mobile">
-        <div>
-          <img
-            class="main-logo main-logo-mobile"
-            :src="brandIcon"
-            alt="brand_logo"
-          />
-        </div>
-        <div>
-          <IconClose v-if="isMenuOpen" size="20px" @click="handleMenu" />
-          <IconMenu v-else size="3rem" @click="handleMenu" />
-        </div>
+        <img
+          class="main-logo main-logo-mobile"
+          :src="brandIcon"
+          alt="brand_logo"
+          @click="handleMenu"
+        />
       </div>
       <div :class="panelClass" v-if="props.show">
         <div class="panel-title">
@@ -169,6 +162,15 @@ const handleMenu = () => {
   width: 30rem;
 }
 
+.panel-mobile {}
+
+.panel-mobile-close,
+.panel-mobile-open {
+  border-width: 0;
+  border-bottom: 12px solid;
+  border-image: url("/src/assets/header/header_border2.png") 100% 0;
+}
+
 .panel-mobile-close {
   width: 100vw;
   height: fit-content;
@@ -216,7 +218,7 @@ const handleMenu = () => {
 
 .main-logo-mobile {
   display: block;
-  /*margin-top: 1rem;*/
+  margin-top: 1rem;
 }
 
 .panel-mobile-open .main-logo {
@@ -291,11 +293,7 @@ const handleMenu = () => {
   flex-direction: column;
   gap: 3rem;
   justify-content: space-between;
-  /*margin: 0 auto;*/
-}
-
-.panel-mobile-open .menu {
-  margin-top: 3rem;
+  margin: 0 auto;
 }
 
 /*.menu div {*/
@@ -352,24 +350,6 @@ const handleMenu = () => {
 
 .language-picker {
   z-index: 1;
-  display: none;
-}
-
-.panel-mobile {
-  width: 100vw;
-  height: 80px;
-  max-height: 80px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  z-index: 99;
-  border-width: 0;
-  border-bottom: 12px solid;
-  border-image: url("/src/assets/header/header_border2.png") 100% 0;
 }
 
 @media only screen and (min-width: 768px) {
@@ -389,14 +369,6 @@ const handleMenu = () => {
 
   .main-logo-mobile {
     display: none;
-  }
-
-  .panel-mobile {
-    display: none;
-  }
-
-  .language-picker {
-    display: block;
   }
 }
 </style>

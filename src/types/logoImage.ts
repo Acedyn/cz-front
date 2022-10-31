@@ -7,6 +7,4 @@ export type LogoImageType =
   | "profile"
   | "time_watch"
   | "tools"
-  | "world"
-  | "envelope_open"
-  | "envelope_close";
+  | "world";

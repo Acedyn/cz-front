@@ -25,7 +25,7 @@ const { headerCollapse, pageLeft, pageTop } = storeToRefs(preferences);
   <RouterView
     :class="`app-view ${isSmall ? 'app-view-small' : ''}`"
     :style="{ top: pageTop, left: pageLeft }"
-    style="overflow: hidden; overflow-x: auto"
+    style="overflow: hidden"
   />
 </template>
 
@@ -39,7 +39,7 @@ const { headerCollapse, pageLeft, pageTop } = storeToRefs(preferences);
   bottom: 0;
   left: 0;
   right: 0;
-  overflow: auto;
+  overflow: scroll;
   scrollbar-width: none;
   background-image: url("/src/assets/background/background.png"),
     radial-gradient(76.99% 76.99% at 50% 53.41%, #925637 0%, #411f12 100%);
@@ -64,12 +64,12 @@ const { headerCollapse, pageLeft, pageTop } = storeToRefs(preferences);
 }
 
 .app-view {
-  /*padding-top: 7.8rem;*/
+  padding-top: 7.8rem;
   --app-padding-side: 10.625rem;
 }
 
 .app-view-small {
-  /*padding-top: 7.8rem;*/
+  padding-top: 7.8rem;
   --app-padding-side: 5vw;
 }
 
