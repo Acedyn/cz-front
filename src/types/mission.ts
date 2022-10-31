@@ -8,6 +8,7 @@ interface MissionAPIData {
   short_description: string;
   long_description: string;
   category: string;
+  image?: string;
   logo: string;
   class: string;
   reward: number;
@@ -22,6 +23,7 @@ interface MissionData {
   shortDescription: string;
   longDescription: string;
   category: string;
+  image?: string;
   logo: string;
   class: string;
   reward: number;

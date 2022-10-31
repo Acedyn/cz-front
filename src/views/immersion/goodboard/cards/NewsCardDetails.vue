@@ -19,24 +19,31 @@ const props = withDefaults(
     textColor: "var(--global-color-paragraph)",
   }
 );
+
+const emit = defineEmits<{ (e: "handleClose"): void }>();
+
+const handleClose = () => emit("handleClose");
 </script>
 
 <template>
   <NewsCard
     :news="props.news"
     :type="props.type"
-    :showImage="props.showImage"
-    :showFooter="props.showFooter"
-    :textColor="props.textColor"
+    :show-image="props.showImage"
+    :show-footer="props.showFooter"
+    :text-color="props.textColor"
+    :text-clip="false"
+    :is-detail-card="true"
+    desc-text-size="16px"
   />
-  <CloseButton class="close-button" size="30px" />
+  <CloseButton class="close-button" size="30px" @click="handleClose" />
 </template>
 
 <style scoped>
 .close-button {
   z-index: 20;
   position: absolute;
-  margin: 20px;
+  margin: 2.5%;
   top: 0;
   right: 0;
 }
