@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { reactive, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import TextInput from "@/components/interaction/TextInput.vue";
 import FileUpload from "@/components/interaction/FileUpload.vue";
 import IconChecked from "@/components/icons/iconCheckedSolid.vue";
 import IconUncheked from "@/components/icons/iconUncheckedOutline.vue";
 import { useAuthStore } from "@/stores/auth";
 
-const { currentUser } = useAuthStore();
+const authStore = useAuthStore();
 
 // Temporary Data
-const accountDetail = reactive({
-  username: currentUser.data?.twitter_username || "",
-  image: currentUser.data?.image || "",
-  mail: currentUser.data?.email || "",
+const accountDetail = ref({
+  username: authStore.user.data?.name || "",
+  image: authStore.user.data?.image || "",
+  mail: authStore.user.data?.email || "",
   password: "",
   passwordConfirm: "",
 });
@@ -22,16 +22,28 @@ const validations = computed(() => {
   const smallLeterRegEx = new RegExp("(?=.*[a-z])");
   return {
     length:
-      accountDetail.password.length >= 8 &&
-      accountDetail.passwordConfirm.length >= 8,
+      accountDetail.value.password.length >= 8 &&
+      accountDetail.value.passwordConfirm.length >= 8,
     hasCapitalLetter:
-      capitalLetterRegex.test(accountDetail.password) &&
-      capitalLetterRegex.test(accountDetail.passwordConfirm),
+      capitalLetterRegex.test(accountDetail.value.password) &&
+      capitalLetterRegex.test(accountDetail.value.passwordConfirm),
     hasSmallLetter:
-      smallLeterRegEx.test(accountDetail.password) &&
-      smallLeterRegEx.test(accountDetail.passwordConfirm),
-    bothPasswordMatch: accountDetail.password === accountDetail.passwordConfirm,
+      smallLeterRegEx.test(accountDetail.value.password) &&
+      smallLeterRegEx.test(accountDetail.value.passwordConfirm),
+    bothPasswordMatch:
+      accountDetail.value.password === accountDetail.value.passwordConfirm,
   };
+});
+
+onMounted(() => {
+  console.log(authStore.user);
+  console.log(authStore.user.data);
+  console.log(authStore.user.data.name);
+  const accountDetailCopy = accountDetail.value;
+  accountDetailCopy.username = authStore.user.data?.name || "";
+  accountDetailCopy.image = authStore.user.data?.image || "";
+  accountDetailCopy.mail = authStore.user.data?.email || "";
+  accountDetail.value = { ...accountDetailCopy };
 });
 </script>
 
@@ -106,7 +118,7 @@ const validations = computed(() => {
     </div>
     <FileUpload
       label="Upload your picture"
-      :defaultImage="currentUser.data?.image"
+      :defaultImage="authStore.user.data?.image"
     />
   </div>
 </template>

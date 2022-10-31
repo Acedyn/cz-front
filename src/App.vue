@@ -25,7 +25,7 @@ const { headerCollapse } = storeToRefs(preferences);
   left: 0;
   bottom: 0;
   right: 0;
-  overflow: scroll;
+  overflow-y: auto;
   scrollbar-width: none;
   display: flex;
 }

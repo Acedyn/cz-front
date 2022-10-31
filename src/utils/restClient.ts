@@ -4,7 +4,6 @@ const authHeader = (url: string): Record<string, string> => {
   const { getUser, isLoggedIn } = useAuthStore();
   const isApiUrl = url.startsWith(import.meta.env.VITE_AUTH_API);
   if (isLoggedIn() && isApiUrl) {
-    console.log(getUser());
     return { Authorization: `Bearer ${getUser().data.tokens.accessToken}` };
   } else {
     return {};

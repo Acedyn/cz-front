@@ -51,11 +51,11 @@ const navButtons = [
   {
     name: t("buttons.profile"),
     click: () => {
-      router.push("/auth/settings");
+      router.push("/auth");
       showPanel.value = false;
     },
     soon: false,
-    path: "auth/settings",
+    path: "auth",
     icon: "profile" as LogoImageType,
   },
   {

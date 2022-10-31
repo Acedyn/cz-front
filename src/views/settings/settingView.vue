@@ -9,7 +9,7 @@ import CTAButton from "../../components/interaction/CtaButton.vue";
 import LoadingModal from "../../components/popup/LoadingPopup.vue";
 import { useAuthStore } from "@/stores/auth";
 
-const { currentUser, logout } = useAuthStore();
+const authStore = useAuthStore();
 
 const isLoading = ref(false);
 
@@ -26,8 +26,6 @@ type SectionBtnType = {
 
 const route = useRoute();
 const router = useRouter();
-
-const user = currentUser;
 
 const section_btn = ref<SectionBtnType[]>([
   {
@@ -57,7 +55,7 @@ const handleSaveBtn = () => {
 };
 
 onMounted(async () => {
-  if (!currentUser.data) {
+  if (!authStore.user.data) {
     router.push("/auth/login");
   }
 });
@@ -70,7 +68,7 @@ onMounted(async () => {
       <div style="display: flex">
         <AvatarBubble
           :size="isSmallScreen ? 'xl' : '2xl'"
-          :user="user"
+          :user="authStore.user"
           :style="{
             marginTop: `${isSmallScreen ? '-20%' : '-25%'}`,
             marginRight: '5%',
@@ -89,7 +87,7 @@ onMounted(async () => {
         </TypographyTitle>
       </div>
       <div v-if="!isSmallScreen" class="action-button-container">
-        <CTAButton invert no-icon @click="logout">Logout</CTAButton>
+        <CTAButton invert no-icon @click="authStore.logout">Logout</CTAButton>
         <CTAButton invert no-icon :disabled="true">Cancel</CTAButton>
         <CTAButton invert no-icon :disabled="true" @click="handleSaveBtn"
           >Save</CTAButton

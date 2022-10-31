@@ -12,16 +12,27 @@ const props = withDefaults(
   {}
 );
 
-const emit = defineEmits<{ (e: "handleClose"): void }>();
+const emit = defineEmits<{
+  (e: "handleClose"): void;
+  (e: "claim"): void;
+}>();
 
 const handleClose = () => {
   emit("handleClose");
+};
+
+const claim = () => {
+  emit("claim");
 };
 </script>
 
 <template>
   <OverlayPopup :show="props.show" disable-close-button margin="5rem">
-    <MissionCardDetails :mission="props.payload" @handleClose="handleClose" />
+    <MissionCardDetails
+      :mission="props.payload"
+      @handleClose="handleClose"
+      @claim="claim"
+    />
   </OverlayPopup>
 </template>
 

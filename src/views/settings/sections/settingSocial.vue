@@ -5,12 +5,11 @@ import SocialMediaButton from "../../../components/interaction/SocialMediaButton
 import IconCheckedSolid from "../../../components/icons/iconCheckedSolid.vue";
 import IconClose from "../../../components/icons/iconClose.vue";
 import IconLink from "../../../components/icons/iconLink.vue";
-import { WalletMultiButton } from "solana-wallets-vue";
+import { WalletMultiButton, useWallet } from "solana-wallets-vue";
 import { useAuthStore } from "@/stores/auth";
-import { useWallet } from "solana-wallets-vue";
 
 const oauthUrl = `${import.meta.env.VITE_OAUTH_API}`;
-const { currentUser } = useAuthStore();
+const authStore = useAuthStore();
 const { connected } = useWallet();
 
 const socialMediaBtn = reactive({
@@ -24,7 +23,7 @@ const activeSocialAccount = reactive({
 
 const linkSocial = (social: string) => {
   window.open(
-    `${oauthUrl}/auth/${social}/callback?id=${currentUser.data.id}`,
+    `${oauthUrl}/auth/${social}/callback?id=${authStore.user.data.id}`,
     "_blank"
   );
 };
@@ -131,5 +130,9 @@ const linkSocial = (social: string) => {
   font-size: 1.375rem;
   display: flex;
   justify-content: center;
+}
+
+.swv-dark > .swv-dropdown {
+  width: 100%;
 }
 </style>

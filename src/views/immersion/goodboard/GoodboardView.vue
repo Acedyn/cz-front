@@ -19,7 +19,7 @@ import type User from "@/types/user";
 import { getAvailableMissions, getCompletedMissions } from "@/types/mission";
 import { getTopUsers } from "@/types/user";
 
-const { currentUser, refreshUser } = useAuthStore();
+const authStore = useAuthStore();
 
 const missionModal = reactive({
   show: false,
@@ -65,13 +65,12 @@ const topUsers = ref<User[]>([]);
 const fetchMissions = async () => {
   availableMissions.value = await getAvailableMissions();
   completedMissions.value = await getCompletedMissions();
-  await refreshUser();
+  await authStore.refreshUser();
 };
 
 onMounted(async () => {
   await fetchMissions();
   topUsers.value = await getTopUsers();
-  await refreshUser();
 });
 </script>
 
@@ -82,22 +81,29 @@ onMounted(async () => {
         <h1>The Goodboard</h1>
       </TypographyText>
 
-      <div class="goodboard-avatar" @click="router.push('/auth/settings')">
+      <div class="goodboard-avatar">
         <div
           style="display: flex; align-items: center; gap: 0.5rem"
-          v-if="currentUser.data"
+          v-if="authStore.user.data"
+          class="user-points"
+          @click="router.push('/immersion/goodboard/rewards')"
         >
           <LogoImage type="box_point" :size="1.2" />
           <TypographyText font="RubikOne" size="big" weight="bold">
             <p class="mission-stats">
-              {{ `${currentUser.data.points || 0} BP` }}
+              {{ `${authStore.user.data.points || 0} BP` }}
             </p>
           </TypographyText>
         </div>
         <TypographyText font="RubikOne" size="big" weight="bold" v-else>
           <p class="mission-stats">Signin / Login</p>
         </TypographyText>
-        <AvatarBubble :size="'xl'" :user="currentUser" />
+        <AvatarBubble
+          class="avatar-bubble"
+          :size="'xl'"
+          :user="authStore.user"
+          @click="router.push('/auth/settings')"
+        />
       </div>
     </div>
 
@@ -151,6 +157,7 @@ onMounted(async () => {
   </div>
 
   <MissionCardModal
+    class="popup-modal"
     :show="missionModal.show"
     :payload="missionModal.payload"
     @handleClose="handleClose"
@@ -158,6 +165,7 @@ onMounted(async () => {
   />
 
   <NewsCardModal
+    class="popup-modal"
     :payload="newsModal.payload"
     :show="newsModal.show"
     @handleClose="handleClose"
@@ -177,13 +185,14 @@ onMounted(async () => {
   right: 0;
   display: flex;
   flex-direction: row;
-  transition: 0.2s;
-  cursor: pointer;
   align-items: center;
 }
 
-.goodboard-avatar:hover {
-  scale: 1.05;
+.avatar-bubble:hover,
+.user-points:hover {
+  cursor: pointer;
+  transition: 0.2s;
+  scale: 1.1;
 }
 
 .goodboard-header {
@@ -263,6 +272,10 @@ onMounted(async () => {
   gap: 2rem;
   grid-template-columns: 2fr 1fr;
   margin-top: 3rem;
+}
+
+.popup-modal {
+  z-index: 100;
 }
 
 @media only screen and (max-width: 767px) {

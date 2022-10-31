@@ -1,3 +1,6 @@
+import type { RouteLocationNormalized, NavigationGuardNext } from "vue-router";
+import { usePreferencesStore } from "@/stores/preferences";
+
 import AuthView from "@/views/auth/AuthView.vue";
 import LoginPage from "@/views/auth/loginPage.vue";
 import RegisterPage from "@/views/auth/registerPage.vue";
@@ -11,6 +14,19 @@ export default {
   path: "/auth",
   name: "auth",
   component: AuthView,
+  beforeEnter(
+    to: RouteLocationNormalized,
+    from: RouteLocationNormalized,
+    next: NavigationGuardNext
+  ) {
+    const preferences = usePreferencesStore();
+    preferences.setHeaderCollapse(true);
+    if (to.name === "auth") {
+      next({ name: "settings" });
+    } else {
+      next();
+    }
+  },
   children: [
     {
       path: "login",

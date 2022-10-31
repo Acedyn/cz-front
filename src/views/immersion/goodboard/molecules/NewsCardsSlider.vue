@@ -39,7 +39,7 @@ const handleNewsClick = (news: News) => {
     </div>
     <div style="overflow: hidden">
       <carousel :items-to-show="2" snapAlign="start">
-        <slide v-for="slide in 10" :key="slide">
+        <slide v-for="slide in 10" :key="slide" style="width: fit-content">
           <div style="margin-top: 1rem; margin-inline: 1rem">
             <NewsCard :news="newsItem" @handleClick="handleNewsClick" />
           </div>

@@ -27,7 +27,7 @@ const emit = defineEmits<{
 }>();
 
 const missionsUrl = `${import.meta.env.VITE_MISSION_API}`;
-const { currentUser } = useAuthStore();
+const authStore = useAuthStore();
 const { wallet } = useWallet();
 
 const buyReward = () => {
@@ -35,7 +35,7 @@ const buyReward = () => {
     return;
   }
   post(
-    `${missionsUrl}/rewards/claim/${props.type}?user=${currentUser.data.id}&address=${wallet.value.publicKey}?amount=${props.count}`,
+    `${missionsUrl}/rewards/claim/${props.type}?user=${authStore.currentUser.data.id}&address=${wallet.value.publicKey}&amount=${props.count}`,
     null
   );
 };

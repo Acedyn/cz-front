@@ -5,6 +5,7 @@ import LogoImage from "../../../../components/atoms/LogoImage.vue";
 import StickerButton from "../../../../components/interaction/StickerButton.vue";
 import CloseButton from "@/components/interaction/CloseButton.vue";
 import { validateMission } from "@/types/mission";
+import Tweet from "vue-tweet";
 
 import type Mission from "../../../../types/mission";
 
@@ -41,11 +42,14 @@ const participateMission = () => {
 
 const claimMission = async () => {
   await validateMission(props.mission);
-  setTimeout(() => {
-    emit("claim");
-    handleClose();
-  }, 1000);
+  emit("claim");
+  handleClose();
 };
+
+const tweetId = computed(() => {
+  const parameters = props.mission.data.parameters;
+  return parameters ? parameters["post-id"] : parameters;
+});
 </script>
 
 <template>
@@ -109,7 +113,15 @@ const claimMission = async () => {
           colorLine="#530f03"
           colorBD="var(--global-color-primary)"
         />
-        <img :src="props.mission.data.image" alt="mission image" />
+        <Tweet
+          v-if="tweetId"
+          :tweet-id="tweetId"
+          class="tweet-preview"
+          cards="hidden"
+          align="center"
+        />
+
+        <img :src="props.mission.data.image" alt="mission image" v-else />
       </div>
     </div>
   </transition>
@@ -256,5 +268,13 @@ const claimMission = async () => {
   to {
     scale: 1;
   }
+}
+</style>
+
+<style>
+.tweet-preview {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 </style>

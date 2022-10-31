@@ -71,7 +71,7 @@ export const useAuthStore = defineStore({
         },
       });
 
-      this.refreshUser();
+      await this.refreshUser();
       router.push("/auth/settings");
     },
 

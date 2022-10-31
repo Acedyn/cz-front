@@ -7,8 +7,10 @@ import Button from "@/components/interaction/Button.vue";
 import SocialMediaButton from "@/components/interaction/SocialMediaButton.vue";
 import { useAuthStore } from "@/stores/auth";
 import { RouterLink } from "vue-router";
+import { WalletMultiButton, useWallet } from "solana-wallets-vue";
 
 const { login } = useAuthStore();
+const { publicKey, signMessage } = useWallet();
 
 const loginState = reactive({
   email: "",
@@ -19,6 +21,14 @@ const loginState = reactive({
 const isLoginDisabled = computed(() => {
   return !(loginState.email.length > 1 && loginState.password.length > 1);
 });
+
+const solanaLogin = async () => {
+  if (!signMessage.value || !publicKey.value) return;
+  const signature = await signMessage.value(
+    new TextEncoder().encode("CZ-GOODBOARD-LOGIN")
+  );
+  login(publicKey.value.toString(), new TextDecoder().decode(signature));
+};
 
 const loginUser = () => {
   login(loginState.email, loginState.password);
@@ -82,11 +92,10 @@ const loginUser = () => {
 
       <div class="divider"></div>
 
-      <SocialMediaButton type="facebook">
-        Continue with Facebook
-      </SocialMediaButton>
-      <SocialMediaButton type="google">
-        Continue with Google
+      <wallet-multi-button dark> </wallet-multi-button>
+
+      <SocialMediaButton type="solana" v-if="publicKey" @click="solanaLogin">
+        Continue with wallet
       </SocialMediaButton>
 
       <div class="text-line">
@@ -115,12 +124,8 @@ const loginUser = () => {
 .login-register-container {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 600px;
   max-width: 50%;
+  margin-inline: auto;
 }
 
 .login-register-container * {
